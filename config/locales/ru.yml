@@ -84,6 +84,8 @@ ru:
         start_at: "дата старта"
         end_at: "дата окончания"
         topic: "тема"
+      article_body_image:
+        source: "файл"
     models:
       poll:
         one: "опрос"
@@ -103,6 +105,9 @@ ru:
       page:
         one: "страница"
         other: "страницы"
+      article_gallery:
+        one: "галлерея"
+        other: "галлерею"
       
       tv_article: "видео"
       trip_article: "trip"
