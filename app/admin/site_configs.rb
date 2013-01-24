@@ -2,6 +2,7 @@
 
 ActiveAdmin.register SiteConfig do
   menu label: "Настройки"
+  actions :all, except: [:new]
 
   controller do
     def index

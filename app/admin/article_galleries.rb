@@ -2,6 +2,7 @@
 
 ActiveAdmin.register ArticleGallery do
   menu false
+  actions :all, except: [:new]
 
   filter :title
 
@@ -24,4 +25,6 @@ ActiveAdmin.register ArticleGallery do
 
     default_actions
   end
+
+  form partial: "article_galleries/admin_form"
 end

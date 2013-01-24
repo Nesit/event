@@ -3,6 +3,15 @@
 ActiveAdmin.register ArticleBodyImage do
   menu false
 
+  controller do
+    def destroy
+      image = ArticleBodyImage.find(params[:id])
+      gallery = image.article_gallery
+      image.delete
+      redirect_to edit_admin_article_gallery_path(gallery)
+    end
+  end
+
   index do
     column :id
     

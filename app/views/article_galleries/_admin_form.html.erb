@@ -1,0 +1,24 @@
+<%= semantic_form_for [:admin, resource], html: { id: 'admin-gallery-form' } do |f| %>
+	<%= f.inputs do %>
+		<%= f.input :title %>
+	<% end %>
+
+	<% resource.images.build %>
+	<%= f.fields_for :images do |ff| %>
+		<%= f.inputs (ff.object and ff.object.persisted? ? "Изображение" : ""), class: 'inputs images-item' do %>
+			<%= ff.input :source %>
+			<% if ff.object and ff.object.source? %>
+				<li><label>&nbsp;</label>
+				<%= image_tag(ff.object.source) %>
+				</li>
+			<% end %>
+			<% if ff.object and ff.object.persisted? %>
+				<li>
+					<label>&nbsp;</label>
+					<%= link_to 'Удалить', admin_article_body_image_path(ff.object), method: 'delete' %>
+			<% end %>
+		<% end %>
+	<% end %>
+
+	<%= f.actions %>
+<% end %>
