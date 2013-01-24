@@ -1,0 +1,118 @@
+<% @hide_top = true %>
+<% content_for :without_aside do %>
+	<div id="profile">
+		<%= render 'menu', current: :profile %>
+		<div class="profile-top-avatar">
+			<%= image_tag(current_user.avatar.url, class: 'left') %>
+			<h1 class="left bottom-line">Привет друг!</h1>
+		</div>
+		<div class="right" id="profile-content">
+			<%= form_for @user, url: user_path, method: :put, html: { id: 'user-profile-form' } do |f| %>
+				<div class="field-list">
+					<div class="field">
+						<%= f.label :name, "Имя*", class: 'left' %>
+						<div class="input-line left">
+							<%= f.text_field :name, 'data-placeholder' => "Введите ваше имя" %>
+							<div id="user-ensure-name-message" class="hidden"></div>
+						</div>
+						<div class="description left">
+							Укажите ваше имя, чтобы в дальнейшем вы могли оставлять комментарии
+						</div>
+						<div class="clear"></div>
+					</div>
+
+					<div class="field">
+						<%= f.label :new_country_cd, "Страна", class: 'left' %>
+						<div class="input-line left">
+							<%= f.select :new_country_cd, options_for_select(City.countries_for_select(:value)), include_blank: false %>
+						</div>
+						<div class="description left"></div>
+						<div class="clear"></div>
+					</div>
+
+					<div class="field">
+						<%= f.label :city, "Город*", class: 'left' %>
+						<div class="input-line left">
+							<%= f.select :city_id, options_from_collection_for_select(City.where(country_cd: @user.city.country_cd), :id, :name, @user.city_id) %>
+							<%= f.hidden_field :new_city %>
+						</div>
+						<div class="description left"></div>
+						<div class="clear"></div>
+					</div>
+
+					<div class="field">
+						<%= f.label :born_at, "Дата рождения*", class: 'left' %>
+						<div class="input-line left">
+							<%= f.date_select :born_at %>
+						</div>
+						<div class="description left"></div>
+						<div class="clear"></div>
+					</div>
+
+					<div class="field">
+						<%= f.label :gender_cd, "Пол*", class: 'left' %>
+						<div class="input-line left">
+							<div class="profile-gender-select">
+								<%= link_to "Мужской", '#', class: (@user.gender == :male ? 'active' : ''), 'data-value' => 1 %>
+								<%= link_to "Женский", '#', class: (@user.gender == :female ? 'active' : ''), 'data-value' => 2 %>
+								<div class="clear"></div>
+							</div>
+							<%= f.hidden_field :gender_cd %>
+						</div>
+						<div class="description left"></div>
+						<div class="clear"></div>
+					</div>
+
+					<div class="field">
+						<%= f.label :company, "Компания*", class: 'left' %>
+						<div class="input-line left">
+							<%= f.text_field :company, 'data-placeholder' => "Введите название компании" %>
+							<div id="user-ensure-name-message" class="hidden"></div>
+						</div>
+						<div class="description left"></div>
+						<div class="clear"></div>
+					</div>
+
+					<div class="field">
+						<%= f.label :position, "Должность*", class: 'left' %>
+						<div class="input-line left">
+							<%= f.text_field :position, 'data-placeholder' => "Введите вашу должность" %>
+							<div id="user-ensure-name-message" class="hidden"></div>
+						</div>
+						<div class="description left"></div>
+						<div class="clear"></div>
+					</div>
+
+					<div class="field">
+						<%= f.label :website, "Веб-сайт*", class: 'left' %>
+						<div class="input-line left">
+							<%= f.text_field :website, 'data-placeholder' => "Введите адрес веб-сайта" %>
+							<div id="user-ensure-name-message" class="hidden"></div>
+						</div>
+						<div class="description left"></div>
+						<div class="clear"></div>
+					</div>
+
+					<div class="field">
+						<%= f.label :phone_number, "Телефон", class: 'left' %>
+						<div class="input-line left">
+							<%= f.text_field :phone_number, 'data-placeholder' => "Введите ваш телефон" %>
+							<div id="user-ensure-name-message" class="hidden"></div>
+						</div>
+						<div class="description left">
+							Введите ваш телефон в формате +7 916 123 11 22
+						</div>
+						<div class="clear"></div>
+					</div>
+				</div>
+				<p class="notice">
+					Для того чтобы вы могли оставлять комментарии,
+					вам нужно заполнить все обязательные поля.
+				</p>
+
+				<%= f.submit "Сохранить" %>
+			<% end %>
+		</div>
+		<div class="clear"></div>
+	</div>
+<% end %>

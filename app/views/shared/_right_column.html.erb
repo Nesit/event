@@ -1,0 +1,17 @@
+<div id="right-column" class="right">
+	<div class="frame">
+		<div class="frame-title">Реклама</div>
+		<%= link_to image_tag(asset_path('samples/banner240x400.jpg')), 'http://adresource.ru/category/aghientstvo/deluxe-interactive-moscow' %>
+	</div>
+
+	<% if poll = Poll.unvoted_poll_for(current_user) %>
+	<div class="frame" id="poll-aside">
+		<%= render 'polls/aside', poll: poll %>
+	</div>
+	<% elsif poll = Poll.newer_started.first %>
+	<div class="frame" id="poll-aside">
+		<%= render 'polls/aside_result', poll: poll %>
+	</div>
+	<% end %>
+
+</div>

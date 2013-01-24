@@ -1,0 +1,5 @@
+example_admin_user:
+  id: 1
+  email: admin@example.com
+  # password is 'password'
+  encrypted_password: '$2a$10$zS6SnU3LXFZbN8KdDF/UJOA3n6o7ZzYfrLBQnElS/psxkiBDWzby.'

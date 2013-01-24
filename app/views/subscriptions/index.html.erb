@@ -1,0 +1,55 @@
+<% @hide_top = true %>
+<% content_for :without_aside do %>
+	<div id="profile">
+		<%= render 'users/menu', current: :subscriptions %>
+
+		<div class="profile-top-avatar">
+			<%= image_tag(current_user.avatar.url, class: 'left') %>
+			<h1 class="left">Привет друг!</h1>
+		</div>
+		<div class="right" id="profile-content">
+			<% unless @subscriptions.any? %>
+				<div id="no-subscriptions-block">
+					<h1>Подписка</h1>
+					<p>
+						К сожалению у вас отсутствует подписка, но вы можете подписаться прямо сейчас!
+					</p>
+					<%= link_to "Подписаться", new_subscription_path %>
+				</div>
+			<% else %>
+				<div id="subscriptions-list">
+				<% @subscriptions.each do |subscription| %>
+					<div class="subscription-item">
+						<div class="date left">
+							<% if subscription.pending? %>
+								<%= Russian.strftime subscription.created_at %>
+							<% elsif subscription.active? %>
+								<%= Russian.strftime subscription.activated_at %>
+								&mdash;
+								<%= Russian.strftime subscription.ended_at %>
+							<% end %>
+						</div>
+
+						<div class="for-whom left">
+							<%= subscription.user.name or subscription.user.email %>
+						</div>
+
+						<div class="description left">
+							<%= description_for_subscription(subscription) %>
+						</div>
+
+						<% if subscription.pending? %>
+							<div class="actions right">
+								<%= link_to "оплатить", subscription_pay_path(subscription) %>
+								<%= link_to "удалить", subscription_path(subscription), method: :delete %>
+							</div>
+						<% end %>
+						<div class="clear"></div>
+					</div>
+				<% end %>
+				</div>
+			<% end %>
+		</div>
+		<div class="clear"></div>
+	</div>
+<% end %>

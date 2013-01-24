@@ -1,0 +1,5 @@
+poll1:
+  id: 1
+  topic: "Какое из событий 2012 года, по Вашему мнению, достойно звания «Событие Года»?"
+  start_at: '<%= DateTime.now - 1.day %>'
+  end_at: '<%= DateTime.now + 1.week %>'

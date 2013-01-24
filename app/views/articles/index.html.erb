@@ -1,0 +1,46 @@
+<% content_for :wide_footer do %>
+	<%= paginate @articles, window: 4 %>
+<% end %>
+
+<% if display_article_category_title? %>
+	<h1 class="article-category-title">
+		<%= t("articles.category.#{params[:type]}") %>
+	</h1>
+<% end %>
+
+<% if main_page? %>
+	<%= render 'articles/carousel' %>
+	<%= render 'articles/afisha' %>
+<% end %>
+
+<div class="articles-list">
+	<% if @site_config and not @site_config.article_list_banner_body.blank? %>
+		<%= render 'articles/items', articles: (@articles.slice(0..(@site_config.article_list_banner_after-1)) or []) %>
+		<div class="frame" id="article-list-banner">
+			<div class="frame-title">Реклама</div>
+			<div><%= @site_config.article_list_banner_body.html_safe %></div>
+		</div>
+		<%= render 'articles/items', articles: (@articles.slice(@site_config.article_list_banner_after..-1) or []) %>
+	<% else %>
+		<%= render 'articles/items', articles: @articles %>
+	<% end %>
+	<div class="spacer"></div>
+</div>
+<div class="clear"></div>
+
+<% if main_page? %>
+	<div id="video-block">
+		<h2>Видео</h2>
+		<div class="clear"></div>
+		<div class="video-items">
+			<% TvArticle.newer.flatten.first(3).each do |article| %>
+				<div class="video-item left">
+					<%= link_to "", article, class: 'overlay' %>
+					<%= image_tag(article.head_image.video_thumb) %>
+					<p><%= article.title %></p>
+				</div>
+			<% end %>
+		</div>
+		<div class="clear"></div>
+	</div>
+<% end %>

@@ -1,0 +1,124 @@
+ru:
+  views:
+    pagination:
+      previous: '●'
+      next: '●'
+
+  attributes:
+    tag_list: "Список тегов через запятую"
+    avatar: "аватар"
+    created_at: "дата создания"
+    updated_at: "дата изменения"
+    title: "название"
+    name: "имя"
+    email: "эл. почта"
+    current_sign_in_at: "текущий вход выполнен в"
+    last_sign_in_at: "последний вход в"
+    sign_in_count: "количество входов"
+    password: "пароль"
+    password_confirmation: "подтверждение пароля"
+    body: "содержимое"
+    closed: "закрыта?"
+    head_image: "изображение в заголовке"
+    galleries: "галлереи"
+    author: "автор"
+    issue: "номер"
+    head_video_url: "видео в загловке"
+    list_item_description: "текст для отображение в списке"
+    short_description: "текст для отображение в заголовочном блоке"
+    closed_body: "содержимое"
+    target_at: "назначено на"
+
+  articles:
+    category:
+      NewsArticle: "Новости"
+      EventArticle: "Афиша"
+      CompanyArticle: "Компании"
+      InterviewArticle: "Интервью"
+      OverviewArticle: "Обзоры"
+      ReportArticle: "Rепоrтажи"
+      TripArticle: "Trip"
+      TvArticle: "TV"
+    previous:
+      NewsArticle: "Предыдущая новость"
+      EventArticle: "Предыдущее событие"
+      CompanyArticle: "Предыдущая компания"
+      InterviewArticle: "Предыдущее интервью"
+      OverviewArticle: "Предыдущий обзор"
+      ReportArticle: "Предыдущий репортаж"
+      TripArticle: "Предыдущий trip"
+      TvArticle: "Предыдущее видео"
+    next:
+      NewsArticle: "Следующая новость"
+      EventArticle: "Следующее событие"
+      CompanyArticle: "Следующая компания"
+      InterviewArticle: "Следующее интервью"
+      OverviewArticle: "Следующий обзор"
+      ReportArticle: "Следующий репортаж"
+      TripArticle: "Следующий trip"
+      TvArticle: "Следующее видео"
+
+  active_admin:
+    dashboard: "Панель"
+    CompanyArticle: "Компании"
+    EventArticle: "События"
+    InterviewArticle: "Интервью"
+    NewsArticle: "Новости"
+    OverviewArticle: "Обзоры"
+    ReportArticle: "Репортажи"
+    TripArticle: "Trips"
+    TvArticle: "TV"
+
+  activerecord:
+    attributes:
+      site_config:
+        actual_article: "статья"
+        actual_article_description: "описание"
+        article_list_banner_after: "вставить после"
+        article_list_banner_body: "содержимое"
+      issue:
+        issued_at: "выпущен в"
+        cover: "обложка"
+        number: "номер"
+      poll:
+        start_at: "дата старта"
+        end_at: "дата окончания"
+        topic: "тема"
+    models:
+      poll:
+        one: "опрос"
+        other: "опросы"
+      article_author:
+        one: "автор"
+        few: "авторов"
+        many: "авторы"
+        other: "авторы"
+      admin_user:
+        one: "администратор"
+        other: "администраторы"
+      issue:
+        one: "номер"
+        other: "номера"
+      site_config: "настройки"
+      page:
+        one: "страница"
+        other: "страницы"
+      
+      tv_article: "видео"
+      trip_article: "trip"
+      interview_article: "интервью"
+      company_article:
+        one: "компания"
+        other: "компании"
+      news_article:
+        one: "новость"
+        other: "новости"
+      overview_article:
+        one: "обзор"
+        other: "обзоры"
+      report_article:
+        one: "репортаж"
+        other: "репортажи"
+      event_article:
+        one: "событие"
+        other: "события"

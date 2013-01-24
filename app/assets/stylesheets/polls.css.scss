@@ -1,0 +1,258 @@
+.polls-list {
+	margin-bottom: 50px;
+
+	h1 {
+		@include sans-serif;
+		color: $purple-color;
+		text-transform: uppercase;
+		font-weight: bold;
+		border-bottom: 1px solid $polls-header-border-color;
+		padding: 10px 5px;
+	}
+
+	.poll-item {
+		border-bottom: 1px solid $polls-header-border-color;
+	}
+}
+
+@mixin poll-item {
+	height: 37px;
+	margin: 23px 0;
+}
+
+.poll-item {
+	@include sans-serif;
+
+	h1, h2 {
+		@include sans-serif;
+		font-weight: bold;
+		font-size: 24px;
+		margin: 20px 0;
+		a {
+			color: $text-color;
+		}
+
+		a:hover {
+			color: $purple-color;
+		}
+	}
+
+	.choices, .graphs, .counts {
+		padding: 7px 0;
+	}
+
+	.choices {
+		width: 170px;
+
+		.choice-item {
+			@include poll-item;
+			font-size: 12px;
+		}
+	}
+
+	.results {
+		width: 290px;
+		.graphs {
+			.graph-item {
+				@include poll-item;
+				background-color: $poll-graph-inactive-color;
+			}
+
+			.graph-item.active {
+				background-color: $poll-graph-active-color;
+			}
+
+			padding-left: 5px;
+			padding-right: 5px;
+
+			border-left: 2px solid $poll-result-left-border-color;
+			border-bottom: 2px solid $poll-result-bottom-border-color;
+		}
+
+		.total-votes {
+			margin: 16px 5px;
+			font-weight: bold;
+			font-size: 12px;
+		}
+	}
+
+	.counts {
+		width: 166px;
+
+		.count-item {
+			@include poll-item;
+			line-height: 37px;
+			font-size: 12px;
+		}
+
+		.count-item.active {
+			color: $purple-color;
+		}
+	}
+
+	.start-end-notice {
+		font-size: 12px;
+	}
+
+	.poll-item-info {
+		margin: 35px 0;
+		height: 28px;
+
+		.created-at {
+			@include datetime-text-typography;
+			color: $light-grey-text-color;
+			line-height: 28px;
+
+			.hiddable {
+				overflow: hidden;
+			}
+		}
+
+		.social-share-line {
+			margin-left: 165px;
+			position: absolute;
+		}
+
+		.stats {
+			width: 150px;
+			line-height: 28px;
+		}
+
+		.comments-count {
+			background-image: asset-url("comments_icon.png", image);
+			background-repeat: no-repeat;
+			background-position: left center;
+			padding-left: 16px;
+			width: 45px;
+		}
+
+		.pageviews-count {
+			background-image: asset-url("pageview_icon.png", image);
+			background-repeat: no-repeat;
+			background-position: left center;
+			padding-left: 16px;
+			width: 60px;
+		}
+
+		.pageviews-count, .comments-count {
+			@include datetime-text-typography;
+			color: $light-grey-text-color;
+		}
+	}
+
+	.poll-choices-select-list {
+		width: 500px;
+		margin: 0 auto;
+
+		.point-radio {
+			@extend .point-checkbox;
+			p {
+				width: 482px;
+			}
+		}
+
+		.point-radio.active {
+			@extend .point-checkbox.active;
+			p {
+				color: $purple-color;
+				text-decoration: underline;
+			}
+		}
+	}
+
+	input[type=submit] {
+		@include button;
+		display: block;
+		margin: 25px auto;
+		height: 35px;
+		width: 200px;
+	}
+}
+
+#poll-aside .poll-choices-select-list {
+	h2 {
+		@include sans-serif;
+		color: $poll-aside-header-fg-color;
+		font-weight: bold;
+		font-size: 14px;
+		margin-left: 32px;
+	}
+
+	.wrapper {
+		margin-left: 32px;
+
+		.notice {
+			@include sans-serif;
+			font-size: 16px;
+			color: $grey-text-color;
+			text-align: center;
+		}
+	}
+
+	.point-radio, .point-radio-static {
+		@extend .point-checkbox;
+		p {
+			width: 192px;
+			font-size: 12px;
+		}
+
+		.-icon {
+			background-image: asset-url("small_point_inactive.png", image);
+		}
+	}
+
+	.point-radio.active, .point-radio-static.active {
+		@extend .point-checkbox.active;
+		p {
+			color: $purple-color;
+			text-decoration: underline;
+		}
+
+		.-icon {
+			background-image: asset-url("small_point_active.png", image);
+		}
+	}
+
+	.point-radio:hover {
+		p {
+			color: $purple-color;
+			text-decoration: underline;
+		}
+	}
+
+	.point-radio-static {
+		height: 100%;
+		cursor: inherit;
+		.graph {
+			background-color: $poll-graph-inactive-color;
+			color: $text-color;
+			text-align: center;
+		}
+
+		.count, .graph {
+			margin: 5px 0;
+			padding: 3px;
+			font-size: 11px;
+		}
+	}
+
+	.point-radio-static.active {
+		.graph {
+			background-color: $poll-graph-active-color;
+			color: white;
+		}
+	}
+
+	input[type=submit] {
+		display: block;
+		@include button;
+		background-color: $poll-aside-button-bg-color;
+		font-weight: normal;
+		text-transform: none;
+		height: 40px;
+		width: 100%;
+	}
+	input[type=submit]:hover {
+		background-color: $purple-color;
+	}
+}

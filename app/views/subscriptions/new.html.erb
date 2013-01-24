@@ -1,0 +1,39 @@
+<% content_for :without_aside do %>
+	<div id="new-subscription">
+		<h1>Оформление подписки</h1>
+
+		<div id="subscription-content">
+			<h2>Что даёт подписка на Event.ru:</h2>
+			<%= form_for Subscription.new, remote: true do |f| %>
+				<%= point_checkbox_tag("Доступ для чтения закрытых статей на сайте") %>
+				<%= point_checkbox_tag("Доступ к полной электронной версии журнала") %>
+				<%= point_checkbox_field(f, :print_versions_by_courier, "Получение печатных изданий с помощью курьерской доставки") %>
+				
+				<div class="subscription-kind-select">
+					<%= f.hidden_field :kind %>
+
+					<div class="-item left" data-value="six_months" data-default-price="600" data-advanced-price="1250" data-months-count="6">
+						<%= link_to "6 месяцев", '#' %>
+						<p><span class="price">600</span> рублей</p>
+					</div>
+
+					<div class="-item left" data-value="one_year" data-default-price="1000" data-advanced-price="2000" data-months-count="12">
+						<%= link_to "1 год", '#' %>
+						<p><span class="price">1000</span> рублей</p>
+					</div>
+
+					<div class="-item left" data-value="two_years" data-default-price="1800" data-advanced-price="3500" data-months-count="24">
+						<%= link_to "2 года", '#' %>
+						<p><span class="price">1800</span> рублей</p>
+					</div>
+					<div class="clear"></div>
+				</div>
+				<p class="payment">
+					Вы платите всего:<br>
+					<span class="per-month-price">100</span> р. в месяц
+				</p>
+				<%= f.submit "Оплатить", disabled: true %>
+			<% end %>
+		</div>
+	</div>
+<% end %>

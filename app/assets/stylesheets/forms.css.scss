@@ -1,0 +1,84 @@
+input.placeholder {
+	font-style: oblique;
+	color: $form-label-text-color;
+	@include sans-serif;
+}
+
+textarea.placeholder {
+	font-style: normal;
+	@include serif;
+	color: $form-label-text-color;
+	font-size: 14px;
+}
+
+@mixin form-text-field {
+	border: 1px solid $grey-border-color;
+	outline: none;
+	padding: 5px;
+	height: 16px;
+}
+
+@mixin error-block {
+	background-color: $error-bg-color;
+	color: $error-fg-color;
+	border: 1px solid $error-border-color;
+	padding: 6px;
+}
+
+@mixin select-field {
+	height: 28px;
+	border: 1px solid $grey-border-color;
+	margin: 0;
+	outline: 0;
+	background-color: white;
+}
+
+@mixin button {
+	padding: 0;
+	height: 28px;
+	border: none;
+	background-color: $purple-color;
+	color: white;
+	text-transform: uppercase;
+	font-weight: bold;
+	cursor: pointer;
+}
+
+.point-checkbox {
+	height: 16px;
+	line-height: 16px;
+	margin: 18px 0;
+	@include sans-serif;
+	color: $grey-text-color;
+	cursor: pointer;
+
+	.-icon {
+		margin-top: 2px;
+		margin-right: 8px;
+		width: 10px;
+		height: 10px;
+		background-image: url(asset_path("point_inactive.png", image));
+	}
+}
+
+.point-checkbox.active {
+	.-icon {
+		background-image: url(asset_path("point_active.png", image));
+	}
+}
+
+.point-checkbox-static {
+	height: 16px;
+	line-height: 16px;
+	margin: 18px 0;
+	@include sans-serif;
+	color: $grey-text-color;
+
+	.-icon {
+		margin-top: 2px;
+		margin-right: 8px;
+		width: 10px;
+		height: 10px;
+		background-image: url(asset_path("point_active.png", image));
+	}
+}

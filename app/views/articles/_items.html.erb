@@ -1,0 +1,39 @@
+<% articles.each_with_index do |article, i| %>
+	<div class="article-item">
+		<% if article.kind_of? TvArticle %>
+			<%= link_to "", article, class: 'overlay' %>
+		<% end %>
+		<%= link_to image_tag(article.head_image.list_thumb), article, class: 'article-item-image left' %>
+		<div class="article-item-description right">
+			<%= link_to content_tag(:h2, article.title), article %>
+			<p><%= article.list_item_description %></p>
+		</div>
+		<div class="article-item-info right">
+			<% if display_article_category? %>
+				<%= link_to t("articles.category.#{article.class.name}"), articles_path_for_article_class(article.class), class: 'articles-category left' %>
+			<% end %>
+			<div class="created-at left">
+				<%= distance_of_time_in_words(Time.now, article.created_at) %> назад,
+				в <%= article.created_at.strftime("%H:%M") %>
+			</div>
+			<div class="right">
+				<% if article.pageviews_count > 0 %>
+				<div class="pageviews-count right">
+					<%= article.pageviews_count %>
+				</div>
+				<% end %>
+				
+				<% if article.comments_count > 0 %>
+				<div class="comments-count right">
+					<%= article.comments_count %>
+				</div>
+				<% end %>
+			</div>
+			<div class="clear"></div>
+		</div>
+		<div class="clear"></div>
+	</div>
+	<% if i != (articles.length-1) %>
+	<div class="spacer"></div>
+	<% end %>
+<% end %>

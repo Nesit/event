@@ -1,0 +1,109 @@
+<% if logged_in? %>
+	<%= link_to "Профиль", edit_user_path, class: 'profile-link' %> | 
+	<%= link_to "Выйти", user_session_path, 'data-method' => :delete, class: 'logout-link' %>
+
+	<div id="email-dialog" class="hidden dialog">
+		<div class="dialog-title">Для продолжения введите ваш e-mail</div>
+		<%= form_tag update_user_email_path, method: :put, remote: true do |f| %>
+			<div class="wrapper">
+				<div id="email-dialog-message">
+					Для работы с сайтом нам необходим адрес вашей элекронной почты
+				</div>
+				<%= email_field_tag :email, '', 'data-placeholder' => "Введите email" %>
+				<%= submit_tag "Отправить" %>
+			</div>
+			<div class="clear"></div>
+		<% end %>
+	</div>
+
+<% else %>
+
+	<%= link_to "Войти", '#', class: 'login-link' %>
+	|
+	<%= link_to "Зарегистрироваться", '#', class: 'register-link' %>
+
+	<div id="login-dialog" class="hidden dialog closable">
+		<%= link_to "X", '#', class: 'close-link right' %>
+		<div class="dialog-title">Вход на сайт</div>
+		<div class="login-kind-title">Войти как пользователь:</div>
+		<div class="social-login">
+			<%= content_tag :a, href: oauth_login_path(provider: 'facebook') do %>
+				<%= image_tag(asset_path('facebook_icon.png')) %>
+				Facebook
+			<% end %>
+
+			<%= content_tag :a, href: oauth_login_path(provider: 'vkontakte') do %>
+				<%= image_tag(asset_path('vkontakte_icon.png')) %>
+				ВКонтакте
+			<% end %>
+		</div>
+
+		<p id="login-dialog-message">
+			Если вы зарегистрированны в одной из этих социальных сетей,
+			то вы можете войти в Event используя имеющийся аккаунт.
+			Для этого выберите сайт и следуйте инструкциям.
+		</p>
+
+		<div class="login-kind-title">Войти по логину Event:</div>
+
+		<%= form_tag user_session_path, method: :post, remote: true do |f| %>
+			<div class="left">
+			<%= email_field_tag :email, '', 'data-placeholder' => "Введите email" %>
+			<div><%= check_box_tag :remember_me %>Запомнить?</div>
+			<%= submit_tag "Готово!" %>
+			</div>
+			<div class="right">
+			<%= password_field_tag :password, '', 'data-placeholder' => "Введите пароль" %>
+			<%= link_to "Забыли пароль?", '#', class: 'reset-password-link' %>
+			</div>
+			<div class="clear"></div>
+		<% end %>
+
+		<p class="register-notice">
+			У вас ещё нет логина на Event.ru? <br />
+			<%= link_to "Зарегистрироваться", '#', class: 'register-link' %>
+		</p>
+	</div>
+
+	<div id="register-dialog" class="hidden dialog closable">
+		<%= link_to "X", '#', class: 'close-link right' %>
+		<div class="dialog-title">Регистрация</div>
+		<%= form_for User.new(email: (params[:user] and params[:user][:email])), remote: true do |f| %>
+			<div class="left">
+				<%= f.email_field :email, 'data-placeholder' => "Введите email" %>
+				<%= text_field_tag :captcha, '', 'data-placeholder' => "Введите слово с картинки" %>
+				<%= f.submit "Зарегистрироваться" %>
+			</div>
+			<div class="right">
+				<p id="register-dialog-message">
+					Введите ваш email и код подтверждения,
+					затем мы вам сгенерируем пароль и вышлем
+					на указанный адрес
+				</p>
+				<%= captcha_tag %>
+			</div>
+			<div class="clear"></div>
+		<% end %>
+	</div>
+
+	<div id="subscribe-dialog" class="hidden dialog closable">
+		<%= link_to "X", '#', class: 'close-link right' %>
+		<div class="dialog-title">Для продолжения введите ваш e-mail</div>
+		<%= form_for Subscription.new, remote: true do |f| %>
+			<div class="left">
+				<%= f.hidden_field :kind %>
+				<%= f.hidden_field :print_versions_by_courier %>
+				<%= email_field_tag :email, '', 'data-placeholder' => "Введите email" %>
+				<%= text_field_tag :captcha, '', 'data-placeholder' => "Введите слово с картинки" %>
+				<%= f.submit "Зарегистрироваться" %>
+			</div>
+			<div class="right">
+				<p id="subscribe-dialog-message">
+					Введите ваш email и код подтверждения
+				</p>
+				<%= captcha_tag %>
+			</div>
+			<div class="clear"></div>
+		<% end %>
+	</div>
+<% end %>

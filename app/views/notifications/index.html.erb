@@ -1,0 +1,27 @@
+<% @hide_top = true %>
+<% content_for :without_aside do %>
+	<div id="profile">
+		<%= render 'users/menu', current: :notifications %>
+
+		<div class="profile-top-avatar">
+			<%= image_tag(current_user.avatar.url, class: 'left') %>
+			<h1 class="left">Привет друг!</h1>
+		</div>
+		<div class="right" id="profile-content">
+			<p class="profile-notifications-notice">
+				Отметьте в каких случаях вы хотите получать уведомления.
+			</p>
+			<%= form_for current_user, url: user_path, method: :put, html: { id: 'user-profile-form' } do |f| %>
+				<div class="notifications-list">
+					<%= point_checkbox_field(f, :article_comment_notification, "Кто-то добавил комментарий на статью, которую вы откомментировали") %>
+					<%= point_checkbox_field(f, :comment_notification, "Ваш комментарий был откомментирован") %>
+					<%= point_checkbox_field(f, :event_notification, "Уведомления о наступающих событиях") %>
+					<%= point_checkbox_field(f, :partner_notification, "Получать информацию от партнёров") %>
+					<%= point_checkbox_field(f, :weekly_notification, "Подписаться на еженедельную рассылку новостей Event") %>
+				</div>
+				<%= f.submit "Сохранить" %>
+			<% end %>
+		</div>
+		<div class="clear"></div>
+	</div>
+<% end %>

@@ -1,0 +1,25 @@
+<% @poll.start_at ||= DateTime.now %>
+<% @poll.end_at ||= DateTime.now %>
+<%= semantic_form_for [:admin, @poll], html: { id: 'poll-form' } do |f| %>
+	<%= f.inputs do %>
+		<%= f.input :topic %>
+		<%= f.input :start_at %>
+		<%= f.input :end_at %>
+	<% end %>
+	<% unless f.object.new_record? %>
+		<% f.object.choices.build %>
+		<%= f.inputs "Варианты ответа", class: 'choices inputs' do %>
+			<li>
+				<label>Примечание</label>
+				<p>Чтобы добавить новый вариант ответа просто кликните на пустое поле.
+				Чтобы удалить вариант ответа достаточно стереть текст в соответствующем поле</p>
+			</li>
+			
+			<%= f.semantic_fields_for :choices do |ff, i| %>
+				<%= ff.input :title, label: "Вариант ответа", placeholder: "Добавить вариант" %>
+			<% end %>
+			
+		<% end %>
+	<% end %>
+	<%= f.actions %>
+<% end %>

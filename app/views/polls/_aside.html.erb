@@ -1,0 +1,18 @@
+<%= link_to "Мнение", polls_path, class: 'frame-bold-title' %>
+<div class="poll-choices-select-list<%= current_user ? '' : ' auth-required' %>">
+	<h2><%= poll.topic %></h2>
+	<%= form_for [poll, PollVote.new], remote: true do |f| %>
+		<%= hidden_field_tag :aside, true %>
+		<div class="wrapper">
+			<%= f.hidden_field :poll_choice_id %>
+			<% poll.choices.each do |choice| %>
+				<div class="point-radio" data-id="<%= choice.id %>">
+					<div class="-icon left"></div>
+					<p class="left"><%= choice.title %></p>
+					<div class="clear"></div>
+				</div>
+			<% end %>
+		</div>
+		<%= f.submit "Проголосовать" %>
+	<% end %>
+</div>

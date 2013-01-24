@@ -1,0 +1,54 @@
+// to easily change typeface later
+@mixin sans-serif {
+	font-family: Helvetica, "Arial", sans-serif;
+}
+
+@mixin serif {
+	font-family: "Georgia", "Times New Roman", serif;
+}
+
+// articles
+@mixin article-header-typography {
+	font-weight: bold;
+	@include sans-serif;
+}
+
+@mixin article-header-description-typography {
+	@include sans-serif;
+}
+
+@mixin article-list-item-header-typography {
+	font-weight: bold;
+	@include sans-serif;
+}
+
+@mixin article-list-item-description-typography {
+	@include sans-serif;
+}
+
+@mixin article-carousel-header {
+	font-weight: bold;
+	text-decoration: none;
+	@include sans-serif;
+}
+// articles end
+
+// menu
+@mixin menu-item-typography {
+	text-transform: uppercase;
+	text-decoration: none;
+	@include sans-serif;
+}
+// menu end
+
+@mixin datetime-text-typography {
+	@include sans-serif;
+	font-size: 12px;
+}
+
+@mixin dialog-title-typography {
+	text-transform: uppercase;
+	font-weight: bold;
+	font-size: 13px;
+	@include sans-serif;
+}

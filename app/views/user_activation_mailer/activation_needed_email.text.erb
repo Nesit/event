@@ -1,0 +1,6 @@
+Здравствуйте!
+
+Ваш email: <%= @user.email %>
+Ваш пароль: <%= @user.password %>
+
+Чтобы активировать вашу учётную запись проследуйте по ссылке: <%= activate_user_url(token: @user.activation_token) %>

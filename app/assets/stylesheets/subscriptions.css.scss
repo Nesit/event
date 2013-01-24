@@ -1,0 +1,179 @@
+#new-subscription, #subscription-notice {
+	h1 {
+		@include sans-serif;
+		color: $purple-color;
+		text-transform: uppercase;
+		font-weight: bold;
+		font-size: 21px;
+		padding-bottom: 5px;
+		margin-bottom: 30px;
+
+		border-bottom: 2px solid $grey-border-color;
+	}
+
+	#subscription-content {
+		width: 590px;
+		margin: 0 auto;
+		@include sans-serif;
+
+		> p {
+			color: $grey-text-color;
+			margin: 30px 0;
+		}
+	}
+}
+
+#new-subscription {
+	#subscription-content {
+		width: 590px;
+		margin: 0 auto;
+		@include sans-serif;
+
+		h2 {
+			font-weight: bold;
+			font-size: 19px;
+			margin-bottom: 30px;
+		}
+
+		.subscription-kind-select {
+			margin-top: 33px;
+			.-item {
+				margin-right: 44px;
+				a {
+					font-size: 19px;
+					color: $text-color;
+					font-weight: bold;
+					display: block;
+					width: 152px;
+					height: 152px;
+					line-height: 152px;
+					text-align: center;
+					background-image: url(asset-path("select_circle_inactive.png", image));
+				}
+
+				p {
+					margin-top: 20px;
+					text-align: center;
+					font-style: oblique;
+					font-size: 13px;
+				}
+			}
+
+			.-item.active, .-item:hover {
+				a {
+					color: white;
+					background-image: url(asset-path("select_circle_active.png", image));
+				}
+
+				p {
+					color: $purple-color;
+					font-weight: bold;
+					font-style: normal;
+				}
+			}
+		}
+
+		p.payment {
+			width: 170px;
+			margin: 34px auto;
+			font-style: oblique;
+			color: $purple-color;
+
+			// hidden by default, removes when activated
+			visibility: hidden;
+
+			.per-month-price {
+				font-weight: bold;
+				font-style: normal;
+			}
+		}
+
+		input[type=submit] {
+			@include button;
+			width: 446px;
+			height: 56px;
+			padding: 16px;
+			font-size: 22px;
+			border: 1px solid $purple-color;
+			display: block;
+			margin: 0 auto;
+			margin-bottom: 34px;
+		}
+
+		input[type=submit][disabled=disabled] {
+			background-color: white;
+			color: $purple-color;
+			text-transform: capitalize;
+			border: 1px solid $grey-border-color;
+		}
+	}
+}
+
+.subscription-item {
+	@include sans-serif;
+	color: $light-grey-text-color;
+	margin-top: 16px;
+	height: 24px;
+	line-height: 24px;
+	border-bottom: 1px solid $grey-border-color;
+	font-size: 13px;
+
+	.date, .for-whom, .description, .actions {
+		display: block;
+	}
+
+	.date {
+		width: 200px;
+	}
+
+	.for-whom {
+		width: 200px;
+	}
+
+	.description {
+		font-weight: bold;
+	}
+
+	.actions {
+		a {
+			color: white;
+			background-color: $purple-color;
+			font-weight: bold;
+			padding: 4px;
+		}
+
+		:first-child {
+			margin-right: 30px;
+		}
+	}
+}
+
+#no-subscriptions-block {
+	@include sans-serif;
+	margin-top: 18px;
+
+	h1 {
+		color: $purple-color;
+		text-transform: uppercase;
+		font-weight: bold;
+		font-size: 21px;
+		padding-bottom: 5px;
+		margin-bottom: 30px;
+
+		border-bottom: 2px solid $grey-border-color;
+	}
+
+	p {
+		color: $grey-text-color;
+	}
+
+	a {
+		display: block;
+		@include button;
+		width: 250px;
+		height: 50px;
+		line-height: 50px;
+		text-align: center;
+		margin: 10px auto;
+	}
+}

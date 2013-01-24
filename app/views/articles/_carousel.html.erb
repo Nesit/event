@@ -1,0 +1,42 @@
+<div class="articles-carousel">
+	<div class="left carousel-content">
+		<% @carousel_articles.each do |article| %>
+		<div class="carousel-content-item" id="carousel-item<%= article.id %>">
+			<div class="carousel-item-description">
+				<%= link_to content_tag(:h2, article.title), article %>
+				<%= link_to image_tag(article.head_image.head.carousel), article %>
+				<p><%= article.list_item_description %></p>
+			</div>
+			<div class="article-carousel-item-info">
+				<%= link_to t("articles.category.#{article.class.name}"), articles_path_for_article_class(article.class), class: 'articles-category left' %>
+				<div class="created-at left">
+					<%= distance_of_time_in_words(Time.now, article.created_at) %> назад,
+					в <%= article.created_at.strftime("%H:%M") %>
+				</div>
+				<div class="right">
+					<% if article.pageviews_count > 0 %>
+					<div class="pageviews-count right">
+						<%= article.pageviews_count %>
+					</div>
+					<% end %>
+					
+					<% if article.comments_count > 0 %>
+					<div class="comments-count right">
+						<%= article.comments_count %>
+					</div>
+					<% end %>
+				</div>
+				
+				<div class="clear"></div>
+			</div>
+		</div>
+		<% end %>
+	</div>
+
+	<ul class="right carousel-list">
+		<% @carousel_articles.each do |article| %>
+			<li class="carousel-list-item"><%= link_to article.title, article, 'data-item-id' => "carousel-item#{article.id}" %></li>
+		<% end %>
+	</ul>
+	<div class="clear"></div>
+</div>

@@ -1,0 +1,24 @@
+<%= semantic_form_for [:admin, resource] do |f| %>
+  <%= f.inputs do %>
+    <%= f.input :title %>
+    <%= f.input :author %>
+    <%= f.input :issue %>
+    <%= f.input :head_image unless resource.kind_of? TvArticle %>
+    <%= f.input :head_video_url, required: true if resource.kind_of? TvArticle %>
+    <%= f.input :list_item_description %>
+    <%= f.input :short_description %>
+    <%= f.input :tag_list %>
+    <%= f.input :target_at, as: (resource.kind_of?(EventArticle) ? :date : :hidden) %>
+  <% end %>
+
+  <%= f.inputs "Контент" do %>
+    <%= f.input :body, as: :html_editor %>
+  <% end %>
+
+  <%= f.inputs "Закрытость" do %>
+    <%= f.input :closed %>
+    <%= f.input :closed_body, as: :html_editor %>
+  <% end %>
+
+  <%= f.actions %>
+<% end %>

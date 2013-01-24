@@ -1,0 +1,8 @@
+<% content_for :wide_footer do %>
+	<%= paginate @polls, window: 4 %>
+<% end %>
+
+<div class="polls-list">
+	<h1>Мнения</h1>
+	<%= render 'items', polls: @polls %>
+</div>

@@ -1,0 +1,49 @@
+.social-share-line {
+	display: inline-block;
+	a {
+		display: inline-block;
+		border: 1px solid $social-share-border-color;
+		width: 30px;
+		height: 26px;
+		padding-left: 30px;
+		background-color: $social-share-bg-color;
+		color: $social-share-fg-color;
+		line-height: 26px;
+		font-size: 12px;
+		text-align: center;
+	}
+
+	.fb, .vk, .twitter, .gplus, .mailru {
+		background-repeat: no-repeat;
+	}
+
+	.fb {
+		background-image: asset-url("fb_share.png", image);
+	}
+
+	.vk {
+		background-image: asset-url("vk_share.png", image);
+	}
+
+	.twitter {
+		background-image: asset-url("twitter_share.png", image);
+	}
+
+	.gplus {
+		background-image: asset-url("gplus_share.png", image);
+	}
+
+	.mailru {
+		background-image: asset-url("mailru_share.png", image);
+	}
+}
+
+.bottom-social-share {
+	.social-share-line {
+		float: inherit;
+		width: 330px;
+		margin-left: 155px;
+	}
+	border-top: 1px solid $grey2-border-color;
+	padding: 22px 0;
+}

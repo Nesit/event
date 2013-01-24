@@ -1,0 +1,21 @@
+expired_subscription1:
+  id: 1
+  user_id: 1
+  state: expired
+  kind_cd: 2
+  activated_at: <%= 2.years.ago.to_date %>
+  ended_at: <%= 1.year.ago.to_date %>
+
+active_subscription2:
+  id: 2
+  user_id: 1
+  state: active
+  kind_cd: 1
+  activated_at: <%= 3.months.ago.to_date %>
+  ended_at: <%= Date.today + 3.months %>
+
+pending_subscription3:
+  id: 3
+  user_id: 2
+  state: pending
+  kind_cd: 1

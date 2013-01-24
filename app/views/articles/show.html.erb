@@ -1,0 +1,85 @@
+<div class="article-block">
+	<div class="article-header">
+		<h1><%= @article.title %></h1>
+		<% if @article.author %>
+			<div class="article-author-line">
+				<%= image_tag(@article.author.avatar) %>
+				<span><%= @article.author.name %></span>
+			</div>
+		<% end %>
+
+		<% if @article.kind_of? TvArticle %>
+			<div class="article-head-image">
+				<iframe
+					width="470"
+					height="240"
+					src="http://www.youtube.com/embed/<%= @article.head_video_code %>?wmode=opaque" frameborder="0"
+					allowfullscreen></iframe>
+			</div>
+		<% else %>
+			<%= image_tag(@article.head_image.head, class: 'article-head-image') %>
+		<% end %>
+		
+		<div class="article-short">
+			<%= @article.short_description %>
+		</div>
+
+		<div class="article-social-line">
+			<%= render 'shared/social_share', subject: @article %>
+			<div class="created-at">
+				<%= distance_of_time_in_words(Time.now, @article.created_at) %> назад<span class="hiddable">,
+				в <%= @article.created_at.strftime("%H:%M") %></span>
+			</div>
+			<div class="clear"></div>
+		</div>
+	</div>
+
+	<div class="article-body">
+		<% if @article.closed? %>
+			<% if can_see_closed? %>
+				<%= article_body_as_html(@article) %>
+			<% else %>
+				<%= @article.closed_body.html_safe %>
+				<%= render 'issue', issue: @article.issue unless @article.issue.blank? %>
+			<% end %>
+		<% else %>
+			<%= article_body_as_html(@article) %>
+		<% end %>
+	</div>
+
+	<div class="article-tags-line">
+		<% if @article.tags.any? %>
+			<strong>Теги:</strong>
+			<% @article.tags.each do |tag| %>
+				<%= link_to tag.name, articles_path(tag_id: tag.id) %>
+			<% end %>
+		<% end %>
+	</div>
+	<div class="bottom-social-share">
+		<%= render 'shared/social_share', subject: @article %>
+	</div>
+	<div class="article-navigation">
+		<%= link_to t("articles.previous.#{@article.class.name}"), @article.previous_article, class: 'previous-article-link left' if @article.previous_article %>
+		<%= link_to t("articles.next.#{@article.class.name}"), @article.next_article, class: 'next-article-link right' if @article.next_article %>
+		<div class="clear"></div>
+	</div>
+	<p class="social-networks-notice">
+		Следите за обновлениями в вашей социальной сети:
+		<%= link_to "Вконтакте", EventRu::Links::Vkontakte %> или <%= link_to "Facebook", EventRu::Links::Facebook %>
+	</p>
+	
+	<div class="article-popular">
+		<div class="title">Самое популярное:</div>
+		
+		<% @article.class.popular.first(5).each do |article| %>
+		<div class="item left">
+			<%= link_to image_tag(article.head_image.popular), article %>
+			<%= link_to article.title, article %>
+		</div>
+		<% end %>
+		<div class="clear"></div>
+	</div>
+	
+</div>
+
+<%= render 'comments/list', topic: @article %>

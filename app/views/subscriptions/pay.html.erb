@@ -1,0 +1,8 @@
+<%= payment_service_for @subscription.id, Robokassa::Login,
+                amount: @subscription.amount,
+                service: :robokassa,
+                secret: Robokassa::Password1 do |s| %>
+<% end %>
+<script type="text/javascript">
+	document.getElementsByTagName('form')[0].submit()
+</script>

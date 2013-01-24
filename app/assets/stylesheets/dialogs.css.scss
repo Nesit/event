@@ -1,0 +1,149 @@
+#dialog-overlay.active {
+	background-image: asset-url("dialog_overlay_bg.png", image);
+	position: fixed;
+	width: 100%;
+	height: 100%;
+	z-index: 9;
+}
+
+#login-dialog, #register-dialog, #subscribe-dialog, #email-dialog {
+	@include sans-serif;
+
+	width: 500px;
+	padding: 19px;
+	border: 1px solid $grey-border-color;
+	text-align: left;
+	z-index: 10;
+
+	background-color: white;
+
+	.dialog-title {
+		border-bottom: 2px solid $grey-border-color;
+		@include dialog-title-typography;
+		color: $text-color;
+		padding-bottom: 8px;
+		margin-bottom: 8px;
+	}
+
+	.close-link {
+		text-decoration: none;
+		font-weight: bold;
+		font-size: 16px;
+		color: $text-color;
+	}
+
+	.login-kind-title {
+		font-size: 14px;
+		margin: 10px 0;
+		color: $text-color;
+	}
+
+	p {
+		color: $grey-text-color;
+		font-size: 14px;
+	}
+
+	.social-login {
+		margin: 10px 0;
+		font-size: 14px;
+		img {
+			border: none;
+		}
+
+		a {
+			color: $text-color;
+			text-decoration: none;
+		}
+	}
+
+	img {
+		border: 1px solid $grey-border-color;
+	}
+}
+
+#login-dialog, #register-dialog, #subscribe-dialog, #email-dialog {
+	position: fixed;
+	margin-left: -250px;
+	margin-top: -200px;
+	left: 50%;
+	top: 50%;
+
+	#login-dialog-message {
+		height: 45px;
+	}
+
+	#register-dialog-message, #subscribe-dialog-message {
+		height: 80px;
+	}
+
+	form {
+		.left, .right, .wrapper {
+			width: 240px;
+			input[type=email], input[type=password], input[type=text] {
+				width: 230px;
+				margin-bottom: 10px;
+				height: 14px;
+			}
+
+			input[type=submit] {
+				margin: 10px 0;
+				width: 240px;
+			}
+		}
+
+		input[name=captcha] {
+			margin-top: 44px;
+		}
+
+		input[type=email], input[type=password], input[type=text] {
+			@include form-text-field;
+		}
+
+		input[type=submit] {
+			@include button;
+		}
+	}
+}
+
+#register-dialog {
+	input[type=email].loader {
+		background-image: asset-url("small_loader.gif", image);
+		background-position: 98% 50%;
+		background-repeat: no-repeat;
+	}
+}
+
+#login-dialog {
+	.reset-password-link {
+		font-weight: normal;
+		font-style: oblique;
+	}
+
+	.register-notice {
+		font-style: oblique;
+		.register-link {
+			font-weight: normal;
+			font-style: normal;
+		}
+	}
+
+	.social-login {
+		img {
+			vertical-align: middle;
+		}
+	}
+}
+
+#email-dialog {
+	width: 360px;
+	margin-left: -180px;
+
+	.wrapper {
+		width: 300px;
+		margin: 0 auto;
+	}
+
+	#email-dialog-message {
+		margin: 20px 0;
+	}
+}

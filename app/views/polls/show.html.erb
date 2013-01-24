@@ -1,0 +1,14 @@
+<%= render 'items', polls: [@poll] %>
+<%#div class="bottom-social-share">
+	<= render 'shared/social_share', subject: @poll >
+</div%>
+<div class="article-navigation">
+	<%= link_to "Предыдущий опрос", @poll.previous_poll, class: 'previous-poll-link left' if @poll.previous_poll %>
+	<%= link_to "Следующий опрос", @poll.next_poll, class: 'next-poll-link right' if @poll.next_poll %>
+	<div class="clear"></div>
+</div>
+<p class="social-networks-notice">
+	Следите за обновлениями в вашей социальной сети:
+	<%= link_to "Вконтакте", '#' %> или <%= link_to "Facebook", '#' %>
+</p>
+<%= render 'comments/list', topic: @poll %>

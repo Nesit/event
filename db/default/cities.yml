@@ -1,0 +1,9 @@
+moscow:
+  id: 1
+  country_cd: 0
+  name: "Москва"
+
+piter:
+  id: 2
+  country_cd: 0
+  name: "Санкт-Петербург"

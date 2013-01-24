@@ -1,0 +1,12 @@
+#page-content {
+	h1 {
+		@include sans-serif;
+		font-size: 32px;
+		font-weight: bold;
+	}
+
+	p {
+		@include sans-serif;
+		margin: 1em 0;
+	}
+}

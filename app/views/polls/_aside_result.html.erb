@@ -1,0 +1,19 @@
+<%= link_to "Мнение", polls_path, class: 'frame-bold-title' %>
+<div class="poll-choices-select-list<%= current_user ? '' : ' auth-required' %>">
+	<h2><%= poll.topic %></h2>
+	<div class="wrapper">
+		<% poll.choices.each do |choice| %>
+			<div class="point-radio-static<%= choice.voted?(current_user) ? ' active' : '' %>" data-id="<%= choice.id %>" data-percent="<%= choice.votes_percent %>">
+				<p class="left">
+					<%= choice.title %>
+					<div class="graph left"><%= choice.votes_percent %>%</div>
+					<div class="count right">
+						<%= choice.votes.count %>
+						<%= Russian.p(choice.votes.count, "голос", "голоса", "голосов") %>
+					</div>
+				</p>
+				<div class="clear"></div>
+			</div>
+		<% end %>
+	</div>
+</div>

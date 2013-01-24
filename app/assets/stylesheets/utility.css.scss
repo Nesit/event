@@ -1,0 +1,57 @@
+.clear { clear: both; }
+.left { float: left; }
+.right { float: right; }
+.hidden { display: none; }
+
+@mixin jcarousel($height) {
+	position: relative;
+    overflow: hidden;
+    height: $height;
+}
+
+@mixin jcarousel-list {
+	width: 20000em;
+    position: absolute;
+    list-style: none;
+    margin: 0;
+    padding: 0;
+}
+
+@mixin jcarousel-item {
+	float: left;
+}
+
+.frame {
+	padding: 23px;
+	padding-top: 0;
+	border: 1px solid $grey-border-color;
+	margin-bottom: 20px;
+
+	.frame-title, .frame-bold-title {
+		position: relative;
+		top: -10px;
+		left: 70px;
+		display: inline-block;
+		width: 100px;
+		text-align: center;
+
+		@include sans-serif;
+		text-transform: uppercase;
+		background-color: white;
+	}
+
+	.frame-title {
+		color: $grey-border-color;
+		font-size: 11px;
+	}
+
+	.frame-bold-title {
+		color: $purple-color;
+		font-weight: bold;
+		font-size: 16px;
+	}
+
+	.frame-content {
+		margin-top: 23px;
+	}
+}

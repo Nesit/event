@@ -1,0 +1,79 @@
+<% polls.each do |poll| %>
+	<div class="poll-item">
+		<% if action_name == 'show' %>
+			<h1><%= poll.topic %></h1>
+		<% else %>
+			<h2><%= link_to poll.topic, poll %></h2>
+		<% end %>
+		
+
+		<% if poll.voted?(current_user) or not poll.running? %>
+
+			<div class="choices left">
+				<% poll.choices.each do |choice| %>
+					<div class="choice-item"><%= choice.title %></div>
+				<% end %>
+			</div>
+			<div class="results left">
+				<div class="graphs">
+					<% poll.choices.each do |choice| %>
+						<div class="graph-item<%= choice.voted?(current_user) ? ' active' : '' %>" data-percent="<%= choice.votes_percent %>"></div>
+					<% end %>
+				</div>
+				<p class="total-votes">Всего проголосовало: <%= poll.votes.count %></p>
+			</div>
+			<div class="counts left">
+				<% poll.choices.each do |choice| %>
+					<div class="count-item<%= choice.voted?(current_user) ? ' active' : '' %>">
+						<%= choice.votes_percent %>%
+						(<%= choice.votes.count %> <%= Russian.p(choice.votes.count, "голос", "голоса", "голосов") %>)
+					</div>
+				<% end %>
+			</div>
+			<div class="clear"></div>
+
+		<% else %>
+
+			<div class="poll-choices-select-list<%= current_user ? '' : ' auth-required' %>">
+				<%= form_for [poll, PollVote.new] do |f| %>
+					<%= f.hidden_field :poll_choice_id %>
+					<% poll.choices.each do |choice| %>
+						<div class="point-radio" data-id="<%= choice.id %>">
+							<div class="-icon left"></div>
+							<p class="left"><%= choice.title %></p>
+							<div class="clear"></div>
+						</div>
+					<% end %>
+					<%= f.submit "Проголосовать" %>
+				<% end %>
+			</div>
+
+		<% end %>
+
+		<p class="start-end-notice">
+			Проводится с <%= poll.start_at.strftime("%d.%m.%Y") %>
+			по <%= poll.end_at.strftime("%d.%m.%Y") %>
+		</p>
+		<div class="poll-item-info">
+			<div class="created-at left">
+				<%= distance_of_time_in_words(Time.now, poll.created_at) %> назад<span class="hiddable">,
+				в <%= poll.created_at.strftime("%H:%M") %></span>
+			</div>
+			<div class="right stats">
+				<% if poll.pageviews_count > 0 %>
+				<div class="pageviews-count right">
+					<%= poll.pageviews_count %>
+				</div>
+				<% end %>
+				
+				<% if poll.comments_count > 0 %>
+				<div class="comments-count right">
+					<%= poll.comments_count %>
+				</div>
+				<% end %>
+			</div>
+			<%= render 'shared/social_share', subject: poll, url: "http://#{request.domain}#{poll_path(poll)}" %>
+			<div class="clear"></div>
+		</div>
+	</div>
+<% end %>

@@ -1,0 +1,22 @@
+comment_on_linus1:
+  id: 1
+  author_id: 1
+  body: Какой же Линус всё-таки лапочка!
+  topic_id: 3
+  topic_type: Article
+
+comment_on_linus2:
+  id: 2
+  author_id: 2
+  body: "Ну расписано-то красиво, а вот как оно на деле... Время покажет"
+  topic_id: 3
+  topic_type: Article
+
+comment_on_linus3:
+  id: 3
+  author_id: 1
+  body: "А по мне, так всё будет радужно! Ты какой-то угрюмый =("
+  ancestry: '2'
+  topic_id: 3
+  topic_type: Article
+

@@ -1,0 +1,14 @@
+poll1_choice1:
+  id: 1
+  poll_id: 1
+  title: "Выборы президента в России"
+
+poll1_choice2:
+  id: 2
+  poll_id: 1
+  title: "Концерт Success Will Wright Apocalypse Across The Sky"
+
+poll1_choice3:
+  id: 3
+  poll_id: 1
+  title: "Повтор программы «Дом 2» на ТНТ"

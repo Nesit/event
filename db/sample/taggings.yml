@@ -1,0 +1,272 @@
+id43:
+  id: 43
+  tag_id: 7
+  taggable_id: 3
+  taggable_type: Article
+  context: tags
+
+id44:
+  id: 44
+  tag_id: 8
+  taggable_id: 3
+  taggable_type: Article
+  context: tags
+
+id45:
+  id: 45
+  tag_id: 9
+  taggable_id: 3
+  taggable_type: Article
+  context: tags
+
+id46:
+  id: 46
+  tag_id: 7
+  taggable_id: 9
+  taggable_type: Article
+  context: tags
+
+id47:
+  id: 47
+  tag_id: 8
+  taggable_id: 9
+  taggable_type: Article
+  context: tags
+
+id48:
+  id: 48
+  tag_id: 9
+  taggable_id: 9
+  taggable_type: Article
+  context: tags
+
+id49:
+  id: 49
+  tag_id: 7
+  taggable_id: 4
+  taggable_type: Article 
+  context: tags
+
+id50:
+  id: 50
+  tag_id: 8
+  taggable_id: 4
+  taggable_type: Article
+  context: tags
+
+id51:
+  id: 51
+  tag_id: 9
+  taggable_id: 4
+  taggable_type: Article
+  context: tags
+
+id52:
+  id: 52
+  tag_id: 7
+  taggable_id: 5
+  taggable_type: Article
+  context: tags
+
+id53:
+  id: 53
+  tag_id: 8
+  taggable_id: 5
+  taggable_type: Article
+  context: tags
+
+id54:
+  id: 54
+  tag_id: 9
+  taggable_id: 5
+  taggable_type: Article
+  context: tags
+
+id55:
+  id: 55
+  tag_id: 7
+  taggable_id: 6
+  taggable_type: Article
+  context: tags
+
+id56:
+  id: 56
+  tag_id: 8
+  taggable_id: 6
+  taggable_type: Article
+  context: tags
+
+id57:
+  id: 57
+  tag_id: 9
+  taggable_id: 6
+  taggable_type: Article
+  context: tags
+
+id58:
+  id: 58
+  tag_id: 7
+  taggable_id: 2
+  taggable_type: Article
+  context: tags
+
+id59:
+  id: 59
+  tag_id: 8
+  taggable_id: 2
+  taggable_type: Article
+  context: tags
+
+id60:
+  id: 60
+  tag_id: 9
+  taggable_id: 2
+  taggable_type: Article
+  context: tags
+
+id61:
+  id: 61
+  tag_id: 7
+  taggable_id: 12
+  taggable_type: Article
+  context: tags
+
+id62:
+  id: 62
+  tag_id: 8
+  taggable_id: 12
+  taggable_type: Article
+  context: tags
+
+id63:
+  id: 63
+  tag_id: 9
+  taggable_id: 12
+  taggable_type: Article
+  context: tags
+
+id64:
+  id: 64
+  tag_id: 7
+  taggable_id: 10
+  taggable_type: Article
+  context: tags
+
+id65:
+  id: 65
+  tag_id: 8
+  taggable_id: 10
+  taggable_type: Article
+  context: tags
+
+id66:
+  id: 66
+  tag_id: 9
+  taggable_id: 10
+  taggable_type: Article
+  context: tags
+
+id67:
+  id: 67
+  tag_id: 7
+  taggable_id: 8
+  taggable_type: Article
+  context: tags
+
+id68:
+  id: 68
+  tag_id: 8
+  taggable_id: 8
+  taggable_type: Article
+  context: tags
+
+id69:
+  id: 69
+  tag_id: 9
+  taggable_id: 8
+  taggable_type: Article
+  context: tags
+
+id70:
+  id: 70
+  tag_id: 7
+  taggable_id: 7
+  taggable_type: Article
+  context: tags
+
+id71:
+  id: 71
+  tag_id: 8
+  taggable_id: 7
+  taggable_type: Article
+  context: tags
+
+id72:
+  id: 72
+  tag_id: 9
+  taggable_id: 7
+  taggable_type: Article
+  context: tags
+
+id73:
+  id: 73
+  tag_id: 7
+  taggable_id: 13
+  taggable_type: Article
+  context: tags
+
+id74:
+  id: 74
+  tag_id: 8
+  taggable_id: 13
+  taggable_type: Article
+  context: tags
+
+id75:
+  id: 75
+  tag_id: 9
+  taggable_id: 13
+  taggable_type: Article
+  context: tags
+
+id76:
+  id: 76
+  tag_id: 7
+  taggable_id: 11
+  taggable_type: Article
+  context: tags
+
+id77:
+  id: 77
+  tag_id: 8
+  taggable_id: 11
+  taggable_type: Article
+  context: tags
+
+id78:
+  id: 78
+  tag_id: 9
+  taggable_id: 11
+  taggable_type: Article
+  context: tags
+
+id79:
+  id: 79
+  tag_id: 7
+  taggable_id: 1
+  taggable_type: Article
+  context: tags
+
+id80:
+  id: 80
+  tag_id: 8
+  taggable_id: 1
+  taggable_type: Article
+  context: tags
+
+id81:
+  id: 81
+  tag_id: 9
+  taggable_id: 1
+  taggable_type: Article
+  context: tags

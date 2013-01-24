@@ -1,0 +1,95 @@
+#top-comment-form {
+	input[type=submit] {
+		@include button;
+		width: 265px;
+	}
+}
+
+.comments-list {
+	margin: 1em 0;
+
+	h2 {
+		@include sans-serif;
+		text-transform: uppercase;
+		color: $purple-color;
+	}
+
+	> form > textarea {
+		width: 618px;
+		height: 123px;
+		border: 1px solid $grey-border-color;
+		margin: 10px 0;
+		resize: none;
+		padding: 10px;
+	}
+
+	.notice {
+		@include sans-serif;
+		color: $grey-text-color;
+		font-size: 12px;
+	}
+
+	.comment {
+		padding-top: 15px;
+		border-bottom: 1px solid $grey-border-color;
+
+		img.avatar {
+			margin-right: 10px;
+			width: 60px;
+			height: 60px;
+		}
+
+		.comment-author-name {
+			@include sans-serif;
+			font-size: 13px;
+
+			img {
+				vertical-align: middle;
+				margin-right: 5px;
+			}
+
+			.name {
+				color: $blue-color;
+			}
+			a.name {
+				text-decoration: underline;
+			}
+
+			.date {
+				margin-left: 7px;
+				font-weight: bold;
+			}
+		}
+
+		.blue-link {
+			@include sans-serif;
+			color: $blue-color;
+			text-decoration: underline;
+			font-size: 13px;
+		}
+
+		p {
+			margin: 1em 0;
+			margin-left: 70px;
+		}
+
+		textarea {
+			width: 100%;
+			height: 123px;
+			margin-left: 70px;
+			border: 1px solid $grey-border-color;
+			resize: none;
+		}
+
+		input[type=submit] {
+			@include button;
+			margin: 16px 0;
+			margin-left: 70px;
+			width: 200px;
+		}
+	}
+
+	.comment-tree {
+		padding-left: 15px;
+	}
+}

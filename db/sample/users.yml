@@ -1,0 +1,46 @@
+user1:
+  id: 1
+  email: user1@example.com
+  name: Сердюков Сергей
+  city_id: 1
+  born_at: '01-01-1966'
+  gender_cd: 1
+  company: "Microsoft"
+  position: менеджер
+  website: "www.Microsoft.com"
+  state: complete
+  salt: 'G9Y3bPEzgLyJMpbRruKy'
+  crypted_password: '$2a$10$zUA/Q8y8skaUZJy1zXmyu.V0PfUyTnOgytiOB8pYh3TknX0O3.x0e'
+  activation_state: active
+
+user2:
+  id: 2
+  email: user2@example.com
+  name: Адольф Виссарионыч
+  city_id: 1
+  born_at: '01-01-1945'
+  gender_cd: 1
+  company: "Google"
+  position: инженер
+  website: "www.Google.com"
+  state: complete
+  salt: 'UzNpW4ggbDXrywH2zzny'
+  crypted_password: '$2a$10$RYBQJTFBA3s2QpzXmaCskuVl2pTRxsvzjg6nYrTwQGeiY/ddf8GqC'
+  activation_state: active
+
+<% (3..6).each do |i| %>
+user<%= i %>:
+  id: <%= i %>
+  email: user4@example.com
+  name: Пользователь<%= i %>
+  city_id: 1
+  born_at: '01-01-1945'
+  gender_cd: 1
+  company: "Event.Ru"
+  position: тестер
+  website: "www.even.tru"
+  state: complete
+  salt: 'UzNpW4ggbDXrywH2zzny'
+  crypted_password: '$2a$10$RYBQJTFBA3s2QpzXmaCskuVl2pTRxsvzjg6nYrTwQGeiY/ddf8GqC'
+  activation_state: active
+<% end %>

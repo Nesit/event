@@ -1,0 +1,13 @@
+$ ->
+    $('.social-share-line a').on 'click', ->
+        $item = $(this)
+        social = $item.attr('class')
+        id = $item.parent().attr('data-id')
+        kind = $item.parent().attr('data-kind')
+        $.ajax
+            type: 'POST'
+            url: '/shares'
+            data: { social: social, id: id, kind: kind }
+            success: ->
+                val = parseInt $item.html()
+                $item.html("#{val+1}")
