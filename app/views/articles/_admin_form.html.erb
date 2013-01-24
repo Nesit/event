@@ -7,6 +7,7 @@
     <%= f.input :head_video_url, required: true if resource.kind_of? TvArticle %>
     <%= f.input :list_item_description %>
     <%= f.input :short_description %>
+    <%= f.input :created_at %>
     <%= f.input :tag_list %>
     <%= f.input :target_at, as: (resource.kind_of?(EventArticle) ? :date : :hidden) %>
   <% end %>
