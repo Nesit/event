@@ -27,8 +27,8 @@
 		<div class="article-social-line">
 			<%= render 'shared/social_share', subject: @article %>
 			<div class="created-at">
-				<%= distance_of_time_in_words(Time.now, @article.created_at) %> назад<span class="hiddable">,
-				в <%= @article.created_at.strftime("%H:%M") %></span>
+				<%= distance_of_time_in_words(Time.now, @article.published_at) %> назад<span class="hiddable">,
+				в <%= @article.published_at.strftime("%H:%M") %></span>
 			</div>
 			<div class="clear"></div>
 		</div>

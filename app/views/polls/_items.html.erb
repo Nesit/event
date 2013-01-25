@@ -56,8 +56,8 @@
 		</p>
 		<div class="poll-item-info">
 			<div class="created-at left">
-				<%= distance_of_time_in_words(Time.now, poll.created_at) %> назад<span class="hiddable">,
-				в <%= poll.created_at.strftime("%H:%M") %></span>
+				<%= distance_of_time_in_words(Time.now, poll.published_at) %> назад<span class="hiddable">,
+				в <%= poll.published_at.strftime("%H:%M") %></span>
 			</div>
 			<div class="right stats">
 				<% if poll.pageviews_count > 0 %>

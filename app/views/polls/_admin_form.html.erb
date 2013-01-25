@@ -5,6 +5,8 @@
 		<%= f.input :topic %>
 		<%= f.input :start_at %>
 		<%= f.input :end_at %>
+		<% f.object.published_at ||= DateTime.now %>
+		<%= f.input :published_at %>
 	<% end %>
 	<% unless f.object.new_record? %>
 		<% f.object.choices.build %>

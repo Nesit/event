@@ -7,8 +7,8 @@
     <%= f.input :head_video_url, required: true if resource.kind_of? TvArticle %>
     <%= f.input :list_item_description %>
     <%= f.input :short_description %>
-    <% f.object.created_at = DateTime.now %>
-    <%= f.input :created_at %>
+    <% f.object.published_at ||= DateTime.now %>
+    <%= f.input :published_at %>
     <%= f.input :tag_list %>
     <%= f.input :target_at, as: (resource.kind_of?(EventArticle) ? :date : :hidden) %>
   <% end %>

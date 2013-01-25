@@ -6,13 +6,15 @@ class Article < ActiveRecord::Base
   acts_as_taggable
   attr_accessible :tag_list
 
+  before_validation :ensure_published_date
+
   validates :title, :body, :short_description, :list_item_description,
-            :head_image, presence: true
+            :head_image, :published_at, presence: true
   validates :type, presence: true
 
   attr_accessible :body, :title, :head_image, :list_item_description,
     :short_description, :target_at, :author_id, :issue_id, :closed,
-    :closed_body, :created_at
+    :closed_body, :published_at
 
   has_many :comments, as: :topic
   belongs_to :author, class_name: 'ArticleAuthor'
@@ -30,16 +32,22 @@ class Article < ActiveRecord::Base
 
   def next_article
     self.class.where('articles.id <> ?', id)
-              .where("articles.created_at < ?", created_at).first
+              .where("articles.published_at < ?", published_at).first
   end
 
   def previous_article
     self.class.where('articles.id <> ?', id)
-              .where("articles.created_at > ?", created_at).first
+              .where("articles.published_at > ?", published_at).first
   end
 
   def closed?
     closed
+  end
+
+  private
+
+  def ensure_published_date
+    self.published_at ||= DateTime.now
   end
 end
 

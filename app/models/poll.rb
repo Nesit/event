@@ -1,7 +1,7 @@
 class Poll < ActiveRecord::Base
-  validates :topic, :start_at, :end_at, presence: true
+  validates :topic, :start_at, :end_at, :published_at, presence: true
 
-  attr_accessible :topic, :start_at, :end_at, :choices_attributes
+  attr_accessible :topic, :start_at, :end_at, :published_at, :choices_attributes
 
   has_many :votes, class_name: 'PollVote'
   has_many :choices, class_name: 'PollChoice'
@@ -10,6 +10,7 @@ class Poll < ActiveRecord::Base
   accepts_nested_attributes_for :choices
 
   before_validation :remove_empty_choices
+  before_validation :ensure_published_date
 
   scope :newer_started, order('polls.start_at DESC')
 
@@ -58,12 +59,12 @@ class Poll < ActiveRecord::Base
 
   def next_poll
     self.class.where('polls.id <> ?', id)
-              .where("polls.created_at < ?", created_at).first
+              .where("polls.published_at < ?", published_at).first
   end
 
   def previous_poll
     self.class.where('polls.id <> ?', id)
-              .where("polls.created_at > ?", created_at).first
+              .where("polls.published_at > ?", published_at).first
   end
 
   private
@@ -76,5 +77,9 @@ class Poll < ActiveRecord::Base
     to_remove.each do |choice|
       choices.delete(choice)
     end
+  end
+
+  def ensure_published_date
+    self.published_at ||= DateTime.now
   end
 end

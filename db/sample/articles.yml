@@ -1,5 +1,5 @@
 news_article:
-  created_at: '<%= DateTime.now %>'
+  published_at: '<%= DateTime.now %>'
   id: 1
   type: NewsArticle
   title: "Лучше там, где нас нет. Отличные идеи стартапов со всего мира"
@@ -38,7 +38,7 @@ news_article:
     – они не впишутся в официальные рамки. В чем же секрет?
 
 event_article:
-  created_at: '<%= DateTime.now + 1.second %>'
+  published_at: '<%= DateTime.now + 1.second %>'
   id: 2
   type: EventArticle
   title: "Конец света близится!"
@@ -103,7 +103,7 @@ event_article:
     которые должны произойти в 2012 году.
 
 closed_news_article:
-  created_at: '<%= DateTime.now + 2.seconds %>'
+  published_at: '<%= DateTime.now + 2.seconds %>'
   id: 3
   title: Что такое Linux?
   issue_id: 1
@@ -168,7 +168,7 @@ closed_news_article:
     контента закрыта...</b>
 
 festival_event_article:
-  created_at: '<%= DateTime.now + 3.seconds %>'
+  published_at: '<%= DateTime.now + 3.seconds %>'
   id: 4
   type: EventArticle
   title: "Международный Фестиваль Культур"
@@ -214,7 +214,7 @@ festival_event_article:
     Влюбись в этот мир. Он удивительный!
 
 stallman_event_article:
-  created_at: '<%= DateTime.now + 4.seconds %>'
+  published_at: '<%= DateTime.now + 4.seconds %>'
   id: 5
   type: EventArticle
   title: "Визит Ричарда Столлмана в Москву"  
@@ -260,7 +260,7 @@ stallman_event_article:
     В подробностях расписание визита.
 
 sting_interview_article:
-  created_at: '<%= DateTime.now + 5.seconds %>'
+  published_at: '<%= DateTime.now + 5.seconds %>'
   id: 6
   type: InterviewArticle
   title: "Интервью со Стингом"
@@ -308,7 +308,7 @@ sting_interview_article:
     Мусульмане, коммунисты, капиталисты, католики", - уверен музыкант.
 
 news_article7:
-  created_at: '<%= DateTime.now + 6.seconds %>'
+  published_at: '<%= DateTime.now + 6.seconds %>'
   id: 7
   type: NewsArticle
   title: "Глава РПЦ призвал отказаться от дорогих авто"
@@ -335,7 +335,7 @@ news_article7:
     из государственного гаража.
 
 news_article8:
-  created_at: '<%= DateTime.now + 7.seconds %>'
+  published_at: '<%= DateTime.now + 7.seconds %>'
   id: 8
   type: NewsArticle
   title: "Депутат-единорос ответил на обвинения Навального"
@@ -385,7 +385,7 @@ news_article8:
     об иностранных организациях и цензуре в интернете.
 
 news_article9:
-  created_at: '<%= DateTime.now + 8.seconds %>'
+  published_at: '<%= DateTime.now + 8.seconds %>'
   id: 9
   type: NewsArticle
   title: "Из-за катастрофы погибло руководство Погранслужбы Казахстана"
@@ -419,7 +419,7 @@ news_article9:
     обязанности которого начал исполнять Турганбек Стамбеков.
 
 news_article10:
-  created_at: '<%= DateTime.now + 9.seconds %>'
+  published_at: '<%= DateTime.now + 9.seconds %>'
   id: 10
   type: NewsArticle
   title: "Реки Миссури и Миссисипи раскрыли свои тайны"
@@ -464,7 +464,7 @@ news_article10:
     Любителей поживится ждет наказание по всей строгости закона.
 
 event_article11:
-  created_at: '<%= DateTime.now + 10.seconds %>'
+  published_at: '<%= DateTime.now + 10.seconds %>'
   id: 11
   type: EventArticle
   title: "Hackby 2013"
@@ -501,7 +501,7 @@ event_article11:
     бесплатный доступ к которым будет открыт на мероприятии.
 
 event_article12:
-  created_at: '<%= DateTime.now + 11.seconds %>'
+  published_at: '<%= DateTime.now + 11.seconds %>'
   id: 12
   type: EventArticle
   title: "Конкурс на лучшего снеговика"
@@ -535,7 +535,7 @@ event_article12:
     а авторы лучших работ получат новогодние призы.
 
 event_article13:
-  created_at: '<%= DateTime.now + 12.seconds %>'
+  published_at: '<%= DateTime.now + 12.seconds %>'
   id: 13
   type: EventArticle
   title: "Codefest"
@@ -558,7 +558,7 @@ event_article13:
     «Секреты Power Point:пять слайдов к успеху».
 
 tv_article14:
-  created_at: '<%= DateTime.now + 13.seconds %>'
+  published_at: '<%= DateTime.now + 13.seconds %>'
   id: 14
   type: TvArticle
   title: "СтопХАМ в 2012 году"
@@ -572,7 +572,7 @@ tv_article14:
     <div class="article-body-video" data-code="pLcx8oO7Vgc">Видео pLcx8oO7Vgc</div>
 
 tv_article15:
-  created_at: '<%= DateTime.now + 14.seconds %>'
+  published_at: '<%= DateTime.now + 14.seconds %>'
   id: 15
   type: TvArticle
   title: "Захватываем Мосгордуму 1"
@@ -595,7 +595,7 @@ tv_article15:
     кто посмотрит это видео. Записывайтесь в комиссии :)
 
 tv_article16:
-  created_at: '<%= DateTime.now + 15.seconds %>'
+  published_at: '<%= DateTime.now + 15.seconds %>'
   id: 16
   title: "George Carlin - Death Penalty"
   body: |

@@ -16,6 +16,7 @@ require Rails.root.join('app/models/article')
     filter :title
     filter :closed
     filter :target_at if klass == "EventArticle"
+    filter :published_at
     filter :created_at
     filter :updated_at
 
@@ -32,6 +33,7 @@ require Rails.root.join('app/models/article')
       end
 
       column :target_at if klass == "EventArticle"
+      column :published_at
       column :created_at
       column :updated_at
 

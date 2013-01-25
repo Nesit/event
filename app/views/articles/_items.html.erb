@@ -13,8 +13,8 @@
 				<%= link_to t("articles.category.#{article.class.name}"), articles_path_for_article_class(article.class), class: 'articles-category left' %>
 			<% end %>
 			<div class="created-at left">
-				<%= distance_of_time_in_words(Time.now, article.created_at) %> назад,
-				в <%= article.created_at.strftime("%H:%M") %>
+				<%= distance_of_time_in_words(Time.now, article.published_at) %> назад,
+				в <%= article.published_at.strftime("%H:%M") %>
 			</div>
 			<div class="right">
 				<% if article.pageviews_count > 0 %>

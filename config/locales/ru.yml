@@ -8,6 +8,7 @@ ru:
     tag_list: "Список тегов через запятую"
     avatar: "аватар"
     created_at: "дата создания"
+    published_at: "дата публикации"
     updated_at: "дата изменения"
     title: "название"
     name: "имя"
