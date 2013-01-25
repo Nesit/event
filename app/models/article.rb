@@ -12,7 +12,7 @@ class Article < ActiveRecord::Base
 
   attr_accessible :body, :title, :head_image, :list_item_description,
     :short_description, :target_at, :author_id, :issue_id, :closed,
-    :closed_body
+    :closed_body, :created_at
 
   has_many :comments, as: :topic
   belongs_to :author, class_name: 'ArticleAuthor'
