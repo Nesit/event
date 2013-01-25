@@ -14,10 +14,6 @@ class BasicImageUploader < CarrierWave::Uploader::Base
     "/none.png"
   end
 
-  def store_dir
-    "system/uploads/#{model.class.to_s.underscore}/#{mounted_as}/#{model.id}"
-  end
-
   # hack to make fallback url work
   def url(*args)
     super_url = super
