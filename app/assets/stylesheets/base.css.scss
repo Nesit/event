@@ -181,6 +181,7 @@ a {
 	margin: 0 auto;
 	margin-bottom: 21px;
 	width: 950px;
+	height: 80px;
 }
 
 .subscribe-aside-link {
@@ -188,6 +189,14 @@ a {
 	position: fixed;
 	margin-left: 960px;
 	margin-top: 243px;
+}
+
+#left-banner {
+	position: fixed;
+	width: 100px;
+	height: 100px;
+	margin-top: 100px;
+	margin-left: -100px;
 }
 
 #main-column {
@@ -351,5 +360,9 @@ a {
 		text-align: center;
 		padding-top: 25px;
 		font-size: 13px;
+	}
+
+	#bottom-banner {
+		height: 60px;
 	}
 }

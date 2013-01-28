@@ -59,6 +59,24 @@
 			<%= link_to image_tag(asset_path('logo.png')), root_path, id: :logo %>
 			<div class="clear"></div>
 			<%= link_to image_tag(asset_path('subscribe_aside.png')), new_subscription_path, class: 'subscribe-aside-link' %>
+			<div id="left-banner">
+				<!--  AdRiver code START. Type:100x100 Site: Event.ru PZ: 0 BN: 0 -->
+				<script language="javascript" type="text/javascript"><!--
+				var RndNum4NoCash = Math.round(Math.random() * 1000000000);
+				var ar_Tail='unknown'; if (document.referrer) ar_Tail = escape(document.referrer);
+				document.write(
+				'<iframe src="http://ad.adriver.ru/cgi-bin/erle.cgi?'
+				+ 'sid=189350&target=blank&bt=2&pz=0&rnd=' + RndNum4NoCash + '&tail256=' + ar_Tail
+				+ '" frameborder=0 vspace=0 hspace=0 width=100 height=100 marginwidth=0'
+				+ ' marginheight=0 scrolling=no></iframe>');
+				//--></script>
+				<noscript>
+				<a href="http://ad.adriver.ru/cgi-bin/click.cgi?sid=189350&bt=2&pz=0&rnd=1626592686" target=_blank>
+				<img src="http://ad.adriver.ru/cgi-bin/rle.cgi?sid=189350&bt=2&pz=0&rnd=1626592686" alt="-AdRiver-" border=0 width=100 height=100></a>
+				</noscript>
+
+				<!--  AdRiver code END  -->
+			</div>
 			
 		</div>
 	<% end %>
@@ -67,7 +85,25 @@
 		<%= yield :without_aside %>
 	<% else %>
 		<% unless @hide_top %>
-		<%= link_to image_tag(asset_path('samples/banner950x80.jpg')), "http://www.graylinenicaragua.com/", id: 'top-banner' %>
+		<div id="top-banner">
+			<!--  AdRiver code START. Type:extension Site: Event.ru PZ: 1 BN: 0 -->
+			<script type="text/javascript">
+			(function(L){if(typeof(ar_cn)=="undefined")ar_cn=1;
+			var S='setTimeout(function(e){if(!self.CgiHref){document.close();e=parent.document.getElementById("ar_container_"+ar_bnum);e.parentNode.removeChild(e);}},3000);',
+			    j=' type="text/javascript"',t=0,D=document,n=ar_cn;L+=escape(D.referrer||'unknown')+'&rnd='+Math.round(Math.random()*999999999);
+			function _(){if(t++<100){var F=D.getElementById('ar_container_'+n);
+			    if(F){try{var d=F.contentDocument||(window.ActiveXObject&&window.frames['ar_container_'+n].document);
+			    if(d){d.write('<sc'+'ript'+j+'>var ar_bnum='+n+';'+S+'<\/sc'+'ript><sc'+'ript'+j+' src="'+L+'"><\/sc'+'ript>');t=0}
+			    else setTimeout(_,100);}catch(e){try{F.src="javascript:{document.write('<sc'+'ript"+j+">var ar_bnum="+n+"; document.domain=\""
+			    +D.domain+"\";"+S+"<\/sc'+'ript>');document.write('<sc'+'ript"+j+" src=\""+L+"\"><\/sc'+'ript>');}";return}catch(E){}}}else setTimeout(_,100);}}
+			D.write('<div style="visibility:hidden;height:0px;left:-1000px;position:absolute;"><iframe id="ar_container_'+ar_cn
+			    +'" width=1 height=1 marginwidth=0 marginheight=0 scrolling=no frameborder=0><\/iframe><\/div><div id="ad_ph_'+ar_cn
+			    +'" style="display:none;"><\/div>');_();ar_cn++;
+			})('http://ad.adriver.ru/cgi-bin/erle.cgi?sid=189350&target=blank&bt=43&pz=1&tail256=');
+			</script>
+			<!--  AdRiver code END  -->
+			<%#= link_to image_tag(asset_path('samples/banner950x80.jpg')), "http://www.graylinenicaragua.com/", id: 'top-banner' %>
+		</div>
 		<% end %>
 
 		<div id="left-column" class="left">
@@ -118,7 +154,24 @@
 <div id="tight-footer">
 	<div class="center-container">
 		<%= link_to image_tag(asset_path('bottom_logo.png')), root_path, class: 'left' %>
-		<%= link_to image_tag(asset_path('samples/bottom_sponsor_logo.png')), '#', class: 'right' %>
+		<div class="right" id="bottom-banner">
+			<!--  AdRiver code START. Type:150x60 Site: Event.ru PZ: 3 BN: 0 -->
+			<script language="javascript" type="text/javascript"><!--
+			var RndNum4NoCash = Math.round(Math.random() * 1000000000);
+			var ar_Tail='unknown'; if (document.referrer) ar_Tail = escape(document.referrer);
+			document.write(
+			'<iframe src="http://ad.adriver.ru/cgi-bin/erle.cgi?'
+			+ 'sid=189350&target=blank&bt=9&pz=3&rnd=' + RndNum4NoCash + '&tail256=' + ar_Tail
+			+ '" frameborder=0 vspace=0 hspace=0 width=150 height=60 marginwidth=0'
+			+ ' marginheight=0 scrolling=no></iframe>');
+			//--></script>
+			<noscript>
+			<a href="http://ad.adriver.ru/cgi-bin/click.cgi?sid=189350&bt=9&pz=3&rnd=261181063" target=_blank>
+			<img src="http://ad.adriver.ru/cgi-bin/rle.cgi?sid=189350&bt=9&pz=3&rnd=261181063" alt="-AdRiver-" border=0 width=150 height=60></a>
+			</noscript>
+
+			<!--  AdRiver code END  -->
+		</div>
 		<p class="bottom-sponsor-description">
 			Генеральный спонсор информационного портала - WE CAN GROUP
 		</p>
