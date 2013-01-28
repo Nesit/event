@@ -353,12 +353,13 @@ a {
 #tight-footer {
 	background-color: $tight-footer-bg-color;
 	color: $tight-footer-fg-color;
-	height: 63px;
+	height: 60px;
+	overflow: hidden;
 
 	.bottom-sponsor-description {
 		@include sans-serif;
 		text-align: center;
-		padding-top: 25px;
+		line-height: 60px;
 		font-size: 13px;
 	}
 
