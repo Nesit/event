@@ -11,6 +11,32 @@ a {
 		@include serif;
 		font-size: 16px;
 	}
+
+	b, strong {
+		font-weight: bold;
+	}
+
+	em, i {
+		font-style: oblique;
+	}
+
+	h1, h2, h3 {
+		font-weight: bold;
+		@include sans-serif;
+		margin: 1em 0;
+	}
+
+	h1 {
+		font-size: 32px;
+	}
+
+	h2 {
+		font-size: 24px;
+	}
+
+	h3 {
+		font-size: 18px;
+	}
 }
 
 #top-menu {
