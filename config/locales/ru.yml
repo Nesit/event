@@ -38,7 +38,7 @@ ru:
       InterviewArticle: "Интервью"
       OverviewArticle: "Обзоры"
       ReportArticle: "Rепоrтажи"
-      TripArticle: "Trip"
+      TripArticle: "Опыт"
       TvArticle: "TV"
     previous:
       NewsArticle: "Предыдущая новость"
@@ -47,7 +47,7 @@ ru:
       InterviewArticle: "Предыдущее интервью"
       OverviewArticle: "Предыдущий обзор"
       ReportArticle: "Предыдущий репортаж"
-      TripArticle: "Предыдущий trip"
+      TripArticle: "Предыдущий опыт"
       TvArticle: "Предыдущее видео"
     next:
       NewsArticle: "Следующая новость"
@@ -56,7 +56,7 @@ ru:
       InterviewArticle: "Следующее интервью"
       OverviewArticle: "Следующий обзор"
       ReportArticle: "Следующий репортаж"
-      TripArticle: "Следующий trip"
+      TripArticle: "Следующий опыт"
       TvArticle: "Следующее видео"
 
   active_admin:
@@ -67,7 +67,7 @@ ru:
     NewsArticle: "Новости"
     OverviewArticle: "Обзоры"
     ReportArticle: "Репортажи"
-    TripArticle: "Trips"
+    TripArticle: "Опыт"
     TvArticle: "TV"
 
   activerecord:
@@ -111,7 +111,9 @@ ru:
         other: "галлерею"
       
       tv_article: "видео"
-      trip_article: "trip"
+      trip_article:
+        one: "опыт"
+        other: "опыты"
       interview_article: "интервью"
       company_article:
         one: "компания"
