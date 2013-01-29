@@ -127,9 +127,27 @@
 		}
 	}
 
+	.remember-me-block {
+		position: relative;
+
+		input[type=checkbox] {
+			margin: 0;
+			margin-right: 5px;
+		}
+
+		label {
+			position: absolute;
+			top: 0;
+		}
+	}
+
 	.social-login {
 		img {
 			vertical-align: middle;
+		}
+
+		:last-child img {
+			margin-left: 15px;
 		}
 	}
 }
