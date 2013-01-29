@@ -1,3 +1,7 @@
+<div class="hidden">
+	<%# to update after login by ajax %>
+	<%= csrf_meta_tags %>
+</div>
 <% if logged_in? %>
 	<%= link_to "Профиль", edit_user_path, class: 'profile-link' %> | 
 	<%= link_to "Выйти", user_session_path, 'data-method' => :delete, class: 'logout-link' %>

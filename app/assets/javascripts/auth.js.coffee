@@ -128,7 +128,11 @@ $ ->
         $('#login-dialog input[name=email]').addClass('loader')
 
     $('#login-dialog form').on 'ajax:success', (event, data) ->
-        window.location.reload()
+        $('.dialog.closable').addClass('hidden')
+        $('#dialog-overlay').removeClass('active')
+        $('#auth-block').html(data)
+        value = $('#auth-block meta[name=csrf-token]').attr('content')
+        $('meta[name=csrf-token]').attr('content', value)
 
     $('#login-dialog form').on 'ajax:error', ->
         f = ->
