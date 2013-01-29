@@ -124,11 +124,17 @@ $ ->
         $('#register-dialog form img').attr('src', captcha_src)
         $('#register-dialog-message').html("Неправильно введён код с картинки")
 
+    $('#login-dialog form').on 'ajax:beforeSend', (event) ->
+        $('#login-dialog input[name=email]').addClass('loader')
+
     $('#login-dialog form').on 'ajax:success', (event, data) ->
         window.location.reload()
 
     $('#login-dialog form').on 'ajax:error', ->
-        $('#login-dialog-message').html("Неправильный email или пароль")
+        f = ->
+            $('#login-dialog input[name=email]').removeClass('loader')
+            $('#login-dialog-message').html("Неправильный email или пароль")
+        setTimeout(f, 1000)
 
     $('.auth-required').on 'click', (event) ->
         window.show_login_dialog()

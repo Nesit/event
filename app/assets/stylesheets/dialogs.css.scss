@@ -105,7 +105,7 @@
 	}
 }
 
-#register-dialog {
+#register-dialog, #login-dialog {
 	input[type=email].loader {
 		background-image: asset-url("small_loader.gif", image);
 		background-position: 98% 50%;
