@@ -39,18 +39,44 @@
 	.article-short {
 		@include article-header-description-typography;
 	}
+}
 
-	.article-social-line {
-		margin-top: 50px;
-		position: relative;
+.article-social-line {
+	margin-top: 50px;
+	position: relative;
+	color: $light-grey-text-color;
+	line-height: 28px;
 
-		.created-at {
-			@include datetime-text-typography;
-			color: $light-grey-text-color;
-			position: absolute;
-			bottom: 0;
-			right: 0;
-		}
+	.social-share-line {
+		display: block;
+		width: 326px;
+		margin: 0 auto;
+	}
+
+	.created-at {
+		@include datetime-text-typography;
+		color: $light-grey-text-color;
+	}
+
+	.comments-count, .pageviews-count {
+		@include sans-serif;
+		font-size: 12px;
+	}
+
+	.comments-count {
+		background-image: asset-url("comments_icon.png", image);
+		background-repeat: no-repeat;
+		background-position: left center;
+		padding-left: 16px;
+		width: 45px;
+	}
+
+	.pageviews-count {
+		background-image: asset-url("pageview_icon.png", image);
+		background-repeat: no-repeat;
+		background-position: left center;
+		padding-left: 16px;
+		width: 60px;
 	}
 }
 

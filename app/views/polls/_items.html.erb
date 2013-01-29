@@ -54,6 +54,7 @@
 			Проводится с <%= poll.start_at.strftime("%d.%m.%Y") %>
 			по <%= poll.end_at.strftime("%d.%m.%Y") %>
 		</p>
+		<% if action_name == 'show' %>
 		<div class="poll-item-info">
 			<div class="created-at left">
 				<%= distance_of_time_in_words(Time.now, poll.published_at) %> назад<span class="hiddable">,
@@ -75,5 +76,6 @@
 			<%= render 'shared/social_share', subject: poll, url: "http://#{request.domain}#{poll_path(poll)}" %>
 			<div class="clear"></div>
 		</div>
+		<% end %>
 	</div>
 <% end %>
