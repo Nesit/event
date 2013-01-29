@@ -4,4 +4,5 @@
 #= require active_admin/editor_ext
 #= require active_admin/polls
 #= require active_admin/galleries
+#= require active_admin/menu
 

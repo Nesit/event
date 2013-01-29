@@ -14,17 +14,5 @@ ActiveAdmin.register SiteConfig do
     end
   end
 
-  form do |f|
-    f.inputs "Актуально сегодня" do
-      f.input :actual_article
-      f.input :actual_article_description
-    end
-
-    f.inputs "Баннер в списке статей" do
-      f.input :article_list_banner_after
-      f.input :article_list_banner_body
-    end
-
-    f.actions
-  end
+  form partial: 'site_configs/admin_form'
 end

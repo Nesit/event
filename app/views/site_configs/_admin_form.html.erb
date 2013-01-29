@@ -1,0 +1,30 @@
+<%= semantic_form_for [:admin, resource] do |f| %>
+  <%= f.inputs "Актуально сегодня" do %>
+    <%= f.input :actual_article %>
+    <%= f.input :actual_article_description %>
+  <% end %>
+
+  <%= f.inputs "Баннер в списке статей" do %>
+    <%= f.input :article_list_banner_after %>
+    <%= f.input :article_list_banner_body %>
+  <% end %>
+
+  <%#= f.inputs "Меню" do >
+    <li>
+      <label>Новый элемент</label>
+    </li>
+    <li>
+      <label>&nbsp;</label>
+      <div class="edit-menu-block">
+        <%= link_to "Добавить элемент", '#', class: 'admin-add-menu-element-link' >
+        <div class="menu-edit-area">
+          <div class="ui-state-default">Спецпроекты</div>
+          <div class="ui-state-default">Афиша</div>
+          <div class="ui-state-default">Интервью</div>
+        </div>
+      </div>
+    </li>
+  < end %>
+
+  <%= f.actions %>
+<% end %>

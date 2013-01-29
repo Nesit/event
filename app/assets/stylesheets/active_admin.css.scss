@@ -19,6 +19,12 @@
 	}
 }
 
+.active_admin {
+	.edit-menu-block {
+		margin-left: 20%;
+	}
+}
+
 // Overriding any non-variable SASS must be done after the fact.
 // For example, to change the default status-tag color:
 //
