@@ -234,9 +234,49 @@ a {
 	position: fixed;
 	width: 100px;
 	height: 100px;
-	margin-top: 100px;
-	margin-left: -100px;
+	margin-top: 55px;
+	margin-left: -160px;
 	z-index: 1;
+}
+
+#left-social-line {
+	position: fixed;
+	margin-left: -50px;
+	padding: 0px 5px;
+	background-color: $social-share-bg-color;
+	border: 1px solid $social-share-border-color;
+
+	a {
+		margin: 11px 0;
+		display: block;
+		width: 30px;
+		height: 26px;
+	}
+
+	.fb, .vk, .twitter, .gplus, .mailru {
+		background-repeat: no-repeat;
+	}
+
+	.fb {
+		background-image: asset-url("fb_share.png", image);
+	}
+
+	.vk {
+		background-image: asset-url("vk_share.png", image);
+	}
+
+	.twitter {
+		background-image: asset-url("twitter_share.png", image);
+	}
+
+	.gplus {
+		background-image: asset-url("gplus_share.png", image);
+	}
+
+	.mailru {
+		background-image: asset-url("mailru_share.png", image);
+	}
+
 }
 
 #main-column {
