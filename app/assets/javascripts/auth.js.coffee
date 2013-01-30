@@ -18,6 +18,10 @@ window.show_email_dialog = ->
     $('#email-dialog').removeClass('hidden')
     $('#dialog-overlay').addClass('active')
 
+window.update_csrf_token = (value) ->
+    $('meta[name=csrf-token]').attr('content', value)
+    $('input[name=authenticity_token]').val(value)
+
 $ ->
     $('#dialog-overlay').on 'click', (event) ->
         return if $('.dialog.closable').length == 0
@@ -132,7 +136,15 @@ $ ->
         $('#dialog-overlay').removeClass('active')
         $('#auth-block').html(data)
         value = $('#auth-block meta[name=csrf-token]').attr('content')
-        $('meta[name=csrf-token]').attr('content', value)
+        window.update_csrf_token(value)
+
+        # allow comment
+        $('.comments-list input[type=submit]').removeClass('hidden')
+        $('.comments-list .notice').addClass('hidden')
+        $('.comments-list .comment-reply-block').removeClass('hidden')
+
+        # allow vote
+        $('#poll-aside .poll-choices-select-list').removeClass('auth-required')
 
     $('#login-dialog form').on 'ajax:error', ->
         f = ->
@@ -140,7 +152,7 @@ $ ->
             $('#login-dialog-message').html("Неправильный email или пароль")
         setTimeout(f, 1000)
 
-    $('.auth-required').on 'click', (event) ->
+    $(document).on 'click', '.auth-required', (event) ->
         window.show_login_dialog()
         false
 

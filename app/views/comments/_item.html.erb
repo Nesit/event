@@ -12,7 +12,8 @@
 				<span class="date"><%= comment.created_at.strftime("%d.%m.%Y %H:%M") %></span>
 			</div>
 			<p><%= comment.body %></p>
-			<% if can?(:create, Comment) %>
+
+			<div class="comment-reply-block <%= can?(:create, Comment) || 'hidden' %>">
 				<p><%= link_to "ответить", '#', class: 'comment-reply-link blue-link' %></p>
 				<%= form_for comment.children.build(topic: comment.topic), html: { class: 'hidden' } do |f| %>
 					<%= f.text_area :body %>
@@ -21,10 +22,13 @@
 					<%= f.hidden_field :topic_type %>
 					<%= f.submit "откомментировать" %>
 				<% end %>
-			<% elsif current_user and current_user.need_info? %>
-				<p><%= link_to "Заполните информацию в личном кабинете", edit_user_path, class: 'blue-link' %></p>
-			<% else %>
-				<p><%= link_to "Войти, чтобы ответить", '#', class: 'login-link blue-link' %></p>
+			</div>
+			<% unless can?(:create, Comment) %>
+				<% if current_user and current_user.need_info? %>
+					<p class="notice"><%= link_to "Заполните информацию в личном кабинете", edit_user_path, class: 'blue-link' %></p>
+				<% else %>
+					<p class="notice"><%= link_to "Войти, чтобы ответить", '#', class: 'login-link blue-link' %></p>
+				<% end %>
 			<% end %>
 		</div>
 		<div class="clear"></div>
