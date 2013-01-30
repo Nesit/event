@@ -44,14 +44,14 @@
 }
 
 .article-social-line {
-	margin-top: 50px;
+	margin: 25px 0;
 	position: relative;
 	color: $light-grey-text-color;
 	line-height: 28px;
 
 	.social-share-line {
 		display: block;
-		width: 326px;
+		width: 330px;
 		margin: 0 auto;
 	}
 
@@ -70,7 +70,7 @@
 		background-repeat: no-repeat;
 		background-position: left center;
 		padding-left: 16px;
-		width: 45px;
+		width: 40px;
 	}
 
 	.pageviews-count {
@@ -78,7 +78,7 @@
 		background-repeat: no-repeat;
 		background-position: left center;
 		padding-left: 16px;
-		width: 60px;
+		width: 40px;
 	}
 }
 
@@ -339,7 +339,7 @@
 					background-repeat: no-repeat;
 					background-position: left center;
 					padding-left: 16px;
-					width: 60px;
+					width: 45px;
 				}
 			}
 
