@@ -2,7 +2,7 @@ class PollsController < ApplicationController
   authorize_resource
 
   def index
-    @polls = Poll.newer_started.page(params[:page]).per(3)
+    @polls = Poll.newer.page(params[:page]).per(3)
   end
 
   def show
