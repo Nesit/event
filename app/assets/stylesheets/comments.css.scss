@@ -10,6 +10,8 @@
 
 	h2 {
 		@include sans-serif;
+		font-size: 12pt;
+		font-weight: bold;
 		text-transform: uppercase;
 		color: $purple-color;
 	}
@@ -23,10 +25,15 @@
 		padding: 10px;
 	}
 
+	textarea {
+		font-size: 10pt;
+		@include serif;
+	}
+
 	.notice {
 		@include sans-serif;
 		color: $grey-text-color;
-		font-size: 12px;
+		font-size: 10pt;
 	}
 
 	.comment {

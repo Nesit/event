@@ -6,14 +6,21 @@
 	font-size: 12px;
 
 	color: $light-grey-text-color;
-	.logout-link,
-	.login-link,
-	.register-link,
-	.profile-link,
+
 	.reset-password-link {
 		color: $text-color;
 		font-weight: bold;
 		text-decoration: none;
+	}
+
+	.logout-link,
+	.login-link,
+	.register-link,
+	.profile-link {
+		color: $text-color;
+		font-weight: normal;
+		@include sans-serif;
+		font-size: 10pt;
 	}
 
 	.logout-link:hover,

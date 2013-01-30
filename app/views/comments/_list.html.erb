@@ -7,10 +7,12 @@
 		<%= f.hidden_field :topic_type %>
 		<%= f.submit "Откомментировать", class: (can?(:create, Comment) || 'hidden') %>
 		
-		<% if not can?(:create, Comment) and current_user and current_user.need_info? %>
-			<div class="right notice"><%= link_to "Заполните информацию в личном кабинете", edit_user_path %></div>
-		<% else %>
-			<div class="right notice">Чтобы оставить комментарий вам нужно <%= link_to "авторизироваться", '#', class: 'login-link' %></div>
+		<% unless can?(:create, Comment) %>
+			<% if current_user and current_user.need_info? %>
+				<div class="right notice"><%= link_to "Заполните информацию в личном кабинете", edit_user_path %></div>
+			<% else %>
+				<div class="right notice">Чтобы оставить комментарий вам нужно <%= link_to "авторизироваться", '#', class: 'login-link' %></div>
+			<% end %>
 		<% end %>
 		<div class="clear"></div>
 	<% end %>

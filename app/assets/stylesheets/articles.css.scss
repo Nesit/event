@@ -17,8 +17,9 @@
 	padding: 23px 86px;
 
 	h1 {
-		font-size: 32px;
-		@include article-header-typography;
+		font-size: 20pt;
+		font-weight: bold;
+		@include sans-serif;
 	}
 
 	.article-author-line {
@@ -37,7 +38,8 @@
 	}
 
 	.article-short {
-		@include article-header-description-typography;
+		@include sans-serif;
+		font-size: 14pt;
 	}
 }
 
@@ -176,9 +178,9 @@
 }
 
 .social-networks-notice {
-	@include serif;
+	@include sans-serif;
 	font-style: oblique;
-	font-size: 16px;
+	font-size: 12pt;
 	a {
 		color: $grey-link-text-color;
 		text-decoration: underline;
@@ -281,22 +283,26 @@
 			width: 355px;
 			height: 170px;
 
-			a {
-				text-decoration: none;
-				h2 {
-					@include article-list-item-header-typography;
-					font-size: 27px;
+			h2 {
+				font-weight: bold;
+				@include sans-serif;
+				font-size: 20pt;
+				margin-bottom: 0.5em;
+				a {
+					text-decoration: none;
 					color: $text-color;
-					margin-bottom: 0.5em;
 				}
-				h2:hover {
+			}
+			h2:hover {
+				a {
 					color: $purple-color;
 				}
 			}
 
 			p {
-				margin: 1.5em 0;
-				@include article-list-item-description-typography;
+				margin: 1.0em 0;
+				@include serif;
+				font-size: 14pt;
 			}
 		}
 
@@ -369,7 +375,7 @@
 			text-decoration: none;
 			h2 {
 				@include article-carousel-header;
-				font-size: 24px;
+				font-size: 20pt;
 				color: $text-color;
 				margin-bottom: 0.5em;
 			}
@@ -380,6 +386,7 @@
 
 		p {
 			margin: 10px 0;
+			font-size: 12pt;
 			@include sans-serif;
 		}
 
@@ -437,6 +444,7 @@
 				color: $text-color;
 				display: block;
 				font-weight: bold;
+				font-size: 14pt;
 			}			
 		}
 
@@ -558,7 +566,7 @@
 
 			p {
 				@include serif;
-				font-size: 11px;
+				font-size: 12px;
 
 			}
 		}
