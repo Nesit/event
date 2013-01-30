@@ -225,14 +225,14 @@ a {
 	display: block;
 	position: fixed;
 	margin-left: 960px;
-	margin-top: 243px;
+	margin-top: 112px;
 }
 
 #left-banner {
 	position: fixed;
 	width: 100px;
 	height: 100px;
-	margin-top: 55px;
+	margin-top: 167px;
 	margin-left: -160px;
 	z-index: 1;
 }
@@ -240,6 +240,7 @@ a {
 #left-social-line {
 	position: fixed;
 	margin-left: -50px;
+	margin-top: 112px;
 	padding: 0px 5px;
 	background-color: $social-share-bg-color;
 	border: 1px solid $social-share-border-color;
