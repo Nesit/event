@@ -11,7 +11,7 @@
   <a data-wysihtml5-command="formatBlock" data-wysihtml5-command-value="h2">h2</a>
   <a data-wysihtml5-command="formatBlock" data-wysihtml5-command-value="h3">h3</a>
   <br><br>
-  <a data-wysihtml5-command="insertVideo" title="Video from YouTube"><span>Видео с YouTube</span></a>
+  <a data-wysihtml5-command="insertVideo" title="Video from YouTube"><span>Видео с YouTube,Vimeo</span></a>
   <% if object.kind_of? Article %>
     <a data-wysihtml5-command="insertGallery" title="Gallery"><span>Новая галлерея</span></a>
     <a class="gallery-edit-link" style="display:none"><span>Редактировать выделенную галлерею</span></a>
@@ -23,7 +23,7 @@
 
   <div data-wysihtml5-dialog="insertVideo" style="display: none">
     <label>
-      Ссылка с YouTube:
+      Ссылка с YouTube или Vimeo:
       <input data-wysihtml5-dialog-field="href" value="http://">
     </label>
     <div class="action-group">

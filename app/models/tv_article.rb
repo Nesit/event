@@ -1,4 +1,4 @@
-# encoding: utf-8
+  # encoding: utf-8
 
 class TvArticle < Article
   attr_accessor :head_video_url

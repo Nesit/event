@@ -276,6 +276,7 @@ var wysihtml5ParserRules = {
             "check_attributes": {
                 "data-id": "allow",
                 "data-code": "allow",
+                "data-kind": "allow",
                 "style": "allow"
             }
         },
