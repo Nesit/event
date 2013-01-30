@@ -62,28 +62,19 @@ wysihtml5.commands.insertVideo =
         y_reg2 = /youtu\.be\/([a-zA-Z0-9_-]+)/
         y_reg3 = /youtube\.com\/watch.*v=([a-zA-Z0-9_-]+)/
         match = y_reg1.exec(value.href) or y_reg2.exec(value.href) or y_reg3.exec(value.href)
-        return unless match
-        code = match[1] 
-
-        doc = composer.doc
-        video = this.state(composer)
-
-        if video
-            composer.selection.setBefore(video);
-            parent = video.parentNode;
-            parent.removeChild(video);
-
-            wysihtml5.dom.removeEmptyTextNodes(parent);
-            if parent.nodeName == "A" and not parent.firstChild
-                composer.selection.setAfter(parent)
-                parent.parentNode.removeChild(parent)
-
-                wysihtml5.quirks.redraw(composer.element);
-                return
+        if match
+            code = match[1]
+            kind = 'youtube'
+        else
+            match = /vimeo\.com\/(\d+)/.exec(value.href)
+            return unless match
+            code = match[1]
+            kind = 'vimeo'
 
         video = doc.createElement("div")
         text = doc.createTextNode("Видео #{code}")
         video.setAttribute("data-code", code)
+        video.setAttribute("data-kind", kind)
         video.setAttribute("class", "article-body-video")
         video.appendChild(text)
 

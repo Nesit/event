@@ -13,6 +13,8 @@ class Poll < ActiveRecord::Base
   before_validation :ensure_published_date
 
   scope :newer_started, order('polls.start_at DESC')
+  scope :newer, order('polls.created_at DESC')
+  scope :older, order('polls.created_at ASC')
 
   # polls that are active right now
   scope :running,

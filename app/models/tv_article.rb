@@ -1,4 +1,4 @@
-# encoding: utf-8
+  # encoding: utf-8
 
 class TvArticle < Article
   attr_accessor :head_video_url
@@ -7,12 +7,21 @@ class TvArticle < Article
   before_validation :extract_image_and_code_for_video
   validate :head_video_code_presence
 
+  validates :head_video_kind,
+    presence: true,
+    inclusion: { in: ['youtube', 'vimeo'] }
+
   def head_video_url
     case
     when @head_video_url.present?
       @head_video_url
     when head_video_code.present?
-      "http://www.youtube.com/watch?v=#{head_video_code}"
+      case head_video_kind
+      when 'youtube'
+        "http://www.youtube.com/watch?v=#{head_video_code}"
+      when 'vimeo'
+        "http://vimeo.com/#{head_video_code}"
+      end
     else
       ''
     end
@@ -39,19 +48,38 @@ class TvArticle < Article
     reg3 = /youtube\.com\/watch.*v=([a-zA-Z0-9_-]+)/
     match = reg1.match(head_video_url) || reg2.match(head_video_url) || reg3.match(head_video_url)
     
-    self.head_video_code = match[1] if match
+    if match
+      self.head_video_code = match[1]
+      self.head_video_kind = 'youtube'
+      return
+    end
+
+    reg = /vimeo\.com\/(\d+)/
+    match = reg.match(head_video_url)
+    if match
+      self.head_video_code = match[1]
+      self.head_video_kind = 'vimeo'
+      return
+    end
   end
 
   def generate_video_thumbnail
     return if head_video_code.blank?
     return unless head_video_code_changed?
     
-    thumb_url = "http://img.youtube.com/vi/#{head_video_code}/0.jpg"
+    if head_video_kind == 'youtube'
+      thumb_url = "http://img.youtube.com/vi/#{head_video_code}/0.jpg"
+    end
+
+    if head_video_kind == 'vimeo'
+      metainfo = JSON(open("http://vimeo.com/api/v2/video/#{head_video_code}.json").read)
+      thumb_url = metainfo[0]["thumbnail_large"]
+    end
 
     require "uri"
     require "net/http"
 
-    file = Tempfile.new(['youtube_thumb', '.jpg'])
+    file = Tempfile.new(['video_thumb', '.jpg'])
     file.binmode
     file.write(open(thumb_url).read)
     file.close

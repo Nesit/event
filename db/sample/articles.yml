@@ -23,13 +23,14 @@ news_article:
     Сделать выступление таким, чтобы о нем вспоминали и рассказывали друзьям и знакомым.
     И совсем не обязательно приглашать на такое мероприятие шумные коллективы
     – они не впишутся в официальные рамки. В чем же секрет?
+    <div class="article-body-video" data-code="50405555" data-kind="vimeo">Видео 50405555</div>
     <br><br>
     Какой мы представляем себе обычный доклад? Зал с большим экраном впереди,
     на сцене одинокий оратор (или несколько докладчиков, выступающих поочередно)
     с микрофоном в руках и… – очевидно, что другие ассоциации не спешат приходить на ум.
     Это неслучайно, ведь 90% докладов проводятся именно в таком стандартном формате.
     <br><br>
-    <div class="article-body-video" data-code="Am3RILBj6DA">Видео Am3RILBj6DA</div>
+    <div class="article-body-video" data-code="Am3RILBj6DA" data-kind="youtube">Видео Am3RILBj6DA</div>
     <br><br>
     А какими бывают остальные 10%? Яркими, веселыми, шутливыми, а главное – запоминающимися.
     А не это ли важнейшая цель любого доклада или конференции?
@@ -69,7 +70,7 @@ event_article:
     во время рождения ребенка. Надо полагать, в день 21 декабря 2012 г.
     Солнце родится заново, пройдя перед этим сквозь "темный коридор".
     <br><br>
-    <div class="article-body-video" data-code="-JQzCXrh11o">Видео -JQzCXrh11o</div>
+    <div class="article-body-video" data-code="-JQzCXrh11o" data-kind="youtube">Видео -JQzCXrh11o</div>
     <br><br>
     21 декабря заканчивается Эра Рыб, проходившая под лозунгом "Я верю",
     и начинается Эра Водолея с лозунгом "Я знаю". Эра Водолея продлится 2 160 лет.
@@ -189,7 +190,7 @@ festival_event_article:
     национальная одежда и еда, предметы быта,
     видео и фото материалы о народностях России.
     <br><br>
-    <div class="article-body-video" data-code="FxpxjTgOypE">Видео FxpxjTgOypE</div>
+    <div class="article-body-video" data-code="FxpxjTgOypE" data-kind="youtube">Видео FxpxjTgOypE</div>
     <br><br>
     Для самых маленьких посетителей мы подготовили  детскую площадку,
     на котором  их ждут английский клуб, мастер-класс по рисованию,
@@ -252,7 +253,7 @@ stallman_event_article:
     Для участия необходимо зарегистрироваться по телефону +7-903-545-06-99
     (Артем Блажко) или по адресу:mediacom@hse.ru
     <br><br>
-    <div class="article-body-video" data-code="uFMMXRoSxnA">Видео uFMMXRoSxnA</div>
+    <div class="article-body-video" data-code="uFMMXRoSxnA" data-kind="youtube">Видео uFMMXRoSxnA</div>
     <br><br>
     Несмотря ни на что, RMS все же приедет в Россию третьего марта.
     В течение трех дней он прочтет несколько лекций,
@@ -279,7 +280,7 @@ sting_interview_article:
     люблю Москву и хотел бы чаще выступать в других городах.
     Но здесь по-прежнему есть доля загадки, мистики и это мне очень нравится".
     <br><br>
-    <div class="article-body-video" data-code="037uSAIahho">Видео 037uSAIahho</div>
+    <div class="article-body-video" data-code="037uSAIahho" data-kind="youtube">Видео 037uSAIahho</div>
     <br><br>
     По словам рок-певца, он "очень надеется" на то,
     что холодная война между Россией и западным миром закончилась.
@@ -324,7 +325,7 @@ news_article7:
     По его словам, священники не должны передвигаться на дорогих автомобилях,
     чтобы не вызывать негативные дискуссии в обществе и снять соответствующие обвинения с РПЦ. 
     <br><br>
-    <div class="article-body-video" data-code="iiBrDmI48xk">Видео iiBrDmI48xk</div>
+    <div class="article-body-video" data-code="iiBrDmI48xk" data-kind="youtube">Видео iiBrDmI48xk</div>
     <br><br>
     Патриарх Московский и всея Руси порекомендовал пользоваться корейскими
     и японскими автомобилями, которые не уступают по уровню комфорта своим
@@ -357,7 +358,7 @@ news_article8:
     в дорогостоящих зарубежных учебных заведениях,
     пока  сам Железняк говорит о важности формирования патриотизма в детях. 
     <br><br>
-    <div class="article-body-video" data-code="-5gyeaGyK_w">Видео -5gyeaGyK_w</div>
+    <div class="article-body-video" data-code="-5gyeaGyK_w" data-kind="youtube">Видео -5gyeaGyK_w</div>
     <br><br>
     Так, одна из дочерей депутата-единороса Екатерина Железняк
     в настоящее время обучается в элитной школе The American School in Switzerland.
@@ -550,7 +551,7 @@ event_article13:
     В рамках CodeFest ожидается кофе с булочками,
     шахматы с поэтессами и виски-брейк с плавным перетеканием в афтепати.
     <br><br>
-    <div class="article-body-video" data-code="UOIMB3sGAFA">Видео UOIMB3sGAFA</div>
+    <div class="article-body-video" data-code="UOIMB3sGAFA" data-kind="youtube">Видео UOIMB3sGAFA</div>
     <br><br>
     И самое главное — рады вам будут докладчики,
     которые со всей ответственностью готовятся к выступлению и
@@ -569,7 +570,7 @@ tv_article14:
   body: |
     В Рязани:
     <br><br>
-    <div class="article-body-video" data-code="pLcx8oO7Vgc">Видео pLcx8oO7Vgc</div>
+    <div class="article-body-video" data-code="pLcx8oO7Vgc" data-kind="youtube">Видео pLcx8oO7Vgc</div>
 
 tv_article15:
   published_at: '<%= DateTime.now + 14.seconds %>'

@@ -10,11 +10,7 @@
 
 		<% if @article.kind_of? TvArticle %>
 			<div class="article-head-image">
-				<iframe
-					width="470"
-					height="240"
-					src="http://www.youtube.com/embed/<%= @article.head_video_code %>?wmode=opaque" frameborder="0"
-					allowfullscreen></iframe>
+				<%= embeded_video_tag(@article.head_video_kind, @article.head_video_code, 470, 312) %>
 			</div>
 		<% else %>
 			<%= image_tag(@article.head_image.head, class: 'article-head-image') %>
