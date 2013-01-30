@@ -19,10 +19,10 @@
 				<div class="temperature right">+20</div>
 				<%= image_tag(asset_path('samples/weather.png'), class: 'right') %>
 				<div class="clear"></div>
-				<div class="left current-time"></div>
-				<div class="right current-date">
+				<div class="current-time"></div>
+				<div class="current-date">
 					<%= Russian.strftime(Date.today, "%e %B").capitalize %>
-					<div class="week-day"><%= Russian.strftime(Date.today, "%A") %></div>
+					<span class="week-day"><%= Russian.strftime(Date.today, "%A") %></span>
 				</div>
 			</div>
 
