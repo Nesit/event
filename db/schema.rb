@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20130125203531) do
+ActiveRecord::Schema.define(:version => 20130130154751) do
 
   create_table "active_admin_comments", :force => true do |t|
     t.string   "resource_id",   :null => false
@@ -94,6 +94,7 @@ ActiveRecord::Schema.define(:version => 20130125203531) do
     t.integer  "gplus_shares_count",    :default => 0
     t.integer  "mailru_shares_count",   :default => 0
     t.datetime "published_at"
+    t.string   "head_video_kind"
   end
 
   add_index "articles", ["issue_id"], :name => "index_articles_on_issue_id"

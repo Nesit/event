@@ -22,4 +22,25 @@ module ArticlesHelper
   def article_body_as_html(article)
     article.body.html_safe
   end
+
+  def embeded_video_tag(kind, code, width, height)
+    source =
+      case kind
+      when 'youtube'
+        <<-HTML
+          <iframe width="#{width}" height="#{height}"
+              src="http://www.youtube.com/embed/#{code}?wmode=opaque"
+              frameborder="0" allowfullscreen>
+          </iframe>
+        HTML
+      when 'vimeo'
+        <<-HTML
+          <iframe src="http://player.vimeo.com/video/#{code}"
+              width="#{width}" height="#{height}" frameborder="0"
+              webkitAllowFullScreen mozallowfullscreen allowFullScreen>
+          </iframe>
+        HTML
+      end
+    source.html_safe
+  end
 end

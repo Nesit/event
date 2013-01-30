@@ -22,11 +22,11 @@ end
 # tv articles
 # generate video thumbnails
 [
-  [14, "f5H35Ak5a2E"],
-  [15, "MLzshjaSxmE"],
-  [16, "qDO6HV6xTmI"],
+  [14, "http://www.youtube.com/watch?v=f5H35Ak5a2E"],
+  [15, "http://www.youtube.com/watch?v=MLzshjaSxmE"],
+  [16, "https://vimeo.com/58179312"],
 ].each do |pair|
   article = Article.find(pair.first)
-  article.head_video_code = pair.last
+  article.head_video_url = pair.last
   article.save!
 end
