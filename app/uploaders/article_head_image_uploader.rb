@@ -4,7 +4,7 @@ class ArticleHeadImageUploader < BasicImageUploader
   process convert: :png
 
   version :head do
-    process resize_to_fill: [470, 240]
+    process resize_to_fill: [470, 312]
     process convert: :png
 
     version :carousel do
