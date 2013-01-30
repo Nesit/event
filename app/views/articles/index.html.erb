@@ -20,6 +20,7 @@
 			<div class="frame-title">Реклама</div>
 			<div><= @site_config.article_list_banner_body.html_safe ></div>
 		</div %>
+		<div class="spacer"></div>
 		<%= render 'articles/items', articles: (@articles.slice(@site_config.article_list_banner_after..-1) or []) %>
 	<% else %>
 		<%= render 'articles/items', articles: @articles %>
