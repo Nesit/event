@@ -144,7 +144,7 @@ $ ->
         $('.comments-list .comment-reply-block').removeClass('hidden')
 
         # allow vote
-        $('#poll-aside .poll-choices-select-list').removeClass('auth-required')
+        $('#poll-aside .poll-choices-select-list input[type=submit]').removeClass('auth-required')
 
     $('#login-dialog form').on 'ajax:error', ->
         f = ->

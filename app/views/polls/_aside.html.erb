@@ -1,5 +1,5 @@
 <%= link_to "Мнение", polls_path, class: 'frame-bold-title' %>
-<div class="poll-choices-select-list<%= current_user ? '' : ' auth-required' %>">
+<div class="poll-choices-select-list">
 	<h2><%= poll.topic %></h2>
 	<%= form_for [poll, PollVote.new], remote: true do |f| %>
 		<%= hidden_field_tag :aside, true %>
@@ -13,6 +13,6 @@
 				</div>
 			<% end %>
 		</div>
-		<%= f.submit "Проголосовать" %>
+		<%= f.submit "Проголосовать", class: (current_user ? '' : 'auth-required') %>
 	<% end %>
 </div>
