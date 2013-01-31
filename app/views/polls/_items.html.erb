@@ -34,7 +34,7 @@
 
 		<% else %>
 
-			<div class="poll-choices-select-list<%= current_user ? '' : ' auth-required' %>">
+			<div class="poll-choices-select-list">
 				<%= form_for [poll, PollVote.new] do |f| %>
 					<%= f.hidden_field :poll_choice_id %>
 					<% poll.choices.each do |choice| %>
@@ -44,7 +44,7 @@
 							<div class="clear"></div>
 						</div>
 					<% end %>
-					<%= f.submit "Проголосовать" %>
+					<%= f.submit "Проголосовать", class: (current_user || 'auth-required') %>
 				<% end %>
 			</div>
 

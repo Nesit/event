@@ -1,17 +1,8 @@
 .polls-list {
 	margin-bottom: 50px;
-
-	h1 {
-		@include sans-serif;
-		color: $purple-color;
-		text-transform: uppercase;
-		font-weight: bold;
-		border-bottom: 1px solid $polls-header-border-color;
-		padding: 10px 5px;
-	}
-
+	
 	.poll-item {
-		border-bottom: 1px solid $polls-header-border-color;
+		border-bottom: 1px solid $grey-border-color;
 	}
 }
 
