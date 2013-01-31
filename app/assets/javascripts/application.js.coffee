@@ -21,6 +21,6 @@ $.fn.overflows = ->
     return ($(this).width() != this.clientWidth || $(this).height() != this.clientHeight)
 
 $ ->
-    $(':input, textarea').placeholder()
+    $('input[data-placeholder], textarea[data-placeholder]').placeholder();
     $('.hiddable').each (_, e) ->
         $(e).addClass('hidden') if $(e).overflows()

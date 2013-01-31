@@ -28,10 +28,12 @@
       <% unless @hide_top %>
 	<div id="header">
 	  <div id="utmost-left-block" class="left">
-	    <div class="city-name left">МОСКВА</div>
-	    <div class="temperature right">+20</div>
-	    <%= image_tag(asset_path('samples/weather.png'), class: 'right') %>
-	    <div class="clear"></div>
+	  	<div class="hidden">
+		    <div class="city-name left">МОСКВА</div>
+		    <div class="temperature right">+20</div>
+		    <%= image_tag(asset_path('samples/weather.png'), class: 'right') %>
+		    <div class="clear"></div>
+		</div>
 	    <div class="current-time"></div>
 	    <div class="current-date">
 	      <%= Russian.strftime(Date.today, "%e %B").capitalize %>,

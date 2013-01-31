@@ -60,14 +60,16 @@ $ ->
         $('#subscribe-dialog form input[name=captcha]').val('')
 
     $('#subscribe-dialog form input[name="email"]').on 'keyup', (event) ->
-        return unless /.+\@.+/.test($(this).val())
-
+        return unless window.is_email_valid($(this).val())
+        
         return if window.ensureEmailLock
         window.ensureNameLock = true
+        $input = $(this)
+        $input.addClass('loader')
         func = =>
             $.ajax
                 url: '/profile/email.json'
-                data: { email: $(this).val() }
+                data: { email: $input.val() }
                 success: (data) ->
                     if data.used
                         $('#subscribe-dialog-message').html("На данную почту уже есть зарегистрированая учётная запись, если вы уверены что это ваш e-mail, то продолжайте")
@@ -75,4 +77,5 @@ $ ->
                         $('#subscribe-dialog-message').html("Введите ваш email и код подтверждения")
                 complete: ->
                     window.ensureEmailLock = false
+                    $input.removeClass('loader')
         setTimeout(func, 2000)
