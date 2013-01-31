@@ -1,27 +1,26 @@
 <div class="article-block">
 	<div class="article-header">
-		<h1><%= @article.title %></h1>
-		<% if @article.author %>
-			<div class="article-author-line">
-				<%= image_tag(@article.author.avatar.thumb) %>
-				<span><%= @article.author.name %></span>
-			</div>
-		<% end %>
+		<div class="wrapper">
+			<h1><%= @article.title %></h1>
+			<% if @article.author %>
+				<div class="article-author-line">
+					<%= image_tag(@article.author.avatar.thumb) %>
+					<span><%= @article.author.name %></span>
+				</div>
+			<% end %>
 
-		<% if @article.kind_of? TvArticle %>
-			<div class="article-head-image">
-				<%= embeded_video_tag(@article.head_video_kind, @article.head_video_code, 470, 312) %>
+			<% if @article.kind_of? TvArticle %>
+				<div class="article-head-image">
+					<%= embeded_video_tag(@article.head_video_kind, @article.head_video_code, 470, 312) %>
+				</div>
+			<% else %>
+				<%= image_tag(@article.head_image.head, class: 'article-head-image') %>
+			<% end %>
+			
+			<div class="article-short">
+				<%= @article.short_description %>
 			</div>
-		<% else %>
-			<%= image_tag(@article.head_image.head, class: 'article-head-image') %>
-		<% end %>
-		
-		<div class="article-short">
-			<%= @article.short_description %>
 		</div>
-	</div>
-	
-	<div class="article-body">
 		<div class="article-social-line">
 			<div class="created-at left">
 				<%= distance_of_time_in_words(Time.now, @article.published_at) %> назад<span class="hiddable">,
@@ -44,7 +43,9 @@
 			
 			<div class="clear"></div>
 		</div>
-
+	</div>
+	
+	<div class="article-body">
 		<% if @article.closed? %>
 			<% if can_see_closed? %>
 				<%= article_body_as_html(@article) %>

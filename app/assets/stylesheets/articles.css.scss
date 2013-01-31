@@ -14,7 +14,11 @@
 
 .article-header {
 	border: 1px solid $grey-border-color;
-	padding: 23px 86px;
+	padding: 23px 20px;
+
+	.wrapper {
+		padding: 0px 66px;
+	}
 
 	h1 {
 		font-size: 20pt;
