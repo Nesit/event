@@ -8,7 +8,7 @@ module Robokassa
   if Rails.env.production?
     Login = 'event'
     Password1 = 'rfhfutjpbc1q2w3e4r1'
-    Password1 = 'rfhfutjpbc1q2w3e4r2'
+    Password2 = 'rfhfutjpbc1q2w3e4r2'
   else
     Login = 'event_test_account'
     Password1 = 'asdf123bvg'
