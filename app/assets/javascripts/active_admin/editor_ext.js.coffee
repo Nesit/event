@@ -71,6 +71,7 @@ wysihtml5.commands.insertVideo =
             code = match[1]
             kind = 'vimeo'
 
+        doc = composer.doc
         video = doc.createElement("div")
         text = doc.createTextNode("Видео #{code}")
         video.setAttribute("data-code", code)
