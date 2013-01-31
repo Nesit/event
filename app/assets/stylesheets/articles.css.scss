@@ -150,9 +150,27 @@
 		padding: 25px;
 		border: 1px solid $grey-border-color;
 
+		@include serif;
+
 		.description {
 			margin-left: 10px;
 			width: 310px;
+		}
+
+		h2 {
+			@include serif;
+			font-weight: normal;
+			font-size: 10pt;
+			margin: 0;
+		}
+
+		.p1 {
+			font-size: 15pt;
+			margin: 0.3em 0;
+		}
+
+		.p2, .p3 {
+			font-size: 12pt;
 		}
 	}
 }
