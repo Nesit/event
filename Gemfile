@@ -2,9 +2,7 @@ source :rubygems
 
 gem 'rails', '3.2.11'
 
-group :production do
-  gem 'pg'
-end
+gem 'pg'
 
 gem 'jquery-rails'
 gem 'chosen-rails'
