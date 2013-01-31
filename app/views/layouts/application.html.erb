@@ -139,7 +139,7 @@
 		<div class="clear"></div>
 		<% if reports = ReportArticle.first(4) and reports.any? %>
 			<div class="reports">
-				<h2><%= link_to t("articles.category.ReportArticle"), report_articles_path %></h2>
+				<h2><%= link_to "REPORTАЖИ", report_articles_path %></h2>
 				<div class="list">
 					<% reports.each do |article| %>
 						<div class="item left">
