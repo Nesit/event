@@ -19,6 +19,7 @@ class ArticlesController < ApplicationController
 
   def show
     @article.record_pageview!
+    seo_tags(@article, title: :title, description: :short_description, image: :head_image)
   end
 
   private

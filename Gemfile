@@ -1,7 +1,10 @@
 source :rubygems
 
 gem 'rails', '3.2.11'
-gem 'pg'
+
+group :production do
+  gem 'pg'
+end
 
 gem 'jquery-rails'
 gem 'chosen-rails'
@@ -33,7 +36,7 @@ group :assets do
   # use latest code with fixes for input-placeholder
   # when newer version comes (0.12.3) might be turned back to stable
   gem 'compass', github: 'chriseppstein/compass', branch: 'css3'
-  
+
   gem 'compass-rails', '~> 1.0.3'
   gem 'therubyracer', :platforms => :ruby
   gem 'libv8', '~> 3.11.8'
@@ -44,13 +47,10 @@ group :development do
   gem 'better_errors'
   gem 'binding_of_caller'
   gem 'thin'
-
-  gem 'capistrano'
-  gem 'capistrano-unicorn'
-  gem 'rvm-capistrano'
-
-  # for RailsPanel Chrome extension
-  gem 'meta_request', '0.2.0'
+  gem 'sqlite3'
+  gem 'sextant'
+  gem 'quiet_assets'
+  gem 'letter_opener'
 end
 
 group :test, :development do

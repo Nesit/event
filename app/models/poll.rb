@@ -21,6 +21,10 @@ class Poll < ActiveRecord::Base
     lambda { where('start_at < ?', DateTime.now)
                .where('? < end_at', DateTime.now) }
 
+  def to_param
+    "#{id}-#{title.parameterize}"
+  end
+
   # for social share partial
   def title
     topic

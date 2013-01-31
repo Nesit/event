@@ -22,6 +22,8 @@ window.update_csrf_token = (value) ->
     $('meta[name=csrf-token]').attr('content', value)
     $('input[name=authenticity_token]').val(value)
 
+window.is_email_valid = (email) -> /.+\@.+\..+/.test(email)
+
 $ ->
     $('#dialog-overlay').on 'click', (event) ->
         return if $('.dialog.closable').length == 0
@@ -44,14 +46,12 @@ $ ->
         $('#dialog-overlay').removeClass('active')
         event.preventDefault()
 
-    is_email_valid = (email) -> /.+\@.+\..+/.test(email)
-
     check_login_dialog_fields = ->
         $form = $('#login-dialog form')
         email = $form.find('input[name=email]').val()
 
         return "Поле email не заполнено" unless email
-        return "После email не соответсвует формату" unless is_email_valid(email)
+        return "После email не соответсвует формату" unless window.is_email_valid(email)
 
 
     used_map = {}
@@ -68,7 +68,7 @@ $ ->
             $('#register-dialog-message').html("Поле email не заполнено")
             return false
 
-        if email and not is_email_valid(email)
+        if email and not window.is_email_valid(email)
             $('#register-dialog-message').html("После email не соответствует формату")
             return false
 
@@ -89,7 +89,7 @@ $ ->
 
         email = $(this).val()
         return unless email
-        return unless is_email_valid(email)
+        return unless window.is_email_valid(email)
 
         check = ->
             $.ajax
@@ -167,3 +167,12 @@ $ ->
 
     $('#email-dialog form').on 'ajax:error', ->
         $('#email-dialog-message').html("Email введён неверно, либо уже используется")
+
+    # captcha reload
+    $('.reload-captcha-link').on 'click', (event) ->
+        $img = $(this).parent().find('img[alt=captcha]')
+
+        # stupid reassignment to force reload
+        src = $img.attr('src')
+        $img.attr('src', src)
+        event.preventDefault()
