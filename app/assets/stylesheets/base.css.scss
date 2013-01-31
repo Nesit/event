@@ -40,6 +40,19 @@ a {
 	}
 }
 
+
+@mixin page-title {
+	color: $text-color;
+	font-size: 42px;
+	@include sans-serif;
+	font-weight: bold;
+	margin-bottom: 16px;
+	padding-bottom: 16px;
+	display: block;
+	border-bottom: 1px solid $grey-border-color;
+}
+
+
 #top-menu {
 	background-color: $menu-bg-color;
 	color: $menu-fg-color;
@@ -288,6 +301,10 @@ a {
 
 	#left-column {
 		width: 640px;
+
+		> h1 {
+			@include page-title;
+		}
 	}
 
 	#right-column {
