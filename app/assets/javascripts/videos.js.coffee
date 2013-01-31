@@ -4,7 +4,7 @@ $ ->
         kind = $(e).attr('data-kind')
         if kind == 'youtube'
             html = """
-                <iframe width="570" height="310"
+                <iframe width="575" height="384"
                     src="http://www.youtube.com/embed/#{code}?wmode=opaque"
                     frameborder="0" allowfullscreen>
                 </iframe>
@@ -15,7 +15,7 @@ $ ->
         if kind == 'vimeo'
             html = """
                 <iframe src="http://player.vimeo.com/video/#{code}"
-                    width="570" height="310" frameborder="0"
+                    width="575" height="384" frameborder="0"
                     webkitAllowFullScreen mozallowfullscreen allowFullScreen>
                 </iframe>
             """

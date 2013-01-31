@@ -14,10 +14,10 @@
 
 .article-header {
 	border: 1px solid $grey-border-color;
-	padding: 23px 20px;
+	padding: 23px 18px;
 
 	.wrapper {
-		padding: 0px 66px;
+		padding: 0px 64px;
 	}
 
 	h1 {
@@ -88,7 +88,7 @@
 
 .article-body {
 	margin: 30px auto;
-	width: 570px;
+	width: 575px;
 
 	@include content-block;
 
@@ -135,7 +135,7 @@
 	}
 
 	.article-gallery-carousel {
-		@include jcarousel(310px);
+		@include jcarousel(384px);
 		ul {
 			@include jcarousel-list;
 			li {

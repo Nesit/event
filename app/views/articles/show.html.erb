@@ -11,7 +11,7 @@
 
 			<% if @article.kind_of? TvArticle %>
 				<div class="article-head-image">
-					<%= embeded_video_tag(@article.head_video_kind, @article.head_video_code, 470, 312) %>
+					<%= embeded_video_tag(@article.head_video_kind, @article.head_video_code, 474, 316) %>
 				</div>
 			<% else %>
 				<%= image_tag(@article.head_image.head, class: 'article-head-image') %>
