@@ -87,7 +87,10 @@
 					затем мы вам сгенерируем пароль и вышлем
 					на указанный адрес
 				</p>
-				<%= captcha_tag %>
+				<div class="captcha-block">
+					<%= captcha_tag %>
+					<%= link_to image_tag(asset_path("refresh_act.png")), '#', class: 'reload-captcha-link' %>
+				</div>
 			</div>
 			<div class="clear"></div>
 		<% end %>
@@ -102,13 +105,16 @@
 				<%= f.hidden_field :print_versions_by_courier %>
 				<%= email_field_tag :email, '', 'data-placeholder' => "Введите email" %>
 				<%= text_field_tag :captcha, '', 'data-placeholder' => "Введите слово с картинки" %>
-				<%= f.submit "Зарегистрироваться" %>
+				<%= f.submit "Продолжить" %>
 			</div>
 			<div class="right">
 				<p id="subscribe-dialog-message">
 					Введите ваш email и код подтверждения
 				</p>
-				<%= captcha_tag %>
+				<div class="captcha-block">
+					<%= captcha_tag %>
+					<%= link_to image_tag(asset_path("refresh_act.png")), '#', class: 'reload-captcha-link' %>
+				</div>
 			</div>
 			<div class="clear"></div>
 		<% end %>
