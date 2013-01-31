@@ -145,6 +145,7 @@ $ ->
 
         # allow vote
         $('#poll-aside .poll-choices-select-list input[type=submit]').removeClass('auth-required')
+        $('.polls-list input[type=submit]').removeClass('auth-required')
 
     $('#login-dialog form').on 'ajax:error', ->
         f = ->
