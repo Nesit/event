@@ -1,14 +1,6 @@
 #new-subscription, #subscription-notice {
 	h1 {
-		@include sans-serif;
-		color: $purple-color;
-		text-transform: uppercase;
-		font-weight: bold;
-		font-size: 21px;
-		padding-bottom: 5px;
-		margin-bottom: 30px;
-
-		border-bottom: 2px solid $grey-border-color;
+		@include page-title;
 	}
 
 	#subscription-content {
@@ -153,14 +145,7 @@
 	margin-top: 18px;
 
 	h1 {
-		color: $purple-color;
-		text-transform: uppercase;
-		font-weight: bold;
-		font-size: 21px;
-		padding-bottom: 5px;
-		margin-bottom: 30px;
-
-		border-bottom: 2px solid $grey-border-color;
+		@include page-title;
 	}
 
 	p {
