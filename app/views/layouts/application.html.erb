@@ -1,67 +1,80 @@
 <!DOCTYPE html>
 <html>
-<head>
-	<title>EventRu</title>
-	<%= stylesheet_link_tag "application", media: "all" %>
-	<%= javascript_include_tag "application" %>
-	<%= csrf_meta_tags %>
-</head>
-<body>
+  <head>
+    <% @seo_tags = {} if @seo_tags.nil? %>
+    <title><%= @seo_tags[:title] %></title>
+    <meta name="description" content="<%= @seo_tags[:description] %>">
+    <meta name="keywords" content="<%= @seo_tags[:keywords] %>">
 
-<%= render 'shared/top_menu' %>
+    <!-- start social meta -->
+    <meta property="og:image" content="<%= URI.join(host_path, @seo_tags[:image].to_s) if @seo_tags[:image] %>"/>
+    <meta property="og:title" content="<%= @seo_tags[:title] %>"/>
+    <meta property="og:description" content="<%= @seo_tags[:description] %>"/>
+    <meta property="og:url" content="<%= full_url %>"/>
+    <meta property="og:site_name" content="EventRu"/>
+    <meta property="og:type" content="website"/>
+    <!-- end social meta -->
 
-<div id="main-column">
-	
-	<% unless @hide_top %>
-		<div id="header">
-			<div id="utmost-left-block" class="left">
-				<div class="city-name left">МОСКВА</div>
-				<div class="temperature right">+20</div>
-				<%= image_tag(asset_path('samples/weather.png'), class: 'right') %>
-				<div class="clear"></div>
-				<div class="current-time"></div>
-				<div class="current-date">
-					<%= Russian.strftime(Date.today, "%e %B").capitalize %>,
-					<span class="week-day"><%= Russian.strftime(Date.today, "%A") %></span>
-				</div>
-			</div>
+    <%= stylesheet_link_tag "application", media: "all" %>
+    <%= javascript_include_tag "application" %>
+    <%= csrf_meta_tags %>
+  </head>
+  <body>
 
-			<div id="left-block" class="left">
-				<% if @site_config and @site_config.actual_article %>
-					<%= content_tag(:a, href: url_for(@site_config.actual_article)) do %>
-						<div class="actual-today">Актуально сегодня:</div>
-						<p><%= @site_config.actual_article_description %></p>
-					<% end %>
-				<% end %>
-			</div>
+    <%= render 'shared/top_menu' %>
 
-			<div id="utmost-right-block" class="right">
-				<div id="auth-block">
-					<%= render 'shared/auth_block' %>
-				</div>
+    <div id="main-column">
+      
+      <% unless @hide_top %>
+	<div id="header">
+	  <div id="utmost-left-block" class="left">
+	    <div class="city-name left">МОСКВА</div>
+	    <div class="temperature right">+20</div>
+	    <%= image_tag(asset_path('samples/weather.png'), class: 'right') %>
+	    <div class="clear"></div>
+	    <div class="current-time"></div>
+	    <div class="current-date">
+	      <%= Russian.strftime(Date.today, "%e %B").capitalize %>,
+	      <span class="week-day"><%= Russian.strftime(Date.today, "%A") %></span>
+	    </div>
+	  </div>
 
-				<%= form_tag '#', id: 'search-form' do %>
-					<%= text_field_tag :query, '', class: 'left', 'data-placeholder' => "Поиск по сайту" %>
-					<%= submit_tag '', class: 'right' %>
-					<div class="clear"></div>
-				<% end %>
-			</div>
+	  <div id="left-block" class="left">
+	    <% if @site_config and @site_config.actual_article %>
+	      <%= content_tag(:a, href: url_for(@site_config.actual_article)) do %>
+		<div class="actual-today">Актуально сегодня:</div>
+		<p><%= @site_config.actual_article_description %></p>
+	      <% end %>
+	    <% end %>
+	  </div>
 
-			<div id="right-block" class="right">
-				<% if issue = Issue.current %>
-					Новый номер
-					<%= link_to issue.name, '#', class: 'issue-link' %>
-					<%= issue.to_s %>
-					<%= link_to "Подписаться", new_subscription_path, class: 'subscribe-link' %>
-				<% end %>
-			</div>
+	  <div id="utmost-right-block" class="right">
+	    <div id="auth-block">
+	      <%= render 'shared/auth_block' %>
+	    </div>
 
-			<%= link_to image_tag(asset_path('logo.png')), root_path, id: :logo %>
-			<div class="clear"></div>
-			<%= link_to image_tag(asset_path('subscribe_aside.png')), new_subscription_path, class: 'subscribe-aside-link' %>
-			<div id="left-banner">
-				<!--  AdRiver code START. Type:100x100 Site: Event.ru PZ: 1 BN: 0 -->
-				<script language="javascript" type="text/javascript"><!--
+	    <%= form_tag '#', id: 'search-form' do %>
+	    <%= text_field_tag :query, '', class: 'left', 'data-placeholder' => "Поиск по сайту" %>
+	    <%= submit_tag '', class: 'right' %>
+	    <div class="clear"></div>
+      <% end %>
+      </div>
+
+      <div id="right-block" class="right">
+	<% if issue = Issue.current %>
+	  Новый номер
+	  <%= link_to issue.name, '#', class: 'issue-link' %>
+	  <%= issue.to_s %>
+	  <%= link_to "Подписаться", new_subscription_path, class: 'subscribe-link' %>
+	<% end %>
+      </div>
+
+      <%= link_to image_tag(asset_path('logo.png')), root_path, id: :logo %>
+      <div class="clear"></div>
+      <%= link_to image_tag(asset_path('subscribe_aside.png')), new_subscription_path, class: 'subscribe-aside-link' %>
+      <div id="left-banner">
+	<!--  AdRiver code START. Type:100x100 Site: Event.ru PZ: 1 BN: 0 -->
+	<script language="javascript" type="text/javascript"><!--
 				var RndNum4NoCash = Math.round(Math.random() * 1000000000);
 				var ar_Tail='unknown'; if (document.referrer) ar_Tail = escape(document.referrer);
 				document.write(

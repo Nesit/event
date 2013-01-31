@@ -1,4 +1,19 @@
+# For share link. For change new window style change opts
+share_social =(url, service) ->
+  width  = 575
+  height = 400
+  left   = ($(window).width()  - width)  / 2
+  top    = ($(window).height() - height) / 2
+  opts   = 'status=1,width=#{width},height=#{height},top=#{top},left=#{left};' 
+
+  myWindow = window.open(url, service, opts)
+  myWindow.focus()
+  
 $ ->
+    $('a.share').live 'click', ->
+      share_social($(@).attr('href'), $(@).data('service'))
+      false
+
     $('.social-share-line a').on 'click', ->
         $item = $(this)
         social = $item.attr('class')

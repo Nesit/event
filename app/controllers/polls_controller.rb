@@ -8,5 +8,6 @@ class PollsController < ApplicationController
   def show
     @poll = Poll.find(params[:id])
     @poll.record_pageview!
+    seo_tags(@poll, title: :title)
   end
 end
