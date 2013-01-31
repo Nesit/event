@@ -47,4 +47,18 @@ class ApplicationController < ActionController::Base
     # TODO 403
     head :access_denied
   end
+
+  # TODO: Add default seo data
+  # OPTIMIZE: I guess that is not best solution
+  # For add seo tags to page, it's ease to use
+  # Example:
+  # seo_tags(Article.first, title: Article.first.title)
+  def seo_tags(obj, *model_methods)
+    @seo_tags = {}
+    model_methods = model_methods.first
+    %w[title description keywords image].each do |field|
+      @seo_tags.merge!({ field.to_sym => obj.send(model_methods[field.to_sym]) }) if model_methods.has_key?(field.to_sym)
+    end
+    @seo_tags
+  end
 end
