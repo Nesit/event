@@ -8,7 +8,8 @@ ActiveAdmin.register User do
   filter :name
   filter :company
   filter :city
-  filter :state, as: :select, collection: %w[need_email need_info complete disabled].
+  filter :banned
+  filter :state, as: :select, collection: %w[need_email need_info complete disabled banned].
     map {|s| [I18n.t(s), s]}, include_blank: true
 
   controller do
@@ -33,8 +34,7 @@ ActiveAdmin.register User do
       f.input :name
       f.input :email
       f.input :avatar, :as => :file, :hint => f.template.image_tag(f.object.avatar.url)
-      f.input :state, as: :select, collection: %w[need_email need_info complete disabled].
-        map {|s| [I18n.t(s), s]}, include_blank: false
+      f.input :banned, as: :select, collection: [['Да', true], ['Нет', false]], include_blank: false
       f.input :born_at
       f.input :gender_cd
       f.input :company

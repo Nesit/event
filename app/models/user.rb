@@ -18,6 +18,8 @@ class User < ActiveRecord::Base
   before_validation :process_new_city
   before_validation :ensure_uniqueness_name
   before_validation :select_state
+  before_destroy :user_deleted
+  after_save :banned_notify, if: "banned_changed?"
 
   attr_accessor :new_city, :new_country_cd
 
@@ -25,11 +27,11 @@ class User < ActiveRecord::Base
                   :new_country_cd, :company, :position, :website,
                   :phone_number, :name, :gender, :email, :avatar,
                   :comment_notification, :event_notification,
-                  :partner_notification, :weekly_notification,
+                  :partner_notification, :weekly_notification, :state,
                   :active_subscription, :password, :password_confirmation,
                   :article_comment_notification, :as => [:default, :admin]
 
-  attr_accessible :state, :as => [:default, :admin]
+  attr_accessible :state, :banned, :as => [:admin]
 
   has_many :authentications, dependent: :destroy
   has_many :comments, foreign_key: :author_id
@@ -97,7 +99,7 @@ class User < ActiveRecord::Base
       self.state = 'complete'
     else
       self.state = 'need_info'
-    end  
+    end
   end
 
   def ensure_password
@@ -124,5 +126,16 @@ class User < ActiveRecord::Base
     self.city_id = city.id
   end
 
+  def banned_notify
+    if banned
+      UserMailer.user_banned(self).deliver
+    else
+      UserMailer.user_unbanned(self).deliver
+    end
+  end
+
+  def user_deleted
+    UserMailer.user_deleted(self).deliver
+  end
 
 end
