@@ -4,6 +4,8 @@ gem 'rails', '3.2.11'
 
 group :production do
   gem 'pg'
+  gem 'whenever'
+  gem 'exception_notification'
 end
 
 gem 'jquery-rails'
