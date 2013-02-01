@@ -9,8 +9,8 @@
 				<%= point_checkbox_tag("Доступ к полной электронной версии журнала") %>
 				<%= point_checkbox_field(f, :print_versions_by_courier, "Получение печатных изданий с помощью курьерской доставки") %>
 				
+				<%= f.hidden_field :kind %>
 				<div class="subscription-kind-select">
-					<%= f.hidden_field :kind %>
 
 					<div class="-item left" data-value="six_months" data-default-price="600" data-advanced-price="1250" data-months-count="6">
 						<%= link_to "6 месяцев", '#' %>
@@ -32,7 +32,7 @@
 					Вы платите всего:<br>
 					<span class="per-month-price">100</span> р. в месяц
 				</p>
-				<%= f.submit "Оплатить", disabled: true %>
+				<%= f.submit "Оплатить", class: 'disabled' %>
 			<% end %>
 		</div>
 	</div>

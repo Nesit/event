@@ -31,11 +31,12 @@ $ ->
 
         $('.subscription-kind-select .-item').removeClass('active')
         $item.addClass('active')
-        $('#subscription-content input[type=submit]').removeAttr('disabled')
+        $('#subscription-content input[type=submit]').removeClass('disabled')
 
         update_price_per_month()
 
     $('#subscription-content form').on 'submit', (event) ->
+        return false if $(this).find('input[type=submit]').hasClass('disabled')
         # if logged in, proceed as usual
         return if $('#auth-block .profile-link').length != 0
 

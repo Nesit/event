@@ -23,4 +23,5 @@
   <% end %>
 
   <%= f.actions %>
+  <%= link_to "К списку", eval("admin_#{resource.class.name.underscore.pluralize}_path") %>
 <% end %>
