@@ -8,7 +8,7 @@ Feature: Article commenting
     Given I am not logged in
     And I am on the article page
     Then comment text area should be readonly
-    And I should see "Чтобы оставить комментарий вам нужно авторизироваться" within comment form
+    And I should see "Чтобы оставить комментарий Вам нужно авторизироваться" within comment form
     And submit button should not be visible within comment form
 
   @javascript
