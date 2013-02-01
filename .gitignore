@@ -6,4 +6,5 @@
 /public/uploads
 /.rbenv-version
 /.gems
+
 /config/database.yml
