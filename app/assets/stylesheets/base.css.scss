@@ -235,26 +235,28 @@ a {
 	}
 }
 
+$fixed-top-margin: 112px;
+
 .subscribe-aside-link {
 	display: block;
 	position: fixed;
 	margin-left: 960px;
-	margin-top: 112px;
+	margin-top: $fixed-top-margin + 44px;
 }
 
 #left-banner {
 	position: fixed;
 	width: 100px;
 	height: 100px;
-	margin-top: 167px;
-	margin-left: -160px;
+	margin-top: $fixed-top-margin + 55px;
+	margin-left: -140px;
 	z-index: 1;
 }
 
 #left-social-line {
 	position: fixed;
-	margin-left: -50px;
-	margin-top: 112px;
+	margin-left: -38px;
+	margin-top: $fixed-top-margin + 65px;
 	padding: 0px 5px;
 	background-color: $social-share-bg-color;
 	border: 1px solid $social-share-border-color;
@@ -262,8 +264,8 @@ a {
 	a {
 		margin: 11px 0;
 		display: block;
-		width: 30px;
-		height: 26px;
+		width: 18px;
+		height: 18px;
 	}
 
 	.fb, .vk, .twitter, .gplus, .mailru {
@@ -271,23 +273,22 @@ a {
 	}
 
 	.fb {
-		background-image: asset-url("fb_share.png", image);
+		background: asset-url("left_social_icons.png", image) 0 0;
 	}
 
 	.vk {
-		background-image: asset-url("vk_share.png", image);
+		background: asset-url("left_social_icons.png", image) -18px 0;
 	}
 
 	.twitter {
-		background-image: asset-url("twitter_share.png", image);
+		background: asset-url("left_social_icons.png", image) -36px 0;
 	}
 
 	.gplus {
-		background-image: asset-url("gplus_share.png", image);
 	}
 
 	.mailru {
-		background-image: asset-url("mailru_share.png", image);
+		background: asset-url("left_social_icons.png", image) -54px 0;
 	}
 
 }
@@ -486,6 +487,11 @@ a {
 			background-image: asset-url("projects/fest.png", image);
 			width: 91px;
 			height: 60px;
+		}
+
+		// temporary, according to EVENT-121
+		.umbrella, .box {
+			visibility: hidden;
 		}
 	}
 }
