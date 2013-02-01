@@ -20,7 +20,7 @@ GIT
 
 GIT
   remote: git://github.com/vladimir-vg/active_admin_editor.git
-  revision: 8ede52cad5ecb82233f65cb764b0ca28f0460bfa
+  revision: 9003e873fbbded0951001ba666afc5822a8bc0c1
   branch: custom-toolbar
   specs:
     active_admin_editor (0.3.6)
