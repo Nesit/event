@@ -8,12 +8,10 @@ class User < ActiveRecord::Base
 
   # removed presence: true for a while.
   # TODO: figure out how to deal with oauth-users without email
-  validates :email,
-    presence: true, format: /.+\@.+\..+/,
-    unless: proc { state.to_sym == :need_email }
-  validates :email, uniqueness: { scope: :state }, unless: proc { email.blank? }
-  
-  validates :password, presence: true, if: proc { crypted_password.blank? }
+  validates :email, presence: true, format: /.+\@.+\..+/, unless: "state == :need_email"
+  validates :email, uniqueness: { scope: :state }, unless: "email.empty?"
+
+  validates :password, presence: true, if: "crypted_password.blank?"
   validates :password, length: { minimum: 6 }, if: :password
 
   before_validation :ensure_password
@@ -24,11 +22,14 @@ class User < ActiveRecord::Base
   attr_accessor :new_city, :new_country_cd
 
   attr_accessible :born_at, :gender_cd, :city_id, :new_city,
-    :new_country_cd, :company, :position, :website,
-    :phone_number, :name, :gender, :email
+                  :new_country_cd, :company, :position, :website,
+                  :phone_number, :name, :gender, :email, :avatar,
+                  :comment_notification, :event_notification,
+                  :partner_notification, :weekly_notification,
+                  :active_subscription, :password, :password_confirmation,
+                  :article_comment_notification, :as => [:default, :admin]
 
-  attr_accessible :article_comment_notification, :comment_notification,
-    :event_notification, :partner_notification, :weekly_notification
+  attr_accessible :state, :as => [:default, :admin]
 
   has_many :authentications, dependent: :destroy
   has_many :comments, foreign_key: :author_id
@@ -122,4 +123,6 @@ class User < ActiveRecord::Base
 
     self.city_id = city.id
   end
+
+
 end

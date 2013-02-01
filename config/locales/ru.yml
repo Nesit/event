@@ -1,4 +1,8 @@
 ru:
+  need_email: Необходим e-mail
+  need_info: Неоходима информация
+  complete: Все есть
+  disabled: Отключен
   views:
     pagination:
       previous: '●'
@@ -72,6 +76,8 @@ ru:
 
   activerecord:
     attributes:
+      user:
+        state: Статус
       site_config:
         actual_article: "статья"
         actual_article_description: "описание"
@@ -88,6 +94,11 @@ ru:
       article_body_image:
         source: "файл"
     models:
+      user:
+        one: Пользователя
+        few: Пользователи
+        many: Пользователи
+        other: Пользователи
       poll:
         one: "опрос"
         other: "опросы"

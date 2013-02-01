@@ -61,4 +61,8 @@ class ApplicationController < ActionController::Base
     end
     @seo_tags
   end
+
+  def set_admin_locale
+    I18n.locale = :ru
+  end
 end
