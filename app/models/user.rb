@@ -45,6 +45,7 @@ class User < ActiveRecord::Base
   as_enum :gender, male: 1, female: 2
 
   scope :activated, where(activation_state: 'active')
+  scope :with_subscription, where(active_subscription: true)
 
   state_machine initial: 'need_info' do
     state 'need_email'

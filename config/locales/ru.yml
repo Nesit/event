@@ -1,4 +1,9 @@
 ru:
+  active_admin:
+    scopes:
+      all: Все
+      with_subscription: Подписанные
+
   need_email: Необходим e-mail
   need_info: Неоходима информация
   complete: Все есть

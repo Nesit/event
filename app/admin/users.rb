@@ -4,6 +4,9 @@ ActiveAdmin.register User do
 
   actions :all, :except => [:show]
 
+  scope :all, default: true
+  scope :with_subscription
+
   filter :email
   filter :name
   filter :company
