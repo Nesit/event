@@ -13,6 +13,15 @@ require Rails.root.join('app/models/article')
   ActiveAdmin.register klass.constantize do
     menu parent: "Статьи", label: I18n.t("active_admin.#{klass}")
 
+    actions :all, :except => [:show]
+
+    controller do
+      def show
+        redirect_to(eval("edit_admin_#{resource.class.name.underscore}_path(resource)")) and return
+      end
+    end
+
+
     filter :title
     filter :closed
     filter :target_at if klass == "EventArticle"
