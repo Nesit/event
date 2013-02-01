@@ -44,6 +44,8 @@
 	.article-short {
 		@include sans-serif;
 		font-size: 12pt;
+		line-height: 1.4;
+		text-align: center;
 	}
 }
 
