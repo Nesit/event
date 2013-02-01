@@ -25,7 +25,7 @@ $ ->
         value = $item.attr('data-value')
         is_advanced = $('#subscription-content .point-checkbox input').val() == 'true'
 
-        $('.subscription-kind-select input[type=hidden]').val(value)
+        $('#subscription-content input[name="subscription[kind]"]').val(value)
 
         $('#subscription-content p.payment').css('visibility', 'visible')
 
