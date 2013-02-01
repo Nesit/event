@@ -2,7 +2,7 @@ source :rubygems
 
 gem 'rails', '3.2.11'
 
-group :production do
+group :production, :staging do
   gem 'pg'
   gem 'whenever'
   gem 'exception_notification'
