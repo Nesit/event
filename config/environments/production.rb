@@ -7,6 +7,7 @@ EventRu::Application.configure do
   config.serve_static_assets = false
   config.assets.compress = true
   config.assets.compile = false
+  config.assets.precompile += %w(application.css active_admin.css wysiwyg.css)
   config.assets.digest = true
   config.action_mailer.delivery_method = :sendmail
   config.action_dispatch.x_sendfile_header = 'X-Accel-Redirect'
