@@ -1,7 +1,8 @@
+<% if @afisha_articles.any? %>
 <div class="afisha">
 	<div class="left afisha-description">
 		<h2>Афиша событий</h2>
-		<%= image_tag(asset_path('afisha.png')) %>
+		<%= image_tag('') %>
 	</div>
 	<div class="right afisha-list">
 		<% @afisha_articles.each do |event_article| %>
@@ -15,5 +16,6 @@
 	</div>
 	<div class="clear"></div>
 </div>
+<% end %>
 
 <div class="afisha-purple-line"></div>
