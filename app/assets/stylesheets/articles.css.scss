@@ -151,12 +151,27 @@
 		margin: 10px auto;
 		padding: 25px;
 		border: 1px solid $grey-border-color;
+		background-image: asset-url("issue_border_bg.png", image);
+
+		img {
+			width: 200px;
+			height: 283px;
+		}
+
+		.wrapper {
+			background-color: $closed-article-issue-bg-color;
+			border: 1px solid $grey-border-color;
+		}
+
+		a:hover {
+			text-decoration: underline;
+		}
 
 		@include serif;
 
 		.description {
 			margin-left: 10px;
-			width: 310px;
+			width: 308px;
 		}
 
 		h2 {
@@ -164,6 +179,7 @@
 			font-weight: normal;
 			font-size: 10pt;
 			margin: 0;
+			color: white;
 		}
 
 		.p1 {
