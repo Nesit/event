@@ -308,6 +308,13 @@
 					text-decoration: none;
 					color: $text-color;
 				}
+
+				a.closed {
+					padding-right: 24px;
+					background-image: asset-url("closed.png", image);
+					background-repeat: no-repeat;
+					background-position: right center;
+				}
 			}
 			h2:hover {
 				a {
