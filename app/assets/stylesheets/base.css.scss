@@ -80,7 +80,7 @@ a {
 			@include menu-item-typography;
 		}
 
-		.menu-nav-item:hover, .menu-nav-item.active {
+		a.menu-nav-item:hover, .menu-nav-item.active {
 			color: $purple-color;
 		}
 
