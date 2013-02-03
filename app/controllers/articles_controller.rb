@@ -27,6 +27,6 @@ class ArticlesController < ApplicationController
   def assign_article
     klass = params[:type].constantize
     raise "Wrong article type: #{params[:type]}" unless klass.superclass == Article
-    @article = klass.find(params[:id])
+    @article = klass.find(extract_id_from_slug(params[:id]))
   end
 end

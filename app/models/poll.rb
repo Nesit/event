@@ -22,7 +22,7 @@ class Poll < ActiveRecord::Base
                .where('? < end_at', DateTime.now) }
 
   def to_param
-    "#{id}-#{title.parameterize}"
+    "#{title.parameterize}-#{id}"
   end
 
   # for social share partial
