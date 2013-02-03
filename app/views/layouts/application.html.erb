@@ -145,8 +145,8 @@
 				<div class="list">
 					<% reports.each do |article| %>
 						<div class="item left">
-							<%= link_to image_tag(article.head_image.footer), article %>
-							<%= link_to article.title, article, class: 'report-link' %>
+							<%= slugged_link_to image_tag(article.head_image.footer), article %>
+							<%= slugged_link_to article.title, article, class: 'report-link' %>
 						</div>
 					<% end %>
 					<div class="clear"></div>
@@ -162,11 +162,14 @@
 		</div>
 		<div class="bottom-description right">
 			<h2 class="left">Спецпроекты:</h2>
-			<%= link_to '', '#', class: 'conf left' %>
-			<%= link_to '', '#', class: 'box left' %>
-			<%= link_to '', '#', class: 'tv left' %>
-			<%= link_to '', '#', class: 'umbrella left' %>
-			<%= link_to '', '#', class: 'fest left' %>
+			<span class="conf left"></span>
+			<span class="tv left"></span>
+			<span class="fest left"></span>
+			<%#= link_to '', '#', class: 'conf left' %>
+			<%#= link_to '', '#', class: 'box left' %>
+			<%#= link_to '', '#', class: 'tv left' %>
+			<%#= link_to '', '#', class: 'umbrella left' %>
+			<%#= link_to '', '#', class: 'fest left' %>
 			<div class="clear"></div>
 			<p>Публикация материалов с сайта возможна только с письменного согласия редакции.</p>
 			<p>Сайт может содержать информацию не предназначенную для лиц младше 18 лет.</p>

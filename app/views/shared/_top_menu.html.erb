@@ -15,7 +15,8 @@
 			<% end %>
 
 			<%= link_to "TV", tv_articles_path, class: ['menu-nav-item', (active_menu_category?(TvArticle) ? 'active' : '')].join(' ') %>
-			<%= link_to "Спецпроекты", '#', class: 'menu-nav-item' %>
+			<span class="menu-nav-item">Спецпроекты</span>
+			<%#= link_to "Спецпроекты", '#', class: 'menu-nav-item' %>
 		</div>
 		<div class="clear"></div>
 	</div>

@@ -80,7 +80,7 @@ a {
 			@include menu-item-typography;
 		}
 
-		.menu-nav-item:hover, .menu-nav-item.active {
+		a.menu-nav-item:hover, .menu-nav-item.active {
 			color: $purple-color;
 		}
 
@@ -99,8 +99,8 @@ a {
 	margin-top: 50px;
 
 	#utmost-left-block {
-		width: 120px;
-		margin-top: 30px;
+		width: 150px;
+		margin-top: 40px;
 
 		.city-name {
 			color: $weather-city-fg-color;
@@ -140,7 +140,7 @@ a {
 		width: 160px;
 		margin-top: 35px;
 		position: relative;
-		left: 60px;
+		left: 23px; // temporary, until weather block is fixed
 
 		a { text-decoration: none; }
 		.actual-today {
@@ -167,7 +167,7 @@ a {
 	#right-block {
 		width: 140px;
 		position: relative;
-		right: 30px;
+		right: 21px;
 		top: 36px;
 
 		@include sans-serif2;
@@ -436,7 +436,7 @@ $fixed-top-margin: 112px;
 		h2 {
 			@include sans-serif;
 			font-size: 21px;
-			width: 155px;
+			width: 180px;
 			height: 68px;
 			margin-top: 10px;
 			display: inline-block;
@@ -451,7 +451,7 @@ $fixed-top-margin: 112px;
 		.conf, .box, .tv, .umbrella, .fest {
 			display: block;
 			background-repeat: no-repeat;
-			margin-right: 12px;
+			margin-right: 35px;
 		}
 
 		.conf {
@@ -488,11 +488,6 @@ $fixed-top-margin: 112px;
 			background-image: asset-url("projects/fest.png", image);
 			width: 91px;
 			height: 60px;
-		}
-
-		// temporary, according to EVENT-121
-		.umbrella, .box {
-			visibility: hidden;
 		}
 	}
 }

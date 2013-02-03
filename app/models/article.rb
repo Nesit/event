@@ -44,10 +44,6 @@ class Article < ActiveRecord::Base
     closed
   end
 
-  def to_param
-    "#{id}-#{title.parameterize}"
-  end
-
   private
 
   def ensure_published_date
