@@ -436,7 +436,7 @@ $fixed-top-margin: 112px;
 		h2 {
 			@include sans-serif;
 			font-size: 21px;
-			width: 155px;
+			width: 180px;
 			height: 68px;
 			margin-top: 10px;
 			display: inline-block;
@@ -451,7 +451,7 @@ $fixed-top-margin: 112px;
 		.conf, .box, .tv, .umbrella, .fest {
 			display: block;
 			background-repeat: no-repeat;
-			margin-right: 12px;
+			margin-right: 35px;
 		}
 
 		.conf {
@@ -488,11 +488,6 @@ $fixed-top-margin: 112px;
 			background-image: asset-url("projects/fest.png", image);
 			width: 91px;
 			height: 60px;
-		}
-
-		// temporary, according to EVENT-121
-		.umbrella, .box {
-			visibility: hidden;
 		}
 	}
 }
