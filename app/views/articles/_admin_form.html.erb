@@ -3,6 +3,7 @@
     <%= f.input :title %>
     <%= f.input :author %>
     <%= f.input :issue %>
+    <%= f.input :closed %>
     <%= f.input :head_image unless resource.kind_of? TvArticle %>
     <%= f.input :head_video_url, required: true if resource.kind_of? TvArticle %>
     <%= f.input :list_item_description %>
@@ -17,8 +18,7 @@
     <%= f.input :body, as: :html_editor %>
   <% end %>
 
-  <%= f.inputs "Закрытость" do %>
-    <%= f.input :closed %>
+  <%= f.inputs "Превью" do %>
     <%= f.input :closed_body, as: :html_editor %>
   <% end %>
 

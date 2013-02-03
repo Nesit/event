@@ -3,8 +3,8 @@
 		<% @carousel_articles.each do |article| %>
 		<div class="carousel-content-item" id="carousel-item<%= article.id %>">
 			<div class="carousel-item-description">
-				<%= link_to content_tag(:h2, article.title), article %>
-				<%= link_to image_tag(article.head_image.head.carousel), article %>
+				<%= slugged_link_to content_tag(:h2, article.title), article %>
+				<%= slugged_link_to image_tag(article.head_image.head.carousel), article %>
 				<p><%= article.list_item_description %></p>
 			</div>
 			<div class="article-carousel-item-info">
@@ -35,7 +35,7 @@
 
 	<ul class="right carousel-list">
 		<% @carousel_articles.each do |article| %>
-			<li class="carousel-list-item"><%= link_to article.title, article, 'data-item-id' => "carousel-item#{article.id}" %></li>
+			<li class="carousel-list-item"><%= slugged_link_to article.title, article, 'data-item-id' => "carousel-item#{article.id}" %></li>
 		<% end %>
 	</ul>
 	<div class="clear"></div>

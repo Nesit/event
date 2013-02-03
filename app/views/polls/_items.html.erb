@@ -3,7 +3,7 @@
 		<% if action_name == 'show' %>
 			<h1><%= poll.topic %></h1>
 		<% else %>
-			<h2><%= link_to poll.topic, poll %></h2>
+			<h2><%= slugged_link_to poll.topic, poll %></h2>
 		<% end %>
 		
 
