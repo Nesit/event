@@ -17,6 +17,21 @@ setup_gallery_carousel = ($el) ->
         else
             $el.find('.article-gallery-pagination .page-right').addClass('active')
 
+    next = ->
+        $carousel = $el.find('.article-gallery-carousel')
+        unless $carousel.jcarousel('hasNext')
+            $carousel.jcarousel('scroll', 0)
+        else
+            $carousel.jcarousel('scroll', '+=1')
+
+    prev = ->
+        $carousel = $el.find('.article-gallery-carousel')
+        unless $carousel.jcarousel('hasPrev')
+            $carousel.jcarousel('scroll', $carousel.jcarousel('items').length-1)
+        else
+            $carousel.jcarousel('scroll', '-=1')
+
+
     id = $el.attr('data-id')
     $.ajax
         url: "/article_galleries/#{id}.html"
@@ -28,15 +43,19 @@ setup_gallery_carousel = ($el) ->
             update_pagination_control()
 
             $el.find('.article-gallery-pagination .page-left').on 'click', (event) ->
-                $el.find('.article-gallery-carousel').jcarousel('scroll', '-=1')
+                prev()
                 event.preventDefault()
 
             $el.find('.article-gallery-pagination .page-right').on 'click', (event) ->
-                $el.find('.article-gallery-carousel').jcarousel('scroll', '+=1')
+                next()
                 event.preventDefault()
 
             $el.find('.article-gallery-carousel').on 'scrollend.jcarousel', (event, carousel) ->
                 update_pagination_control()
+
+            $el.find("ul li a").on 'click', (event) ->
+                next()
+                event.preventDefault()
 
 $ ->
     $('.article-body-gallery').each (i, e) ->
