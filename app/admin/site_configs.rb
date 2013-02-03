@@ -9,7 +9,8 @@ ActiveAdmin.register SiteConfig do
       if @site_config = SiteConfig.first
         redirect_to edit_admin_site_config_path(@site_config)
       else
-        redirect_to new_admin_site_config_path
+        @site_config = SiteConfig.create!
+        redirect_to edit_admin_site_config_path(@site_config)
       end
     end
   end
