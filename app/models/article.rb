@@ -24,6 +24,7 @@ class Article < ActiveRecord::Base
   scope :older, order('articles.created_at ASC')
   scope :popular, order('articles.pageviews_count DESC')
   scope :without_tv, where('type <> ?', 'TvArticle')
+  scope :open, where(closed: false)
 
   def record_pageview!
     self.pageviews_count += 1
@@ -38,10 +39,6 @@ class Article < ActiveRecord::Base
   def previous_article
     self.class.where('articles.id <> ?', id)
               .where("articles.published_at > ?", published_at).first
-  end
-
-  def closed?
-    closed
   end
 
   private
