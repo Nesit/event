@@ -87,7 +87,7 @@
 		input[type=submit].disabled, input[type=submit]:hover {
 			background-color: white;
 			color: $purple-color;
-			text-transform: capitalize;
+			//text-transform: capitalize;
 			border: 1px solid $grey-border-color;
 		}
 
