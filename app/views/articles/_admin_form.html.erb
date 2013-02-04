@@ -15,11 +15,11 @@
   <% end %>
 
   <%= f.inputs "Контент" do %>
-    <%= f.input :body, as: :html_editor %>
+    <%= f.input :body, as: :html_editor, input_html: { style: 'height: 525px;'} %>
   <% end %>
 
   <%= f.inputs "Превью" do %>
-    <%= f.input :closed_body, as: :html_editor %>
+    <%= f.input :closed_body, as: :html_editor, input_html: { style: 'height: 525px;'} %>
   <% end %>
 
   <%= f.actions %>
