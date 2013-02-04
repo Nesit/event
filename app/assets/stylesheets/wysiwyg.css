@@ -1,24 +1,24 @@
 .article-body-video {
   width: 570px;
-  height: 310px;
+  height: 50px;
   background-color: #87ace3;
   border: 1px solid #c7c7c7;
   color: white;
   font-size: 24px;
   font-weight: bold;
-  line-height: 310px;
+  line-height: 50px;
   text-align: center;
 }
 
 .article-body-gallery {
   width: 570px;
-  height: 310px;
+  height: 50px;
   background-color: #e73337;
   border: 1px solid #c7c7c7;
   color: white;
   font-size: 24px;
   font-weight: bold;
-  line-height: 310px;
+  line-height: 50px;
   text-align: center;
 }
 

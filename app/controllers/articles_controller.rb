@@ -6,15 +6,15 @@ class ArticlesController < ApplicationController
   def index
     @articles =
       if params[:type]
-        Article.where(type: params[:type])
+        Article.open.where(type: params[:type])
       else
-        Article.scoped
+        Article.open
       end
     if params[:tag_id]
       tag = ActsAsTaggableOn::Tag.find(params[:tag_id])
-      @articles = @articles.tagged_with(tag)
+      @articles = @articles.open.tagged_with(tag)
     end
-    @articles = @articles.newer.page(params[:page]).per(10)
+    @articles = @articles.open.newer.page(params[:page]).per(10)
   end
 
   def show
@@ -22,11 +22,18 @@ class ArticlesController < ApplicationController
     seo_tags(@article, title: :title, description: :short_description, image: :head_image)
   end
 
+  def preview
+    klass = params[:type].constantize
+    raise "Wrong article type: #{params[:type]}" unless klass.superclass == Article
+    @article = klass.find(extract_id_from_slug(params[:id]))
+    render 'show'
+  end
+
   private
 
   def assign_article
     klass = params[:type].constantize
     raise "Wrong article type: #{params[:type]}" unless klass.superclass == Article
-    @article = klass.find(params[:id])
+    @article = klass.open.find(extract_id_from_slug(params[:id]))
   end
 end

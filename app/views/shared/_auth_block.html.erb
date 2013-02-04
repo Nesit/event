@@ -43,12 +43,11 @@
 		</div>
 
 		<p id="login-dialog-message">
-			Если вы зарегистрированны в одной из этих социальных сетей,
-			то вы можете войти в Event используя имеющийся аккаунт.
-			Для этого выберите сайт и следуйте инструкциям.
+			Если вы зарегистрированы в одной из этих сетей,
+			то вы можете войти используя имеющийся аккаунт.
 		</p>
 
-		<div class="login-kind-title">Войти по логину Event:</div>
+		<div class="login-kind-title">Войти по логину Event.ru:</div>
 
 		<%= form_tag user_session_path, method: :post, remote: true do |f| %>
 			<div class="left">
@@ -82,11 +81,7 @@
 				<%= f.submit "Зарегистрироваться" %>
 			</div>
 			<div class="right">
-				<p id="register-dialog-message">
-					Введите ваш email и код подтверждения,
-					затем мы вам сгенерируем пароль и вышлем
-					на указанный адрес
-				</p>
+				<p id="register-dialog-message"></p>
 				<div class="captcha-block">
 					<%= captcha_tag %>
 					<%= link_to image_tag(asset_path("refresh_act.png")), '#', class: 'reload-captcha-link' %>
@@ -105,7 +100,7 @@
 				<%= f.hidden_field :print_versions_by_courier %>
 				<%= email_field_tag :email, '', 'data-placeholder' => "Введите email" %>
 				<%= text_field_tag :captcha, '', 'data-placeholder' => "Введите слово с картинки" %>
-				<%= f.submit "Продолжить" %>
+				<%= f.submit "Поехали!" %>
 			</div>
 			<div class="right">
 				<p id="subscribe-dialog-message">

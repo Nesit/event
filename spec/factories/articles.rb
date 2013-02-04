@@ -6,7 +6,7 @@ FactoryGirl.define do
     body "Текст статьи"
     short_description "Краткое описание"
     list_item_description "Краткое описание для отображения в списке"
-    head_image { File.open(Rails.root.join("spec/samples/image.png")) }
+    head_image { File.open(Rails.root.join("db/sample/images/image.png")) }
     type 'NewsArticle'
   end
 end

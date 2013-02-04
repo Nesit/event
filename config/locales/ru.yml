@@ -56,7 +56,7 @@ ru:
       InterviewArticle: "Предыдущее интервью"
       OverviewArticle: "Предыдущий обзор"
       ReportArticle: "Предыдущий репортаж"
-      TripArticle: "Предыдущий опыт"
+      TripArticle: "Предыдущая статья"
       TvArticle: "Предыдущее видео"
     next:
       NewsArticle: "Следующая новость"
@@ -65,7 +65,7 @@ ru:
       InterviewArticle: "Следующее интервью"
       OverviewArticle: "Следующий обзор"
       ReportArticle: "Следующий репортаж"
-      TripArticle: "Следующий опыт"
+      TripArticle: "Следующая статья"
       TvArticle: "Следующее видео"
 
   active_admin:

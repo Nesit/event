@@ -13,6 +13,7 @@ class Ability
     can [:create, :activate, :oauth, :oauth_callback, :ensure_email], User
 
     can :read, Article
+    can :preview, Article if admin_user
     can :read, ArticleGallery # for dynamic embedding images galleries
     can :read, Comment
     can :read, Poll
@@ -36,7 +37,7 @@ class Ability
     can :destroy, :user_session
 
     # for profile
-    can :read, City 
+    can :read, City
     can :manage, Subscription
     can :read, :notification
     can [:edit, :update, :ensure_name], User

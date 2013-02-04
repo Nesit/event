@@ -15,6 +15,10 @@ class ApplicationController < ActionController::Base
 
   after_filter :check_need_email
 
+  def extract_id_from_slug(slug)
+    slug.split('-').last.to_i
+  end
+
   protected
 
   def check_need_email

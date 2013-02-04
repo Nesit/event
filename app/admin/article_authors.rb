@@ -1,7 +1,8 @@
 # encoding: utf-8
-
 ActiveAdmin.register ArticleAuthor do
   menu label: "Авторы"
+
+  actions :all, :except => [:show]
 
   filter :name
 

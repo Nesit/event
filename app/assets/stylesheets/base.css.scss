@@ -11,7 +11,8 @@ a {
 	}
 	
 	@include serif;
-	font-size: 15pt;
+	font-size: 12pt;
+	line-height: 1.3;
 
 	b, strong {
 		font-weight: bold;
@@ -79,7 +80,7 @@ a {
 			@include menu-item-typography;
 		}
 
-		.menu-nav-item:hover, .menu-nav-item.active {
+		a.menu-nav-item:hover, .menu-nav-item.active {
 			color: $purple-color;
 		}
 
@@ -98,8 +99,8 @@ a {
 	margin-top: 50px;
 
 	#utmost-left-block {
-		width: 120px;
-		margin-top: 30px;
+		width: 150px;
+		margin-top: 40px;
 
 		.city-name {
 			color: $weather-city-fg-color;
@@ -137,9 +138,9 @@ a {
 
 	#left-block {
 		width: 160px;
-		margin-top: 35px;
+		margin-top: 23px;
 		position: relative;
-		left: 60px;
+		left: 23px; // temporary, until weather block is fixed
 
 		a { text-decoration: none; }
 		.actual-today {
@@ -166,8 +167,8 @@ a {
 	#right-block {
 		width: 140px;
 		position: relative;
-		right: 30px;
-		top: 36px;
+		right: 21px;
+		top: 25px;
 
 		@include sans-serif2;
 		font-size: 10pt;
@@ -235,26 +236,28 @@ a {
 	}
 }
 
+$fixed-top-margin: 112px;
+
 .subscribe-aside-link {
 	display: block;
 	position: fixed;
 	margin-left: 960px;
-	margin-top: 112px;
+	margin-top: $fixed-top-margin + 44px;
 }
 
 #left-banner {
 	position: fixed;
 	width: 100px;
 	height: 100px;
-	margin-top: 167px;
-	margin-left: -160px;
+	margin-top: $fixed-top-margin + 55px;
+	margin-left: -140px;
 	z-index: 1;
 }
 
 #left-social-line {
 	position: fixed;
-	margin-left: -50px;
-	margin-top: 112px;
+	margin-left: -38px;
+	margin-top: $fixed-top-margin + 65px;
 	padding: 0px 5px;
 	background-color: $social-share-bg-color;
 	border: 1px solid $social-share-border-color;
@@ -262,8 +265,8 @@ a {
 	a {
 		margin: 11px 0;
 		display: block;
-		width: 30px;
-		height: 26px;
+		width: 18px;
+		height: 18px;
 	}
 
 	.fb, .vk, .twitter, .gplus, .mailru {
@@ -271,23 +274,22 @@ a {
 	}
 
 	.fb {
-		background-image: asset-url("fb_share.png", image);
+		background: asset-url("left_social_icons.png", image) 0 0;
 	}
 
 	.vk {
-		background-image: asset-url("vk_share.png", image);
+		background: asset-url("left_social_icons.png", image) -18px 0;
 	}
 
 	.twitter {
-		background-image: asset-url("twitter_share.png", image);
+		background: asset-url("left_social_icons.png", image) -36px 0;
 	}
 
 	.gplus {
-		background-image: asset-url("gplus_share.png", image);
 	}
 
 	.mailru {
-		background-image: asset-url("mailru_share.png", image);
+		background: asset-url("left_social_icons.png", image) -54px 0;
 	}
 
 }
@@ -434,7 +436,7 @@ a {
 		h2 {
 			@include sans-serif;
 			font-size: 21px;
-			width: 155px;
+			width: 180px;
 			height: 68px;
 			margin-top: 10px;
 			display: inline-block;
@@ -449,7 +451,7 @@ a {
 		.conf, .box, .tv, .umbrella, .fest {
 			display: block;
 			background-repeat: no-repeat;
-			margin-right: 12px;
+			margin-right: 35px;
 		}
 
 		.conf {
@@ -464,7 +466,7 @@ a {
 			height: 60px;
 		}
 		.box:hover {
-			background-image: asset-url("projects/ek_c.png", image);
+			background-image: asset-url("projects/ek_a.png", image);
 		}
 
 		.tv {
@@ -479,7 +481,7 @@ a {
 			height: 60px;
 		}
 		.umbrella:hover {
-			background-image: asset-url("projects/event_c.png", image);
+			background-image: asset-url("projects/event_a.png", image);
 		}
 
 		.fest {

@@ -13,6 +13,15 @@ require Rails.root.join('app/models/article')
   ActiveAdmin.register klass.constantize do
     menu parent: "Статьи", label: I18n.t("active_admin.#{klass}")
 
+    actions :all, :except => [:show]
+
+    controller do
+      def show
+        redirect_to(eval("edit_admin_#{resource.class.name.underscore}_path(resource)")) and return
+      end
+    end
+
+
     filter :title
     filter :closed
     filter :target_at if klass == "EventArticle"
@@ -22,21 +31,25 @@ require Rails.root.join('app/models/article')
 
     index do
       column :id
-      column :title
-      column :closed
+      column :title do |resource|
+        truncate(resource.title)
+      end
+      column :closed do |resource|
+        resource.closed? ? 'Да' : 'Нет'
+      end
       column :head_image do |article|
-        image_tag(article.head_image.list_thumb)
+        image_tag(article.head_image.thumb)
       end
 
       column :galleries do |article|
         link_to "Галлереи", admin_article_galleries_path('q[article_id_eq]' => article.id)
       end
-
-      column :target_at if klass == "EventArticle"
-      column :published_at
-      column :created_at
-      column :updated_at
-
+      column :target_at do |resource|
+        resource.target_at.to_s(:tiny)
+      end if klass == "EventArticle"
+      column :published_at do |resource|
+        resource.published_at.to_s(:tiny)
+      end
       default_actions
     end
 

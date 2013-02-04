@@ -44,6 +44,8 @@
 	.article-short {
 		@include sans-serif;
 		font-size: 12pt;
+		line-height: 1.4;
+		text-align: center;
 	}
 }
 
@@ -143,35 +145,54 @@
 			}
 		}
 	}
+}
 
-	.issue-block {
-		width: 520px;
-		margin: 10px auto;
-		padding: 25px;
+.issue-block {
+	width: 588px;
+	margin: 10px auto;
+	padding: 25px;
+	border: 1px solid $grey-border-color;
+	background-image: asset-url("issue_border_bg.png", image);
+
+	img {
+		width: 200px;
+		height: 283px;
+	}
+
+	.wrapper {
+		background-color: $closed-article-issue-bg-color;
 		border: 1px solid $grey-border-color;
+	}
 
+	a {
+		text-decoration: underline;
+		color: $dark-purple-color;
+	}
+
+	@include serif;
+
+	.description {
+		margin: 10px;
+		width: 365px;
+	}
+
+	h2 {
 		@include serif;
+		font-weight: normal;
+		font-size: 10pt;
+		margin: 0;
+		color: white;
+		margin-bottom: 12px;
+	}
 
-		.description {
-			margin-left: 10px;
-			width: 310px;
-		}
+	.p1 {
+		font-size: 15pt;
+		margin: 12px 0;
+	}
 
-		h2 {
-			@include serif;
-			font-weight: normal;
-			font-size: 10pt;
-			margin: 0;
-		}
-
-		.p1 {
-			font-size: 15pt;
-			margin: 0.3em 0;
-		}
-
-		.p2, .p3 {
-			font-size: 12pt;
-		}
+	.p2, .p3 {
+		font-size: 12pt;
+		margin-top: 14px;
 	}
 }
 
@@ -187,6 +208,10 @@
 		margin-left: 7px;
 		color: $tag-text-color;
 	}
+
+	a:hover {
+		color: $purple-color;
+	}
 }
 
 .article-navigation {
@@ -196,6 +221,11 @@
 	a {
 		font-style: oblique;
 		font-size: 14px;
+		line-height: 30px;
+	}
+
+	.arrow {
+		font-size: 30px;
 	}
 }
 
@@ -306,6 +336,13 @@
 					text-decoration: none;
 					color: $text-color;
 				}
+
+				a.closed {
+					padding-right: 24px;
+					background-image: asset-url("closed.png", image);
+					background-repeat: no-repeat;
+					background-position: right center;
+				}
 			}
 			h2:hover {
 				a {
@@ -316,7 +353,7 @@
 			p {
 				margin: 1.0em 0;
 				@include serif;
-				font-size: 14pt;
+				font-size: 12pt;
 			}
 		}
 
@@ -498,9 +535,11 @@
 			margin-bottom: 3px;
 			font-size: 14px;
 			.icon {
-				width: 9px;
-				height: 12px;
-				background-image: asset-url('afisha_inactive.png', image);
+				margin-top: 2px;
+				width: 10px;
+				height: 10px;
+				background: asset-url('afisha_icons.png', image) 0 -10px;
+				background-repeat: no-repeat;
 				margin-right: 5px;
 			}
 
@@ -528,7 +567,7 @@
 			}
 		}
 		.afisha-item.active .icon {
-			background-image: asset-url('afisha_active.png', image);
+			background: asset-url('afisha_icons.png', image) 0 0;
 		}
 	}
 }

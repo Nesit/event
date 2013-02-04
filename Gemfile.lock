@@ -20,7 +20,7 @@ GIT
 
 GIT
   remote: git://github.com/vladimir-vg/active_admin_editor.git
-  revision: 8ede52cad5ecb82233f65cb764b0ca28f0460bfa
+  revision: 9003e873fbbded0951001ba666afc5822a8bc0c1
   branch: custom-toolbar
   specs:
     active_admin_editor (0.3.6)
@@ -115,6 +115,7 @@ GEM
       coffee-rails (~> 3.2)
       railties (~> 3.0)
       sass-rails (~> 3.2)
+    chronic (0.9.0)
     chunky_png (1.2.6)
     coderay (1.0.8)
     coffee-rails (3.2.2)
@@ -160,6 +161,9 @@ GEM
       yard (>= 0.7.0)
     erubis (2.7.0)
     eventmachine (1.0.0)
+    exception_notification (3.0.0)
+      actionmailer (>= 3.0.4)
+      tinder (~> 1.8)
     execjs (1.4.0)
       multi_json (~> 1.0)
     factory_girl (4.1.0)
@@ -169,6 +173,8 @@ GEM
       railties (>= 3.0.0)
     faraday (0.8.4)
       multipart-post (~> 1.1)
+    faraday_middleware (0.9.0)
+      faraday (>= 0.7.4, < 0.9)
     fastercsv (1.5.5)
     ffi (1.2.0)
     formtastic (2.2.1)
@@ -176,7 +182,9 @@ GEM
     gherkin (2.11.5)
       json (>= 1.4.6)
     has_scope (0.5.1)
+    hashie (1.2.0)
     hike (1.2.1)
+    http_parser.rb (0.5.3)
     httpauth (0.2.0)
     i18n (0.6.1)
     inherited_resources (1.3.1)
@@ -289,6 +297,7 @@ GEM
       rails (>= 3.2)
     simple_enum (1.6.4)
       activesupport (>= 3.0.0)
+    simple_oauth (0.1.9)
     simplecov (0.7.1)
       multi_json (~> 1.0)
       simplecov-html (~> 0.7.1)
@@ -309,9 +318,22 @@ GEM
       rack (>= 1.0.0)
     thor (0.16.0)
     tilt (1.3.3)
+    tinder (1.9.2)
+      eventmachine (~> 1.0)
+      faraday (~> 0.8)
+      faraday_middleware (~> 0.9)
+      hashie (~> 1.0)
+      json (~> 1.7.5)
+      mime-types (~> 1.19)
+      multi_json (~> 1.5)
+      twitter-stream (~> 0.1)
     treetop (1.4.12)
       polyglot
       polyglot (>= 0.3.1)
+    twitter-stream (0.1.16)
+      eventmachine (>= 0.12.8)
+      http_parser.rb (~> 0.5.1)
+      simple_oauth (~> 0.1.4)
     tzinfo (0.3.35)
     uglifier (1.3.0)
       execjs (>= 0.3.0)
@@ -323,6 +345,9 @@ GEM
     warden (1.2.1)
       rack (>= 1.0)
     websocket (1.0.4)
+    whenever (0.8.2)
+      activesupport (>= 2.3.4)
+      chronic (>= 0.6.3)
     xpath (1.0.0)
       nokogiri (~> 1.3)
     yard (0.8.3)
@@ -349,6 +374,7 @@ DEPENDENCIES
   database_cleaner
   debugger
   easy_captcha
+  exception_notification
   factory_girl_rails
   formtastic (~> 2.2.1)
   jquery-rails
@@ -372,3 +398,4 @@ DEPENDENCIES
   thin
   uglifier (>= 1.0.3)
   unicorn
+  whenever

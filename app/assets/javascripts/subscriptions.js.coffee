@@ -25,17 +25,18 @@ $ ->
         value = $item.attr('data-value')
         is_advanced = $('#subscription-content .point-checkbox input').val() == 'true'
 
-        $('.subscription-kind-select input[type=hidden]').val(value)
+        $('#subscription-content input[name="subscription[kind]"]').val(value)
 
         $('#subscription-content p.payment').css('visibility', 'visible')
 
         $('.subscription-kind-select .-item').removeClass('active')
         $item.addClass('active')
-        $('#subscription-content input[type=submit]').removeAttr('disabled')
+        $('#subscription-content input[type=submit]').removeClass('disabled')
 
         update_price_per_month()
 
     $('#subscription-content form').on 'submit', (event) ->
+        return false if $(this).find('input[type=submit]').hasClass('disabled')
         # if logged in, proceed as usual
         return if $('#auth-block .profile-link').length != 0
 

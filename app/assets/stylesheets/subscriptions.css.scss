@@ -29,8 +29,9 @@
 
 		.subscription-kind-select {
 			margin-top: 33px;
+
 			.-item {
-				margin-right: 44px;
+				margin-left: 67px;
 				a {
 					font-size: 19px;
 					color: $text-color;
@@ -46,9 +47,12 @@
 				p {
 					margin-top: 20px;
 					text-align: center;
-					font-style: oblique;
 					font-size: 13px;
 				}
+			}
+
+			:first-child {
+				margin-left: 0;
 			}
 
 			.-item.active, .-item:hover {
@@ -80,7 +84,13 @@
 			}
 		}
 
-		input[type=submit] {
+		input[type=submit].disabled, input[type=submit]:hover {
+			background-color: white;
+			color: $purple-color;
+			border: 1px solid $grey-border-color;
+		}
+
+		input[type=submit], input[type=submit].disabled:hover {
 			@include button;
 			width: 446px;
 			height: 56px;
@@ -90,13 +100,6 @@
 			display: block;
 			margin: 0 auto;
 			margin-bottom: 34px;
-		}
-
-		input[type=submit][disabled=disabled] {
-			background-color: white;
-			color: $purple-color;
-			text-transform: capitalize;
-			border: 1px solid $grey-border-color;
 		}
 	}
 }
