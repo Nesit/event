@@ -6,15 +6,15 @@ class ArticlesController < ApplicationController
   def index
     @articles =
       if params[:type]
-        Article.open.where(type: params[:type])
+        Article.where(type: params[:type])
       else
-        Article.open
+        Article.scoped
       end
     if params[:tag_id]
       tag = ActsAsTaggableOn::Tag.find(params[:tag_id])
-      @articles = @articles.open.tagged_with(tag)
+      @articles = @articles.tagged_with(tag)
     end
-    @articles = @articles.open.newer.page(params[:page]).per(10)
+    @articles = @articles.newer.page(params[:page]).per(10)
   end
 
   def show
@@ -34,6 +34,6 @@ class ArticlesController < ApplicationController
   def assign_article
     klass = params[:type].constantize
     raise "Wrong article type: #{params[:type]}" unless klass.superclass == Article
-    @article = klass.open.find(extract_id_from_slug(params[:id]))
+    @article = klass.find(extract_id_from_slug(params[:id]))
   end
 end
