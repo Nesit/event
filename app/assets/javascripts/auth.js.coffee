@@ -1,14 +1,35 @@
 window.show_register_dialog = ->
+    # need to enclose val('') with focus and blur events
+    # to do not break placeholder plugin
+    $inputs = $('#register-dialog').find('input[name="user[email]"], input[name=captcha]')
+    $inputs.trigger('focus')
+    $inputs.val('')
+    $inputs.trigger('blur')
+
+    $('#register-dialog-message').html(
+        """Введите ваш email и код подтверждения,
+           затем мы вам сгенерируем пароль и вышлем
+           на указанный адрес""")
     $('.dialog.closable').addClass('hidden')
     $('#register-dialog').removeClass('hidden')
     $('#dialog-overlay').addClass('active')
 
 window.show_login_dialog = ->
+    $inputs = $('#login-dialog').find('input[name=email], input[name=password]')
+    $inputs.trigger('focus')
+    $inputs.val('')
+    $inputs.trigger('blur')
+
     $('.dialog.closable').addClass('hidden')
     $('#login-dialog').removeClass('hidden')
     $('#dialog-overlay').addClass('active')
 
 window.show_subscribe_dialog = ->
+    $inputs = $('#subscribe-dialog').find('input[name=email], input[name=captcha]')
+    $inputs.trigger('focus')
+    $inputs.val('')
+    $inputs.trigger('blur')
+
     $('.dialog.closable').addClass('hidden')
     $('#subscribe-dialog').removeClass('hidden')
     $('#dialog-overlay').addClass('active')
@@ -51,7 +72,7 @@ $ ->
         email = $form.find('input[name=email]').val()
 
         return "Поле email не заполнено" unless email
-        return "После email не соответсвует формату" unless window.is_email_valid(email)
+        return "Поле email не соответсвует формату" unless window.is_email_valid(email)
 
 
     used_map = {}

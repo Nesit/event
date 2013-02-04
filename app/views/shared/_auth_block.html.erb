@@ -81,11 +81,7 @@
 				<%= f.submit "Зарегистрироваться" %>
 			</div>
 			<div class="right">
-				<p id="register-dialog-message">
-					Введите ваш email и код подтверждения,
-					затем мы вам сгенерируем пароль и вышлем
-					на указанный адрес
-				</p>
+				<p id="register-dialog-message"></p>
 				<div class="captcha-block">
 					<%= captcha_tag %>
 					<%= link_to image_tag(asset_path("refresh_act.png")), '#', class: 'reload-captcha-link' %>
