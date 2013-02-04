@@ -208,6 +208,10 @@
 		margin-left: 7px;
 		color: $tag-text-color;
 	}
+
+	a:hover {
+		color: $purple-color;
+	}
 }
 
 .article-navigation {
