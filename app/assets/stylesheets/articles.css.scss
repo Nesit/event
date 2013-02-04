@@ -523,9 +523,11 @@
 			margin-bottom: 3px;
 			font-size: 14px;
 			.icon {
-				width: 9px;
-				height: 12px;
-				background-image: asset-url('afisha_inactive.png', image);
+				margin-top: 2px;
+				width: 10px;
+				height: 10px;
+				background: asset-url('afisha_icons.png', image) 0 -10px;
+				background-repeat: no-repeat;
 				margin-right: 5px;
 			}
 
@@ -553,7 +555,7 @@
 			}
 		}
 		.afisha-item.active .icon {
-			background-image: asset-url('afisha_active.png', image);
+			background: asset-url('afisha_icons.png', image) 0 0;
 		}
 	}
 }

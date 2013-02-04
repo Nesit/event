@@ -1,7 +1,9 @@
 <% if @afisha_articles.any? %>
 <div class="afisha">
 	<div class="left afisha-description">
-		<h2>Афиша событий</h2>
+		<%= link_to event_articles_path do %>
+			<h2>Афиша событий</h2>
+		<% end %>
 		<img src="" />
 	</div>
 	<div class="right afisha-list">
