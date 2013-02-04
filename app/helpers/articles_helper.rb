@@ -1,3 +1,5 @@
+# encoding: utf-8
+
 module ArticlesHelper
   def can_see_closed?
     current_user and current_user.active_subscription?
@@ -21,6 +23,16 @@ module ArticlesHelper
 
   def article_body_as_html(article)
     article.body.html_safe
+  end
+
+  def prev_article_label(article)
+    label = t("articles.previous.#{article.class.name}")
+    "<span class=\"arrow\">‹ </span>#{label}".html_safe
+  end
+
+  def next_article_label(article)
+    label = t("articles.next.#{article.class.name}")
+    "#{label}<span class=\"arrow\"> ›</span>".html_safe
   end
 
   def embeded_video_tag(kind, code, width, height)
