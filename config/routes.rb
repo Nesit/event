@@ -12,13 +12,16 @@ EventRu::Application.routes.draw do
       path: kind.pluralize,
       only: [:index, :show],
       defaults: { type: "#{kind.camelize}Article" } do
+      get 'preview', on: :member
     end
   end
   resources :"tv_articles",
     controller: :articles,
     path: 'tv',
     only: [:index, :show],
-    defaults: { type: "TvArticle" }
+    defaults: { type: "TvArticle" } do
+    get 'preview', on: :member
+    end
 
   resources :polls, only: [:index, :show] do
     resources :poll_votes, path: :votes, only: [:create]
@@ -40,7 +43,7 @@ EventRu::Application.routes.draw do
 
   post 'sessions' => 'user_sessions#create', as: :user_session
   delete 'sessions' => 'user_sessions#destroy', as: :user_session
-  
+
   resources :users, only: [:create, :destroy]
 
   get 'profile' => 'users#edit', as: :edit_user
@@ -50,7 +53,7 @@ EventRu::Application.routes.draw do
   get 'profile/name' => 'users#ensure_name', as: :ensure_user_name
   get 'profile/email' => 'users#ensure_email', as: :ensure_user_email
   put 'profile/email' => 'users#update_email', as: :update_user_email
-  
+
   get 'users/oauth' => 'users#oauth', as: :oauth_login
   get 'users/activate' => 'users#activate', as: :activate_user
   get 'users/callback' => 'users#oauth_callback'
