@@ -132,6 +132,7 @@
 		.register-link {
 			font-weight: normal;
 			font-style: normal;
+			color: $purple-color;
 		}
 	}
 
@@ -161,6 +162,12 @@
 		:last-child img {
 			margin-left: 15px;
 		}
+	}
+
+	input[type=submit]:hover {
+		background-color: white;
+		color: $purple-color;
+		border: 1px solid $grey-border-color;
 	}
 }
 
