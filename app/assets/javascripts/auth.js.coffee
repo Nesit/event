@@ -14,6 +14,12 @@ window.show_register_dialog = ->
     $('#register-dialog').removeClass('hidden')
     $('#dialog-overlay').addClass('active')
 
+window.show_register_thanks_dialog = ->
+    $('.dialog.closable').addClass('hidden')
+    $('#register-thanks-dialog').removeClass('hidden')
+    $('#dialog-overlay').addClass('active')
+
+
 window.show_login_dialog = ->
     $inputs = $('#login-dialog').find('input[name=email], input[name=password]')
     $inputs.trigger('focus')
@@ -146,8 +152,7 @@ $ ->
             return false
 
     $('#register-dialog form').on 'ajax:success', (event, data) ->
-        message = "Письмо с дальнейшими инструкциями отправлено на указанный адрес"
-        $('#register-dialog-message').html(message)
+        window.show_register_thanks_dialog()
 
     $('#register-dialog form').on 'ajax:error', (event, data) ->
         $el = $(data.responseText)
