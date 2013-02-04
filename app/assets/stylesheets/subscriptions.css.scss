@@ -27,6 +27,13 @@
 			margin-bottom: 30px;
 		}
 
+		.point-checkbox:hover {
+			p {
+				color: $purple-color;
+				text-decoration: underline;
+			}
+		}
+
 		.subscription-kind-select {
 			margin-top: 33px;
 
@@ -63,7 +70,6 @@
 
 				p {
 					color: $purple-color;
-					font-weight: bold;
 					font-style: normal;
 				}
 			}
