@@ -60,7 +60,7 @@ $ ->
             .attr('src', $('#subscribe-dialog img[alt=captcha]').attr('src'))
         $('#subscribe-dialog form input[name=captcha]').val('')
 
-    $('#subscribe-dialog form input[name="email"]').on 'keyup', (event) ->
+    $('#subscribe-dialog form input[name="email"]').on 'keyup change', (event) ->
         return unless window.is_email_valid($(this).val())
         
         return if window.ensureEmailLock

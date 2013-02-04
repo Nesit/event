@@ -105,7 +105,7 @@ $ ->
             $('#register-dialog-message').html("")
             return true
 
-    $('#register-dialog form input[name="user[email]"]').on 'keyup', ->
+    $('#register-dialog form input[name="user[email]"]').on 'keyup change', ->
         clearTimeout(window.register_email_timeout) if window.register_email_timeout
 
         email = $(this).val()
@@ -127,7 +127,7 @@ $ ->
         $('#register-dialog form input[name="user[email]"]').addClass('loader')
         window.register_email_timeout = setTimeout(check, 1000)
 
-    $('#register-dialog form').find('input[name="user[email]"], input[name=captcha]').on 'keyup', ->
+    $('#register-dialog form').find('input[name="user[email]"], input[name=captcha]').on 'keyup change', ->
         check_register_dialog_fields()
 
     $('#register-dialog form').on 'ajax:beforeSend', (event) ->
