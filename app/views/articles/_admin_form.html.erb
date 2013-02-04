@@ -24,5 +24,7 @@
 
   <%= f.actions %>
   <%= link_to "К списку", eval("admin_#{resource.class.name.underscore.pluralize}_path") %>
-  <%= link_to "Предпросмотр", eval("preview_#{resource.class.name.underscore}_path") %>
+  <% unless f.object.new_record? %>
+    <%= link_to("Предпросмотр", eval("preview_#{resource.class.name.underscore}_path")) %>
+  <% end %>
 <% end %>
