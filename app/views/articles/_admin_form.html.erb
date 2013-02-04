@@ -15,13 +15,16 @@
   <% end %>
 
   <%= f.inputs "Контент" do %>
-    <%= f.input :body, as: :html_editor %>
+    <%= f.input :body, as: :html_editor, input_html: { style: 'height: 525px;'} %>
   <% end %>
 
   <%= f.inputs "Превью" do %>
-    <%= f.input :closed_body, as: :html_editor %>
+    <%= f.input :closed_body, as: :html_editor, input_html: { style: 'height: 525px;'} %>
   <% end %>
 
   <%= f.actions %>
   <%= link_to "К списку", eval("admin_#{resource.class.name.underscore.pluralize}_path") %>
+  <% unless f.object.new_record? %>
+    <%= link_to("Предпросмотр", eval("preview_#{resource.class.name.underscore}_path")) %>
+  <% end %>
 <% end %>

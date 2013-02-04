@@ -1,5 +1,4 @@
 class Article < ActiveRecord::Base
-  
   mount_uploader :head_image, ArticleHeadImageUploader
   has_many :galleries, class_name: 'ArticleGallery'
 
@@ -38,10 +37,6 @@ class Article < ActiveRecord::Base
   def previous_article
     self.class.where('articles.id <> ?', id)
               .where("articles.published_at > ?", published_at).first
-  end
-
-  def closed?
-    closed
   end
 
   private

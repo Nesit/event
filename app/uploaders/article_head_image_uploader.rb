@@ -28,6 +28,11 @@ class ArticleHeadImageUploader < BasicImageUploader
     process convert: :png
   end
 
+  version :thumb do
+    process resize_to_fill: [100, 100]
+    process convert: :png
+  end
+
   version :footer do
     process resize_to_fill: [216, 146]
     process convert: :png

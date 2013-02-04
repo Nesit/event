@@ -22,6 +22,13 @@ class ArticlesController < ApplicationController
     seo_tags(@article, title: :title, description: :short_description, image: :head_image)
   end
 
+  def preview
+    klass = params[:type].constantize
+    raise "Wrong article type: #{params[:type]}" unless klass.superclass == Article
+    @article = klass.find(extract_id_from_slug(params[:id]))
+    render 'show'
+  end
+
   private
 
   def assign_article

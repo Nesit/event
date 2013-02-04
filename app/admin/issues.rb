@@ -8,15 +8,18 @@ ActiveAdmin.register Issue do
   filter :issued_at
 
   index do
-    column :id
+    id_column
     column :number
     column :name
     column :cover do |issue|
       image_tag(issue.cover.thumb)
     end
-    column :issued_at
-    column :created_at
-    column :updated_at
+    %w[issued_at created_at].each do |method|
+      column method.to_sym do |resource|
+        resource.send(method.to_sym).to_s(:tiny_with_time)
+      end
+    end
+
 
     default_actions
   end

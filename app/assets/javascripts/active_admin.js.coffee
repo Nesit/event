@@ -5,4 +5,3 @@
 #= require active_admin/polls
 #= require active_admin/galleries
 #= require active_admin/menu
-

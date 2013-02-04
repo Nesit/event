@@ -13,7 +13,7 @@
 				<div id="email-dialog-message">
 					Для работы с сайтом нам необходим адрес вашей элекронной почты
 				</div>
-				<%= email_field_tag :email, '', 'data-placeholder' => "Введите email" %>
+				<%= email_field_tag :email, '', autocomplete: 'off', 'data-placeholder' => "Введите email" %>
 				<%= submit_tag "Отправить" %>
 			</div>
 			<div class="clear"></div>
@@ -43,16 +43,15 @@
 		</div>
 
 		<p id="login-dialog-message">
-			Если вы зарегистрированны в одной из этих социальных сетей,
-			то вы можете войти в Event используя имеющийся аккаунт.
-			Для этого выберите сайт и следуйте инструкциям.
+			Если вы зарегистрированы в одной из этих сетей,
+			то вы можете войти используя имеющийся аккаунт.
 		</p>
 
-		<div class="login-kind-title">Войти по логину Event:</div>
+		<div class="login-kind-title">Войти по логину Event.ru:</div>
 
 		<%= form_tag user_session_path, method: :post, remote: true do |f| %>
 			<div class="left">
-			<%= email_field_tag :email, '', 'data-placeholder' => "Введите email" %>
+			<%= email_field_tag :email, '', autocomplete: 'off', 'data-placeholder' => "Введите email" %>
 			<div class="remember-me-block">
 				<%= check_box_tag :remember_me %>
 				<label for="remember_me">Запомнить?</label>
@@ -77,16 +76,12 @@
 		<div class="dialog-title">Регистрация</div>
 		<%= form_for User.new(email: (params[:user] and params[:user][:email])), remote: true do |f| %>
 			<div class="left">
-				<%= f.email_field :email, 'data-placeholder' => "Введите email" %>
+				<%= f.email_field :email, autocomplete: 'off', 'data-placeholder' => "Введите email" %>
 				<%= text_field_tag :captcha, '', 'data-placeholder' => "Введите слово с картинки" %>
 				<%= f.submit "Зарегистрироваться" %>
 			</div>
 			<div class="right">
-				<p id="register-dialog-message">
-					Введите ваш email и код подтверждения,
-					затем мы вам сгенерируем пароль и вышлем
-					на указанный адрес
-				</p>
+				<p id="register-dialog-message"></p>
 				<div class="captcha-block">
 					<%= captcha_tag %>
 					<%= link_to image_tag(asset_path("refresh_act.png")), '#', class: 'reload-captcha-link' %>
@@ -96,6 +91,13 @@
 		<% end %>
 	</div>
 
+	<div id="register-thanks-dialog" class="hidden dialog closable">
+		<%= link_to "X", '#', class: 'close-link right' %>
+		<div class="dialog-title">Регистрация</div>
+		<h2>Спасибо за регистрацию!</h2>
+		<p>Письмо с дальнейшими инструкциями отправлено на указанный адрес</p>
+	</div>
+
 	<div id="subscribe-dialog" class="hidden dialog closable">
 		<%= link_to "X", '#', class: 'close-link right' %>
 		<div class="dialog-title">Для продолжения введите ваш e-mail</div>
@@ -103,7 +105,7 @@
 			<div class="left">
 				<%= f.hidden_field :kind %>
 				<%= f.hidden_field :print_versions_by_courier %>
-				<%= email_field_tag :email, '', 'data-placeholder' => "Введите email" %>
+				<%= email_field_tag :email, '', autocomplete: 'off', 'data-placeholder' => "Введите email" %>
 				<%= text_field_tag :captcha, '', 'data-placeholder' => "Введите слово с картинки" %>
 				<%= f.submit "Поехали!" %>
 			</div>

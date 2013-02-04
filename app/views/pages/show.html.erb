@@ -1,5 +1,4 @@
-<% content_for :without_aside do %>
-	<div id="page-content">
-		<%= @page.body.html_safe %>
-	</div>
-<% end %>
+<h1><%= @page.name %></h1>
+<div id="page-content">
+	<%= @page.body.html_safe %>
+</div>

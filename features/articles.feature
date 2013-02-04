@@ -5,4 +5,4 @@ Feature: Articles display
       | title                    |
       | Длинное название новости |
     And I am on the main page
-    Then I should see "Длинное название новости"
+    Then I should see "Длинное название новости"  
