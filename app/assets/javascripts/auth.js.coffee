@@ -51,16 +51,18 @@ $ ->
         $('.dialog.closable').addClass('hidden')
         $('#dialog-overlay').removeClass('active')
 
-    $('.login-link').on 'click', (event) ->
+    $(document.body).on 'click', '.login-link', (event) ->
         window.show_login_dialog()
-        false
+        event.preventDefault()
 
-    $('.register-link').on 'click', (event) ->
+
+    $(document.body).on 'click', '.register-link', (event) ->
         window.show_register_dialog()
-        false
+        event.preventDefault()
 
     $('.dialog').on 'click', (event) ->
-        event.stopPropagation()
+        #event.stopPropagation()
+        console.log('click')
 
     $('.dialog .close-link').on 'click', (event) ->
         $(this).closest('.dialog.closable').addClass('hidden')
@@ -98,14 +100,16 @@ $ ->
             return false
 
         if window.register_email_used
-            $('#register-dialog-message').html("Пользователь с таким email уже существует")
+            $('#register-dialog-message').html(
+                'Пользователь с таким email уже существует<br>
+                 <a href="#" class="login-link">Пройдите авторизацию</a>')
             return false
         else
             # all is ok, just put std message
             $('#register-dialog-message').html("")
             return true
 
-    $('#register-dialog form input[name="user[email]"]').on 'keyup change', ->
+    $('#register-dialog form input[name="user[email]"]').on 'keyup', ->
         clearTimeout(window.register_email_timeout) if window.register_email_timeout
 
         email = $(this).val()
@@ -119,15 +123,17 @@ $ ->
                 success: (data) ->
                     $('#register-dialog form input[name="user[email]"]').removeClass('loader')
                     if data.used
-                        window.register_email_used = true
-                        $('#register-dialog-message').html("Пользователь с таким email уже существует")
+                        window.register_email_used = true   
+                        $('#register-dialog-message').html(
+                            'Пользователь с таким email уже существует<br>
+                             <a href="#" class="login-link">Пройдите авторизацию</a>')
                     else
                         window.register_email_used = false
                         check_register_dialog_fields()
         $('#register-dialog form input[name="user[email]"]').addClass('loader')
         window.register_email_timeout = setTimeout(check, 1000)
 
-    $('#register-dialog form').find('input[name="user[email]"], input[name=captcha]').on 'keyup change', ->
+    $('#register-dialog form').find('input[name="user[email]"], input[name=captcha]').on 'keyup', ->
         check_register_dialog_fields()
 
     $('#register-dialog form').on 'ajax:beforeSend', (event) ->
@@ -174,7 +180,7 @@ $ ->
             $('#login-dialog-message').html("Неправильный email или пароль")
         setTimeout(f, 1000)
 
-    $(document).on 'click', '.auth-required', (event) ->
+    $(document.body).on 'click', '.auth-required', (event) ->
         window.show_login_dialog()
         false
 
