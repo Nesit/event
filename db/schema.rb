@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20130201092028) do
+ActiveRecord::Schema.define(:version => 20130130154751) do
 
   create_table "active_admin_comments", :force => true do |t|
     t.string   "resource_id",   :null => false
@@ -268,7 +268,6 @@ ActiveRecord::Schema.define(:version => 20130201092028) do
     t.boolean  "event_notification",              :default => true,  :null => false
     t.boolean  "partner_notification",            :default => true,  :null => false
     t.boolean  "weekly_notification",             :default => true,  :null => false
-    t.boolean  "banned",                          :default => false, :null => false
   end
 
   add_index "users", ["activation_token"], :name => "index_users_on_activation_token"

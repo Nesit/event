@@ -47,6 +47,7 @@ class UsersController < ApplicationController
   def update_email
     @user = current_user
     @user.email = params[:email]
+    @user.state = 'need_info'
     @user.save!
     head :ok
   end
@@ -72,7 +73,8 @@ class UsersController < ApplicationController
       redirect_back_or_to root_path
     else
       @user = create_from(params[:provider])
-      @user.save!
+      @user.state = 'need_email' unless @user.email?
+      @user.save(validation: false)
       @user.activate!
       reset_session # protect from session fixation attack
       auto_login(@user)

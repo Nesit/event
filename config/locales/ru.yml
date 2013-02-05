@@ -8,6 +8,7 @@ ru:
   need_info: Неоходима информация
   complete: Все есть
   disabled: Отключен
+  banned: Забанен
   views:
     pagination:
       previous: '●'

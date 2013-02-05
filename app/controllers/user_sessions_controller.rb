@@ -1,6 +1,6 @@
 class UserSessionsController < ApplicationController
   authorize_resource class: false
-  
+
   def create
     @user = login(params[:email], params[:password], params[:remember])
     if @user = login(params[:email], params[:password], params[:remember])
@@ -9,7 +9,7 @@ class UserSessionsController < ApplicationController
       head :unprocessable_entity
     end
   end
-  
+
   def destroy
     logout
     redirect_back_or_to root_path

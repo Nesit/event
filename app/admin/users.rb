@@ -11,8 +11,7 @@ ActiveAdmin.register User do
   filter :name
   filter :company
   filter :city
-  filter :banned
-  filter :state, as: :select, collection: %w[need_email need_info complete disabled banned].
+  filter :state, as: :select, collection: %w[need_email need_info complete banned].
     map {|s| [I18n.t(s), s]}, include_blank: true
 
   controller do
@@ -20,6 +19,12 @@ ActiveAdmin.register User do
       params[:user].delete_if {|k,v| k == 'password'} if (params[:user][:password] && params[:user][:password].empty?)
       super
     end
+  end
+
+  member_action :banned, :method => :put do
+    user = User.find(params[:id])
+    user.banned!
+    redirect_to edit_admin_user_path(user), :notice => "Banned!"
   end
 
   index do
@@ -36,8 +41,9 @@ ActiveAdmin.register User do
     f.inputs "Основное" do
       f.input :name
       f.input :email
+      f.input :state, as: :select, collection: %w[need_email need_info complete banned].
+        map {|s| [I18n.t(s), s]}, include_blank: true, input_html: {disabled: true}
       f.input :avatar, :as => :file, :hint => f.template.image_tag(f.object.avatar.url)
-      f.input :banned, as: :select, collection: [['Да', true], ['Нет', false]], include_blank: false
       f.input :born_at
       f.input :gender_cd
       f.input :company
@@ -55,7 +61,11 @@ ActiveAdmin.register User do
     f.inputs 'Пароль' do
       f.input :password
     end
+    f.inputs 'Действия' do
+      link_to('Забанить', banned_admin_user_path(resource), method: :put) unless resource.banned?
+    end
     f.actions
+
   end
 
 end
