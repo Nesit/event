@@ -14,7 +14,7 @@ class ArticlesController < ApplicationController
       tag = ActsAsTaggableOn::Tag.find(params[:tag_id])
       @articles = @articles.tagged_with(tag)
     end
-    @articles = @articles.newer.page(params[:page]).per(10)
+    @articles = @articles.newer_published.page(params[:page]).per(10)
   end
 
   def show

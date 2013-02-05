@@ -21,6 +21,8 @@ class Article < ActiveRecord::Base
 
   scope :newer, order('articles.created_at DESC')
   scope :older, order('articles.created_at ASC')
+  scope :newer_published, order('articles.published_at DESC')
+  scope :older_published, order('articles.published_at ASC')
   scope :popular, order('articles.pageviews_count DESC')
   scope :without_tv, where('type <> ?', 'TvArticle')
 
