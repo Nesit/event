@@ -28,26 +28,20 @@
       <% unless @hide_top %>
 	<div id="header">
 	  <div id="utmost-left-block" class="left">
-	  	<div class="hidden">
-		    <div class="city-name left">МОСКВА</div>
-		    <div class="temperature right">+20</div>
-		    <%= image_tag(asset_path('samples/weather.png'), class: 'right') %>
-		    <div class="clear"></div>
-		</div>
-	    <div class="current-time"></div>
 	    <div class="current-date">
-	      <%= Russian.strftime(Date.today, "%e %B").capitalize %>,
-	      <span class="week-day"><%= Russian.strftime(Date.today, "%A") %></span>
+	      <%= Russian.strftime(Date.today, "%e %B %Y").capitalize %>
+	      <!-- span class="week-day"><%= Russian.strftime(Date.today, "%A") %></span -->
 	    </div>
+	   	<% if @site_config and @site_config.actual_article %>
+	    	<%= link_to @site_config.actual_article do %>
+				<div class="actual-today">Актуально сегодня:</div>
+				<p class="actual-today-desc"><%= @site_config.actual_article_description %></p>
+	      	<% end %>
+	    <% end %>
 	  </div>
 
 	  <div id="left-block" class="left">
-	    <% if @site_config and @site_config.actual_article %>
-	      <%= content_tag(:a, href: url_for(@site_config.actual_article)) do %>
-		<div class="actual-today">Актуально сегодня:</div>
-		<p><%= @site_config.actual_article_description %></p>
-	      <% end %>
-	    <% end %>
+
 	  </div>
 
 	  <div id="utmost-right-block" class="right">
@@ -63,15 +57,12 @@
       </div>
 
       <div id="right-block" class="right">
-	<% if issue = Issue.current %>
-	  Новый номер
-	  <%= link_to issue.name, '#', class: 'issue-link' %>
-	  <%= issue.to_s %>
-	  <%= link_to "Подписаться", new_subscription_path, class: 'subscribe-link' %>
-	<% end %>
       </div>
 
-      <%= link_to image_tag(asset_path('logo.png')), root_path, id: :logo %>
+      <div id="logo">
+	      <%= link_to image_tag(asset_path('logo.png')), root_path %>
+	      <p>Информационный портал event-индустриии</p>
+	  </div>
       <div class="clear"></div>
       <%= link_to image_tag(asset_path('subscribe_aside.png')), new_subscription_path, class: 'subscribe-aside-link' %>
       <div id="left-banner">

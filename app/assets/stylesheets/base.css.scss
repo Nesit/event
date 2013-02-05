@@ -99,48 +99,7 @@ a {
 	margin-top: 50px;
 
 	#utmost-left-block {
-		width: 150px;
-		margin-top: 40px;
-
-		.city-name {
-			color: $weather-city-fg-color;
-			@include sans-serif;
-			font-size: 10pt;
-			line-height: 28px;	
-		}
-
-		.temperature {
-			@include sans-serif;
-			font-size: 10pt;
-			font-style: oblique;
-			color: $purple-color;
-			line-height: 28px;
-		}
-
-		.current-time {
-			@include sans-serif2;
-			font-size: 10pt;
-			line-height: 20px;
-			color: $purple-color;
-			height: 20px;
-			width: 110px;
-		}
-
-		.current-date {
-			@include serif;
-			font-size: 10pt;
-			font-weight: bold;
-			.week-day {
-				font-weight: normal;
-			}
-		}
-	}
-
-	#left-block {
 		width: 160px;
-		margin-top: 23px;
-		position: relative;
-		left: 23px; // temporary, until weather block is fixed
 
 		a { text-decoration: none; }
 		.actual-today {
@@ -154,54 +113,67 @@ a {
 			@include sans-serif;
 			font-size: 10pt;
 			font-size: 13px;
-			color: $text-color;
+			color: $header-grey-color;
 		}
 		p:hover {
 			color: $purple-color;
 		}
+
+		.current-date {
+			@include sans-serif;
+			font-size: 10pt;
+			font-weight: bold;
+			margin: 10px 0;
+			color: $header-grey-color2;
+			.week-day {
+				font-weight: normal;
+			}
+		}
+	}
+
+	#left-block {
+		width: 160px;
+		margin-top: 23px;
+		position: relative;
+		left: 23px;
 	}
 
 	#logo {
 		display: block;
 		margin: 0 auto;
-		width: 252px;
+		width: 270px;
+
+		img {
+			margin-left: 10px;
+			margin-top: 10px;
+		}
+
+		p {
+			font-size: 10pt;
+			color: $header-grey-color2;
+			@include sans-serif;
+		}
 	}
 
 	#right-block {
 		width: 140px;
+		height: 120px;
 		position: relative;
 		right: 21px;
-		top: 25px;
 
-		@include sans-serif2;
-		font-size: 10pt;
-		text-transform: uppercase;
-		line-height: 1.3em;
-		.issue-link {
-			text-decoration: none;
-			display: block;
-			color: $purple-color;
-		}
-
-		.subscribe-link {
-			font-weight: normal;
-			text-decoration: underline;
-			display: block;
-			font-size: 8pt;
-			color: $header-subscribe-fg-color;
-		}
-		.subscribe-link:hover {
-			color: $purple-color;
-		}
+		background-image: asset-url("head_cover.png", image);
+		background-repeat: no-repeat;
+		background-position: center bottom;
 	}
 
 	#utmost-right-block {
-		margin-top: 36px;
+		margin-top: 20px;
 		width: 170px;
 
 		#search-form {
 			border: 1px solid $grey-border-color;
 			padding: 1px 3px;
+			margin-top: 15px;
 			@include border-radius(5px, 5px);
 
 			input[name=query] {
