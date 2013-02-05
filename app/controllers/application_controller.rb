@@ -18,6 +18,29 @@ class ApplicationController < ActionController::Base
     slug.split('-').last.to_i
   end
 
+  rescue_from "Exception" do
+    respond_to do |format|
+      format.html { render 'home/page500', status: 500 }
+    end
+  end
+
+  error404classes = [
+    "ActiveRecord::RecordNotFound",
+    "AbstractController::ActionNotFound",
+    "ActionController::RoutingError"
+  ]
+  rescue_from(*error404classes) do
+    respond_to do |format|
+      format.html { render 'home/page404', status: 404 }
+    end
+  end
+
+  rescue_from "CanCan::AccessDenied" do
+    respond_to do |format|
+      format.html { render 'home/page403', status: 403 }
+    end
+  end
+
   protected
 
   def check_need_email
