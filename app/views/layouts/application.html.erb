@@ -148,7 +148,7 @@
 		
 		<div class="bottom-menu left">
 			<% Page.all.each do |page| %>
-				<%= link_to page.name, page %>
+				<%= slugged_link_to page.name, page %>
 			<% end %>
 		</div>
 		<div class="bottom-description right">
