@@ -7,4 +7,13 @@ class HomeController < ApplicationController
     @articles = Article.without_tv.newer.page(params[:page]).per(10)
     render template: 'articles/index'
   end
+
+  def page500
+  end
+
+  def page404
+  end
+
+  def page403
+  end
 end

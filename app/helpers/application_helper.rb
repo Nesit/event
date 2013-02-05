@@ -12,9 +12,8 @@ module ApplicationHelper
   end
 
   def slugged_link_to(content, object, *args)
-    sym = object.class.name.underscore.pluralize
-    index_path = send("#{sym}_path")
-    path = "#{index_path}/#{object.title.parameterize}-#{object.id}"
+    sym = object.class.name.underscore
+    path = send("#{sym}_path", id: "#{object.title.parameterize}-#{object.id}")
     link_to(content, path, *args)
   end
 end
