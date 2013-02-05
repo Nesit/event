@@ -161,9 +161,11 @@ a {
 		position: relative;
 		right: 21px;
 
-		background-image: asset-url("head_cover.png", image);
-		background-repeat: no-repeat;
-		background-position: center bottom;
+		a {
+			display: block;
+			margin-top: 42px;
+			margin-left: 15px;
+		}
 	}
 
 	#utmost-right-block {
