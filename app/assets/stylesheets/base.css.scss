@@ -122,7 +122,7 @@ a {
 
 		.current-date {
 			@include sans-serif;
-			font-size: 10pt;
+			font-size: 11pt;
 			font-weight: bold;
 			margin-bottom: 12px;
 			.week-day {
@@ -141,7 +141,7 @@ a {
 	#logo {
 		display: block;
 		margin: 0 auto;
-		width: 270px;
+		width: 300px;
 
 		img {
 			margin-left: 10px;
@@ -164,13 +164,13 @@ a {
 		a {
 			display: block;
 			margin-top: 42px;
-			margin-left: 15px;
+			margin-left: 30px;
 		}
 	}
 
 	#utmost-right-block {
 		margin-top: 20px;
-		width: 170px;
+		width: 185px;
 
 		#search-form {
 			border: 1px solid $grey-border-color;
