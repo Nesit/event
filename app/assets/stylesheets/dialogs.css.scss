@@ -14,7 +14,7 @@
 	}
 }
 
-#login-dialog, #register-dialog, #subscribe-dialog, #email-dialog {
+#login-dialog, #register-dialog, #register-thanks-dialog, #subscribe-dialog, #email-dialog {
 	@include sans-serif;
 
 	width: 500px;
@@ -69,7 +69,7 @@
 	}
 }
 
-#login-dialog, #register-dialog, #subscribe-dialog, #email-dialog {
+#login-dialog, #register-dialog, #register-thanks-dialog, #subscribe-dialog, #email-dialog {
 	position: fixed;
 	margin-left: -250px;
 	margin-top: -200px;
@@ -182,5 +182,17 @@
 
 	#email-dialog-message {
 		margin: 20px 0;
+	}
+}
+
+#register-thanks-dialog {
+	h2 {
+		color: $grey-text-color;
+		font-size: 16px;
+	}
+
+	h2, p {
+		width: 300px;
+		margin: 30px auto;
 	}
 }

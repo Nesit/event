@@ -1,5 +1,4 @@
 class Article < ActiveRecord::Base
-  
   mount_uploader :head_image, ArticleHeadImageUploader
   has_many :galleries, class_name: 'ArticleGallery'
 
@@ -24,7 +23,6 @@ class Article < ActiveRecord::Base
   scope :older, order('articles.created_at ASC')
   scope :popular, order('articles.pageviews_count DESC')
   scope :without_tv, where('type <> ?', 'TvArticle')
-  scope :open, where(closed: false)
 
   def record_pageview!
     self.pageviews_count += 1
