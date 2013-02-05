@@ -21,6 +21,7 @@
 		font-weight: normal;
 		@include sans-serif;
 		font-size: 10pt;
+		color: $header-grey-color;
 	}
 
 	.logout-link:hover,
