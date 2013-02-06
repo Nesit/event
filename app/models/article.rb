@@ -8,12 +8,11 @@ class Article < ActiveRecord::Base
   before_validation :ensure_published_date
 
   validates :title, :body, :short_description, :list_item_description,
-            :head_image, :published_at, presence: true
-  validates :type, presence: true
+            :head_image, :published_at, :type, presence: true
 
   attr_accessible :body, :title, :head_image, :list_item_description,
-    :short_description, :target_at, :author_id, :issue_id, :closed,
-    :closed_body, :published_at
+                  :short_description, :target_at, :author_id, :issue_id, :closed,
+                  :closed_body, :published_at, :published
 
   has_many :comments, as: :topic
   belongs_to :author, class_name: 'ArticleAuthor'
@@ -25,6 +24,7 @@ class Article < ActiveRecord::Base
   scope :older_published, order('articles.published_at ASC')
   scope :popular, order('articles.pageviews_count DESC')
   scope :without_tv, where('type <> ?', 'TvArticle')
+  scope :published, where(published: true)
 
   def record_pageview!
     self.pageviews_count += 1
