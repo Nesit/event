@@ -71,6 +71,17 @@ ru:
     TvArticle: "TV"
 
   activerecord:
+    enums:
+      city:
+        countries:
+          russia: "Россия"
+          belarus: "Белоруссия"
+          ukraine: "Украина"
+          moldavia: "Молдавия"
+          poland: "Польша"
+          lithuania: "Литва"
+          latvia: "Латвия"
+          khazakhstan: "Казахстан"
     attributes:
       site_config:
         actual_article: "статья"

@@ -12,7 +12,7 @@
 					<div class="field">
 						<%= f.label :name, "Имя*", class: 'left' %>
 						<div class="input-line left">
-							<%= f.text_field :name, 'data-placeholder' => "Введите ваше имя" %>
+							<%= f.text_field :name, 'data-placeholder' => "Введите ваше имя", class: 'required' %>
 							<div id="user-ensure-name-message" class="hidden"></div>
 						</div>
 						<div class="description left">
@@ -43,7 +43,7 @@
 					<div class="field">
 						<%= f.label :born_at, "Дата рождения*", class: 'left' %>
 						<div class="input-line left">
-							<%= f.date_select :born_at %>
+							<%= f.date_select :born_at, { start_year: (Time.now.year-16), end_year: (Time.now.year-75), prompt: { year: "Год", month: "Месяц", day: "День" } }, { class: 'required' } %>
 						</div>
 						<div class="description left"></div>
 						<div class="clear"></div>
@@ -57,7 +57,7 @@
 								<%= link_to "Женский", '#', class: (@user.gender == :female ? 'active' : ''), 'data-value' => 2 %>
 								<div class="clear"></div>
 							</div>
-							<%= f.hidden_field :gender_cd %>
+							<%= f.hidden_field :gender_cd, class: 'required' %>
 						</div>
 						<div class="description left"></div>
 						<div class="clear"></div>
@@ -66,7 +66,7 @@
 					<div class="field">
 						<%= f.label :company, "Компания*", class: 'left' %>
 						<div class="input-line left">
-							<%= f.text_field :company, 'data-placeholder' => "Введите название компании" %>
+							<%= f.text_field :company, 'data-placeholder' => "Введите название компании", class: 'required' %>
 							<div id="user-ensure-name-message" class="hidden"></div>
 						</div>
 						<div class="description left"></div>
@@ -76,7 +76,7 @@
 					<div class="field">
 						<%= f.label :position, "Должность*", class: 'left' %>
 						<div class="input-line left">
-							<%= f.text_field :position, 'data-placeholder' => "Введите вашу должность" %>
+							<%= f.text_field :position, 'data-placeholder' => "Введите вашу должность", class: 'required' %>
 							<div id="user-ensure-name-message" class="hidden"></div>
 						</div>
 						<div class="description left"></div>
@@ -86,7 +86,7 @@
 					<div class="field">
 						<%= f.label :website, "Веб-сайт*", class: 'left' %>
 						<div class="input-line left">
-							<%= f.text_field :website, 'data-placeholder' => "Введите адрес веб-сайта" %>
+							<%= f.text_field :website, 'data-placeholder' => "Введите адрес веб-сайта", class: 'required' %>
 							<div id="user-ensure-name-message" class="hidden"></div>
 						</div>
 						<div class="description left"></div>
@@ -100,7 +100,7 @@
 							<div id="user-ensure-name-message" class="hidden"></div>
 						</div>
 						<div class="description left">
-							Введите ваш телефон в формате +7 916 123 11 22
+							Введите ваш телефон в формате<br />+7 916 123 11 22
 						</div>
 						<div class="clear"></div>
 					</div>

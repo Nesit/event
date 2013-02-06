@@ -2,12 +2,30 @@ $ ->
     # global var where stored fetched lists of cities
     window.cities = {}
 
+    check_for_required_fields = ->
+        all_filled = true
+        $('#user-profile-form .required').map (i, e) ->
+            value = $(e).val()
+            if value == "" || value == undefined || value == null
+                all_filled = false
+                return
+        if all_filled
+            $('#user-profile-form .notice').css('visibility', 'hidden')
+        else
+            $('#user-profile-form .notice').css('visibility', 'visible')
+
     setup_city_select = (country_cd) ->
         html_parts = []
         for city in window.cities[country_cd]
             html_parts.push "<option value=\"#{city.id}\">#{city.name}</option>"
         $('#user-profile-form select[name="user[city_id]"]').html(html_parts.join())
-        $('#user-profile-form select[name="user[city_id]"]').trigger("liszt:updated");
+        $('#user-profile-form select[name="user[city_id]"]').trigger("liszt:updated")
+        $('#user-profile-form select[name="user[city_id]"]').addClass("required")
+        $('#user-profile-form .chzn-container').on 'click keyup', ->
+            check_for_required_fields()
+
+    $(document).on 'change', '#user-profile-form .required', ->
+        check_for_required_fields()
 
     $('#user-profile-form select[name="user[new_country_cd]"]').on 'change', (event) ->
         country_cd = $(this).val()
@@ -46,6 +64,8 @@ $ ->
     $('#user-profile-form input[name="user[name]"]').on 'keyup', (event) ->
         return if window.ensureNameLock
         window.ensureNameLock = true
+        $input = $(this)
+        $input.addClass('loader')
         func = =>
             $.ajax
                 url: '/profile/name.json'
@@ -59,6 +79,7 @@ $ ->
                         $('#user-ensure-name-message').html("Имя уже используется")
                 complete: ->
                     window.ensureNameLock = false
+                    $input.removeClass('loader')
         setTimeout(func, 1000)
 
     $('#user-profile-form .profile-gender-select a').on 'click', (event) ->
