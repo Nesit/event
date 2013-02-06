@@ -19,7 +19,10 @@ class ApplicationController < ActionController::Base
   end
 
   unless Rails.env.development?
-    rescue_from "Exception" do
+    rescue_from "Exception" do |exception|
+      ExceptionNotifier::Notifier
+        .exception_notification(request.env, exception).deliver
+      
       respond_to do |format|
         format.html { render 'home/page500', status: 500 }
       end
