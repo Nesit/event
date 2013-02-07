@@ -54,62 +54,6 @@ class User < ActiveRecord::Base
     state 'disabled'
   end
 
-  # unfortunately sorcery creates new accounts without validation
-  # so it's possible to have several accounts with same email in database
-  # maximum 3 (vk + fb + usual email based)
-  # 
-  # this method used to merge one account into another
-  def merge_other!(other)
-    other.authentications.each do |auth|
-      auth.user_id = self.id
-      auth.save!
-    end
-    authentications.reload!
-
-    other.subscriptions.each do |sub|
-      sub.user_id = self.id
-      sub.save!
-    end
-    subscriptions.reload!
-
-    other.comments.each do |comment|
-      comment.author_id = self.id
-      comment.save!
-    end
-    comments.reload!
-
-    unless crypted_password
-      self.crypted_password = other.crypted_password
-      self.salt = other.salt
-    end
-
-    if activation_state != 'active' and other.activation_state == 'active'
-      self.activation_state = 'active'
-    end
-
-    self.name ||= other.name
-
-
-
-    # TODO avatar
-
-    # TODO
-
-    other.destroy
-  end
-
-  def merge_other_with_same_email!
-    User.where('id <> ?', id).where(email: email).each do |other|
-      self.merge_other!(other)
-    end
-
-    setup_activation if user.activation_state != 'active'
-  end
-
-  def with_unique_email?
-    User.where(email: email).count == 1
-  end
-
   def free_name?(name)
     query = name.gsub('%', '\%').gsub('_', '\_')
     not User.where("id <> ?", id).where("name LIKE ?", query).any?
