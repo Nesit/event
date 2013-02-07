@@ -3,7 +3,6 @@
     <%= f.input :title %>
     <%= f.input :author %>
     <%= f.input :issue %>
-    <%= f.input :closed %>
     <%= f.input :published, as: :select, collection: [['Да', true],['Нет', false]], include_blank: false %>
     <%= f.input :head_image unless resource.kind_of? TvArticle %>
     <%= f.input :head_video_url, required: true if resource.kind_of? TvArticle %>
@@ -20,6 +19,7 @@
   <% end %>
 
   <%= f.inputs "Превью" do %>
+    <%= f.input :closed %>
     <%= f.input :closed_body, as: :html_editor, input_html: { style: 'height: 525px;'} %>
   <% end %>
 
