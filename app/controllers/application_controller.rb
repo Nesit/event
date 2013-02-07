@@ -20,8 +20,10 @@ class ApplicationController < ActionController::Base
 
   unless Rails.env.development?
     rescue_from "Exception" do |exception|
-      ExceptionNotifier::Notifier
-        .exception_notification(request.env, exception).deliver
+      if Rails.env.production? or Rails.env.staging?
+        ExceptionNotifier::Notifier
+          .exception_notification(request.env, exception).deliver
+      end
       
       respond_to do |format|
         format.html { render 'home/page500', status: 500 }
@@ -30,7 +32,7 @@ class ApplicationController < ActionController::Base
     error404classes = [
       "ActiveRecord::RecordNotFound",
       "AbstractController::ActionNotFound",
-      "ActionController::RoutingError"
+      "ActionController::RoutingError",
     ]
     rescue_from(*error404classes) do
       respond_to do |format|
