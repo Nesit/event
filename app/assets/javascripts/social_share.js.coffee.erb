@@ -16,7 +16,7 @@ $ ->
 
     $('.social-share-line a').on 'click', ->
         $item = $(this)
-        social = $item.attr('class')
+        social = $item.attr('data-kind')
         id = $item.parent().attr('data-id')
         kind = $item.parent().attr('data-kind')
         $.ajax

@@ -157,7 +157,7 @@ $ ->
     $('#register-dialog form').on 'ajax:error', (event, data) ->
         $el = $(data.responseText)
         captcha_src = $el.find('img[alt=captcha]').attr('src')
-        $('#register-dialog form img').attr('src', captcha_src)
+        $('#register-dialog form img[alt=captcha]').attr('src', captcha_src)
         $('#register-dialog-message').html("Неправильно введён код с картинки")
 
     $('#login-dialog form').on 'ajax:beforeSend', (event) ->

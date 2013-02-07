@@ -70,7 +70,7 @@ Rails.application.config.sorcery.configure do |config|
   # What providers are supported by this app, i.e. [:twitter, :facebook, :github, :google, :liveid] .
   # Default: `[]`
   #
-  config.external_providers = [:facebook, :vkontakte]
+  config.external_providers = [:facebook, :vk]
 
 
   # You can change it by your local ca_file. i.e. '/etc/pki/tls/certs/ca-bundle.crt'
@@ -98,11 +98,12 @@ Rails.application.config.sorcery.configure do |config|
   }
 
   
-  config.vkontakte.key = "3286894"
-  config.vkontakte.secret = "UwMhWfA1Bl5sjZfAIwee"
-  config.vkontakte.callback_url = "http://event.ru/users/callback?provider=vkontakte"
-  config.vkontakte.user_info_mapping = {
+  config.vk.key = "3286894"
+  config.vk.secret = "UwMhWfA1Bl5sjZfAIwee"
+  config.vk.callback_url = "http://event.ru/users/callback?provider=vk"
+  config.vk.user_info_mapping = {
     # attribute: user_hash.property
+    name: "full_name",
     # vkontakte doesn't provide emails =(
   }
 
