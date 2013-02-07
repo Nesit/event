@@ -67,4 +67,6 @@ EventRu::Application.routes.draw do
   end
 
   root to: 'home#show'
+
+  match '*any' => 'home#page404'
 end
