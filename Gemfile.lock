@@ -1,14 +1,4 @@
 GIT
-  remote: git://github.com/Fodoj/sorcery.git
-  revision: f4c22e6a8c995d3498606736d05bab64dd6bc18a
-  ref: f4c22e6a8c995d3498606736d05bab64dd6bc18a
-  specs:
-    sorcery (0.7.13)
-      bcrypt-ruby (~> 3.0.0)
-      oauth (~> 0.4.4)
-      oauth2 (~> 0.7.1)
-
-GIT
   remote: git://github.com/chriseppstein/compass.git
   revision: 0930869f7b10803f85222aa65510b4cd5c84ac2a
   branch: css3
@@ -195,6 +185,8 @@ GEM
       railties (>= 3.0, < 5.0)
       thor (>= 0.14, < 2.0)
     json (1.7.6)
+    jwt (0.1.5)
+      multi_json (>= 1.0)
     kaminari (0.14.1)
       actionpack (>= 3.0.0)
       activesupport (>= 3.0.0)
@@ -226,11 +218,12 @@ GEM
     multipart-post (1.1.5)
     nokogiri (1.5.5)
     oauth (0.4.7)
-    oauth2 (0.7.1)
+    oauth2 (0.8.0)
       faraday (~> 0.8)
       httpauth (~> 0.1)
+      jwt (~> 0.1.4)
       multi_json (~> 1.0)
-      rack (~> 1.4)
+      rack (~> 1.2)
     orm_adapter (0.4.0)
     pg (0.14.1)
     polyamorous (0.5.0)
@@ -302,6 +295,10 @@ GEM
       multi_json (~> 1.0)
       simplecov-html (~> 0.7.1)
     simplecov-html (0.7.1)
+    sorcery (0.8.1)
+      bcrypt-ruby (~> 3.0.0)
+      oauth (~> 0.4.4)
+      oauth2 (~> 0.8.0)
     sprockets (2.2.2)
       hike (~> 1.2)
       multi_json (~> 1.0)
@@ -391,7 +388,7 @@ DEPENDENCIES
   sass-rails (~> 3.2.3)
   sextant
   simple_enum
-  sorcery!
+  sorcery (~> 0.8.1)
   sqlite3
   state_machine
   therubyracer

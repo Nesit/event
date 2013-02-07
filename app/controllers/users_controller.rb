@@ -11,8 +11,6 @@ class UsersController < ApplicationController
 
   def create
     if valid_captcha?(params[:captcha])
-      # remove all other pending activations
-      User.where(activation_state: 'pending', email: params[:user][:email]).delete_all
       @user = User.new(params[:user])
       @user.save!
       head :ok
@@ -71,9 +69,50 @@ class UsersController < ApplicationController
       auto_login(@user)
       redirect_back_or_to root_path
     else
-      @user = create_from(params[:provider])
+      previous_user = nil
+      @user = create_from(params[:provider]) do |user|
+        if user.valid? # service provides email, and it was unique, all is ok
+          true
+        elsif user.email.blank?
+          # email is blank and user will get email request dialog,
+          # so problem with email collision will be solved later
+          true
+        else
+          # account with this email is already exists
+          previous_user = User.where(email: @user.email).first
+
+          # if registered account still doesn't activated via email
+          # and doesn't binded to any of the social network
+          # then probably specified email doesn't belong to that user
+          # or belongs to this person. Anyway, can be safely removed
+          if previous_user.activation_state == 'pending' and not previous_user.authentications.any?
+            previous_user.destroy
+            previous_user = nil
+            true
+          else
+            # we need to copy sensetive data from here
+            # and skip creation of this account
+            previous_user.name ||= @user.name
+
+            provider_name = params[:provider].to_sym
+            provider = Sorcery::Controller::Config.send(provider_name)
+            user_hash = provider.get_user_hash
+
+            # provider_name and user_hash variables are defined in create_from method in sorcery
+            previous_user.authentications.create!(provider: provider_name, uid: user_hash[:uid])
+            false # do not create social user account, we already copied all info
+          end
+        end
+      end
+
+      # if there were previous user,
+      # then that means that we didn't created new account
+      # just updated old one
+      unless previous_user.nil?
+        @user = previous_user
+      end
+
       @user.save!
-      @user.activate!
       reset_session # protect from session fixation attack
       auto_login(@user)
       redirect_back_or_to root_path

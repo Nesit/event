@@ -11,6 +11,8 @@ class User < ActiveRecord::Base
   validates :email,
     presence: true, format: /.+\@.+\..+/,
     unless: proc { state.to_sym == :need_email }
+
+  # email should be unique or be nil
   validates :email, uniqueness: { scope: :state }, unless: proc { email.blank? }
   
   validates :password, presence: true, if: proc { crypted_password.blank? }
@@ -20,6 +22,7 @@ class User < ActiveRecord::Base
   before_validation :process_new_city
   before_validation :ensure_uniqueness_name
   before_validation :select_state
+  before_validation :delete_all_other_pending, if: proc { activation_state == 'pending' }
 
   attr_accessor :new_city, :new_country_cd
 
@@ -32,7 +35,7 @@ class User < ActiveRecord::Base
 
   has_many :authentications, dependent: :destroy
   has_many :comments, foreign_key: :author_id
-  has_many :subscriptions
+  has_many :subscriptions, dependent: :destroy
   belongs_to :city
 
   accepts_nested_attributes_for :city
@@ -41,13 +44,70 @@ class User < ActiveRecord::Base
 
   as_enum :gender, male: 1, female: 2
 
-  scope :activated, where(activation_state: 'active')
+  scope :activated, where(activation_state: ['active', nil])
+  scope :pending, where(activation_state: 'pending')
 
   state_machine initial: 'need_info' do
     state 'need_email'
     state 'need_info'
     state 'complete'
     state 'disabled'
+  end
+
+  # unfortunately sorcery creates new accounts without validation
+  # so it's possible to have several accounts with same email in database
+  # maximum 3 (vk + fb + usual email based)
+  # 
+  # this method used to merge one account into another
+  def merge_other!(other)
+    other.authentications.each do |auth|
+      auth.user_id = self.id
+      auth.save!
+    end
+    authentications.reload!
+
+    other.subscriptions.each do |sub|
+      sub.user_id = self.id
+      sub.save!
+    end
+    subscriptions.reload!
+
+    other.comments.each do |comment|
+      comment.author_id = self.id
+      comment.save!
+    end
+    comments.reload!
+
+    unless crypted_password
+      self.crypted_password = other.crypted_password
+      self.salt = other.salt
+    end
+
+    if activation_state != 'active' and other.activation_state == 'active'
+      self.activation_state = 'active'
+    end
+
+    self.name ||= other.name
+
+
+
+    # TODO avatar
+
+    # TODO
+
+    other.destroy
+  end
+
+  def merge_other_with_same_email!
+    User.where('id <> ?', id).where(email: email).each do |other|
+      self.merge_other!(other)
+    end
+
+    setup_activation if user.activation_state != 'active'
+  end
+
+  def with_unique_email?
+    User.where(email: email).count == 1
   end
 
   def free_name?(name)
@@ -79,7 +139,21 @@ class User < ActiveRecord::Base
     end
   end
 
+  def ensure_password
+    if crypted_password.blank? and password.blank?
+      self.password = SecureRandom.hex(4)
+    end
+  end
+
   private
+
+  def delete_all_other_pending
+    if new_record?
+      User.pending.where(email: email).delete_all
+    else
+      User.pending.where('id <> ?', id).where(email: email).delete_all
+    end
+  end
 
   def select_state
     complete = true
@@ -97,12 +171,6 @@ class User < ActiveRecord::Base
     else
       self.state = 'need_info'
     end  
-  end
-
-  def ensure_password
-    if crypted_password.blank? and password.blank?
-      self.password = SecureRandom.hex(4)
-    end
   end
 
   # use separate validator instead of uniqueness: true
