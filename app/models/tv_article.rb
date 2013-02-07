@@ -11,7 +11,7 @@ class TvArticle < Article
     presence: true,
     inclusion: { in: ['youtube', 'vimeo'] }
 
-  scope :published, where(published: true)
+  scope :published, lambda{ where(published: true) }
 
   def head_video_url
     case
