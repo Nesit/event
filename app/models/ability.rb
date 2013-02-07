@@ -5,6 +5,7 @@ class Ability
     # for guest
 
     can :show, :home
+    can :none, :home
     can :page404, :home
 
     # to be able log in

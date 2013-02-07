@@ -16,4 +16,8 @@ class HomeController < ApplicationController
 
   def page403
   end
+
+  def none
+    head :ok
+  end
 end

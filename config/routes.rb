@@ -68,5 +68,8 @@ EventRu::Application.routes.draw do
 
   root to: 'home#show'
 
+  # to make exception notifier silent for /none.png requests
+  match 'none' => 'home#none'
+  
   match '*any' => 'home#page404'
 end
