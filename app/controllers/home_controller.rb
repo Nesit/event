@@ -18,6 +18,6 @@ class HomeController < ApplicationController
   end
 
   def none
-    head :ok
+    head :not_found
   end
 end
