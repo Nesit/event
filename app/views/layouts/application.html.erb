@@ -2,7 +2,7 @@
 <html>
   <head>
     <% @seo_tags = {} if @seo_tags.nil? %>
-    <title><%= @seo_tags[:title] %></title>
+    <title><%= @seo_tags[:title] or 'Event' %></title>
     <meta name="description" content="<%= @seo_tags[:description] %>">
     <meta name="keywords" content="<%= @seo_tags[:keywords] %>">
 
