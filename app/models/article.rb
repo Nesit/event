@@ -1,3 +1,5 @@
+# encoding: utf-8
+
 class Article < ActiveRecord::Base
   mount_uploader :head_image, ArticleHeadImageUploader
   has_many :galleries, class_name: 'ArticleGallery'
@@ -25,6 +27,9 @@ class Article < ActiveRecord::Base
   scope :popular, order('articles.pageviews_count DESC')
   scope :without_tv, where('type <> ?', 'TvArticle')
   scope :published, where(published: true)
+
+  extend FriendlyId
+  friendly_id :title, use: :slugged
 
   def record_pageview!
     self.pageviews_count += 1

@@ -12,7 +12,7 @@
 				<div class="icon left"></div>
 				<span class="month-day-date"><%= Russian.strftime(event_article.target_at, "%d/%m") %></span>
 				<span class="week-day"><%= Russian.strftime(event_article.target_at, "%a") %></span>
-				<%= slugged_link_to event_article.title, event_article, class: 'afisha-link' %>
+				<%= link_to event_article.title, event_article, class: 'afisha-link' %>
 			</div>
 		<% end %>
 	</div>

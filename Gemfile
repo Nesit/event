@@ -29,6 +29,8 @@ gem 'easy_captcha'
 gem 'unicorn'
 gem 'activemerchant', require: 'active_merchant'
 
+gem 'friendly_id', '~> 4.0.9'
+
 gem 'acts-as-taggable-on', '~> 2.3.1'
 
 group :assets do
