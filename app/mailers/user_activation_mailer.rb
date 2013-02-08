@@ -3,14 +3,22 @@
 class UserActivationMailer < ActionMailer::Base
   def activation_needed_email(user)
     @user = user
-    mail(to: user.email, subject: "event.ru - Активация учётной записи") do |format|
+    mail(to: user.email, subject: "Event.ru - Активация учётной записи") do |format|
       format.html
       format.text 
     end
   end
 
   def activation_success_email(user)
-    mail(to: user.email, subject: "event.ru - Учётная запись успешно активированна") do |format|
+    mail(to: user.email, subject: "Event.ru - Учётная запись успешно активированна") do |format|
+      format.html
+      format.text 
+    end
+  end
+
+  def merge_need_email(user, email)
+    @user = user
+    mail(to: email, subject: "Event.ru - Подтверждение объединения учётных записей") do |format|
       format.html
       format.text 
     end

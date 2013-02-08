@@ -55,7 +55,17 @@ class UsersController < ApplicationController
       auto_login(@user)
       redirect_to root_path
     else
-      not_authenticated
+      raise "activation token expired or invalid"
+    end
+  end
+
+  def merge
+    if @user = User.load_from_merge_token(params[:token])
+      @user.merge_with_other!
+      auto_login(@user)
+      redirect_to root_path
+    else
+      raise "merge token expired or invalid"
     end
   end
 

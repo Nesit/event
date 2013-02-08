@@ -56,6 +56,7 @@ EventRu::Application.routes.draw do
 
   get 'users/oauth' => 'users#oauth', as: :oauth_login
   get 'users/activate' => 'users#activate', as: :activate_user
+  get 'users/merge' => 'users#merge', as: :merge_user
   get 'users/callback' => 'users#oauth_callback'
 
   resources :robokassa_payments, only: [] do

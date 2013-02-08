@@ -12,6 +12,8 @@ class User < ActiveRecord::Base
     presence: true, format: /.+\@.+\..+/,
     unless: proc { state.to_sym == :need_email }
 
+  validates :merge_email, format: /.+\@.+\..+/, if: proc { merge_email.present? }
+
   # email should be unique or be nil
   validates :email, uniqueness: { scope: :state }, unless: proc { email.blank? }
   
@@ -52,6 +54,24 @@ class User < ActiveRecord::Base
     state 'need_info'
     state 'complete'
     state 'disabled'
+  end
+
+  # this method generates merge token and sends emails with link
+  def setup_record_merge!(email)
+    self.merge_token = SecureRandom.hex(10)
+    self.merge_email = email
+    self.merge_token_expires_at = DateTime.now + 2.days
+    self.save!
+    UserActivationMailer.merge_need_email(user, email).deliver
+  end
+
+  def self.load_from_merge_token(token)
+    User.where(merge_token: token)
+        .where('merge_token_expires_at < ?', DateTime.now).first
+  end
+
+  def merge_with_other!
+    User.where('activation_state <> ?', 'pending').where(email: email)
   end
 
   def free_name?(name)
