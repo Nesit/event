@@ -11,7 +11,7 @@ class BasicImageUploader < CarrierWave::Uploader::Base
   storage :file
 
   def default_url
-    "/none.png"
+    "/none"
   end
 
   # hack to make fallback url work
