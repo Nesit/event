@@ -113,14 +113,6 @@
 	}
 }
 
-#register-dialog, #login-dialog, #subscribe-dialog {
-	input[type=email].loader {
-		background-image: asset-url("small_loader.gif", image);
-		background-position: 98% 50%;
-		background-repeat: no-repeat;
-	}
-}
-
 #login-dialog {
 	.reset-password-link {
 		font-weight: normal;
