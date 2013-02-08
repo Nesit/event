@@ -15,12 +15,15 @@ class HomeController < ApplicationController
   end
 
   def page500
+    params[:format] = :html
   end
 
   def page404
+    params[:format] = :html
   end
 
   def page403
+    params[:format] = :html
   end
 
   def none
