@@ -36,7 +36,7 @@ class SubscriptionsController < ApplicationController
 
       @user.subscriptions.create!(params[:subscription])
     else
-      head :unprocessable_entity
+      raise "invalid captcha"
     end
   end
 
