@@ -3,6 +3,8 @@
 class HomeController < ApplicationController
   authorize_resource class: false
 
+  layout 'error_page', only: [:page404, :page403, :page500]
+
   def show
     @carousel_articles = Article.without_tv.newer_published.first(5)
     @afisha_articles = EventArticle.newer_targeted.first(6)
@@ -13,12 +15,15 @@ class HomeController < ApplicationController
   end
 
   def page500
+    params[:format] = :html
   end
 
   def page404
+    params[:format] = :html
   end
 
   def page403
+    params[:format] = :html
   end
 
   def none

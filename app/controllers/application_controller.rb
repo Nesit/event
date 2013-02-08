@@ -14,11 +14,7 @@ class ApplicationController < ActionController::Base
 
   after_filter :check_need_email
 
-  def extract_id_from_slug(slug)
-    slug.split('-').last.to_i
-  end
-
-  unless Rails.env.development?
+  if Rails.env.development?
     rescue_from "Exception" do |exception|
       if Rails.env.production? or Rails.env.staging?
         ExceptionNotifier::Notifier
@@ -26,7 +22,7 @@ class ApplicationController < ActionController::Base
       end
       
       respond_to do |format|
-        format.html { render 'home/page500', status: 500 }
+        format.html { render 'home/page500', layout: 'error_page', status: 500 }
       end
     end
     error404classes = [
@@ -36,12 +32,12 @@ class ApplicationController < ActionController::Base
     ]
     rescue_from(*error404classes) do
       respond_to do |format|
-        format.html { render 'home/page404', status: 404 }
+        format.html { render 'home/page404', layout: 'error_page', status: 404 }
       end
     end
     rescue_from "CanCan::AccessDenied" do
       respond_to do |format|
-        format.html { render 'home/page403', status: 403 }
+        format.html { render 'home/page403', layout: 'error_page', status: 403 }
       end
     end
   end

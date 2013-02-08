@@ -34,7 +34,7 @@
 		<div class="video-items">
 			<% TvArticle.newer.flatten.first(3).each do |article| %>
 				<div class="video-item left">
-					<%= slugged_link_to "", article, class: 'overlay' %>
+					<%= link_to "", article, class: 'overlay' %>
 					<%= image_tag(article.head_image.video_thumb) %>
 					<p><%= article.title %></p>
 				</div>

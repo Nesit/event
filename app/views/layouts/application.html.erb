@@ -145,8 +145,8 @@
 				<div class="list">
 					<% reports.each do |article| %>
 						<div class="item left">
-							<%= slugged_link_to image_tag(article.head_image.footer), article %>
-							<%= slugged_link_to article.title, article, class: 'report-link' %>
+							<%= link_to image_tag(article.head_image.footer), article %>
+							<%= link_to article.title, article, class: 'report-link' %>
 						</div>
 					<% end %>
 					<div class="clear"></div>
@@ -157,7 +157,7 @@
 		
 		<div class="bottom-menu left">
 			<% Page.all.each do |page| %>
-				<%= slugged_link_to page.name, page %>
+				<%= link_to page.name, page %>
 			<% end %>
 
 			<!-- Yandex.Metrika informer -->
