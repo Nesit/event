@@ -1,11 +1,11 @@
 <% articles.each_with_index do |article, i| %>
 	<div class="article-item">
 		<% if article.kind_of? TvArticle %>
-			<%= slugged_link_to "", article, class: 'overlay' %>
+			<%= link_to "", article, class: 'overlay' %>
 		<% end %>
-		<%= slugged_link_to image_tag(article.head_image.list_thumb), article, class: 'article-item-image left' %>
+		<%= link_to image_tag(article.head_image.list_thumb), article, class: 'article-item-image left' %>
 		<div class="article-item-description right">
-			<h2><%= slugged_link_to article.title, article, class: (article.closed? ? 'closed' : '') %></h2>
+			<h2><%= link_to article.title, article, class: (article.closed? ? 'closed' : '') %></h2>
 			<p><%= article.list_item_description %></p>
 		</div>
 		<div class="article-item-info right">

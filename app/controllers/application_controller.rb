@@ -14,10 +14,6 @@ class ApplicationController < ActionController::Base
 
   after_filter :check_need_email
 
-  def extract_id_from_slug(slug)
-    slug.split('-').last.to_i
-  end
-
   unless Rails.env.development?
     rescue_from "Exception" do |exception|
       if Rails.env.production? or Rails.env.staging?

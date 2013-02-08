@@ -40,10 +40,7 @@ require Rails.root.join('app/models/article')
       column :head_image do |article|
         image_tag(article.head_image.thumb)
       end
-
-      column :galleries do |article|
-        link_to "Галлереи", admin_article_galleries_path('q[article_id_eq]' => article.id)
-      end
+      
       column :target_at do |resource|
         resource.target_at.to_s(:tiny)
       end if klass == "EventArticle"
