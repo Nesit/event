@@ -11,6 +11,12 @@ textarea.placeholder {
 	font-size: 14px;
 }
 
+input.loader {
+	background-image: asset-url("small_loader.gif", image);
+	background-position: 98% 50%;
+	background-repeat: no-repeat;
+}
+
 @mixin form-text-field {
 	border: 1px solid $grey-border-color;
 	outline: none;
