@@ -1,0 +1,16 @@
+<!DOCTYPE html>
+<html>
+<head>
+<title>Event.ru</title>
+<%= stylesheet_link_tag "application", media: "all" %>
+<%= csrf_meta_tags %>
+</head>
+<body>
+	<div id="error-container">
+		<%= yield %>
+		<p><%= link_to 'event@event.ru', 'mailto:event@event.ru' %></p>
+		<p>Спасибо!</p>
+		<p><%= link_to "на главную!", root_path, class: 'main-page-link' %></p>
+	</div>
+</body>
+</html>
