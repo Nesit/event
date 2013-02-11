@@ -43,6 +43,7 @@ class UsersController < ApplicationController
   end
 
   def update_email
+    debugger
     @user = current_user
     if User.activated.where(email: params[:email]).any?
       render json: {used: true}, status: :error

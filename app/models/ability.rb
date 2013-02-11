@@ -33,7 +33,7 @@ class Ability
 
     return if user.blank?
 
-    can [:update_email], User if user.state == 'need_email'
+    can [:update_email], User if user.email.blank?
 
     # now for registered user
     can :manage, PollVote

@@ -1,0 +1,30 @@
+<%= semantic_form_for [:admin, resource] do |f| %>
+  <%= f.inputs "Основное" do %>
+    <%= f.input :name %>
+    <%= f.input :email %>
+    <%= f.input :state, as: :select,
+      collection: %w[need_info complete banned].map {|s| [I18n.t(s), s]},
+      include_blank: true, input_html: {disabled: true} %>
+    <%= f.input :avatar, :as => :file, :hint => f.template.image_tag(f.object.avatar.url) %>
+    <%= f.input :born_at %>
+    <%= f.input :gender_cd %>
+    <%= f.input :company %>
+    <%= f.input :position %>
+    <%= f.input :website %>
+    <%= f.input :phone_number %>
+    <%= f.input :city %>
+    <%= f.input :active_subscription %>
+    <%= f.input :article_comment_notification %>
+    <%= f.input :comment_notification %>
+    <%= f.input :event_notification %>
+    <%= f.input :partner_notification %>
+    <%= f.input :weekly_notification %>
+  <% end %>
+  <%= f.inputs 'Пароль' do %>
+    <%= f.input :password %>
+  <% end %>
+  <%= f.inputs 'Действия' do %>
+    <%= link_to('Забанить', banned_admin_user_path(resource), method: :put) unless resource.banned? %>
+  <% end %>
+  <%= f.actions %>
+<% end %>

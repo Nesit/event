@@ -7,8 +7,10 @@ class User < ActiveRecord::Base
     :company, :position, :website
   ]
 
-  validates :email, presence: true, format: /.+\@.+\..+/
-  validates :email, uniqueness: true, unless: proc { email.blank? }
+  validates :email,
+    format: /.+\@.+\..+/,
+    uniqueness: true,
+    if: :email
 
   validates :merge_email, format: /.+\@.+\..+/, if: proc { merge_email.present? }
 
@@ -54,10 +56,6 @@ class User < ActiveRecord::Base
 
     event :complete do
       transition all => :complete
-    end
-
-    event :need_email do
-      transition :need_info =>  :need_email
     end
 
     event :banned do
