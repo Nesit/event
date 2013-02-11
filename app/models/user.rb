@@ -22,7 +22,7 @@ class User < ActiveRecord::Base
   before_validation :process_new_city
   before_validation :ensure_uniqueness_name
   before_validation :select_state
-  before_validation :delete_all_other_pending, if: proc { activation_state == 'pending' }
+  before_validation :delete_all_other_pending, if: proc { activation_state == 'active' }
 
   attr_accessor :new_city, :new_country_cd
 
@@ -77,9 +77,7 @@ class User < ActiveRecord::Base
 
   def merge_with_other!
     self.email = merge_email
-    other_users = User.where('activation_state <> ?', 'pending')
-                .where(email: merge_email)
-
+    other_users = User.activated.where(email: merge_email)
     other_users.each do |user|
 
       user.subscriptions.each do |sub|

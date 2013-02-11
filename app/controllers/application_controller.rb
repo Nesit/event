@@ -45,7 +45,8 @@ class ApplicationController < ActionController::Base
   protected
 
   def check_need_email
-    if current_user and current_user.state == 'need_email'
+
+    if current_user and (current_user.state == 'need_email' or current_user.activation_state != 'active')
       cookies['need_email'] = true
     else 
       cookies.delete('need_email')

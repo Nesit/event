@@ -44,9 +44,14 @@ class UsersController < ApplicationController
 
   def update_email
     @user = current_user
-    @user.email = params[:email]
-    @user.save!
-    head :ok
+    if User.activated.where(email: params[:email]).any?
+      render json: {used: true}, status: :error
+    else
+      @user.email = params[:email]
+      @user.instance_exec { setup_activation }
+      @user.save!
+      head :ok
+    end
   end
   
   def activate
@@ -57,6 +62,12 @@ class UsersController < ApplicationController
     else
       raise "activation token expired or invalid"
     end
+  end
+
+  def create_merge_request
+    @user = current_user
+    @user.setup_record_merge!(params[:email])
+    head :ok
   end
 
   def merge
@@ -126,8 +137,15 @@ class UsersController < ApplicationController
         @user = previous_user
       end
 
-      # activated when comes from social with email
-      @user.activate! if @user.activation_state != 'active'
+      # sorcery send email only if crypted password present
+      # therefore it doesn't sends at first time
+      #
+      # stupid, but we need to call it twice to make it send email
+      # with our new generated password (in User activate! method)
+      if @user.activation_state != 'active'
+        @user.activate!
+        @user.activate!
+      end
 
       @user.save!
       
