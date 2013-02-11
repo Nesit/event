@@ -197,8 +197,30 @@ $ ->
         $('#email-dialog').addClass('hidden')
         $('#dialog-overlay').removeClass('active')
 
-    $('#email-dialog form').on 'ajax:error', ->
-        $('#email-dialog-message').html("Email введён неверно, либо уже используется")
+    $('#email-dialog form').on 'ajax:error', (event, data) ->
+        try
+            data = JSON.parse(data.responseText)
+            if data.used
+                source = """
+                    Email уже используется в другой учётной записи.
+                    Вы можете <a href="#" class="merge-request-link">объединить</a>
+                    учётные записи, если уверены что ввели свой email верно.
+                """
+                $('#email-dialog-message').html("")
+                $('#email-dialog-message').html(source)
+                $('#email-dialog-message .merge-request-link').on 'click', (event) ->
+                    $.ajax
+                        type: 'POST'
+                        url: '/users/merge'
+                        data: { email: $('#email-dialog form input[name=email]').val() }
+                        success: ->
+                            $('#email-dialog-message')
+                                .html("Письмо с ссылкой активации отправлено на указанную почту")
+                    event.preventDefault()
+            return
+        catch e
+            # do nothing
+        $('#email-dialog-message').html("Произошла ошибка, похоже email введён неверно")
 
     # captcha reload
     $('.reload-captcha-link').on 'click', (event) ->

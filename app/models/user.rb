@@ -8,12 +8,12 @@ class User < ActiveRecord::Base
   ]
 
   validates :email, presence: true, format: /.+\@.+\..+/
-  validates :email, :uniqueness => true
+  validates :email, uniqueness: true, unless: proc { email.blank? }
 
-  validates :password, presence: true, if: "crypted_password.blank?"
+  validates :merge_email, format: /.+\@.+\..+/, if: proc { merge_email.present? }
+
   validates :password, length: { minimum: 6 }, if: :password
 
-  before_validation :ensure_password
   before_validation :process_new_city
   before_validation :ensure_uniqueness_name
 
@@ -21,6 +21,7 @@ class User < ActiveRecord::Base
   after_save :check_complete
 
   before_validation :delete_all_other_pending, if: proc { activation_state == 'pending' }
+  before_validation :select_state
 
   attr_accessor :new_city, :new_country_cd
 
@@ -75,6 +76,74 @@ class User < ActiveRecord::Base
     UserMailer.user_banned(self).deliver
   end
 
+  def activate!
+    if password.blank?
+      self.password = SecureRandom.hex(4)
+    end
+    super
+  end
+
+  # this method generates merge token and sends emails with link
+  def setup_record_merge!(email)
+    self.merge_token = SecureRandom.hex(10)
+    self.merge_email = email
+    self.merge_token_expires_at = DateTime.now + 2.days
+    self.save!
+    UserActivationMailer.merge_need_email(self).deliver
+  end
+
+  def self.load_from_merge_token(token)
+    User.where(merge_token: token)
+        .where('? <= merge_token_expires_at', DateTime.now).first
+  end
+
+  def merge_with_other!
+    self.email = merge_email
+    other_users = User.activated.where(email: merge_email)
+    other_users.each do |user|
+
+      user.subscriptions.each do |sub|
+        sub.user_id = self.id
+        sub.save!
+      end
+      self.subscriptions(true)
+
+      user.comments.each do |comment|
+        comment.author_id = self.id
+        comment.save!
+      end
+      self.comments(true)
+      
+      user.authentications.each do |auth|
+        auth.user_id = self.id
+        auth.save!
+      end
+      self.authentications(true)
+
+      self.city           ||= user.city
+      self.born_at        ||= user.born_at
+      self.gender         ||= user.gender
+      self.company        ||= user.company
+      self.position       ||= user.position
+      self.website        ||= user.website
+      self.phone_number   ||= user.phone_number
+      self.name           ||= user.name
+
+      self.article_comment_notification = user.article_comment_notification
+      self.comment_notification         = user.comment_notification
+      self.event_notification           = user.event_notification
+      self.partner_notification         = user.partner_notification
+      self.weekly_notification          = user.weekly_notification
+
+      self.active_subscription |= user.active_subscription
+
+      # TODO load other user avatar if present
+      
+      user.delete
+    end
+    self.save!
+  end
+
   def free_name?(name)
     query = name.gsub('%', '\%').gsub('_', '\_')
     not User.where("id <> ?", id).where("name LIKE ?", query).any?
@@ -97,24 +166,30 @@ class User < ActiveRecord::Base
   def social_url
     return unless auth = authentications.first
     case auth.provider
-    when 'vkontakte'
+    when 'vk'
       "https://vk.com/id#{auth.uid}"
     when 'facebook'
       "http://www.facebook.com/#{auth.uid}"
     end
   end
 
-  def ensure_password
-    if crypted_password.blank? and password.blank?
-      self.password = SecureRandom.hex(4)
+  private
+
+  def delete_all_other_pending
+    if new_record?
+      ::User.pending.where(email: email).delete_all
+    else
+      ::User.pending.where('id <> ?', id).where(email: email).delete_all
     end
   end
 
-  private
-
-  def ensure_password
-    if crypted_password.blank? and password.blank?
-      self.password = SecureRandom.hex(4)
+  def select_state
+    complete = true
+    FIELDS_FOR_COMPLETE.each do |sym|
+      if send(sym).blank?
+        complete = false
+        break
+      end
     end
   end
 

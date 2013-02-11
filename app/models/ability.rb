@@ -12,7 +12,10 @@ class Ability
     can :create, :user_session
 
     # to log in through OAuth, activate from email
-    can [:create, :activate, :oauth, :oauth_callback, :ensure_email], User
+    can [
+      :create, :activate, :merge, :create_merge_request, :oauth,
+      :oauth_callback, :ensure_email
+      ], User
 
     can :read, Article
     can :preview, Article if admin_user
