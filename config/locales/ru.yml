@@ -29,7 +29,8 @@ ru:
     password: "пароль"
     password_confirmation: "подтверждение пароля"
     body: "содержимое"
-    closed: "закрыта?"
+    closed: "закрыта!"
+    published: "опубликована"
     head_image: "изображение в заголовке"
     galleries: "галлереи"
     author: "автор"
@@ -47,7 +48,7 @@ ru:
       CompanyArticle: "Компании"
       InterviewArticle: "Интервью"
       OverviewArticle: "Обзоры"
-      ReportArticle: "REPORT"
+      ReportArticle: "Report"
       TripArticle: "Опыт"
       TvArticle: "TV"
     previous:
@@ -81,6 +82,17 @@ ru:
     TvArticle: "TV"
 
   activerecord:
+    enums:
+      city:
+        countries:
+          russia: "Россия"
+          belarus: "Белоруссия"
+          ukraine: "Украина"
+          moldavia: "Молдавия"
+          poland: "Польша"
+          lithuania: "Литва"
+          latvia: "Латвия"
+          khazakhstan: "Казахстан"
     attributes:
       user:
         state: Статус

@@ -30,13 +30,14 @@ class SubscriptionsController < ApplicationController
   end
 
   def subscription_for_guest
-    raise "Invalid captcha" unless valid_captcha?(params[:captcha])
+    if valid_captcha?(params[:captcha])
+      @user = User.new(email: params[:email])
+      @user.save!
 
-    User.where(activation_state: 'pending', email: params[:email]).delete_all
-    @user = User.new(email: params[:email])
-    @user.save!
-
-    @user.subscriptions.create!(params[:subscription])
+      @user.subscriptions.create!(params[:subscription])
+    else
+      raise "invalid captcha"
+    end
   end
 
   def destroy

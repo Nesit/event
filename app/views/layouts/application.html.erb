@@ -2,7 +2,7 @@
 <html>
   <head>
     <% @seo_tags = {} if @seo_tags.nil? %>
-    <title><%= @seo_tags[:title] %></title>
+    <title><%= @seo_tags[:title] or 'Event' %></title>
     <meta name="description" content="<%= @seo_tags[:description] %>">
     <meta name="keywords" content="<%= @seo_tags[:keywords] %>">
 
@@ -20,6 +20,14 @@
     <%= csrf_meta_tags %>
   </head>
   <body>
+  	<div id="fb-root"></div>
+	<script>(function(d, s, id) {
+	  var js, fjs = d.getElementsByTagName(s)[0];
+	  if (d.getElementById(id)) return;
+	  js = d.createElement(s); js.id = id;
+	  js.src = "//connect.facebook.net/ru_RU/all.js#xfbml=1";
+	  fjs.parentNode.insertBefore(js, fjs);
+	}(document, 'script', 'facebook-jssdk'));</script>
 
     <%= render 'shared/top_menu' %>
 
@@ -28,26 +36,20 @@
       <% unless @hide_top %>
 	<div id="header">
 	  <div id="utmost-left-block" class="left">
-	  	<div class="hidden">
-		    <div class="city-name left">МОСКВА</div>
-		    <div class="temperature right">+20</div>
-		    <%= image_tag(asset_path('samples/weather.png'), class: 'right') %>
-		    <div class="clear"></div>
-		</div>
-	    <div class="current-time"></div>
 	    <div class="current-date">
-	      <%= Russian.strftime(Date.today, "%e %B").capitalize %>,
-	      <span class="week-day"><%= Russian.strftime(Date.today, "%A") %></span>
+	      <%= Russian.strftime(Date.today, "%e %B %Y").capitalize %>
+	      <!-- span class="week-day"><%= Russian.strftime(Date.today, "%A") %></span -->
 	    </div>
+	   	<% if @site_config and @site_config.actual_article %>
+	    	<%= link_to @site_config.actual_article do %>
+				<div class="actual-today">Актуально сегодня:</div>
+				<p class="actual-today-desc"><%= @site_config.actual_article_description %></p>
+	      	<% end %>
+	    <% end %>
 	  </div>
 
 	  <div id="left-block" class="left">
-	    <% if @site_config and @site_config.actual_article %>
-	      <%= content_tag(:a, href: url_for(@site_config.actual_article)) do %>
-		<div class="actual-today">Актуально сегодня:</div>
-		<p><%= @site_config.actual_article_description %></p>
-	      <% end %>
-	    <% end %>
+
 	  </div>
 
 	  <div id="utmost-right-block" class="right">
@@ -63,15 +65,13 @@
       </div>
 
       <div id="right-block" class="right">
-	<% if issue = Issue.current %>
-	  Новый номер
-	  <%= link_to issue.name, '#', class: 'issue-link' %>
-	  <%= issue.to_s %>
-	  <%= link_to "Подписаться", new_subscription_path, class: 'subscribe-link' %>
-	<% end %>
+      	<%= link_to image_tag(asset_path("head_cover.png")), new_subscription_path %>
       </div>
 
-      <%= link_to image_tag(asset_path('logo.png')), root_path, id: :logo %>
+      <div id="logo">
+	      <%= link_to image_tag(asset_path('logo.png')), root_path %>
+	      <p>Информационный портал event-индустрии</p>
+	  </div>
       <div class="clear"></div>
       <%= link_to image_tag(asset_path('subscribe_aside.png')), new_subscription_path, class: 'subscribe-aside-link' %>
       <div id="left-banner">
@@ -145,8 +145,8 @@
 				<div class="list">
 					<% reports.each do |article| %>
 						<div class="item left">
-							<%= slugged_link_to image_tag(article.head_image.footer), article %>
-							<%= slugged_link_to article.title, article, class: 'report-link' %>
+							<%= link_to image_tag(article.head_image.footer), article %>
+							<%= link_to article.title, article, class: 'report-link' %>
 						</div>
 					<% end %>
 					<div class="clear"></div>
@@ -159,6 +159,41 @@
 			<% Page.all.each do |page| %>
 				<%= link_to page.name, page %>
 			<% end %>
+
+			<!-- Yandex.Metrika informer -->
+			<a href="http://metrika.yandex.ru/stat/?id=19899637&amp;from=informer"
+			target="_blank" rel="nofollow" class="metrika"><img src="//bs.yandex.ru/informer/19899637/3_0_FFFFFFFF_FFFFFFFF_0_pageviews"
+			style="width:88px; height:31px; border:0;" alt="Яндекс.Метрика" title="Яндекс.Метрика: данные за сегодня (просмотры, визиты и уникальные посетители)" onclick="try{Ya.Metrika.informer({i:this,id:19899637,lang:'ru'});return false}catch(e){}"/></a>
+			<!-- /Yandex.Metrika informer -->
+
+			<!-- Yandex.Metrika counter -->
+			<script type="text/javascript">
+			(function (d, w, c) {
+			    (w[c] = w[c] || []).push(function() {
+			        try {
+			            w.yaCounter19899637 = new Ya.Metrika({id:19899637,
+			                    webvisor:true,
+			                    clickmap:true,
+			                    trackLinks:true,
+			                    accurateTrackBounce:true,
+			                    trackHash:true});
+			        } catch(e) { }
+			    });
+
+			    var n = d.getElementsByTagName("script")[0],
+			        s = d.createElement("script"),
+			        f = function () { n.parentNode.insertBefore(s, n); };
+			    s.type = "text/javascript";
+			    s.async = true;
+			    s.src = (d.location.protocol == "https:" ? "https:" : "http:") + "//mc.yandex.ru/metrika/watch.js";
+
+			    if (w.opera == "[object Opera]") {
+			        d.addEventListener("DOMContentLoaded", f, false);
+			    } else { f(); }
+			})(document, window, "yandex_metrika_callbacks");
+			</script>
+			<noscript><div><img src="//mc.yandex.ru/watch/19899637" style="position:absolute; left:-9999px;" alt="" /></div></noscript>
+			<!-- /Yandex.Metrika counter -->
 		</div>
 		<div class="bottom-description right">
 			<h2 class="left">Спецпроекты:</h2>

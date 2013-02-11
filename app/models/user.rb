@@ -16,9 +16,11 @@ class User < ActiveRecord::Base
   before_validation :ensure_password
   before_validation :process_new_city
   before_validation :ensure_uniqueness_name
-  before_destroy :user_deleted
 
+  before_destroy :user_deleted
   after_save :check_complete
+
+  before_validation :delete_all_other_pending, if: proc { activation_state == 'pending' }
 
   attr_accessor :new_city, :new_country_cd
 
@@ -34,7 +36,7 @@ class User < ActiveRecord::Base
 
   has_many :authentications, dependent: :destroy
   has_many :comments, foreign_key: :author_id
-  has_many :subscriptions
+  has_many :subscriptions, dependent: :destroy
   belongs_to :city
 
   accepts_nested_attributes_for :city
@@ -66,6 +68,9 @@ class User < ActiveRecord::Base
     end
   end
 
+  scope :activated, where(activation_state: ['active', nil])
+  scope :pending, where(activation_state: 'pending')
+
   def banned_user
     UserMailer.user_banned(self).deliver
   end
@@ -96,6 +101,12 @@ class User < ActiveRecord::Base
       "https://vk.com/id#{auth.uid}"
     when 'facebook'
       "http://www.facebook.com/#{auth.uid}"
+    end
+  end
+
+  def ensure_password
+    if crypted_password.blank? and password.blank?
+      self.password = SecureRandom.hex(4)
     end
   end
 

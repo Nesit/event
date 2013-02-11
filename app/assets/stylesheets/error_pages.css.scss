@@ -1,0 +1,37 @@
+#error-container {
+	width: 500px;
+	margin: 0 auto;
+	margin-top: 100px;
+	padding-left: 180px;
+	padding-right: 180px;
+	padding-top: 80px;
+
+	background-image: asset-url("error_page_logo.png", image);
+	background-repeat: no-repeat;
+	background-position: right top;
+
+	a {
+		color: $purple-color2;
+		text-decoration: underline;
+	}
+
+	h1 {
+		@include sans-serif;
+		font-size: 256px;
+		color: $purple-color2;
+	}
+
+	p {
+		margin: 1em 0;
+		@include sans-serif;
+		font-size: 14px;
+	}
+
+	.main-page-link {
+		@include sans-serif;
+		display: block;
+		width: 150px;
+		margin: 0 auto;
+		font-size: 24px;
+	}
+}

@@ -19,7 +19,7 @@ gem 'active_admin_editor', github: 'vladimir-vg/active_admin_editor', branch: 'c
 gem 'russian'
 gem 'mini_magick'
 gem 'carrierwave'
-gem 'sorcery', github: 'Fodoj/sorcery', ref: 'f4c22e6a8c995d3498606736d05bab64dd6bc18a'
+gem 'sorcery', '~> 0.8.1'
 gem 'cancan'
 gem 'state_machine'
 gem 'ancestry'
@@ -28,6 +28,8 @@ gem 'rmagick'
 gem 'easy_captcha'
 gem 'unicorn'
 gem 'activemerchant', require: 'active_merchant'
+
+gem 'friendly_id', '~> 4.0.9'
 
 gem 'acts-as-taggable-on', '~> 2.3.1'
 

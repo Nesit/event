@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20130130154751) do
+ActiveRecord::Schema.define(:version => 20130208130643) do
 
   create_table "active_admin_comments", :force => true do |t|
     t.string   "resource_id",   :null => false
@@ -95,11 +95,14 @@ ActiveRecord::Schema.define(:version => 20130130154751) do
     t.integer  "mailru_shares_count",   :default => 0
     t.datetime "published_at"
     t.string   "head_video_kind"
+    t.boolean  "published",             :default => true
+    t.string   "slug"
   end
 
   add_index "articles", ["issue_id"], :name => "index_articles_on_issue_id"
   add_index "articles", ["pageviews_count"], :name => "index_articles_on_pageviews_count"
   add_index "articles", ["published_at"], :name => "index_articles_on_published_at"
+  add_index "articles", ["slug"], :name => "index_articles_on_slug", :unique => true
   add_index "articles", ["target_at"], :name => "index_articles_on_target_at"
   add_index "articles", ["type"], :name => "index_articles_on_type"
 
@@ -157,7 +160,10 @@ ActiveRecord::Schema.define(:version => 20130130154751) do
     t.text     "body"
     t.datetime "created_at", :null => false
     t.datetime "updated_at", :null => false
+    t.string   "slug"
   end
+
+  add_index "pages", ["slug"], :name => "index_pages_on_slug", :unique => true
 
   create_table "poll_choices", :force => true do |t|
     t.integer  "poll_id"
@@ -195,9 +201,11 @@ ActiveRecord::Schema.define(:version => 20130130154751) do
     t.integer  "gplus_shares_count",   :default => 0
     t.integer  "mailru_shares_count",  :default => 0
     t.datetime "published_at"
+    t.string   "slug"
   end
 
   add_index "polls", ["published_at"], :name => "index_polls_on_published_at"
+  add_index "polls", ["slug"], :name => "index_polls_on_slug", :unique => true
 
   create_table "site_configs", :force => true do |t|
     t.integer  "actual_article_id"

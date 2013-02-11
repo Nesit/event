@@ -15,8 +15,32 @@ class ApplicationController < ActionController::Base
 
   after_filter :check_need_email
 
-  def extract_id_from_slug(slug)
-    slug.split('-').last.to_i
+  if Rails.env.development?
+    rescue_from "Exception" do |exception|
+      if Rails.env.production? or Rails.env.staging?
+        ExceptionNotifier::Notifier
+          .exception_notification(request.env, exception).deliver
+      end
+      
+      respond_to do |format|
+        format.html { render 'home/page500', layout: 'error_page', status: 500 }
+      end
+    end
+    error404classes = [
+      "ActiveRecord::RecordNotFound",
+      "AbstractController::ActionNotFound",
+      "ActionController::RoutingError",
+    ]
+    rescue_from(*error404classes) do
+      respond_to do |format|
+        format.html { render 'home/page404', layout: 'error_page', status: 404 }
+      end
+    end
+    rescue_from "CanCan::AccessDenied" do
+      respond_to do |format|
+        format.html { render 'home/page403', layout: 'error_page', status: 403 }
+      end
+    end
   end
 
   protected

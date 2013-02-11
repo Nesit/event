@@ -1,3 +1,5 @@
+# encoding: utf-8
+
 class Poll < ActiveRecord::Base
   validates :topic, :start_at, :end_at, :published_at, presence: true
 
@@ -20,6 +22,9 @@ class Poll < ActiveRecord::Base
   scope :running,
     lambda { where('start_at < ?', DateTime.now)
                .where('? < end_at', DateTime.now) }
+  
+  extend FriendlyId
+  friendly_id :topic, use: :slugged
 
   # for social share partial
   def title

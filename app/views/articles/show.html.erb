@@ -73,8 +73,8 @@
 		<%= render 'shared/social_share', subject: @article %>
 	</div>
 	<div class="article-navigation">
-		<%= slugged_link_to prev_article_label(@article), @article.previous_article, class: 'previous-article-link left' if @article.previous_article %>
-		<%= slugged_link_to next_article_label(@article), @article.next_article, class: 'next-article-link right' if @article.next_article %>
+		<%= link_to prev_article_label(@article), @article.previous_article, class: 'previous-article-link left' if @article.previous_article %>
+		<%= link_to next_article_label(@article), @article.next_article, class: 'next-article-link right' if @article.next_article %>
 		<div class="clear"></div>
 	</div>
 	<p class="social-networks-notice">
@@ -87,8 +87,8 @@
 		
 		<% @article.class.popular.first(5).each do |article| %>
 		<div class="item left">
-			<%= slugged_link_to image_tag(article.head_image.popular), article %>
-			<%= slugged_link_to article.title, article %>
+			<%= link_to image_tag(article.head_image.popular), article %>
+			<%= link_to article.title, article %>
 		</div>
 		<% end %>
 		<div class="clear"></div>
