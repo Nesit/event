@@ -62,16 +62,61 @@ class User < ActiveRecord::Base
     self.merge_email = email
     self.merge_token_expires_at = DateTime.now + 2.days
     self.save!
-    UserActivationMailer.merge_need_email(user, email).deliver
+    UserActivationMailer.merge_need_email(self).deliver
   end
 
   def self.load_from_merge_token(token)
     User.where(merge_token: token)
-        .where('merge_token_expires_at < ?', DateTime.now).first
+        .where('? <= merge_token_expires_at', DateTime.now).first
   end
 
   def merge_with_other!
-    User.where('activation_state <> ?', 'pending').where(email: email)
+    self.email = merge_email
+    other_users = User.where('activation_state <> ?', 'pending')
+                .where(email: merge_email)
+
+    other_users.each do |user|
+
+      user.subscriptions.each do |sub|
+        sub.user_id = self.id
+        sub.save!
+      end
+      self.subscriptions(true)
+
+      user.comments.each do |comment|
+        comment.author_id = self.id
+        comment.save!
+      end
+      self.comments(true)
+      
+      user.authentications.each do |auth|
+        auth.user_id = self.id
+        auth.save!
+      end
+      self.authentications(true)
+
+      self.city           ||= user.city
+      self.born_at        ||= user.born_at
+      self.gender         ||= user.gender
+      self.company        ||= user.company
+      self.position       ||= user.position
+      self.website        ||= user.website
+      self.phone_number   ||= user.phone_number
+      self.name           ||= user.name
+
+      self.article_comment_notification = user.article_comment_notification
+      self.comment_notification         = user.comment_notification
+      self.event_notification           = user.event_notification
+      self.partner_notification         = user.partner_notification
+      self.weekly_notification          = user.weekly_notification
+
+      self.active_subscription |= user.active_subscription
+
+      # TODO load other user avatar if present
+      
+      user.delete
+    end
+    self.save!
   end
 
   def free_name?(name)
@@ -96,7 +141,7 @@ class User < ActiveRecord::Base
   def social_url
     return unless auth = authentications.first
     case auth.provider
-    when 'vkontakte'
+    when 'vk'
       "https://vk.com/id#{auth.uid}"
     when 'facebook'
       "http://www.facebook.com/#{auth.uid}"
@@ -113,9 +158,9 @@ class User < ActiveRecord::Base
 
   def delete_all_other_pending
     if new_record?
-      User.pending.where(email: email).delete_all
+      ::User.pending.where(email: email).delete_all
     else
-      User.pending.where('id <> ?', id).where(email: email).delete_all
+      ::User.pending.where('id <> ?', id).where(email: email).delete_all
     end
   end
 

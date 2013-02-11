@@ -14,7 +14,7 @@ class ApplicationController < ActionController::Base
 
   after_filter :check_need_email
 
-  if Rails.env.development?
+  unless Rails.env.development?
     rescue_from "Exception" do |exception|
       if Rails.env.production? or Rails.env.staging?
         ExceptionNotifier::Notifier

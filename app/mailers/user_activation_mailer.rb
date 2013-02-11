@@ -16,9 +16,9 @@ class UserActivationMailer < ActionMailer::Base
     end
   end
 
-  def merge_need_email(user, email)
+  def merge_need_email(user)
     @user = user
-    mail(to: email, subject: "Event.ru - Подтверждение объединения учётных записей") do |format|
+    mail(to: @user.merge_email, subject: "Event.ru - Подтверждение объединения учётных записей") do |format|
       format.html
       format.text 
     end

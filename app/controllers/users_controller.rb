@@ -62,6 +62,10 @@ class UsersController < ApplicationController
   def merge
     if @user = User.load_from_merge_token(params[:token])
       @user.merge_with_other!
+
+      # because user cames from email, so it belongs to him
+      @user.activate!
+
       auto_login(@user)
       redirect_to root_path
     else
