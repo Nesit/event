@@ -1,3 +1,4 @@
+# -*- coding: utf-8 -*-
 class User < ActiveRecord::Base
   authenticates_with_sorcery!
 
@@ -6,32 +7,32 @@ class User < ActiveRecord::Base
     :company, :position, :website
   ]
 
-  # removed presence: true for a while.
-  # TODO: figure out how to deal with oauth-users without email
-  validates :email,
-    presence: true, format: /.+\@.+\..+/,
-    unless: proc { state.to_sym == :need_email }
+  validates :email, presence: true, format: /.+\@.+\..+/
+  validates :email, :uniqueness => true
 
-  # email should be unique or be nil
-  validates :email, uniqueness: { scope: :state }, unless: proc { email.blank? }
-  
-  validates :password, presence: true, if: proc { crypted_password.blank? }
+  validates :password, presence: true, if: "crypted_password.blank?"
   validates :password, length: { minimum: 6 }, if: :password
 
   before_validation :ensure_password
   before_validation :process_new_city
   before_validation :ensure_uniqueness_name
-  before_validation :select_state
+
+  before_destroy :user_deleted
+  after_save :check_complete
+
   before_validation :delete_all_other_pending, if: proc { activation_state == 'pending' }
 
   attr_accessor :new_city, :new_country_cd
 
   attr_accessible :born_at, :gender_cd, :city_id, :new_city,
-    :new_country_cd, :company, :position, :website,
-    :phone_number, :name, :gender, :email
+                  :new_country_cd, :company, :position, :website,
+                  :phone_number, :name, :gender, :email, :avatar,
+                  :comment_notification, :event_notification,
+                  :partner_notification, :weekly_notification, :state,
+                  :active_subscription, :password, :password_confirmation,
+                  :article_comment_notification, :as => [:default, :admin]
 
-  attr_accessible :article_comment_notification, :comment_notification,
-    :event_notification, :partner_notification, :weekly_notification
+  attr_accessible :state, :as => [:admin]
 
   has_many :authentications, dependent: :destroy
   has_many :comments, foreign_key: :author_id
@@ -44,14 +45,34 @@ class User < ActiveRecord::Base
 
   as_enum :gender, male: 1, female: 2
 
+  scope :activated, where(activation_state: 'active')
+  scope :with_subscription, where(active_subscription: true)
+
+  state_machine :state, initial: :need_info do
+    after_transition any => :banned, :do => :banned_user
+
+    event :complete do
+      transition all => :complete
+    end
+
+    event :need_email do
+      transition :need_info =>  :need_email
+    end
+
+    event :banned do
+      transition all => :banned
+    end
+
+    event :need_info do
+      transition all => :need_info
+    end
+  end
+
   scope :activated, where(activation_state: ['active', nil])
   scope :pending, where(activation_state: 'pending')
 
-  state_machine initial: 'need_info' do
-    state 'need_email'
-    state 'need_info'
-    state 'complete'
-    state 'disabled'
+  def banned_user
+    UserMailer.user_banned(self).deliver
   end
 
   def free_name?(name)
@@ -91,30 +112,10 @@ class User < ActiveRecord::Base
 
   private
 
-  def delete_all_other_pending
-    if new_record?
-      User.pending.where(email: email).delete_all
-    else
-      User.pending.where('id <> ?', id).where(email: email).delete_all
+  def ensure_password
+    if crypted_password.blank? and password.blank?
+      self.password = SecureRandom.hex(4)
     end
-  end
-
-  def select_state
-    complete = true
-    FIELDS_FOR_COMPLETE.each do |sym|
-      if send(sym).blank?
-        complete = false
-        break
-      end
-    end
-
-    if email.blank?
-      self.state = 'need_email'
-    elsif complete
-      self.state = 'complete'
-    else
-      self.state = 'need_info'
-    end  
   end
 
   # use separate validator instead of uniqueness: true
@@ -134,4 +135,17 @@ class User < ActiveRecord::Base
 
     self.city_id = city.id
   end
+
+  def user_deleted
+    UserMailer.user_deleted(self).deliver
+  end
+
+  def check_complete
+    return self.complete?
+    FIELDS_FOR_COMPLETE.each do |f|
+      return if self.send(f).nil?
+    end
+    self.update_column(:state, 'complete')
+  end
+
 end
