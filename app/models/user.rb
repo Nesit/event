@@ -17,10 +17,8 @@ class User < ActiveRecord::Base
   # email should be unique or be nil
   validates :email, uniqueness: { scope: :state }, unless: proc { email.blank? }
   
-  validates :password, presence: true, if: proc { crypted_password.blank? }
   validates :password, length: { minimum: 6 }, if: :password
 
-  before_validation :ensure_password
   before_validation :process_new_city
   before_validation :ensure_uniqueness_name
   before_validation :select_state
@@ -54,6 +52,13 @@ class User < ActiveRecord::Base
     state 'need_info'
     state 'complete'
     state 'disabled'
+  end
+
+  def activate!
+    if password.blank?
+      self.password = SecureRandom.hex(4)
+    end
+    super
   end
 
   # this method generates merge token and sends emails with link
@@ -145,12 +150,6 @@ class User < ActiveRecord::Base
       "https://vk.com/id#{auth.uid}"
     when 'facebook'
       "http://www.facebook.com/#{auth.uid}"
-    end
-  end
-
-  def ensure_password
-    if crypted_password.blank? and password.blank?
-      self.password = SecureRandom.hex(4)
     end
   end
 

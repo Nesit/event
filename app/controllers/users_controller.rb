@@ -64,7 +64,7 @@ class UsersController < ApplicationController
       @user.merge_with_other!
 
       # because user cames from email, so it belongs to him
-      @user.activate!
+      @user.activate! if @user.activation_state != 'active'
 
       auto_login(@user)
       redirect_to root_path
@@ -126,7 +126,11 @@ class UsersController < ApplicationController
         @user = previous_user
       end
 
+      # activated when comes from social with email
+      @user.activate! if @user.activation_state != 'active'
+
       @user.save!
+      
       reset_session # protect from session fixation attack
       auto_login(@user)
       redirect_back_or_to root_path

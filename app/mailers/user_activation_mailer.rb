@@ -10,6 +10,7 @@ class UserActivationMailer < ActionMailer::Base
   end
 
   def activation_success_email(user)
+    @user = user
     mail(to: user.email, subject: "Event.ru - Учётная запись успешно активированна") do |format|
       format.html
       format.text 
