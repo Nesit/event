@@ -6,3 +6,9 @@ config:
   article_list_banner_after: 3
   article_list_banner_body: |
     Объявление! Покупайте наши памперсы, 10 штук по цене 5! Только сегодня!
+  bottom_menu:
+    items:
+    - kind: Page
+      id: 2
+    - kind: Page
+      id: 1

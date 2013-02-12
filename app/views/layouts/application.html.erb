@@ -156,9 +156,7 @@
 		<% end %>
 		
 		<div class="bottom-menu left">
-			<% Page.all.each do |page| %>
-				<%= link_to page.name, page %>
-			<% end %>
+			<%= bottom_menu_tags %>
 
 			<!-- Yandex.Metrika informer -->
 			<a href="http://metrika.yandex.ru/stat/?id=19899637&amp;from=informer"
