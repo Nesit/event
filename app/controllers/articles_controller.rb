@@ -4,17 +4,21 @@ class ArticlesController < ApplicationController
   before_filter :assign_article, only: [:show]
 
   def index
-    @articles =
-      if params[:type]
-        Article.published.where(type: params[:type])
-      else
-        Article.published
-      end
+    @articles = Article.published
+    @articles = @articles.where(type: params[:type]) if params[:type]
+    
     if params[:tag_id]
       tag = ActsAsTaggableOn::Tag.find(params[:tag_id])
-      @articles = @articles.published.tagged_with(tag)
+      @articles = @articles.tagged_with(tag)
     end
-    @articles = @articles.published.newer_published.page(params[:page]).per(10)
+
+    @articles =
+      case params[:type]
+      when 'EventArticle'
+        @articles.newer_targeted.page(params[:page]).per(10)  
+      else
+        @articles.newer_published.page(params[:page]).per(10)  
+      end
   end
 
   def show
