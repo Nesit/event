@@ -14,9 +14,3 @@ ActiveAdmin.setup do |config|
   config.batch_actions = true
   config.before_filter :set_admin_locale
 end
-
-module ActiveAdmin
-  ResourceController.class_eval do
-    with_role :admin
-  end
-end

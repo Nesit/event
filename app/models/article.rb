@@ -5,7 +5,6 @@ class Article < ActiveRecord::Base
   has_many :galleries, class_name: 'ArticleGallery'
 
   acts_as_taggable
-  attr_accessible :tag_list
 
   before_validation :ensure_published_date
 
@@ -14,7 +13,7 @@ class Article < ActiveRecord::Base
 
   attr_accessible :body, :title, :head_image, :list_item_description,
                   :short_description, :target_at, :author_id, :issue_id, :closed,
-                  :closed_body, :published_at, :published
+                  :closed_body, :published_at, :published, :tag_list
 
   has_many :comments, as: :topic
   belongs_to :author, class_name: 'ArticleAuthor'

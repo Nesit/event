@@ -33,9 +33,9 @@ class User < ActiveRecord::Base
                   :comment_notification, :event_notification,
                   :partner_notification, :weekly_notification, :state,
                   :active_subscription, :password, :password_confirmation,
-                  :article_comment_notification, :as => [:default, :admin]
+                  :article_comment_notification
 
-  attr_accessible :state, :as => [:admin]
+  attr_accessible :state
 
   has_many :authentications, dependent: :destroy
   has_many :comments, foreign_key: :author_id
