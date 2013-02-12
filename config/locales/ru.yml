@@ -51,6 +51,7 @@ ru:
       ReportArticle: "Report"
       TripArticle: "Опыт"
       TvArticle: "TV"
+      DetailArticle: "Детали"
     previous:
       NewsArticle: "Предыдущая новость"
       EventArticle: "Предыдущее событие"
@@ -60,6 +61,7 @@ ru:
       ReportArticle: "Предыдущий репортаж"
       TripArticle: "Предыдущая статья"
       TvArticle: "Предыдущее видео"
+      DetailArticle: "Предыдущая статья"
     next:
       NewsArticle: "Следующая новость"
       EventArticle: "Следующее событие"
@@ -69,6 +71,7 @@ ru:
       ReportArticle: "Следующий репортаж"
       TripArticle: "Следующая статья"
       TvArticle: "Следующее видео"
+      DetailArticle: "Следующая статья"
 
   active_admin:
     dashboard: "Панель"
@@ -80,6 +83,7 @@ ru:
     ReportArticle: "Репортажи"
     TripArticle: "Опыт"
     TvArticle: "TV"
+    DetailArticle: "Детали"
 
   activerecord:
     enums:
@@ -159,3 +163,6 @@ ru:
       event_article:
         one: "событие"
         other: "события"
+      detail_article:
+        one: "статья деталей"
+        other: "статьи деталей"

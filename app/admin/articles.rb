@@ -8,7 +8,7 @@ require Rails.root.join('app/models/article')
 
 %w[ CompanyArticle EventArticle InterviewArticle
   NewsArticle OverviewArticle ReportArticle
-  TripArticle TvArticle
+  TripArticle TvArticle DetailArticle
 ].each do |klass|
   ActiveAdmin.register klass.constantize do
     menu parent: "Статьи", label: I18n.t("active_admin.#{klass}")

@@ -62,7 +62,7 @@ end
 %w[
   CompanyArticle InterviewArticle
   NewsArticle OverviewArticle ReportArticle
-  TripArticle
+  TripArticle DetailArticle
 ].each do |klass_name|
   klass = Class.new(Article) do
     # methods here

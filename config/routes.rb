@@ -5,7 +5,7 @@ EventRu::Application.routes.draw do
   devise_for :admin_users, ActiveAdmin::Devise.config
 
   [ 'company', 'event', 'interview', 'news',
-    'overview', 'report', 'trip'
+    'overview', 'report', 'trip', 'detail'
   ].each do |kind|
     resources :"#{kind}_articles",
       controller: :articles,

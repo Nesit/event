@@ -4,19 +4,12 @@
 		<%= link_to image_tag(asset_path('menu_logo.png')), root_path, class: 'menu-nav-item left menu-logo' %>
 
 		<div class="right menu-right">
-			<% [NewsArticle, EventArticle, InterviewArticle, CompanyArticle, OverviewArticle].each do |klass| %>
-				<%= link_to t("articles.category.#{klass.name}"), articles_path_for_article_class(klass), class: ['menu-nav-item', (active_menu_category?(klass) ? 'active' : '')].join(' ') %>
-			<% end %>
-
-			<%= link_to "Мнения", polls_path, class: ['menu-nav-item', (active_menu_polls? ? 'active' : '')].join(' ') %>
-
-			<% [TripArticle, ReportArticle].each do |klass| %>
+			<% [NewsArticle, EventArticle, InterviewArticle, CompanyArticle, OverviewArticle, DetailArticle, TripArticle, ReportArticle].each do |klass| %>
 				<%= link_to t("articles.category.#{klass.name}"), articles_path_for_article_class(klass), class: ['menu-nav-item', (active_menu_category?(klass) ? 'active' : '')].join(' ') %>
 			<% end %>
 
 			<%= link_to "TV", tv_articles_path, class: ['menu-nav-item', (active_menu_category?(TvArticle) ? 'active' : '')].join(' ') %>
-			<span class="menu-nav-item">Спецпроекты</span>
-			<%#= link_to "Спецпроекты", '#', class: 'menu-nav-item' %>
+			<%= link_to "Мнения", polls_path, class: ['menu-nav-item', (active_menu_polls? ? 'active' : '')].join(' ') %>
 		</div>
 		<div class="clear"></div>
 	</div>
