@@ -12,7 +12,7 @@ module ApplicationHelper
   end
 
   def bottom_menu_tags
-    if config = SiteConfig.first and config.bottom_menu.any?
+    if config = SiteConfig.first and config.bottom_menu['items'].present?
       config.bottom_menu['items'].map do |item|
         case item['kind']
         when 'Page'

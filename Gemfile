@@ -27,6 +27,7 @@ gem 'simple_enum'
 gem 'rmagick'
 gem 'easy_captcha'
 gem 'unicorn'
+gem 'thinking-sphinx', '~> 3.0.1'
 gem 'activemerchant', require: 'active_merchant'
 
 gem 'friendly_id', '~> 4.0.9'
