@@ -7,7 +7,7 @@ require 'bundler/capistrano'
 
 set :repository,  "git@github.com:balticit/event.git"
 set :scm, :git
-set :application, "toonbox"
+set :application, "event"
 ssh_options[:forward_agent] = true
 default_run_options[:pty] = true
 default_run_options[:shell] = '/bin/bash -l'
@@ -58,7 +58,7 @@ namespace :db do
   end
 
   task :load_sample, :roles => :app do
-    run "cd #{latest_release}; RAILS_ENV=#{rails_env} more_samples=true bundle exec rake db:load_sample --trace"
+    run "cd #{latest_release}; RAILS_ENV=#{rails_env} #{rake} db:load_sample --trace"
   end
 end
 
