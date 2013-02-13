@@ -17,15 +17,21 @@ class HomeController < ApplicationController
   end
 
   def page500
-    params[:format] = :html
+    if params[:format] and not params[:formst].in?(['html', 'htm'])
+      head :error
+    end
   end
 
   def page404
-    params[:format] = :html
+    if params[:format] and not params[:formst].in?(['html', 'htm'])
+      head :not_found
+    end
   end
 
   def page403
-    params[:format] = :html
+    if params[:format] and not params[:formst].in?(['html', 'htm'])
+      head :access_denied
+    end
   end
 
   def none
