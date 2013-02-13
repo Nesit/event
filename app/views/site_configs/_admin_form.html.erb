@@ -9,22 +9,23 @@
     <%= f.input :article_list_banner_body %>
   <% end %>
 
-  <%#= f.inputs "Меню" do >
+  <%= f.inputs "Нижнее меню" do %>
     <li>
-      <label>Новый элемент</label>
+      <label>Введите url элемента меню</label>
+      <%= text_field_tag 'url', '', name: nil, id: 'bottom-menu-url-field' %>
     </li>
     <li>
       <label>&nbsp;</label>
-      <div class="edit-menu-block">
-        <%= link_to "Добавить элемент", '#', class: 'admin-add-menu-element-link' >
+      <div id="bottom-menu-edit-block">
+        <%= link_to "Добавить элемент", '#', class: 'admin-add-menu-element-link' %>
+        <%= f.hidden_field :bottom_menu, value: (resource.bottom_menu['items'] and resource.bottom_menu['items'].map { |item| item_for_form(item) }.to_json) %>
+        
         <div class="menu-edit-area">
-          <div class="ui-state-default">Спецпроекты</div>
-          <div class="ui-state-default">Афиша</div>
-          <div class="ui-state-default">Интервью</div>
+          
         </div>
       </div>
     </li>
-  < end %>
+  <% end %>
 
   <%= f.actions %>
 <% end %>

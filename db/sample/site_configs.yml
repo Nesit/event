@@ -9,6 +9,8 @@ config:
   bottom_menu:
     items:
     - kind: Page
-      id: 2
+      data: 2
+      title: "Первая"
     - kind: Page
-      id: 1
+      data: 1
+      title: "Вторая"

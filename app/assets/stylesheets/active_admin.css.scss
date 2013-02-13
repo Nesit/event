@@ -20,8 +20,16 @@
 }
 
 .active_admin {
-	.edit-menu-block {
+	#bottom-menu-edit-block {
 		margin-left: 20%;
+	}
+	.menu-item {
+		background-color: darken(#dddddd, 5);
+		margin-bottom: 5px;
+	}
+
+	.menu-item .out-link {
+		padding-right: 50px;
 	}
 }
 

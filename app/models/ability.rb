@@ -2,6 +2,11 @@ class Ability
   include CanCan::Ability
 
   def initialize(user, admin_user)
+    
+    if admin_user.present?
+      can :new, :menu_item
+    end
+
     # for guest
 
     can :show, :home
