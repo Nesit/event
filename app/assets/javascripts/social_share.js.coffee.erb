@@ -10,7 +10,7 @@ share_social =(url, service) ->
   myWindow.focus()
   
 $ ->
-    $('a.share').live 'click', ->
+    $('a.share').on 'click', ->
       share_social($(@).attr('href'), $(@).data('service'))
       false
 
