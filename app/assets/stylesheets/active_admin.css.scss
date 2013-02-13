@@ -29,7 +29,15 @@
 	}
 
 	.menu-item .out-link {
+		padding-left: 66px;
 		padding-right: 50px;
+	}
+
+	.children {
+		margin-left: 212px;
+		.menu-item {
+			background-color: darken(#dddddd, 15);
+		}
 	}
 }
 

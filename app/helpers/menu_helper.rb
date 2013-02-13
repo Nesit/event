@@ -89,6 +89,7 @@ module MenuHelper
   end
 
   def item_for_form(item)
+    item['children'].map! { |item| item_for_form(item) } if item['children']
     {
       item: item,
       link: url_from_menu_item(item),
