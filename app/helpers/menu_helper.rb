@@ -1,3 +1,5 @@
+# encoding: utf-8
+
 module MenuHelper
   require 'uri'
 
@@ -10,39 +12,55 @@ module MenuHelper
       'overview', 'report', 'trip', 'detail'].map(&:pluralize)
     categories.push 'tv'
 
+    page_regex = /pages\/(.*)/
     article_regex = /(#{categories.join('|')})\/(.*)/
     category_regex = /(#{categories.join('|')})/
-    page_regex = /pages\/(.*)/
+    poll_regex = /polls\/(.*)/
+    polls_regex = /polls/
+
     case uri.path
     when page_regex
       match = page_regex.match(uri.path)
       page = Page.find(match[1])
       result = {
-        kind: 'Page',
-        data: page.id,
-        title: page.name,
+        'kind' => 'Page',
+        'data' => page.id,
+        'title' => page.name,
       }
     when article_regex
       match = article_regex.match(uri.path)
       article = Article.find(match[2])
       result = {
-        kind: 'Article',
-        data: page.id,
-        title: article.title,
+        'kind' => 'Article',
+        'data' => page.id,
+        'title' => article.title,
       }
     when category_regex
       match = category_regex.match(uri.path)
       name = match[1]
       type = "#{name.singularize}_article".camelcase
       result = {
-        kind: 'ArticleCategory',
-        data: type,
-        title: I18n.t("articles.category.#{type}"),
+        'kind' => 'ArticleCategory',
+        'data' => type,
+        'title' => I18n.t("articles.category.#{type}"),
+      }
+    when poll_regex
+      match = poll_regex.match(uri.path)
+      poll = Poll.find(match[1])
+      result = {
+        'kind' => 'Poll',
+        'data' => poll.id,
+        'title' => poll.title,
+      }
+    when polls_regex = /polls/
+      result = {
+        'kind' => 'Polls',
+        'title' => "Мнения",
       }
     else
       result = {
-        kind: 'Special',
-        data: url,
+        'kind' => 'Special',
+        'data' => url,
       }
     end
 
@@ -50,10 +68,6 @@ module MenuHelper
   end
 
   def url_from_menu_item(item)
-    # force to use strings for keys, not symbols,
-    # to make all consistent
-    item = Hash[item.map{ |k, v| [k.to_s, v] }]
-
     case item['kind']
     when 'Page'
       page = Page.find(item['data'])
@@ -64,13 +78,14 @@ module MenuHelper
     when 'ArticleCategory'
       sym = item['data'].underscore.pluralize
       send("#{sym}_path")
+    when 'Poll'
+      poll = Poll.find(item['data'])
+      url_for(poll)
+    when 'Polls'
+      polls_path
     when 'Special'
       item['data']
     end
-  end
-
-  def link_from_menu_item(item)
-    link_to item['title'], url_from_menu_item(item)
   end
 
   def item_for_form(item)
@@ -80,11 +95,9 @@ module MenuHelper
     }
   end
 
-  def active_menu_category?(klass)
-    controller_name == 'articles' and params[:type] == klass.name
-  end
-
-  def active_menu_polls?
-    controller_name == 'polls'
+  def current_menu_item?(item)
+    got = URI.parse(request.url).path
+    expected = URI.parse(url_from_menu_item(item)).path
+    got == expected
   end
 end

@@ -4,13 +4,15 @@
 		<%= link_to image_tag(asset_path('menu_logo.png')), root_path, class: 'menu-nav-item left menu-logo' %>
 
 		<div class="right menu-right">
-			<% [NewsArticle, EventArticle, InterviewArticle, CompanyArticle, OverviewArticle, DetailArticle, TripArticle, ReportArticle].each do |klass| %>
-				<%= link_to t("articles.category.#{klass.name}"), articles_path_for_article_class(klass), class: ['menu-nav-item', (active_menu_category?(klass) ? 'active' : '')].join(' ') %>
+			<% if @config = SiteConfig.first and @config.top_menu['items'].present? %>
+				<% @config.top_menu['items'].each do |item| %>
+					<%= link_to item['title'], url_from_menu_item(item), class: ['menu-nav-item', (current_menu_item?(item) ? 'active' : '')].join(' ') %>
+				<% end %>
+			<% else %>
+				<!-- need to set up site config -->
 			<% end %>
-
-			<%= link_to "TV", tv_articles_path, class: ['menu-nav-item', (active_menu_category?(TvArticle) ? 'active' : '')].join(' ') %>
-			<%= link_to "Мнения", polls_path, class: ['menu-nav-item', (active_menu_polls? ? 'active' : '')].join(' ') %>
 		</div>
 		<div class="clear"></div>
 	</div>
 </div>
+

@@ -1,20 +1,9 @@
-config:
-  id: 1
-  actual_article_id: 2
-  actual_article_description: |
-    Близится 21 декабря, конец света... Вы готовы к нему?
-  article_list_banner_after: 3
-  article_list_banner_body: |
-    Объявление! Покупайте наши памперсы, 10 штук по цене 5! Только сегодня!
-  bottom_menu:
-    items:
-    - kind: Page
-      data: 2
-      title: "Первая"
-    - kind: Page
-      data: 1
-      title: "Вторая"
-  bottom_menu:
+# encoding: utf-8
+
+class AddTopMenuToSiteConfigs < ActiveRecord::Migration
+  def change
+    add_column :site_configs, :top_menu, :text
+    source = <<-YAML
     items:
     - kind: ArticleCategory
       data: NewsArticle
@@ -45,3 +34,10 @@ config:
       title: "TV"
     - kind: Polls
       title: "Мнения"
+    YAML
+    if config = SiteConfig.first
+      config.top_menu = YAML.load(source)
+      config.save!
+    end
+  end
+end

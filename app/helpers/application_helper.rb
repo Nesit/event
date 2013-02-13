@@ -15,7 +15,7 @@ module ApplicationHelper
 
   def bottom_menu_tags
     if config = SiteConfig.first and config.bottom_menu['items'].present?
-      config.bottom_menu['items'].map { |item| link_from_menu_item(item) }
+      config.bottom_menu['items'].map { |item| link_to item['title'], url_from_menu_item(item) }
     else
       Page.all.map { |page| link_to page.name, page }
     end.join.html_safe
