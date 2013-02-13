@@ -56,6 +56,10 @@ group :development do
   gem 'sextant'
   gem 'quiet_assets'
   gem 'letter_opener'
+  gem 'capistrano'
+  gem 'capistrano-ext'
+  gem 'capistrano-unicorn'
+  gem 'rvm-capistrano'
 end
 
 group :test, :development do
