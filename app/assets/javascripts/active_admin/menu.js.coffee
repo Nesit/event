@@ -23,6 +23,16 @@ $ ->
             title = $(e).find('input').val()
             items.push(data: data, kind: kind, title: title)
         $input.val(JSON.stringify(items))
+
+    save_top_menu = ->
+        $input = $('#top-menu-edit-block input[name="site_config[top_menu]"]')
+        items = []
+        $('#top-menu-edit-block .menu-edit-area .menu-item').each (i, e) ->
+            data = $(e).attr('data-data')
+            kind = $(e).attr('data-kind')
+            title = $(e).find('input').val()
+            items.push(data: data, kind: kind, title: title)
+        $input.val(JSON.stringify(items))
     
     $('.menu-edit-area').disableSelection()
 
@@ -53,5 +63,29 @@ $ ->
                 success: (data) ->
                     $area.append(item_template(data, false))
                     save_bottom_menu()
+
+    $top_block = $('#top-menu-edit-block')
+    unless $top_block.length == 0
+        $top_block.find('.menu-edit-area').sortable
+            stop: (event, ui) ->
+                save_top_menu()
+        
+        data = $top_block.find('input[name="site_config[top_menu]"]').val()
+        items = JSON.parse(data)
+        $area = $top_block.find('.menu-edit-area')
+        for item in items
+            $area.append(item_template(item, false))
+        
+        save_top_menu()
+
+        $top_block.on 'click', '.admin-add-menu-element-link', (event) ->
+            event.preventDefault()
+            url = $('#top-menu-url-field').val()
+            $.ajax
+                url: '/menu_items/new'
+                data: { url: url }
+                success: (data) ->
+                    $area.append(item_template(data, false))
+                    save_top_menu()
 
         

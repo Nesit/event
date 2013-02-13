@@ -8,6 +8,8 @@ ActiveAdmin.register SiteConfig do
     def parse_menu
       params[:site_config][:bottom_menu] =
         {'items' => JSON(params[:site_config][:bottom_menu])}
+      params[:site_config][:top_menu] =
+        {'items' => JSON(params[:site_config][:top_menu])}
     end
 
     def index
