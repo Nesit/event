@@ -4,8 +4,8 @@
 		<%= link_to image_tag(asset_path('menu_logo.png')), root_path, class: 'menu-nav-item left menu-logo' %>
 
 		<div class="right menu-right">
-			<% if @config = SiteConfig.first and @config.top_menu['items'].present? %>
-				<% @config.top_menu['items'].each do |item| %>
+			<% if config = SiteConfig.first and config.top_menu['items'].present? %>
+				<% config.top_menu['items'].each do |item| %>
 				<div class="menu-nav-item">
 					<%= link_to item['title'], url_from_menu_item(item), class: (current_menu_item?(item) ? 'active' : '') %>
 					<% if item['children'] and item['children'].any? %>
