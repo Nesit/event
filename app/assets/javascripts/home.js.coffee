@@ -30,3 +30,11 @@ $ ->
             str = "#{hours}:#{minutes}:#{seconds}"
             $('#utmost-left-block .current-time').html(str)
         setInterval(update_clock, 1000)
+
+    $('#menu-nav-list .menu-nav-item').on 'mouseenter', ->
+        console.log("enter")
+        $(this).find('.children').removeClass('hidden')
+
+    $('#menu-nav-list .menu-nav-item').on 'mouseout', ->
+        console.log("out")
+        $(this).find('.children').addClass('hidden')

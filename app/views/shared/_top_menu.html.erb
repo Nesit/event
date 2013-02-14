@@ -6,7 +6,16 @@
 		<div class="right menu-right">
 			<% if @config = SiteConfig.first and @config.top_menu['items'].present? %>
 				<% @config.top_menu['items'].each do |item| %>
-					<%= link_to item['title'], url_from_menu_item(item), class: ['menu-nav-item', (current_menu_item?(item) ? 'active' : '')].join(' ') %>
+				<div class="menu-nav-item">
+					<%= link_to item['title'], url_from_menu_item(item), class: (current_menu_item?(item) ? 'active' : '') %>
+					<% if item['children'] and item['children'].any? %>
+						<div class="children hidden">
+							<% item['children'].each do |item| %>
+								<%= link_to item['title'], url_from_menu_item(item), class: 'menu-nav-item' %>
+							<% end %>
+						</div>
+					<% end %>
+				</div>
 				<% end %>
 			<% else %>
 				<!-- need to set up site config -->
