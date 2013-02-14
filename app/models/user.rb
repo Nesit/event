@@ -75,10 +75,14 @@ class User < ActiveRecord::Base
   end
 
   def activate!
-    if password.blank?
+    ensure_plain_password
+    super
+  end
+
+  def ensure_plain_password
+    if crypted_password.blank? and password.blank?
       self.password = SecureRandom.hex(4)
     end
-    super
   end
 
   # this method generates merge token and sends emails with link
