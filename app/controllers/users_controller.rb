@@ -12,6 +12,7 @@ class UsersController < ApplicationController
   def create
     if valid_captcha?(params[:captcha])
       @user = User.new(params[:user])
+      @user.ensure_plain_password
       @user.save!
       head :ok
     else
