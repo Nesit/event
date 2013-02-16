@@ -44,10 +44,19 @@
 		padding-top: 15px;
 		border-bottom: 1px solid $grey-border-color;
 
-		img.avatar {
-			margin-right: 10px;
-			width: 60px;
-			height: 60px;
+		.avatar-block {
+			height: 100%;
+			img.avatar {
+				margin-right: 10px;
+				width: 60px;
+				height: 60px;
+			}
+		}
+
+		.comment-removed-by-user-state p,
+		.comment-removed-by-admin-state p {
+			padding: 15px;
+			background-color: $remove-comment-bg-color;
 		}
 
 		.comment-author-name {
@@ -71,14 +80,14 @@
 				font-weight: bold;
 			}
 
-			.update-comment-link, .delete-comment-link {
+			.edit-comment-link, .delete-comment-link {
 				width: 10px;
 				height: 10px;
 				display: block;
 				margin-left: 10px;
 			}
 
-			.update-comment-link {
+			.edit-comment-link {
 				background: asset-url("comment_icons.png", image) 0 0;
 			}
 
@@ -100,17 +109,20 @@
 		}
 
 		textarea {
-			width: 100%;
-			height: 123px;
-			margin-left: 70px;
 			border: 1px solid $grey-border-color;
 			resize: none;
+			margin-top: 16px;
+			width: 100%;
+			height: 123px;
+		}
+
+		form {
+			margin-left: 70px;
 		}
 
 		input[type=submit] {
 			@include button;
 			margin: 16px 0;
-			margin-left: 70px;
 			width: 200px;
 		}
 	}

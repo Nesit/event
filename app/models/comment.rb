@@ -28,6 +28,18 @@ class Comment < ActiveRecord::Base
     end
   end
 
+  def active?
+    state == 'active'
+  end
+
+  def removed_by_owner?
+    state == 'removed_by_owner'
+  end
+
+  def removed_by_admin?
+    state == 'removed_by_admin'
+  end
+
   store :versions
   def texts_versions
     versions['items'] or []
@@ -43,6 +55,10 @@ class Comment < ActiveRecord::Base
       })
     end
     self[:body] = value
+  end
+
+  def owner?(user)
+    user.present? and (user.id == author_id)
   end
 
   private

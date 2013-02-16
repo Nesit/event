@@ -53,7 +53,7 @@ class Ability
     can [:edit, :update, :ensure_name], User
 
     if user.complete?
-      can :create, Comment
+      can [:create, :update, :destroy], Comment
     end
   end
 end

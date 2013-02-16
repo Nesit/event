@@ -10,14 +10,14 @@ class CommentsController < ApplicationController
 
   def update
     @comment = current_user.comments.find(params[:id])
-    @comment.body = params[:body]
+    @comment.body = params[:comment][:body]
     @comment.save!
     head :ok
   end
 
   def destroy
     @comment = current_user.comments.find(params[:id])
-    @comment.state = 'removed_by_user'
+    @comment.state = 'removed_by_owner'
     @comment.save!
     head :ok
   end
