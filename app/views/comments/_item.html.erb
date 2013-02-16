@@ -10,6 +10,11 @@
 					<span class="name"><%= comment.author.name %></span>
 				<% end %>
 				<span class="date"><%= comment.created_at.strftime("%d.%m.%Y %H:%M") %></span>
+
+				<% if current_user and comment.author.id == current_user.id %>
+					<%= link_to "", comment_path(comment), class: 'delete-comment-link right', method: :delete, remote: true %>
+					<%= link_to "", comment_path(comment), class: 'update-comment-link right', method: :put, remote: true %>
+				<% end %>
 			</div>
 			<p><%= comment.body %></p>
 
@@ -33,7 +38,9 @@
 		</div>
 		<div class="clear"></div>
 	</div>
-	<% comment.children.each do |comment| %>
-		<%= render 'comments/item', comment: comment %>
+	<% if nested %>
+		<% comment.children.each do |comment| %>
+			<%= render 'comments/item', comment: comment, nested: nested %>
+		<% end %>
 	<% end %>
 </div>

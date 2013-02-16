@@ -8,6 +8,20 @@ class CommentsController < ApplicationController
     redirect_to @comment.topic
   end
 
+  def update
+    @comment = current_user.comments.find(params[:id])
+    @comment.body = params[:body]
+    @comment.save!
+    head :ok
+  end
+
+  def destroy
+    @comment = current_user.comments.find(params[:id])
+    @comment.state = 'removed_by_user'
+    @comment.save!
+    head :ok
+  end
+
   def index
     @comments = Comment.where(topic_type: params[:topic_type],
                               topic_id: params[:topic_id]).page(params[:page])

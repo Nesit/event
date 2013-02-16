@@ -70,6 +70,21 @@
 				margin-left: 7px;
 				font-weight: bold;
 			}
+
+			.update-comment-link, .delete-comment-link {
+				width: 10px;
+				height: 10px;
+				display: block;
+				margin-left: 10px;
+			}
+
+			.update-comment-link {
+				background: asset-url("comment_icons.png", image) 0 0;
+			}
+
+			.delete-comment-link {
+				background: asset-url("comment_icons.png", image) -10px 0;
+			}
 		}
 
 		.blue-link {

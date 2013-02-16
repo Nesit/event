@@ -18,6 +18,6 @@
 	<% end %>
 
 	<% topic.comments.toplevel.page(1).each do |comment| %>
-		<%= render 'comments/item', comment: comment %>
+		<%= render 'comments/item', comment: comment, nested: true %>
 	<% end %>
 </div>

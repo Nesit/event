@@ -30,7 +30,7 @@ EventRu::Application.routes.draw do
   end
 
   resources :shares, only: [:create]
-  resources :comments, only: [:create, :index]
+  resources :comments, only: [:create, :index, :update, :destroy]
   resources :cities, only: [:index]
   resources :pages, only: [:show]
   resources :article_galleries, only: [:show]
