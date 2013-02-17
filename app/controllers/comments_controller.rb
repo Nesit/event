@@ -5,7 +5,7 @@ class CommentsController < ApplicationController
     @comment = Comment.new params[:comment]
     @comment.author_id = current_user.id
     @comment.save!
-    redirect_to @comment.topic
+    render partial: 'comments/item', locals: { comment: @comment, nested: false }
   end
 
   def update

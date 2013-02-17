@@ -1,9 +1,4 @@
 $ ->
-    $('.comment-reply-link').on 'click', (event) ->
-        $(this).closest('.comment').find('form').removeClass('hidden')
-        $(this).parent().addClass('hidden')
-        event.preventDefault()
-
     $('#top-comment-form textarea.auth-required').on 'click', ->
         if $(this).attr('readonly')
             window.show_login_dialog()
@@ -77,6 +72,20 @@ $ ->
 
         $(this).closest('.comment').find('.edit-comment-link').show()
 
-    $('.comments-list form').on 'submit', (event) ->
+    $(document).on 'click', '.comment-reply-link', (event) ->
+        $item = $(this).closest('.comment')
+        $form = $item.find('.comment-reply-block form')
+        $form.removeClass('hidden')
+        $form.find('textarea').val('')
+        $(this).parent().addClass('hidden')
+        event.preventDefault()
+
+    $(document).on 'ajax:success', '.comment-reply-block form', (event, data) ->
+        $item = $(this).closest('.comment')
+        $item.find('.comment-tree').prepend(data)
+        $item.find('.comment-reply-link').parent().removeClass('hidden')
+        $item.find('.comment-reply-block form').addClass('hidden')
+
+    $(document).on 'submit', '.comments-list form', (event) ->
         if $(this).find('textarea').val() == ""
             event.preventDefault()

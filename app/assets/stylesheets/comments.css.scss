@@ -40,9 +40,13 @@
 		}
 	}
 
+	> .comment-tree > :first-child {
+		border-top: 0;
+	}
+
 	.comment {
 		padding-top: 15px;
-		border-bottom: 1px solid $grey-border-color;
+		border-top: 1px solid $grey-border-color;
 
 		.avatar-block {
 			height: 100%;
