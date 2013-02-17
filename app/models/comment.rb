@@ -7,7 +7,13 @@ class Comment < ActiveRecord::Base
   belongs_to :topic, polymorphic: true
   belongs_to :author, class_name: 'User'
 
+  scope :newer, order('comments.created_at DESC')
+  scope :older, order('comments.created_at ASC')
+
   scope :toplevel, where(ancestry: [nil, ''])
+  scope :active, where(state: 'active')
+  scope :removed_by_owner, where(state: 'removed_by_owner')
+  scope :removed_by_admin, where(state: 'removed_by_admin')
 
   has_ancestry
 

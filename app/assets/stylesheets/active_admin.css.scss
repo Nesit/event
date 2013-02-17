@@ -19,6 +19,7 @@
 	}
 }
 
+
 .active_admin {
 	#bottom-menu-edit-block, #top-menu-edit-block {
 		margin-left: 20%;
@@ -38,6 +39,12 @@
 		.menu-item {
 			background-color: darken(#dddddd, 15);
 		}
+	}
+
+	.comment-versions p {
+		margin: 10px 0;
+		padding: 15px;
+		background-color: darken(#dddddd, 3);
 	}
 }
 
