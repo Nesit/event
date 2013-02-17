@@ -1,9 +1,4 @@
 ru:
-  active_admin:
-    scopes:
-      all: Все
-      with_subscription: Подписанные
-
   need_email: Необходим e-mail
   need_info: Неоходима информация
   complete: Все есть
@@ -40,6 +35,8 @@ ru:
     short_description: "текст для отображение в заголовочном блоке"
     closed_body: "содержимое"
     target_at: "назначено на"
+    topic: "тема"
+    edit_count: "редактировалось раз"
 
   articles:
     category:
@@ -84,6 +81,17 @@ ru:
     TripArticle: "Опыт"
     TvArticle: "TV"
     DetailArticle: "Детали"
+    
+    scopes:
+      all: Все
+      active: Активные
+      removed_by_owner: Удалённые пользователем
+      removed_by_admin: Удалённые администрацией
+      with_subscription: Подписанные
+    
+    batch_actions:
+      labels:
+        remove_by_admin: "Удалить как администратор"
 
   activerecord:
     enums:

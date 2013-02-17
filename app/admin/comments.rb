@@ -11,6 +11,7 @@ ActiveAdmin.register ::Comment, as: "ContentComment" do
     redirect_to admin_content_comments_path
   end
 
+  scope :all
   scope :active, default: true
   scope :removed_by_owner
   scope :removed_by_admin
