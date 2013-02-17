@@ -80,6 +80,10 @@
 				display: inline-block;
 				width: 115px;
 				margin-left: 10px;
+
+				.star {
+					color: red;
+				}
 			}
 
 			label, .description {
