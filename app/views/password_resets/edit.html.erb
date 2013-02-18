@@ -1,0 +1,17 @@
+<h1>Введите новый пароль</h1>
+<%= semantic_form_for @user, url: password_reset_path(id: @token), method: :put do |f| %>
+  <div id="reset-password-fields">
+    <div class="field">
+      <%= f.label :password %>
+      <%= f.password_field :password %>
+      <%= f.semantic_errors :password %>
+    </div>
+    <div class="field">
+      <%= f.label :password_confirmation %>
+      <%= f.password_field :password_confirmation %>
+    </div>
+    <div class="actions">
+      <%= f.submit "Отправить" %>
+    </div>
+  </div>
+<% end %>

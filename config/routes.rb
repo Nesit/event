@@ -5,7 +5,6 @@ EventRu::Application.routes.draw do
   devise_for :admin_users, ActiveAdmin::Devise.config
   resources :menu_items, only: [:new]
 
-
   [ 'company', 'event', 'interview', 'news',
     'overview', 'report', 'trip', 'detail'
   ].each do |kind|
@@ -61,6 +60,8 @@ EventRu::Application.routes.draw do
   get 'users/merge' => 'users#merge', as: :merge_user
   post 'users/merge' => 'users#create_merge_request'
   get 'users/callback' => 'users#oauth_callback'
+
+  resources :password_resets, only: [:create, :edit, :update]
 
   resources :robokassa_payments, only: [] do
     collection do

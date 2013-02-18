@@ -14,7 +14,12 @@
 	}
 }
 
-#login-dialog, #register-dialog, #register-thanks-dialog, #subscribe-dialog, #email-dialog {
+#login-dialog,
+#register-dialog,
+#message-dialog,
+#subscribe-dialog,
+#email-dialog,
+#reset-password-dialog {
 	@include sans-serif;
 
 	width: 500px;
@@ -69,7 +74,12 @@
 	}
 }
 
-#login-dialog, #register-dialog, #register-thanks-dialog, #subscribe-dialog, #email-dialog {
+#login-dialog,
+#register-dialog,
+#message-dialog,
+#subscribe-dialog,
+#email-dialog,
+#reset-password-dialog {
 	position: fixed;
 	margin-left: -250px;
 	margin-top: -200px;
@@ -163,7 +173,8 @@
 	}
 }
 
-#email-dialog {
+#email-dialog,
+#reset-password-dialog {
 	width: 360px;
 	margin-left: -180px;
 
@@ -177,7 +188,7 @@
 	}
 }
 
-#register-thanks-dialog {
+#message-dialog {
 	h2 {
 		color: $grey-text-color;
 		font-size: 16px;

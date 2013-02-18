@@ -16,6 +16,9 @@ class Ability
     # to be able log in
     can :create, :user_session
 
+    # be able to reset password
+    can [:create, :edit, :update], :password_reset
+
     # to log in through OAuth, activate from email
     can [
       :create, :activate, :merge, :create_merge_request, :oauth,

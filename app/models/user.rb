@@ -15,6 +15,7 @@ class User < ActiveRecord::Base
   validates :merge_email, format: /.+\@.+\..+/, if: proc { merge_email.present? }
 
   validates :password, length: { minimum: 6 }, if: :password
+  validates :password, confirmation: true
 
   before_validation :process_new_city
   before_validation :ensure_uniqueness_name
@@ -26,6 +27,7 @@ class User < ActiveRecord::Base
   before_validation :select_state
 
   attr_accessor :new_city, :new_country_cd
+  attr_accessor :password_confirmation
 
   attr_accessible :born_at, :gender_cd, :city_id, :new_city,
                   :new_country_cd, :company, :position, :website,
