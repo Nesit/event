@@ -53,7 +53,7 @@ class Ability
     can :read, City
     can :manage, Subscription
     can :read, :notification
-    can [:edit, :update, :ensure_name], User
+    can [:edit, :update, :ensure_name, :edit_password, :update_password], User
 
     if user.complete?
       can [:create, :update, :destroy], Comment

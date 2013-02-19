@@ -27,7 +27,7 @@ class User < ActiveRecord::Base
   before_validation :select_state
 
   attr_accessor :new_city, :new_country_cd
-  attr_accessor :password_confirmation
+  attr_accessor :password_confirmation, :old_password
 
   attr_accessible :born_at, :gender_cd, :city_id, :new_city,
                   :new_country_cd, :company, :position, :website,

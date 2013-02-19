@@ -55,6 +55,27 @@ class UsersController < ApplicationController
       head :ok
     end
   end
+
+  def edit_password
+    @user = current_user
+  end
+
+  def update_password
+    @user = User.authenticate(current_user.email, params[:user][:old_password])
+    if @user.blank?
+      @user = current_user
+      @user.errors.add(:old_password, "введён неверно")
+      render 'edit_password'
+    else
+      @user.password = params[:user][:password]
+      @user.password_confirmation = params[:user][:password_confirmation]
+      if @user.save
+        redirect_to edit_user_path
+      else
+        render 'edit_password'
+      end
+    end
+  end
   
   def activate
     if @user = User.load_from_activation_token(params[:token])

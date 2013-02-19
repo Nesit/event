@@ -23,6 +23,7 @@ ru:
     sign_in_count: "количество входов"
     password: "пароль"
     password_confirmation: "подтверждение пароля"
+    old_password: "старый пароль"
     body: "содержимое"
     closed: "закрыта!"
     published: "опубликована"
