@@ -53,6 +53,8 @@ class User < ActiveRecord::Base
   scope :activated, where(activation_state: 'active')
   scope :with_subscription, where(active_subscription: true)
 
+  scope :weekly_subscribers, -> { where(active_subscription: true, weekly_notification: true) }
+
   state_machine :state, initial: :need_info do
     after_transition any => :banned, :do => :banned_user
 
@@ -117,7 +119,7 @@ class User < ActiveRecord::Base
         comment.save!
       end
       self.comments(true)
-      
+
       user.authentications.each do |auth|
         auth.user_id = self.id
         auth.save!
@@ -142,7 +144,7 @@ class User < ActiveRecord::Base
       self.active_subscription |= user.active_subscription
 
       # TODO load other user avatar if present
-      
+
       user.delete
     end
     self.save!

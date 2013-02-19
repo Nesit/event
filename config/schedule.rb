@@ -8,3 +8,11 @@ every 1.day, :at => '3:00 am' do
   rake "subscription:check_expiration"
 end
 
+every :monday, :at => '12pm' do
+  rake 'newsletter:weekly_monday'
+end
+
+every :thursday, :at => '12pm' do
+  rake 'newsletter:weekly_thursday'
+end
+

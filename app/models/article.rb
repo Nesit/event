@@ -27,6 +27,14 @@ class Article < ActiveRecord::Base
   scope :without_tv, where('type <> ?', 'TvArticle')
   scope :published, where(published: true)
 
+  scope :published_to_monday, -> { published.where('published_at BETWEEN ? AND ?',
+                                   (Time.zone.now.prev_week.monday + 3.days).beginning_of_day, Time.zone.now.monday.end_of_day)
+  }
+
+  scope :published_to_thursday, -> { published.where('published_at BETWEEN ? AND ?',
+                                   (Time.zone.now.prev_week.monday).beginning_of_day, (Time.zone.now.monday + 3.days).end_of_day)
+  }
+
   extend FriendlyId
   friendly_id :title, use: :slugged
 

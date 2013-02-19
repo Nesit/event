@@ -62,6 +62,9 @@ group :development do
   gem 'capistrano-ext'
   gem 'capistrano-unicorn'
   gem 'rvm-capistrano'
+  gem 'debugger'
+
+  gem 'rb-inotify', '~> 0.8.8'
 end
 
 group :test, :development do
@@ -70,5 +73,11 @@ group :test, :development do
   gem 'cucumber-rails', require: false
   gem 'database_cleaner'
   gem 'capybara'
-  gem 'debugger'
+  gem 'spork-rails'
+  gem 'guard-spork'
+  gem 'guard-rspec'
+  gem 'ffaker'
+  gem 'timecop'
+  gem 'email_spec'
+  gem 'rspec-mocks'
 end
