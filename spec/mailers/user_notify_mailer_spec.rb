@@ -18,7 +18,7 @@ describe UserNotifyMailer do
     end
     NewsArticle.stub(:published_to_monday).and_return NewsArticle.scoped
     mail = UserNotifyMailer.weekly_newsletter_monday(user).deliver
-    mail.subject.should == 'Вас непременно это заинтересует!'
+    mail.subject.should == 'Новые статьи на Event.ru'
     mail.from.should == ['robot@event.ru']
   end
 end
