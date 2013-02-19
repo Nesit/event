@@ -12,4 +12,11 @@ namespace :newsletter do
       UserNotifyMailer.weekly_newsletter_thursday(user).deliver
     end
   end
+
+  desc "Send new events newsletter"
+  task :event_subscriber => :environment do
+    User.event_subscribers.each do |user|
+      UserNotifyMailer.event_subscriber(user).deliver
+    end
+  end
 end

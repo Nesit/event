@@ -16,3 +16,7 @@ every :thursday, :at => '12pm' do
   rake 'newsletter:weekly_thursday'
 end
 
+every :tuesday, :at => '12pm' do
+  rake 'newsletter:event_subscriber'
+end
+

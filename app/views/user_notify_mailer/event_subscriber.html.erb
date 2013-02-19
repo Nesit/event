@@ -1,0 +1,9 @@
+Напоминаем вам о будущих событиях:<br />
+
+<% @events.each do |day, events| %>
+  <h2><%= I18n.t(day.strftime('%A')) %></h2><br />
+  <% events.each do |event| -%>
+    "<%= event.title %>"(<%= link_to event_article_url(event), event_article_url(event) %>)<br />
+  <% end %>
+  <br /><br />
+<% end -%>

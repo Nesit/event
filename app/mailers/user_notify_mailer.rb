@@ -13,4 +13,10 @@ class UserNotifyMailer < ActionMailer::Base
     return if @news.empty?
     mail(to: user.email, :subject => "Новые статьи на Event.ru")
   end
+
+  def event_subscriber(user)
+    @events = NewsArticle.new_events_tuesday.group_by(&:target_at)
+    return if @events.empty?
+    mail(to: user.email, :subject => "Афиша Event.ru")
+  end
 end

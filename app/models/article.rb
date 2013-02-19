@@ -35,6 +35,10 @@ class Article < ActiveRecord::Base
                                    (Time.zone.now.prev_week.monday).beginning_of_day, (Time.zone.now.monday + 3.days).end_of_day)
   }
 
+  scope :new_events_tuesday, -> { published.where('target_at BETWEEN ? AND ?',
+                                   (Time.zone.now.monday + 1.day).beginning_of_day, Time.zone.now.next_week.end_of_week)
+  }
+
   extend FriendlyId
   friendly_id :title, use: :slugged
 

@@ -54,6 +54,7 @@ class User < ActiveRecord::Base
   scope :with_subscription, where(active_subscription: true)
 
   scope :weekly_subscribers, -> { where(active_subscription: true, weekly_notification: true) }
+  scope :event_subscribers, -> { where(active_subscription: true, event_notification: true) }
 
   state_machine :state, initial: :need_info do
     after_transition any => :banned, :do => :banned_user
