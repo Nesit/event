@@ -116,7 +116,7 @@
 				width: 274px;
 			}
 
-			input[type=text] {
+			input[type=text], input[type=password] {
 				@include form-text-field;
 				width: 200px;
 			}
@@ -151,5 +151,35 @@
 				}
 			}
 		}
+	}
+
+	#profile-password-block {
+		h1 {
+			@include page-title;
+		}
+
+		.field {
+			position: relative;
+
+			input[type=text], input[type=password] {
+				width: 270px;
+			}
+
+			.errors {
+				position: absolute;
+				top: 0;
+				left: 290px;
+				li {
+					@include error-block;
+					padding: 5px;
+				}
+			}
+		}
+
+		input[type=submit] {
+			width: 280px;
+		}
+
+		padding-top: 10px;
 	}
 }
