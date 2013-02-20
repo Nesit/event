@@ -19,4 +19,17 @@ namespace :newsletter do
       UserNotifyMailer.event_subscriber(user).deliver
     end
   end
+
+  desc "Send partner newsletter"
+  task :partner_newsletter => :environment do
+    @newsletters = PartnerNewsletter.need_to_send
+    next if @newsletters.empty?
+    @newsletters.each do |newsletter|
+      newsletter.in_progress
+      User.partner_notifications.each do |user|
+        UserNotifyMailer.partner_newsletter(user, newsletter).deliver
+      end
+      newsletter.done
+    end
+  end
 end

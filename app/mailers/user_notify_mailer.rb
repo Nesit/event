@@ -19,4 +19,9 @@ class UserNotifyMailer < ActionMailer::Base
     return if @events.empty?
     mail(to: user.email, :subject => "Афиша Event.ru")
   end
+
+  def partner_newsletter(user, newsletter)
+    @newsletter = newsletter
+    mail(to: user.email, :subject => "Event.ru рекомендует")
+  end
 end

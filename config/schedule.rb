@@ -20,3 +20,6 @@ every :tuesday, :at => '12pm' do
   rake 'newsletter:event_subscriber'
 end
 
+every 10.minutes do
+  rake 'newsletter:partner_newsletter'
+end

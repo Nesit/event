@@ -1,4 +1,8 @@
 ru:
+  pending: В ожидании
+  in_progress: Выполняется
+  done: Уже выполнен 
+  reject: Отклонён
   Monday: Понедельник
   Tuesday: Вторник
   Wednesday: Среда
