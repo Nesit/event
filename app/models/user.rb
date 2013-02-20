@@ -186,6 +186,7 @@ class User < ActiveRecord::Base
   end
 
   def select_state
+    self.state = 'complete'
     complete = true
     FIELDS_FOR_COMPLETE.each do |sym|
       if send(sym).blank?
@@ -193,6 +194,7 @@ class User < ActiveRecord::Base
         break
       end
     end
+    self.state = 'need_info' unless complete
   end
 
   # use separate validator instead of uniqueness: true
