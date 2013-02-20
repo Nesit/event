@@ -82,7 +82,7 @@ class User < ActiveRecord::Base
   end
 
   def ensure_plain_password
-    if password.blank?
+    if crypted_password.blank? and password.blank?
       self.password = SecureRandom.hex(4)
     end
   end
@@ -117,7 +117,7 @@ class User < ActiveRecord::Base
         comment.save!
       end
       self.comments(true)
-      
+
       user.authentications.each do |auth|
         auth.user_id = self.id
         auth.save!
@@ -142,7 +142,7 @@ class User < ActiveRecord::Base
       self.active_subscription |= user.active_subscription
 
       # TODO load other user avatar if present
-      
+
       user.delete
     end
     self.save!
