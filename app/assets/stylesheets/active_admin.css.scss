@@ -19,9 +19,32 @@
 	}
 }
 
+
 .active_admin {
-	.edit-menu-block {
+	#bottom-menu-edit-block, #top-menu-edit-block {
 		margin-left: 20%;
+	}
+	.menu-item {
+		background-color: darken(#dddddd, 5);
+		margin-bottom: 5px;
+	}
+
+	.menu-item .out-link {
+		padding-left: 66px;
+		padding-right: 50px;
+	}
+
+	.children {
+		margin-left: 212px;
+		.menu-item {
+			background-color: darken(#dddddd, 15);
+		}
+	}
+
+	.comment-versions p {
+		margin: 10px 0;
+		padding: 15px;
+		background-color: darken(#dddddd, 3);
 	}
 }
 

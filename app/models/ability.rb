@@ -2,6 +2,11 @@ class Ability
   include CanCan::Ability
 
   def initialize(user, admin_user)
+    
+    if admin_user.present?
+      can :new, :menu_item
+    end
+
     # for guest
 
     can :show, :home
@@ -11,8 +16,14 @@ class Ability
     # to be able log in
     can :create, :user_session
 
+    # be able to reset password
+    can [:create, :edit, :update], :password_reset
+
     # to log in through OAuth, activate from email
-    can [:create, :activate, :oauth, :oauth_callback, :ensure_email], User
+    can [
+      :create, :activate, :merge, :create_merge_request, :oauth,
+      :oauth_callback, :ensure_email
+      ], User
 
     can :read, Article
     can :preview, Article if admin_user
@@ -30,7 +41,7 @@ class Ability
 
     return if user.blank?
 
-    can [:update_email], User if user.state == 'need_email'
+    can [:update_email], User if user.email.blank?
 
     # now for registered user
     can :manage, PollVote
@@ -42,10 +53,10 @@ class Ability
     can :read, City
     can :manage, Subscription
     can :read, :notification
-    can [:edit, :update, :ensure_name], User
+    can [:edit, :update, :ensure_name, :edit_password, :update_password], User
 
     if user.complete?
-      can :create, Comment
+      can [:create, :update, :destroy], Comment
     end
   end
 end

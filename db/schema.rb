@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20130208130643) do
+ActiveRecord::Schema.define(:version => 20130215074226) do
 
   create_table "active_admin_comments", :force => true do |t|
     t.string   "resource_id",   :null => false
@@ -139,6 +139,8 @@ ActiveRecord::Schema.define(:version => 20130208130643) do
     t.string   "topic_type"
     t.datetime "created_at", :null => false
     t.datetime "updated_at", :null => false
+    t.string   "state"
+    t.text     "versions"
   end
 
   add_index "comments", ["ancestry"], :name => "index_comments_on_ancestry"
@@ -214,6 +216,8 @@ ActiveRecord::Schema.define(:version => 20130208130643) do
     t.datetime "updated_at",                 :null => false
     t.integer  "article_list_banner_after"
     t.text     "article_list_banner_body"
+    t.text     "bottom_menu"
+    t.text     "top_menu"
   end
 
   create_table "subscriptions", :force => true do |t|
@@ -276,11 +280,15 @@ ActiveRecord::Schema.define(:version => 20130208130643) do
     t.boolean  "event_notification",              :default => true,  :null => false
     t.boolean  "partner_notification",            :default => true,  :null => false
     t.boolean  "weekly_notification",             :default => true,  :null => false
+    t.string   "merge_token"
+    t.string   "merge_email"
+    t.datetime "merge_token_expires_at"
   end
 
   add_index "users", ["activation_token"], :name => "index_users_on_activation_token"
   add_index "users", ["city_id"], :name => "index_users_on_city_id"
   add_index "users", ["email"], :name => "index_users_on_email"
+  add_index "users", ["merge_token"], :name => "index_users_on_merge_token"
   add_index "users", ["remember_me_token"], :name => "index_users_on_remember_me_token"
   add_index "users", ["reset_password_token"], :name => "index_users_on_reset_password_token"
   add_index "users", ["state"], :name => "index_users_on_state"

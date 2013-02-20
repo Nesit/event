@@ -3,9 +3,10 @@ EventRu::Application.routes.draw do
 
   ActiveAdmin.routes(self)
   devise_for :admin_users, ActiveAdmin::Devise.config
+  resources :menu_items, only: [:new]
 
   [ 'company', 'event', 'interview', 'news',
-    'overview', 'report', 'trip'
+    'overview', 'report', 'trip', 'detail'
   ].each do |kind|
     resources :"#{kind}_articles",
       controller: :articles,
@@ -28,7 +29,7 @@ EventRu::Application.routes.draw do
   end
 
   resources :shares, only: [:create]
-  resources :comments, only: [:create, :index]
+  resources :comments, only: [:create, :index, :update, :destroy]
   resources :cities, only: [:index]
   resources :pages, only: [:show]
   resources :article_galleries, only: [:show]
@@ -53,10 +54,16 @@ EventRu::Application.routes.draw do
   get 'profile/name' => 'users#ensure_name', as: :ensure_user_name
   get 'profile/email' => 'users#ensure_email', as: :ensure_user_email
   put 'profile/email' => 'users#update_email', as: :update_user_email
+  get 'profile/password' => 'users#edit_password', as: :profile_password
+  post 'profile/password' => 'users#update_password'
 
   get 'users/oauth' => 'users#oauth', as: :oauth_login
   get 'users/activate' => 'users#activate', as: :activate_user
+  get 'users/merge' => 'users#merge', as: :merge_user
+  post 'users/merge' => 'users#create_merge_request'
   get 'users/callback' => 'users#oauth_callback'
+
+  resources :password_resets, only: [:create, :edit, :update]
 
   resources :robokassa_payments, only: [] do
     collection do

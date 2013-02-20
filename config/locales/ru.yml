@@ -1,4 +1,9 @@
 ru:
+  need_email: Необходим e-mail
+  need_info: Неоходима информация
+  complete: Все есть
+  disabled: Отключен
+  banned: Забанен
   views:
     pagination:
       previous: '●'
@@ -18,6 +23,7 @@ ru:
     sign_in_count: "количество входов"
     password: "пароль"
     password_confirmation: "подтверждение пароля"
+    old_password: "старый пароль"
     body: "содержимое"
     closed: "закрыта!"
     published: "опубликована"
@@ -30,6 +36,8 @@ ru:
     short_description: "текст для отображение в заголовочном блоке"
     closed_body: "содержимое"
     target_at: "назначено на"
+    topic: "тема"
+    edit_count: "редактировалось раз"
 
   articles:
     category:
@@ -41,6 +49,7 @@ ru:
       ReportArticle: "Report"
       TripArticle: "Опыт"
       TvArticle: "TV"
+      DetailArticle: "Детали"
     previous:
       NewsArticle: "Предыдущая новость"
       EventArticle: "Предыдущее событие"
@@ -50,6 +59,7 @@ ru:
       ReportArticle: "Предыдущий репортаж"
       TripArticle: "Предыдущая статья"
       TvArticle: "Предыдущее видео"
+      DetailArticle: "Предыдущая статья"
     next:
       NewsArticle: "Следующая новость"
       EventArticle: "Следующее событие"
@@ -59,6 +69,7 @@ ru:
       ReportArticle: "Следующий репортаж"
       TripArticle: "Следующая статья"
       TvArticle: "Следующее видео"
+      DetailArticle: "Следующая статья"
 
   active_admin:
     dashboard: "Панель"
@@ -70,6 +81,18 @@ ru:
     ReportArticle: "Репортажи"
     TripArticle: "Опыт"
     TvArticle: "TV"
+    DetailArticle: "Детали"
+    
+    scopes:
+      all: Все
+      active: Активные
+      removed_by_owner: Удалённые пользователем
+      removed_by_admin: Удалённые администрацией
+      with_subscription: Подписанные
+    
+    batch_actions:
+      labels:
+        remove_by_admin: "Удалить как администратор"
 
   activerecord:
     enums:
@@ -84,6 +107,8 @@ ru:
           latvia: "Латвия"
           khazakhstan: "Казахстан"
     attributes:
+      user:
+        state: Статус
       site_config:
         actual_article: "статья"
         actual_article_description: "описание"
@@ -100,6 +125,11 @@ ru:
       article_body_image:
         source: "файл"
     models:
+      user:
+        one: Пользователя
+        few: Пользователи
+        many: Пользователи
+        other: Пользователи
       poll:
         one: "опрос"
         other: "опросы"
@@ -142,3 +172,6 @@ ru:
       event_article:
         one: "событие"
         other: "события"
+      detail_article:
+        one: "статья деталей"
+        other: "статьи деталей"

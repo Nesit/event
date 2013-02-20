@@ -1,3 +1,4 @@
+# -*- coding: utf-8 -*-
 class User < ActiveRecord::Base
   authenticates_with_sorcery!
 
@@ -6,32 +7,37 @@ class User < ActiveRecord::Base
     :company, :position, :website
   ]
 
-  # removed presence: true for a while.
-  # TODO: figure out how to deal with oauth-users without email
   validates :email,
-    presence: true, format: /.+\@.+\..+/,
-    unless: proc { state.to_sym == :need_email }
+    format: /.+\@.+\..+/,
+    uniqueness: true,
+    if: :email
 
-  # email should be unique or be nil
-  validates :email, uniqueness: { scope: :state }, unless: proc { email.blank? }
-  
-  validates :password, presence: true, if: proc { crypted_password.blank? }
+  validates :merge_email, format: /.+\@.+\..+/, if: proc { merge_email.present? }
+
   validates :password, length: { minimum: 6 }, if: :password
+  validates :password, confirmation: true
 
-  before_validation :ensure_password
   before_validation :process_new_city
   before_validation :ensure_uniqueness_name
-  before_validation :select_state
+
+  before_destroy :user_deleted
+  after_save :check_complete
+
   before_validation :delete_all_other_pending, if: proc { activation_state == 'pending' }
+  before_validation :select_state
 
   attr_accessor :new_city, :new_country_cd
+  attr_accessor :password_confirmation, :old_password
 
   attr_accessible :born_at, :gender_cd, :city_id, :new_city,
-    :new_country_cd, :company, :position, :website,
-    :phone_number, :name, :gender, :email
+                  :new_country_cd, :company, :position, :website,
+                  :phone_number, :name, :gender, :email, :avatar,
+                  :comment_notification, :event_notification,
+                  :partner_notification, :weekly_notification, :state,
+                  :active_subscription, :password, :password_confirmation,
+                  :article_comment_notification
 
-  attr_accessible :article_comment_notification, :comment_notification,
-    :event_notification, :partner_notification, :weekly_notification
+  attr_accessible :state
 
   has_many :authentications, dependent: :destroy
   has_many :comments, foreign_key: :author_id
@@ -44,14 +50,102 @@ class User < ActiveRecord::Base
 
   as_enum :gender, male: 1, female: 2
 
+  scope :activated, where(activation_state: 'active')
+  scope :with_subscription, where(active_subscription: true)
+
+  state_machine :state, initial: :need_info do
+    after_transition any => :banned, :do => :banned_user
+
+    event :complete do
+      transition all => :complete
+    end
+
+    event :banned do
+      transition all => :banned
+    end
+
+    event :need_info do
+      transition all => :need_info
+    end
+  end
+
   scope :activated, where(activation_state: ['active', nil])
   scope :pending, where(activation_state: 'pending')
 
-  state_machine initial: 'need_info' do
-    state 'need_email'
-    state 'need_info'
-    state 'complete'
-    state 'disabled'
+  def banned_user
+    UserMailer.user_banned(self).deliver
+  end
+
+  def activate!
+    ensure_plain_password
+    super
+  end
+
+  def ensure_plain_password
+    if password.blank?
+      self.password = SecureRandom.hex(4)
+    end
+  end
+
+  # this method generates merge token and sends emails with link
+  def setup_record_merge!(email)
+    self.merge_token = SecureRandom.hex(10)
+    self.merge_email = email
+    self.merge_token_expires_at = DateTime.now + 2.days
+    self.save!
+    UserActivationMailer.merge_need_email(self).deliver
+  end
+
+  def self.load_from_merge_token(token)
+    User.where(merge_token: token)
+        .where('? <= merge_token_expires_at', DateTime.now).first
+  end
+
+  def merge_with_other!
+    self.email = merge_email
+    other_users = User.activated.where(email: merge_email)
+    other_users.each do |user|
+
+      user.subscriptions.each do |sub|
+        sub.user_id = self.id
+        sub.save!
+      end
+      self.subscriptions(true)
+
+      user.comments.each do |comment|
+        comment.author_id = self.id
+        comment.save!
+      end
+      self.comments(true)
+      
+      user.authentications.each do |auth|
+        auth.user_id = self.id
+        auth.save!
+      end
+      self.authentications(true)
+
+      self.city           ||= user.city
+      self.born_at        ||= user.born_at
+      self.gender         ||= user.gender
+      self.company        ||= user.company
+      self.position       ||= user.position
+      self.website        ||= user.website
+      self.phone_number   ||= user.phone_number
+      self.name           ||= user.name
+
+      self.article_comment_notification = user.article_comment_notification
+      self.comment_notification         = user.comment_notification
+      self.event_notification           = user.event_notification
+      self.partner_notification         = user.partner_notification
+      self.weekly_notification          = user.weekly_notification
+
+      self.active_subscription |= user.active_subscription
+
+      # TODO load other user avatar if present
+      
+      user.delete
+    end
+    self.save!
   end
 
   def free_name?(name)
@@ -76,16 +170,10 @@ class User < ActiveRecord::Base
   def social_url
     return unless auth = authentications.first
     case auth.provider
-    when 'vkontakte'
+    when 'vk'
       "https://vk.com/id#{auth.uid}"
     when 'facebook'
       "http://www.facebook.com/#{auth.uid}"
-    end
-  end
-
-  def ensure_password
-    if crypted_password.blank? and password.blank?
-      self.password = SecureRandom.hex(4)
     end
   end
 
@@ -93,13 +181,14 @@ class User < ActiveRecord::Base
 
   def delete_all_other_pending
     if new_record?
-      User.pending.where(email: email).delete_all
+      ::User.pending.where(email: email).delete_all
     else
-      User.pending.where('id <> ?', id).where(email: email).delete_all
+      ::User.pending.where('id <> ?', id).where(email: email).delete_all
     end
   end
 
   def select_state
+    self.state = 'complete'
     complete = true
     FIELDS_FOR_COMPLETE.each do |sym|
       if send(sym).blank?
@@ -107,14 +196,7 @@ class User < ActiveRecord::Base
         break
       end
     end
-
-    if email.blank?
-      self.state = 'need_email'
-    elsif complete
-      self.state = 'complete'
-    else
-      self.state = 'need_info'
-    end  
+    self.state = 'need_info' unless complete
   end
 
   # use separate validator instead of uniqueness: true
@@ -134,4 +216,17 @@ class User < ActiveRecord::Base
 
     self.city_id = city.id
   end
+
+  def user_deleted
+    UserMailer.user_deleted(self).deliver
+  end
+
+  def check_complete
+    return self.complete?
+    FIELDS_FOR_COMPLETE.each do |f|
+      return if self.send(f).nil?
+    end
+    self.update_column(:state, 'complete')
+  end
+
 end

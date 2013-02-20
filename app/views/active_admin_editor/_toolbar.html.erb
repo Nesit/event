@@ -14,7 +14,7 @@
   <a data-wysihtml5-command="insertVideo" title="Video from YouTube"><span>Видео с YouTube,Vimeo</span></a>
   <% if object.kind_of? Article %>
     <a data-wysihtml5-command="insertGallery" title="Gallery"><span>Новая галлерея</span></a>
-    <a class="gallery-edit-link" style="display:none"><span>Редактировать выделенную галлерею</span></a>
+    <a class="gallery-edit-link" target="_blank" style="display:none"><span>Редактировать выделенную галлерею</span></a>
   <% end %>
   
   <% if input_html_options[:quicksave] %>

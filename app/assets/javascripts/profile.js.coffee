@@ -89,3 +89,5 @@ $ ->
         $(this).addClass('active')
 
         event.preventDefault()
+
+    check_for_required_fields()

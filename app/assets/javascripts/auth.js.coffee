@@ -14,11 +14,13 @@ window.show_register_dialog = ->
     $('#register-dialog').removeClass('hidden')
     $('#dialog-overlay').addClass('active')
 
-window.show_register_thanks_dialog = ->
+window.show_message_dialog = (title, message1, message2) ->
     $('.dialog.closable').addClass('hidden')
-    $('#register-thanks-dialog').removeClass('hidden')
+    $('#message-dialog').removeClass('hidden')
+    $('#message-dialog .dialog-title').html(title)
+    $('#message-dialog h2').html(message1)
+    $('#message-dialog p').html(message2)
     $('#dialog-overlay').addClass('active')
-
 
 window.show_login_dialog = ->
     $inputs = $('#login-dialog').find('input[name=email], input[name=password]')
@@ -43,6 +45,11 @@ window.show_subscribe_dialog = ->
 window.show_email_dialog = ->
     $('.dialog.closable').addClass('hidden')
     $('#email-dialog').removeClass('hidden')
+    $('#dialog-overlay').addClass('active')
+
+window.show_reset_password_dialog = ->
+    $('.dialog.closable').addClass('hidden')
+    $('#reset-password-dialog').removeClass('hidden')
     $('#dialog-overlay').addClass('active')
 
 window.update_csrf_token = (value) ->
@@ -152,7 +159,8 @@ $ ->
             return false
 
     $('#register-dialog form').on 'ajax:success', (event, data) ->
-        window.show_register_thanks_dialog()
+        window.show_message_dialog("Регистрация", "Спасибо за регистрацию",
+            "Письмо с дальнейшими инструкциями отправлено на указанный адрес")
 
     $('#register-dialog form').on 'ajax:error', (event, data) ->
         $el = $(data.responseText)
@@ -197,8 +205,38 @@ $ ->
         $('#email-dialog').addClass('hidden')
         $('#dialog-overlay').removeClass('active')
 
-    $('#email-dialog form').on 'ajax:error', ->
-        $('#email-dialog-message').html("Email введён неверно, либо уже используется")
+    $('#email-dialog form').on 'ajax:error', (event, data) ->
+        try
+            data = JSON.parse(data.responseText)
+            if data.used
+                source = """
+                    Email уже используется в другой учётной записи.
+                    Вы можете <a href="#" class="merge-request-link">объединить</a>
+                    учётные записи, если уверены что ввели свой email верно.
+                """
+                $('#email-dialog-message').html("")
+                $('#email-dialog-message').html(source)
+                $('#email-dialog-message .merge-request-link').on 'click', (event) ->
+                    $.ajax
+                        type: 'POST'
+                        url: '/users/merge'
+                        data: { email: $('#email-dialog form input[name=email]').val() }
+                        success: ->
+                            $('#email-dialog-message')
+                                .html("Письмо с ссылкой активации отправлено на указанную почту")
+                    event.preventDefault()
+            return
+        catch e
+            # do nothing
+        $('#email-dialog-message').html("Произошла ошибка, похоже email введён неверно")
+
+    $('.reset-password-link').on 'click', (event) ->
+        window.show_reset_password_dialog()
+        event.preventDefault()
+
+    $('#reset-password-dialog form').on 'ajax:success', (event) ->
+        window.show_message_dialog("Восстановление пароля", "",
+            "Письмо с дальнейшими инструкциями отправлено на указанный адрес")
 
     # captcha reload
     $('.reload-captcha-link').on 'click', (event) ->

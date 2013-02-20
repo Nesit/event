@@ -6,9 +6,6 @@
   <body>
     <h1>Здравствуйте!</h1>
 
-    <p>Ваш email: <%= @user.email %></p>
-    <p>Ваш пароль: <%= @user.password %></p>
-
     <p>Чтобы активировать вашу учётную запись проследуйте по ссылке: <%= link_to nil, activate_user_url(token: @user.activation_token) %></p>
   </body>
 </html>

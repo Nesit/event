@@ -2,6 +2,15 @@
 	<%# to update after login by ajax %>
 	<%= csrf_meta_tags %>
 </div>
+
+
+<div id="message-dialog" class="hidden dialog closable">
+	<%= link_to "X", '#', class: 'close-link right' %>
+	<div class="dialog-title"></div>
+	<h2></h2>
+	<p></p>
+</div>
+
 <% if logged_in? %>
 	<%= link_to "Профиль", edit_user_path, class: 'profile-link' %> | 
 	<%= link_to "Выйти", user_session_path, 'data-method' => :delete, class: 'logout-link' %>
@@ -91,11 +100,20 @@
 		<% end %>
 	</div>
 
-	<div id="register-thanks-dialog" class="hidden dialog closable">
+	<div id="reset-password-dialog" class="hidden dialog closable">
 		<%= link_to "X", '#', class: 'close-link right' %>
-		<div class="dialog-title">Регистрация</div>
-		<h2>Спасибо за регистрацию!</h2>
-		<p>Письмо с дальнейшими инструкциями отправлено на указанный адрес</p>
+		<div class="dialog-title">Восстановление пароля</div>
+		<%= form_tag password_resets_path, method: :post, remote: true do |f| %>
+			<div class="wrapper">
+				<div id="email-dialog-message">
+					Введите свой email, на который будут высланы инструкции по
+					восстановлению пароля
+				</div>
+				<%= email_field_tag :email, '', autocomplete: 'off', 'data-placeholder' => "Введите email" %>
+				<%= submit_tag "Восстановить" %>
+			</div>
+			<div class="clear"></div>
+		<% end %>
 	</div>
 
 	<div id="subscribe-dialog" class="hidden dialog closable">

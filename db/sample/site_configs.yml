@@ -6,3 +6,42 @@ config:
   article_list_banner_after: 3
   article_list_banner_body: |
     Объявление! Покупайте наши памперсы, 10 штук по цене 5! Только сегодня!
+  bottom_menu:
+    items:
+    - kind: Page
+      data: 2
+      title: "Первая"
+    - kind: Page
+      data: 1
+      title: "Вторая"
+  bottom_menu:
+    items:
+    - kind: ArticleCategory
+      data: NewsArticle
+      title: "Новости"
+    - kind: ArticleCategory
+      data: EventArticle
+      title: "Афиша"
+    - kind: ArticleCategory
+      data: InterviewArticle
+      title: "Интервью"
+    - kind: ArticleCategory
+      data: CompanyArticle
+      title: "Компании"
+    - kind: ArticleCategory
+      data: OverviewArticle
+      title: "Обзоры"
+    - kind: ArticleCategory
+      data: DetailArticle
+      title: "Детали"
+    - kind: ArticleCategory
+      data: TripArticle
+      title: "Опыт"
+    - kind: ArticleCategory
+      data: ReportArticle
+      title: "Report"
+    - kind: ArticleCategory
+      data: TvArticle
+      title: "TV"
+    - kind: Polls
+      title: "Мнения"

@@ -12,16 +12,21 @@
 <% end %>
 
 <div class="articles-list">
+	<% if main_page? %>
+		<% @list = @articles.last(@articles.length - @carousel_articles.length) %>
+	<% else %>
+		<% @list = @articles %>
+	<% end %>
 	<% if @site_config and not @site_config.article_list_banner_body.blank? %>
-		<%= render 'articles/items', articles: (@articles.slice(0..(@site_config.article_list_banner_after-1)) or []) %>
+		<%= render 'articles/items', articles: (@list.slice(0..(@site_config.article_list_banner_after-1)) or []) %>
 		<%# div class="frame" id="article-list-banner">
 			<div class="frame-title">Реклама</div>
 			<div><= @site_config.article_list_banner_body.html_safe ></div>
 		</div %>
 		<div class="spacer"></div>
-		<%= render 'articles/items', articles: (@articles.slice(@site_config.article_list_banner_after..-1) or []) %>
+		<%= render 'articles/items', articles: (@list.slice(@site_config.article_list_banner_after..-1) or []) %>
 	<% else %>
-		<%= render 'articles/items', articles: @articles %>
+		<%= render 'articles/items', articles: @list %>
 	<% end %>
 	<div class="spacer"></div>
 </div>

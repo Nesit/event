@@ -31,7 +31,7 @@ user2:
 <% (3..6).each do |i| %>
 user<%= i %>:
   id: <%= i %>
-  email: user4@example.com
+  email: user<%= i %>@example.com
   name: Пользователь<%= i %>
   city_id: 1
   born_at: '01-01-1945'

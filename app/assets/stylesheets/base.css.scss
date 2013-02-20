@@ -74,17 +74,52 @@ a {
 			display: inline-block;
 			height: 48px;
 			line-height: 48px;
-			margin-right: 1.2em;
-			color: $menu-fg-color;
-			font-size: 13px;
-			@include menu-item-typography;
+			padding-right: 1.2em;
+
+			a {
+				color: $menu-fg-color;
+				font-size: 13px;
+				@include menu-item-typography;
+			}
+
+			position: relative;
+			.children {
+				display: inline-block;
+				position: absolute;
+				left: 0;
+				top: 48px;
+
+				background-color: $menu-bg-color;
+				color: $menu-fg-color;
+				border: 1px solid $menu-outline-color;
+				border-top: 0;
+
+				.menu-nav-item {
+					margin: 0;
+					padding: 0 1.2em;
+				}
+
+				.menu-nav-item a {
+
+				}
+			}
+
+			.children {
+				display: none;
+			}
 		}
 
-		a.menu-nav-item:hover, .menu-nav-item.active {
+		.menu-nav-item:hover .children {
+			display: inline-block;
+		}
+
+		.menu-nav-item a:hover,
+		.menu-nav-item a.active,
+		.menu-nav-item .children .menu-nav-item:hover {
 			color: $purple-color;
 		}
 
-		.menu-right :last-child {
+		.menu-right > :last-child {
 			margin-right: 0;
 		}
 
