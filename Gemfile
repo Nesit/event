@@ -11,7 +11,7 @@ end
 gem 'jquery-rails'
 gem 'chosen-rails'
 gem 'formtastic', '~> 2.2.1'
-gem 'kaminari', '~> 0.14.1'
+gem 'kaminari', github: 'vladimir-vg/kaminari', branch: 'padding-pages-count-fix'
 
 gem 'activeadmin', '~> 0.5.1'
 gem 'active_admin_editor', github: 'vladimir-vg/active_admin_editor', branch: 'custom-toolbar'

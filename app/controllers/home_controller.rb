@@ -7,8 +7,8 @@ class HomeController < ApplicationController
 
   def show
     articles = Article.without_tv.newer_published
-    @articles = articles.page(params[:page]).per(10)
-    @carousel_articles = @articles.first(5)
+    @articles = articles.page(params[:page]).per(10).padding(5)
+    @carousel_articles = articles.first(5)
     @afisha_articles = EventArticle.newer_targeted.first(6)
 
     @seo_tags ||= {}

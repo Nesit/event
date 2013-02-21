@@ -18,6 +18,15 @@ GIT
       rails (>= 3.0.0)
       rmagick
 
+GIT
+  remote: git://github.com/vladimir-vg/kaminari.git
+  revision: 855f85e56bced58c4088ed2a24c72e8276f9b107
+  branch: padding-pages-count-fix
+  specs:
+    kaminari (0.14.1)
+      actionpack (>= 3.0.0)
+      activesupport (>= 3.0.0)
+
 GEM
   remote: http://rubygems.org/
   specs:
@@ -199,9 +208,6 @@ GEM
     json (1.7.6)
     jwt (0.1.5)
       multi_json (>= 1.0)
-    kaminari (0.14.1)
-      actionpack (>= 3.0.0)
-      activesupport (>= 3.0.0)
     kgio (2.7.4)
     launchy (2.1.2)
       addressable (~> 2.3)
@@ -400,7 +406,7 @@ DEPENDENCIES
   formtastic (~> 2.2.1)
   friendly_id (~> 4.0.9)
   jquery-rails
-  kaminari (~> 0.14.1)
+  kaminari!
   letter_opener
   libv8 (~> 3.11.8)
   mini_magick
