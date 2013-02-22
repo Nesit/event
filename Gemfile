@@ -6,6 +6,8 @@ group :production, :staging do
   gem 'pg'
   gem 'whenever'
   gem 'exception_notification'
+  # For sphinx only
+  gem 'mysql2'
 end
 
 gem 'jquery-rails'
