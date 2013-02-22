@@ -8,3 +8,6 @@ every 1.day, :at => '3:00 am' do
   rake "subscription:check_expiration"
 end
 
+every 1.day, :at => '6:00 am' do
+  rake "weather:update"
+end

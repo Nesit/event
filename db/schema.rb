@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20130215074226) do
+ActiveRecord::Schema.define(:version => 20130221233806) do
 
   create_table "active_admin_comments", :force => true do |t|
     t.string   "resource_id",   :null => false
@@ -218,6 +218,7 @@ ActiveRecord::Schema.define(:version => 20130215074226) do
     t.text     "article_list_banner_body"
     t.text     "bottom_menu"
     t.text     "top_menu"
+    t.text     "weather"
   end
 
   create_table "subscriptions", :force => true do |t|
