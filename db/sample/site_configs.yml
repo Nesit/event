@@ -14,7 +14,7 @@ config:
     - kind: Page
       data: 1
       title: "Вторая"
-  bottom_menu:
+  top_menu:
     items:
     - kind: ArticleCategory
       data: NewsArticle
