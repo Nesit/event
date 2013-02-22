@@ -30,6 +30,10 @@ class Article < ActiveRecord::Base
   extend FriendlyId
   friendly_id :title, use: :slugged
 
+  ThinkingSphinx::Index.define :article, :with => :active_record do
+    indexes title
+  end
+
   def record_pageview!
     self.pageviews_count += 1
     save!

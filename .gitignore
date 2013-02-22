@@ -8,3 +8,6 @@
 /.gems
 
 /config/database.yml
+/config/development.sphinx.conf
+/config/sphinx.yml
+/log/development.sphinx.pid
