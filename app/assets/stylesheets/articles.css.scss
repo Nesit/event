@@ -555,11 +555,18 @@
 				margin-right: 5px;
 			}
 
-			.afisha-link {
-				@include sans-serif;
-				text-decoration: none;
-				color: $text-color;
-				font-weight: bold;
+			.afisha-link-wrapper {
+				.afisha-link {
+					@include sans-serif;
+					text-decoration: none;
+					color: $text-color;
+					font-weight: bold;
+					width: 1000px;
+					display: block;
+				}
+				display: inline-block;
+				width: 340px;
+				overflow: hidden;
 			}
 
 			.afisha-link:hover {
