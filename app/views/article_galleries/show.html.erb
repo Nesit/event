@@ -12,7 +12,13 @@
 	<div class="article-gallery-carousel">
 		<ul>
 			<% @gallery.images.each do |body_image| %>
-				<li><%= link_to image_tag(body_image.source), '#' %></li>
+				<li>
+          <% if @gallery.images.count > 1 %>
+          <%= link_to image_tag(body_image.source), '#' %>
+          <% else %>
+          <%= image_tag(body_image.source) %>
+          <% end %>
+        </li>
 			<% end %>
 		</ul>
 	</div>
