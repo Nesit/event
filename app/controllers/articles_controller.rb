@@ -7,6 +7,7 @@ class ArticlesController < ApplicationController
     @articles = 
       case params[:type]
       when 'EventArticle'
+        @afisha_articles = EventArticle.newer_targeted.first(6)
         EventArticle.published.newer_targeted
       when nil
         Article.published.newer_published
