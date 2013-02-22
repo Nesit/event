@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20130220071207) do
+ActiveRecord::Schema.define(:version => 20130220181915) do
 
   create_table "active_admin_comments", :force => true do |t|
     t.string   "resource_id",   :null => false
@@ -308,6 +308,8 @@ ActiveRecord::Schema.define(:version => 20130220071207) do
     t.string   "merge_token"
     t.string   "merge_email"
     t.datetime "merge_token_expires_at"
+    t.datetime "last_email_comment"
+    t.datetime "last_email_article"
   end
 
   add_index "users", ["activation_token"], :name => "index_users_on_activation_token"

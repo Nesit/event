@@ -32,4 +32,20 @@ namespace :newsletter do
       newsletter.done
     end
   end
+
+  task :comment_article => :environment do
+    User.article_comments.each do |user|
+      articles = user.new_comments_in_articles
+      next if articles.empty?
+      UserNotifyMailer.comment_in_articles(user, articles).deliver
+    end
+  end
+
+  task :comment_comment => :environment do
+    User.comment_notifications.each do |user|
+      articles = user.new_comments_in_comments
+      next if articles.empty?
+      UserNotifyMailer.comment_comment(user, articles).deliver
+    end
+  end
 end

@@ -23,3 +23,11 @@ end
 every 10.minutes do
   rake 'newsletter:partner_newsletter'
 end
+
+every 20.minutes do
+  rake 'newsletter:comment_article'
+end
+
+every 20.minutes do
+  rake 'newsletter:comment_comment'
+end

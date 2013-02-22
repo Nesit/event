@@ -35,7 +35,7 @@ class User < ActiveRecord::Base
                   :comment_notification, :event_notification,
                   :partner_notification, :weekly_notification, :state,
                   :active_subscription, :password, :password_confirmation,
-                  :article_comment_notification
+                  :article_comment_notification, :last_email_comment, :last_email_article
 
   attr_accessible :state
 
@@ -53,9 +53,11 @@ class User < ActiveRecord::Base
   scope :activated, where(activation_state: 'active')
   scope :with_subscription, where(active_subscription: true)
 
-  scope :weekly_subscribers, -> { where(active_subscription: true, weekly_notification: true) }
-  scope :event_subscribers, -> { where(active_subscription: true, event_notification: true) }
+  scope :weekly_subscribers,    -> { where(active_subscription: true, weekly_notification: true) }
+  scope :event_subscribers,     -> { where(active_subscription: true, event_notification: true) }
   scope :partner_notifications, -> { where(active_subscription: true, partner_notification: true) }
+  scope :article_comments,      -> { where(active_subscription: true, article_comment_notification: true) }
+  scope :comment_notifications, -> { where(active_subscription: true, comment_notification: true) }
 
   state_machine :state, initial: :need_info do
     after_transition any => :banned, :do => :banned_user
@@ -75,6 +77,27 @@ class User < ActiveRecord::Base
 
   scope :activated, where(activation_state: ['active', nil])
   scope :pending, where(activation_state: 'pending')
+
+  def last_email_comment!
+    self.update_attribute(:last_email_comment, Time.zone.now)
+  end
+
+  def last_email_article!
+    self.update_attribute(:last_email_article, Time.zone.now)
+  end
+
+  def new_comments_in_articles
+    return [] if self.last_email_article > (Time.zone.now - 3.hours)
+    Article.joins(:comments).where('comments.id IN (?)', self.comment_ids).
+      joins(:comments).where('comments.created_at >= ?', self.last_email_article)
+  end
+
+  def new_comments_in_comments
+    return [] if self.last_email_comment > (Time.zone.now - 3.hours)
+    _comments = comments.map {|c| c.children.where('created_at >= ?', self.last_email_comment)}.flatten
+    _articles = _comments.map {|c| c.topic}
+    _articles.uniq
+  end
 
   def banned_user
     UserMailer.user_banned(self).deliver
