@@ -4,6 +4,7 @@ EventRu::Application.routes.draw do
   ActiveAdmin.routes(self)
   devise_for :admin_users, ActiveAdmin::Devise.config
   resources :menu_items, only: [:new]
+  resources :tags, only: [:index]
 
   [ 'company', 'event', 'interview', 'news',
     'overview', 'report', 'trip', 'detail'
