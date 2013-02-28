@@ -25,7 +25,7 @@ class Ability
       :oauth_callback, :ensure_email
       ], User
 
-    can :read, Article
+    can [:read, :search], Article
     can :preview, Article if admin_user
     can :read, ArticleGallery # for dynamic embedding images galleries
     can :read, Comment

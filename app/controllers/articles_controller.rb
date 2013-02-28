@@ -22,6 +22,14 @@ class ArticlesController < ApplicationController
     @articles = @articles.page(params[:page]).per(10)
   end
 
+  def search
+    @articles = Article.search params[:term],
+      field_weights: { title: 10, body: 3 },
+      page: params[:page],
+      per_page: 10
+    render 'index'
+  end
+
   def show
     @article.record_pageview!
     seo_tags(@article, title: :title, description: :short_description, image: :head_image)

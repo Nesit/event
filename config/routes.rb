@@ -41,6 +41,8 @@ EventRu::Application.routes.draw do
   # to do not dubplicate home page functionality
   get 'articles' => 'articles#index',
     constraints: lambda { |req| req.params[:tag_id].present? }
+  get 'articles/search' => 'articles#search',
+    constraints: lambda { |req| req.params[:term].present? }
 
   post 'sessions' => 'user_sessions#create', as: :user_session
   delete 'sessions' => 'user_sessions#destroy', as: :user_session

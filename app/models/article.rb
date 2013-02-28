@@ -27,6 +27,11 @@ class Article < ActiveRecord::Base
   scope :without_tv, where('type <> ?', 'TvArticle')
   scope :published, where(published: true)
 
+  define_index do
+    indexes title
+    indexes body
+  end
+
   extend FriendlyId
   friendly_id :title, use: :slugged
 
