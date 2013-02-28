@@ -82,7 +82,7 @@
 
 	<div id="register-dialog" class="hidden dialog closable">
 		<%= link_to "X", '#', class: 'close-link right' %>
-		<div class="dialog-title">Регистрация</div>
+		<div class="dialog-title"><!-- replaced dynamically --></div>
 		<%= form_for User.new(email: (params[:user] and params[:user][:email])), remote: true do |f| %>
 			<div class="left">
 				<%= f.email_field :email, autocomplete: 'off', 'data-placeholder' => "Введите email" %>

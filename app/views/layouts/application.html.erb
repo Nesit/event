@@ -96,7 +96,7 @@
 				<%= link_to "", EventRu::Links::Facebook, class: 'fb' %>
 				<%#= link_to "", EventRu::Links::Vkontakte, class: 'vk' %>
 				<%#= link_to "", EventRu::Links::Twitter, class: 'twitter' %>
-				<%= link_to "", EventRu::Links::MailRu, class: 'mailru register-link' %>
+				<%= link_to '', user_notifications_path, class: "mailru #{current_user ? '' : 'weird-register-link'}" %>
 				<%#= link_to "", EventRu::Links::GooglePlus, class: 'gplus' %>
 			</div>
 		</div>

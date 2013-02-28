@@ -6,6 +6,26 @@ window.show_register_dialog = ->
     $inputs.val('')
     $inputs.trigger('blur')
 
+    $('#register-dialog .dialog-title').html("Регистрация")
+
+    $('#register-dialog-message').html(
+        """Введите ваш email и код подтверждения,
+           затем мы вам сгенерируем пароль и вышлем
+           на указанный адрес""")
+    $('.dialog.closable').addClass('hidden')
+    $('#register-dialog').removeClass('hidden')
+    $('#dialog-overlay').addClass('active')
+
+window.show_weird_register_dialog = ->
+    # need to enclose val('') with focus and blur events
+    # to do not break placeholder plugin
+    $inputs = $('#register-dialog').find('input[name="user[email]"], input[name=captcha]')
+    $inputs.trigger('focus')
+    $inputs.val('')
+    $inputs.trigger('blur')
+
+    $('#register-dialog .dialog-title').html("Введите почту, чтобы получать новости!")
+
     $('#register-dialog-message').html(
         """Введите ваш email и код подтверждения,
            затем мы вам сгенерируем пароль и вышлем
@@ -68,6 +88,9 @@ $ ->
         window.show_login_dialog()
         event.preventDefault()
 
+    $('.weird-register-link').on 'click', (event) ->
+        window.show_weird_register_dialog()
+        event.preventDefault()
 
     $(document.body).on 'click', '.register-link', (event) ->
         window.show_register_dialog()
