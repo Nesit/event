@@ -217,7 +217,7 @@ a {
 			margin-top: 8px;
 			@include border-radius(5px, 5px);
 
-			input[name=query] {
+			input[name=term] {
 				width: 130px;
 				height: 21px;
 				margin-top: 2px;
