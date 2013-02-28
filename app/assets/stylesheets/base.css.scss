@@ -5,6 +5,11 @@ a {
 	text-decoration: none;
 }
 
+a:hover {
+	text-decoration: underline;
+	color: lighten($purple-color, 15);
+}
+
 @mixin content-block {
 	p {
 		margin: 1.5em 0;
