@@ -534,3 +534,41 @@ $fixed-top-margin: 112px;
 		height: 60px;
 	}
 }
+
+.weather-block {
+	padding: 10px 30px;
+	@include sans-serif2;
+	color: $grey-text-color;
+
+	.weather-item {
+		height: 30px;
+
+		.weekday {
+			width: 30px;
+			text-transform: uppercase;
+			font-weight: bold;
+		}
+
+		.month-day {
+			font-style: oblique;
+		}
+
+		.tempr {
+			width: 30px;
+			text-align: right;
+			text-transform: uppercase;
+			font-weight: bold;
+		}
+
+		img {
+			// ugly, but can't figure out why it doesn't center vertically
+			margin: -10px 10px;
+		}
+
+		span {
+			display: inline-block;
+			height: 30px;
+			line-height: 30px;
+		}
+	}
+}

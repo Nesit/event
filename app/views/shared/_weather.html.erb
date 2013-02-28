@@ -1,0 +1,15 @@
+<% if site_config = SiteConfig.first and site_config.weather['items'] %>
+<div class="frame">
+	<div class="frame-bold-title">Прогноз</div>
+	<div class="weather-block">
+		<% site_config.weather['items'].each do |item| %>
+			<div class="weather-item">
+				<span class="weekday"><%= item['weekday'] %></span>
+				<span class="month-day"><%= item['month_day'] %></span>
+				<%= image_tag "http://yandex.st/weather/1.1.86/i/icons/30x30/#{item['icon_name']}.png" %>
+				<span class="tempr"><%= item['temperature'] %></span>
+			</div>
+		<% end %>
+	</div>
+</div>
+<% end %>
