@@ -15,8 +15,12 @@ set :app_env, 'staging'
 
 set :rake, "#{File.join shared_path, 'scripts/rvm_wrapper.sh'} #{rake}"
 
-before 'db:drop', 'unicorn:stop'
+after 'deploy:symlink_shared', 'deploy:symlink_sphinx_config'
+
+before 'sphinx:stop', 'sphinx:configure'
+before 'db:drop', 'unicorn:stop', 'sphinx:stop'
 before 'db:create', 'db:drop'
 after 'db:seed', 'db:load_sample'
 
+before 'unicorn:restart', 'sphinx:rebuild'
 before 'unicorn:restart', 'deploy:symlink_robots'
