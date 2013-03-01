@@ -4,6 +4,7 @@
 #= require jquery.placeholder
 #= require chosen-jquery
 #= require jquery.cookie
+#= require jquery-fileupload
 
 #= require home
 #= require forms

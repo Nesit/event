@@ -20,7 +20,10 @@ gem 'active_admin_editor', github: 'vladimir-vg/active_admin_editor', branch: 'c
 
 gem 'russian'
 gem 'mini_magick'
+
 gem 'carrierwave'
+gem "jquery-fileupload-rails"
+
 gem 'sorcery', '~> 0.8.1'
 gem 'cancan'
 gem 'state_machine'

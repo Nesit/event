@@ -1,0 +1,22 @@
+<% @hide_top = true %>
+<% content_for :without_aside do %>
+	<div id="profile">
+		<%= render 'menu', current: :avatar %>
+		<div class="profile-top-avatar">
+			<div class="left">
+				<%= image_tag(current_user.avatar.url, class: 'left') %>
+			</div>
+			<h1 class="left">Привет друг!</h1>
+			<br>
+			<br>
+			<%= semantic_form_for @user, url: profile_avatar_path, method: :post, html: { class: 'profile-avatar-form' } do |f| %>
+				<%= f.file_field :avatar %>
+
+				<%= f.submit "Сохранить" %>
+			<% end %>
+			<div class="clear"></div>
+			<p>Рекомендуемое разрешение 96x96</p>
+		</div>
+		<div class="clear"></div>
+	</div>
+<% end %>

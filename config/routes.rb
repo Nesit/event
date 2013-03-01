@@ -58,6 +58,8 @@ EventRu::Application.routes.draw do
   put 'profile/email' => 'users#update_email', as: :update_user_email
   get 'profile/password' => 'users#edit_password', as: :profile_password
   post 'profile/password' => 'users#update_password'
+  get 'profile/avatar' => 'users#edit_avatar', as: :profile_avatar
+  post 'profile/avatar' => 'users#update_avatar'
 
   get 'users/oauth' => 'users#oauth', as: :oauth_login
   get 'users/activate' => 'users#activate', as: :activate_user

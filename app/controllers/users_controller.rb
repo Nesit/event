@@ -56,6 +56,14 @@ class UsersController < ApplicationController
     end
   end
 
+  def edit_avatar
+    @user = current_user
+  end
+
+  def update_avatar
+    @user = current_user
+  end
+
   def edit_password
     @user = current_user
   end

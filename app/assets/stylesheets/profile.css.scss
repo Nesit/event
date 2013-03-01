@@ -1,4 +1,6 @@
 .profile-top-avatar {
+	margin-left: 140px;
+
 	img {
 		border: 1px solid $profile-avatar-border-color;
 	}
@@ -8,6 +10,23 @@
 		@include sans-serif;
 		font-size: 24px;
 		font-weight: bold;
+	}
+
+	.profile-avatar-form {
+		margin-left: 26px + 96px;
+		margin-top: 20px;
+
+		input[type=submit] {
+			@include button;
+		}
+	}
+
+	p {
+		width: 96px;
+		@include sans-serif;
+		color: $light-grey-text-color;
+		font-size: 12px;
+		font-style: oblique;
 	}
 
 	h1.bottom-line {
