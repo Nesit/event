@@ -29,6 +29,20 @@
 		<% end %>
 	</div>
 
+	<div id="cropping-dialog" class="hidden dialog">
+		<div class="dialog-title">Выделите участок для вашего аватара</div>
+		<%= form_tag update_user_email_path, method: :put, remote: true do |f| %>
+			<div class="wrapper">
+				<div id="email-dialog-message">
+					Для работы с сайтом нам необходим адрес вашей элекронной почты
+				</div>
+				<%= email_field_tag :email, '', autocomplete: 'off', 'data-placeholder' => "Введите email" %>
+				<%= submit_tag "Отправить" %>
+			</div>
+			<div class="clear"></div>
+		<% end %>
+	</div>
+
 <% else %>
 
 	<%= link_to "Войти", '#', class: 'login-link' %>

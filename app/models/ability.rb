@@ -53,7 +53,9 @@ class Ability
     can :read, City
     can :manage, Subscription
     can :read, :notification
-    can [:edit, :update, :ensure_name, :edit_password, :update_password, :edit_avatar, :update_avatar], User
+    can [:edit, :update, :ensure_name, :edit_password, :update_password], User
+    can [:edit_avatar, :update_avatar], User
+    can :create, TemporaryAvatar
 
     if user.complete?
       can [:create, :update, :destroy], Comment

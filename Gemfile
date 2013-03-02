@@ -11,6 +11,7 @@ group :production, :staging do
 end
 
 gem 'jquery-rails'
+gem 'remotipart', '~> 1.0'
 gem 'chosen-rails'
 gem 'formtastic', '~> 2.2.1'
 gem 'kaminari', github: 'vladimir-vg/kaminari', branch: 'padding-pages-count-fix'
@@ -22,7 +23,6 @@ gem 'russian'
 gem 'mini_magick'
 
 gem 'carrierwave'
-gem "jquery-fileupload-rails"
 
 gem 'sorcery', '~> 0.8.1'
 gem 'cancan'

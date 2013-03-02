@@ -16,8 +16,13 @@
 		margin-left: 26px + 96px;
 		margin-top: 20px;
 
-		input[type=submit] {
+		input[type=file] {
+			display: none;
+		}
+
+		button {
 			@include button;
+			width: 200px;
 		}
 	}
 

@@ -11,3 +11,7 @@ end
 every 1.day, :at => '6:00 am' do
   rake "weather:update"
 end
+
+every 2.day, :at => '8:00 am' do
+  rake "temporary_avatars:cleanup"
+end

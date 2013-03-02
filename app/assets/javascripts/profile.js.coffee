@@ -91,3 +91,17 @@ $ ->
         event.preventDefault()
 
     check_for_required_fields()
+
+    window.show_cropping_dialog = (data) ->
+
+
+    $('.profile-avatar-form button').on 'click', (event) ->
+        event.preventDefault()
+        $('.profile-avatar-form input[type=file]').trigger('click')
+
+    $('.profile-avatar-form input[type=file]').on 'change', ->
+        #$.rails.handleRemote($('.profile-avatar-form'))
+        $('.profile-avatar-form').submit()
+
+    $('.profile-avatar-form').on 'ajax:complete', (event, data) ->
+        show_cropping_dialog(JSON.parse(data.responseText))

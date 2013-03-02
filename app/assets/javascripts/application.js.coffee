@@ -1,10 +1,10 @@
 #= require jquery
 #= require jquery_ujs
+#= require jquery.remotipart
 #= require jquery.jcarousel
 #= require jquery.placeholder
 #= require chosen-jquery
 #= require jquery.cookie
-#= require jquery-fileupload
 
 #= require home
 #= require forms

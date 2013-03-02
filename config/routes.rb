@@ -61,6 +61,8 @@ EventRu::Application.routes.draw do
   get 'profile/avatar' => 'users#edit_avatar', as: :profile_avatar
   post 'profile/avatar' => 'users#update_avatar'
 
+  resources :temporary_avatars, only: [:create]
+
   get 'users/oauth' => 'users#oauth', as: :oauth_login
   get 'users/activate' => 'users#activate', as: :activate_user
   get 'users/merge' => 'users#merge', as: :merge_user
