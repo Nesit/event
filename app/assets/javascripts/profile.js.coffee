@@ -92,15 +92,51 @@ $ ->
 
     check_for_required_fields()
 
-    window.show_cropping_dialog = (data) ->
+    # cropping
 
+    show_preview = (coords) ->
+        rx = 100 / coords.w
+        ry = 100 / coords.h
+
+        width = $('#cropping-dialog .source-image').width()
+        height = $('#cropping-dialog .source-image').height()
+
+        $('#cropping-dialog input[name=x]').val(coords.x)
+        $('#cropping-dialog input[name=y]').val(coords.y)
+        $('#cropping-dialog input[name=width]').val(Math.round(coords.w))
+        $('#cropping-dialog input[name=height]').val(Math.round(coords.h))
+
+        $('#avatar-cropping-preview img').css
+            width: Math.round(rx*width) + 'px'
+            height: Math.round(ry*height) + 'px'
+            marginLeft: '-' + Math.round(rx * coords.x) + 'px'
+            marginTop: '-' + Math.round(ry * coords.y) + 'px'
+
+    opts = 
+        onChange: show_preview
+        onSelect: show_preview
+        minSize: [96, 96]
+        aspectRatio: 1
+
+    jcrop_api = null
+    $('#cropping-dialog .source-image').Jcrop opts, ->
+        jcrop_api = this
+
+    window.show_cropping_dialog = (data) ->
+        jcrop_api.setImage(data.url)
+        $('#avatar-cropping-preview img').attr('src', data.url)
+        jcrop_api.setSelect([96, 96, 0, 0])
+        $('#cropping-dialog input[name=temporary_avatar_id]').val(data.id)
+
+        $('.dialog.closable').addClass('hidden')
+        $('#cropping-dialog').removeClass('hidden')
+        $('#dialog-overlay').addClass('active')
 
     $('.profile-avatar-form button').on 'click', (event) ->
         event.preventDefault()
         $('.profile-avatar-form input[type=file]').trigger('click')
 
     $('.profile-avatar-form input[type=file]').on 'change', ->
-        #$.rails.handleRemote($('.profile-avatar-form'))
         $('.profile-avatar-form').submit()
 
     $('.profile-avatar-form').on 'ajax:complete', (event, data) ->

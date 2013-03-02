@@ -1,17 +1,14 @@
 <% @hide_top = true %>
 <% content_for :without_aside do %>
-	<div class="hidden">
-	</div>
 	<div id="profile">
 		<%= render 'menu', current: :avatar %>
 		<div class="profile-top-avatar">
 			<div class="left">
-				<%= image_tag(current_user.avatar.url, class: 'left') %>
+				<%= image_tag(current_user.avatar.profile.url, class: 'left') %>
 			</div>
 			<h1 class="left">Привет друг!</h1>
 			<br>
 			<br>
-			<div class="preview"><span class="fade"></span></div>
 			<%= form_tag temporary_avatars_path, method: :post, remote: true, multipart: true, class: 'profile-avatar-form' do %>
 				<%= file_field_tag :file %>
 		        <button>Загрузить...</button>

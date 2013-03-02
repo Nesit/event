@@ -62,6 +62,12 @@ class UsersController < ApplicationController
 
   def update_avatar
     @user = current_user
+    @user.avatar = UserAvatarUploader.crop_thumbnail_from(
+      params[:x].to_i, params[:y].to_i,
+      params[:width].to_i, params[:height].to_i,
+      TemporaryAvatar.find(params[:temporary_avatar_id]).avatar.path)
+    @user.save!
+    redirect_to profile_avatar_path
   end
 
   def edit_password

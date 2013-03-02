@@ -19,6 +19,7 @@
 #message-dialog,
 #subscribe-dialog,
 #email-dialog,
+#cropping-dialog,
 #reset-password-dialog {
 	@include sans-serif;
 
@@ -79,6 +80,7 @@
 #message-dialog,
 #subscribe-dialog,
 #email-dialog,
+#cropping-dialog,
 #reset-password-dialog {
 	position: fixed;
 	margin-left: -250px;
@@ -127,6 +129,7 @@
 	.reset-password-link {
 		font-weight: normal;
 		font-style: oblique;
+		font-size: 12px;
 	}
 
 	.register-notice {
@@ -197,5 +200,31 @@
 	h2, p {
 		width: 300px;
 		margin: 30px auto;
+	}
+}
+
+#cropping-dialog {
+	position: absolute;
+	width: 768px + 60px + 96px;
+	margin-left: -400px;
+	margin-top: -250px;
+
+	.jcrop-holder {
+		float: left;
+	}
+
+	$preview-margin: 20px;
+
+	input[type=submit] {
+		width: 155px;
+		margin-top: $preview-margin;
+		margin-left: $preview-margin;
+	}
+
+	#avatar-cropping-preview {
+		width: 96px;
+		height: 96px;
+		overflow: hidden;
+		margin-left: $preview-margin;
 	}
 }

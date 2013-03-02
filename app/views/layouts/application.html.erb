@@ -32,7 +32,10 @@
     <%= render 'shared/top_menu' %>
 
     <div id="main-column">
-      
+    	<div id="dialogs-block">
+	    	<%= render 'shared/dialogs' %>
+      	</div>
+
       <% unless @hide_top %>
 	<div id="header">
 	  <div id="utmost-left-block" class="left">
@@ -49,12 +52,11 @@
 	  </div>
 
 	  <div id="left-block" class="left">
-
 	  </div>
 
 	  <div id="utmost-right-block" class="right">
 	    <div id="auth-block">
-	      <%= render 'shared/auth_block' %>
+	    	<%= render 'shared/auth_block' %>
 	    </div>
 
 	    <%= form_tag articles_search_path, method: :get, id: 'search-form' do %>
