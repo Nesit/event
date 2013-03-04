@@ -2,8 +2,6 @@
 ActiveAdmin.register User do
   menu label: 'Пользователи'
 
-  actions :all, :except => [:show]
-
   scope :all, default: true
   scope :with_subscription
 
@@ -31,9 +29,53 @@ ActiveAdmin.register User do
     id_column
     column :name
     column :email
-    column :state do |resource|
-      I18n.t(resource.state)
+    column :created_at
+    column :activation_state do |user|
+      if user.activation_state == 'pending'
+        "нет"
+      else
+        "да"
+      end
     end
+
+    column :price do |user|
+      if user.subscription.present?
+        user.subscription.amount
+      else
+        ""
+      end
+    end
+
+    column :ordered_at do |user|
+      if user.ordered_at
+        Russian.strftime(user.ordered_at, "%d %B %Y, %H:%M")
+      else
+        ""
+      end
+    end
+
+    column :paid do |user|
+      case
+      when user.subscription.blank?
+        ""
+      when user.subscription.paid?
+        "<strong class=\"green\">да</strong>"
+      else
+        "<strong class=\"red\">нет</strong>"
+      end.html_safe
+    end
+
+    column :print_versions_by_courier do |user|
+      case
+      when user.subscription.blank?
+        ""
+      when user.subscription.print_versions_by_courier
+        "да"
+      else
+        "нет"
+      end
+    end
+
     default_actions
   end
 

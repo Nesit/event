@@ -7,7 +7,7 @@
       include_blank: true, input_html: {disabled: true} %>
     <%= f.input :avatar, :as => :file, :hint => f.template.image_tag(f.object.avatar.url) %>
     <%= f.input :born_at %>
-    <%= f.input :gender_cd %>
+    <%= f.input :gender, as: :select, collection: User.genders_for_select, include_blank: false %>
     <%= f.input :company %>
     <%= f.input :position %>
     <%= f.input :website %>
@@ -20,11 +20,14 @@
     <%= f.input :partner_notification %>
     <%= f.input :weekly_notification %>
   <% end %>
-  <%= f.inputs 'Пароль' do %>
+  <%= f.inputs 'Сменить пароль' do %>
     <%= f.input :password %>
   <% end %>
   <%= f.inputs 'Действия' do %>
-    <%= link_to('Забанить', banned_admin_user_path(resource), method: :put) unless resource.banned? %>
+    <li>
+      <label>&nbsp;</label>
+      <%= link_to('Забанить', banned_admin_user_path(resource), method: :put) unless resource.banned? %>
+    </li>
   <% end %>
   <%= f.actions %>
 <% end %>

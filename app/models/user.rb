@@ -78,6 +78,18 @@ class User < ActiveRecord::Base
   scope :activated, where(activation_state: ['active', nil])
   scope :pending, where(activation_state: 'pending')
 
+  def subscription
+    subscriptions.active.first or subscriptions.pending.newer.first
+  end
+
+  def print_versions_by_courier
+    subscription.present? and subscription.print_versions_by_courier
+  end
+
+  def ordered_at
+    subscription.present? and subscription.created_at
+  end
+
   def last_email_comment!
     self.update_attribute(:last_email_comment, Time.zone.now)
   end
