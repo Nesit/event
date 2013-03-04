@@ -4,7 +4,7 @@ share_social =(url, service) ->
   height = 400
   left   = ($(window).width()  - width)  / 2
   top    = ($(window).height() - height) / 2
-  opts   = 'status=1,width=#{width},height=#{height},top=#{top},left=#{left};' 
+  opts   = "width=#{width},height=#{height},top=#{Math.round(top)},left=#{Math.round(left)}" 
 
   myWindow = window.open(url, service, opts)
   myWindow.focus()
