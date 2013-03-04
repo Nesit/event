@@ -1,0 +1,9 @@
+Вас непременно это заинтересует!<br />
+
+<% @news.each do |day, news| %>
+  <h2><%= I18n.t(day.strftime('%A')) %></h2><br />
+  <% news.each do |novelty| -%>
+    "<%= novelty.title %>"(<%= link_to news_article_url(novelty), news_article_url(novelty) %>)<br />
+  <% end %>
+  <br /><br />
+<% end -%>

@@ -11,7 +11,7 @@ FactoryGirl.define do
 
   factory :user do
     password "password" # do not change it, this value used in cucumber tests
-    
+
     factory :user_need_email do
       state 'need_email'
     end

@@ -1,4 +1,15 @@
 ru:
+  pending: В ожидании
+  in_progress: Выполняется
+  done: Уже выполнен 
+  reject: Отклонён
+  Monday: Понедельник
+  Tuesday: Вторник
+  Wednesday: Среда
+  Thursday: Четверг
+  Friday: Пятница
+  Saturday: Суббота
+  Sunday: Воскресенье
   need_email: Необходим e-mail
   need_info: Неоходима информация
   complete: Все есть

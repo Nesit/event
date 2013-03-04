@@ -18,6 +18,7 @@ class Comment < ActiveRecord::Base
   has_ancestry
 
   after_create :update_comments_count!
+  after_create :check_notify
 
   validates :state, presence: true
   state_machine :state, initial: :active do
@@ -75,4 +76,29 @@ class Comment < ActiveRecord::Base
       topic.save!
     end
   end
+
+  def check_notify
+    # Comment to article
+    comments_user_ids = self.topic.comments.
+      joins(:author).
+      where('users.active_subscription = ? AND
+             users.article_comment_notification = ? AND
+             users.id != ? AND
+             (users.last_email_article >= ? or users.last_email_article IS NULL)',
+      true, true, self.author_id, Time.zone.now.to_s(:db)).map {|c| c.author_id}
+
+    User.find(comments_user_ids).each do |user|
+      UserNotifyMailer.comment_in_articles(user, self.topic).deliver
+      user.last_email_article!
+    end
+
+    # Comment to comment
+    return if self.is_root?
+    user = self.root.author
+    return unless user.active_subscription? && user.comment_notification?
+    return if user.last_email_comment.nil? ? false : (user.last_email_comment >= Time.zone.now - 3.hours)
+    UserNotifyMailer.comment_comment(user, self.topic).deliver
+    user.last_email_comment!
+  end
+
 end

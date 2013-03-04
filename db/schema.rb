@@ -148,6 +148,22 @@ ActiveRecord::Schema.define(:version => 20130301133346) do
   add_index "comments", ["topic_id"], :name => "index_comments_on_topic_id"
   add_index "comments", ["topic_type"], :name => "index_comments_on_topic_type"
 
+  create_table "delayed_jobs", :force => true do |t|
+    t.integer  "priority",   :default => 0
+    t.integer  "attempts",   :default => 0
+    t.text     "handler"
+    t.text     "last_error"
+    t.datetime "run_at"
+    t.datetime "locked_at"
+    t.datetime "failed_at"
+    t.string   "locked_by"
+    t.string   "queue"
+    t.datetime "created_at",                :null => false
+    t.datetime "updated_at",                :null => false
+  end
+
+  add_index "delayed_jobs", ["priority", "run_at"], :name => "delayed_jobs_priority"
+
   create_table "issues", :force => true do |t|
     t.date     "issued_at"
     t.string   "cover"
@@ -166,6 +182,15 @@ ActiveRecord::Schema.define(:version => 20130301133346) do
   end
 
   add_index "pages", ["slug"], :name => "index_pages_on_slug", :unique => true
+
+  create_table "partner_newsletters", :force => true do |t|
+    t.string   "title",      :null => false
+    t.string   "state"
+    t.datetime "started_at"
+    t.text     "text"
+    t.datetime "created_at", :null => false
+    t.datetime "updated_at", :null => false
+  end
 
   create_table "poll_choices", :force => true do |t|
     t.integer  "poll_id"
@@ -290,6 +315,8 @@ ActiveRecord::Schema.define(:version => 20130301133346) do
     t.string   "merge_token"
     t.string   "merge_email"
     t.datetime "merge_token_expires_at"
+    t.datetime "last_email_comment"
+    t.datetime "last_email_article"
   end
 
   add_index "users", ["activation_token"], :name => "index_users_on_activation_token"
