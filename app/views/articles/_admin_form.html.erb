@@ -10,7 +10,7 @@
     <%= f.input :short_description %>
     <% f.object.published_at ||= DateTime.now %>
     <%= f.input :published_at %>
-    <%= f.input :tag_list %>
+    <%= f.input :tag_list, input_html: { class: 'tag-list-input' } %>
     <%= f.input :target_at, as: (resource.kind_of?(EventArticle) ? :date : :hidden) %>
   <% end %>
 

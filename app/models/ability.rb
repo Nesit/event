@@ -5,6 +5,7 @@ class Ability
     
     if admin_user.present?
       can :new, :menu_item
+      can :index, :tag
     end
 
     # for guest
