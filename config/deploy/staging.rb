@@ -17,7 +17,7 @@ set :rake, "#{File.join shared_path, 'scripts/rvm_wrapper.sh'} #{rake}"
 
 after 'deploy:symlink_shared', 'deploy:symlink_sphinx_config'
 
-before 'sphinx:stop', 'sphinx:config'
+before 'sphinx:stop', 'sphinx:configure'
 before 'db:drop', 'unicorn:stop', 'sphinx:stop'
 before 'db:create', 'db:drop'
 after 'db:seed', 'db:load_sample'

@@ -63,7 +63,7 @@ namespace :unicorn do
 end
 
 namespace :sphinx do
-  [:config, :in, :start, :stop, :rebuild].each do |_task|
+  [:configure, :index, :start, :stop, :rebuild].each do |_task|
     task _task, :roles => :db do
       run "cd #{release_path}; RAILS_ENV=#{rails_env} #{rake} ts:#{_task} --trace"
     end
