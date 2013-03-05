@@ -26,7 +26,7 @@ class SiteConfig < ActiveRecord::Base
     (0..7).each do |n|
       item = {}
       date = Date.today + n.days
-      #debugger
+      
       day_elt = doc.search("day[@date=\"#{date.to_s}\"]").first
       tempr = day_elt.search("*[@type=day]").search('temperature-data/avg').first.text()
       icon_name = day_elt.search("*[@type=day]").search('image-v3').first.text()

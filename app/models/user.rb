@@ -26,8 +26,12 @@ class User < ActiveRecord::Base
   before_validation :delete_all_other_pending, if: proc { activation_state == 'pending' }
   before_validation :select_state
 
+  before_save :process_external_avatar
+
   attr_accessor :new_city, :new_country_cd
   attr_accessor :password_confirmation, :old_password
+
+  attr_accessor :external_avatar_url
 
   attr_accessible :born_at, :gender_cd, :city_id, :new_city,
                   :new_country_cd, :company, :position, :website,
@@ -88,6 +92,30 @@ class User < ActiveRecord::Base
 
   def ordered_at
     subscription.present? and subscription.created_at
+  end
+
+  def set_facebook_external_avatar_url!
+    if auth = authentications.where(provider: 'facebook').first
+      facebook_id = auth.uid
+      query_url = "https://graph.facebook.com/#{facebook_id}?fields=picture.type(normal)"
+      
+      require 'open-uri'
+      data = JSON.parse(open(query_url).read)
+      self.external_avatar_url = data["picture"]["data"]["url"]
+    end
+  end
+
+  def process_external_avatar
+    return if avatar?
+    return if external_avatar_url.blank?
+
+    require 'open-uri'
+
+    file = Tempfile.new ["external_avatar", File.extname(external_avatar_url)]
+    file.binmode
+    file.write(open(external_avatar_url).read)
+    file.close
+    self.avatar = file
   end
 
   def last_email_comment!

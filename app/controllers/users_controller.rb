@@ -44,7 +44,6 @@ class UsersController < ApplicationController
   end
 
   def update_email
-    debugger
     @user = current_user
     if User.activated.where(email: params[:email]).any?
       render json: {used: true}, status: :error
@@ -184,6 +183,7 @@ class UsersController < ApplicationController
         @user.activate!
       end
 
+      @user.set_facebook_external_avatar_url! if params[:provider] == 'facebook'
       @user.save!
 
       reset_session # protect from session fixation attack
