@@ -27,9 +27,8 @@ class Article < ActiveRecord::Base
   scope :without_tv, where('type <> ?', 'TvArticle')
   scope :published, where(published: true)
 
-  define_index do
-    indexes title
-    indexes body
+  ThinkingSphinx::Index.define :article, :with => :active_record do
+    indexes title, body
   end
 
   scope :published_to_monday, -> { published.where('published_at BETWEEN ? AND ?',

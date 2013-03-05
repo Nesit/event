@@ -11,4 +11,3 @@
 
 /config/database.yml
 /config/*.sphinx.conf
-/config/sphinx.yml

@@ -6,8 +6,6 @@ group :production, :staging do
   gem 'pg'
   gem 'whenever'
   gem 'exception_notification'
-  # For sphinx only
-  gem 'mysql2'
 end
 
 gem 'jquery-rails'
@@ -33,7 +31,8 @@ gem 'rmagick'
 gem 'easy_captcha'
 gem 'unicorn'
 
-gem 'thinking-sphinx', '~> 2.0.14'
+gem 'mysql2', '0.3.12b4'
+gem 'thinking-sphinx', '3.0.0'
 gem 'activemerchant', require: 'active_merchant'
 
 gem 'friendly_id', '~> 4.0.9'
