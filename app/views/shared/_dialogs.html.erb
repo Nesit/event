@@ -27,7 +27,7 @@
 <div id="cropping-dialog" class="dialog hidden closable">
 	<%= link_to "X", '#', class: 'close-link right' %>
 	<div class="dialog-title">Выделите участок для вашего аватара</div>
-	<%= image_tag '#', class: 'source-image left' %>
+	<img src="#" class="source-image left" />
 	<%= form_tag profile_avatar_path, method: :post, class: 'left' do %>
 		<div id="avatar-cropping-preview">
 			<img src="#" />
