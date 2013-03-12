@@ -13,6 +13,8 @@
   [11, "ascii.png"],
   [12, "snow.png"],
   [13, "parlament.png"],
+  
+  [17, "tibet.jpg"],
 ].each do |pair|
   article = Article.find(pair.first)
   article.head_image = File.open Rails.root.join("db", "sample", "images", pair.last)
