@@ -149,7 +149,7 @@ class User < ActiveRecord::Base
   end
 
   def ensure_plain_password
-    if password.blank?
+    if crypted_password.blank? and password.blank?
       self.password = SecureRandom.hex(4)
     end
   end
