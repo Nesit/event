@@ -24,7 +24,7 @@ class Article < ActiveRecord::Base
   scope :newer_published, order('articles.published_at DESC')
   scope :older_published, order('articles.published_at ASC')
   scope :popular, order('articles.pageviews_count DESC')
-  scope :without_tv, where('type <> ?', 'TvArticle')
+  scope :without_tv_and_events, where('type NOT IN (?)', ['TvArticle', 'EventArticle'])
   scope :published, where(published: true)
 
   ThinkingSphinx::Index.define :article, :with => :active_record do

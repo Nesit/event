@@ -19,13 +19,17 @@
 
 <div class="articles-list">
 	<% if @site_config and not @site_config.article_list_banner_body.blank? %>
-		<%= render 'articles/items', articles: (@articles.slice(0..(@site_config.article_list_banner_after-1)) or []) %>
+		<% first_part = @articles.slice(0..(@site_config.article_list_banner_after-1)) %>
+		<% second_part = @articles.slice(@site_config.article_list_banner_after..-1) %>
+		<%= render 'articles/items', articles: (first_part or []) %>
 		<%# div class="frame" id="article-list-banner">
 			<div class="frame-title">Реклама</div>
 			<div><= @site_config.article_list_banner_body.html_safe ></div>
 		</div %>
-		<div class="spacer"></div>
-		<%= render 'articles/items', articles: (@articles.slice(@site_config.article_list_banner_after..-1) or []) %>
+		<% if second_part and second_part.any? %>
+			<div class="spacer"></div>
+			<%= render 'articles/items', articles: (second_part or []) %>
+		<% end %>
 	<% else %>
 		<%= render 'articles/items', articles: @articles %>
 	<% end %>
