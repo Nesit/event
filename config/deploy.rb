@@ -27,8 +27,17 @@ after 'db:migrate', 'db:seed'
 
 after 'deploy:restart', 'unicorn:restart'
 
-namespace :deploy do
+desc "tail production log files"
+task :tail_logs, :roles => :app do
+  log_file = "#{rails_env}.log"
+  run "tail -f #{File.join(shared_path, 'log', log_file)}" do |channel, stream, data|
+    puts  # for an extra line break before the host name
+    puts "#{channel[:host]}: #{data}"
+    break if stream == :err
+  end
+end
 
+namespace :deploy do
   desc "Symlink shared configs and folders on each release."
   task :symlink_shared, :roles => :app do
     run "ln -nfs #{shared_path}/config/database.yml #{release_path}/config/database.yml"
@@ -41,7 +50,6 @@ namespace :deploy do
   task :symlink_sphinx_config, :roles => :app do
     run "ln -nfs #{shared_path}/config/sphinx.yml #{release_path}/config/thinking_sphinx.yml"
   end
-
 end
 
 namespace :db do
