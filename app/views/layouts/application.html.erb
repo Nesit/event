@@ -59,7 +59,7 @@
 	    	<%= render 'shared/auth_block' %>
 	    </div>
 
-	    <%= form_tag articles_search_path, method: :get, id: 'search-form', class: 'hidden' do %>
+	    <%= form_tag articles_search_path, method: :get, id: 'search-form' do %>
 		    <%= text_field_tag :term, '', class: 'left', 'data-placeholder' => "Поиск по сайту" %>
 		    <%= submit_tag '', class: 'right' %>
 		    <div class="clear"></div>

@@ -11,3 +11,5 @@
 
 /config/database.yml
 /config/*.sphinx.conf
+/.rbenv-gemsets
+/config/sphinx.yml
