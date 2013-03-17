@@ -13,3 +13,4 @@
 /config/*.sphinx.conf
 /.rbenv-gemsets
 /config/sphinx.yml
+/config/thinking_sphinx.yml

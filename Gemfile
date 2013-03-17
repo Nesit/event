@@ -1,4 +1,4 @@
-source :rubygems
+source 'https://rubygems.org'
 
 gem 'rails', '3.2.11'
 
@@ -31,8 +31,8 @@ gem 'rmagick'
 gem 'easy_captcha'
 gem 'unicorn'
 
-gem 'mysql2'#, '0.3.12b4'
-gem 'thinking-sphinx', '3.0.1'
+gem 'mysql2'
+gem 'thinking-sphinx', '~> 3.0.1'
 gem 'activemerchant', require: 'active_merchant'
 
 gem 'friendly_id', '~> 4.0.9'
