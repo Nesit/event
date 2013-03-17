@@ -29,6 +29,10 @@ Then /^I should see "(.*?)"$/ do |text|
   page.should have_content(text)
 end
 
+Then /^I should see tag "(.*?)"$/ do |tag|
+  page.should have_selector(tag)
+end
+
 When /^([^:"]+) should not be visible$/ do |element|
   steps %{
     Then #{element} should not be visible within the body
@@ -69,4 +73,8 @@ When /^I wait for ajax$/ do
   active_lambda.call.class.should_not eql(String) until active_lambda.call or (start_time + 5.seconds) < Time.now do
     sleep 1
   end
+end
+
+Then /^show me the page$/ do
+  save_and_open_page
 end
