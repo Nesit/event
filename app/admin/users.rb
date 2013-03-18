@@ -2,6 +2,8 @@
 ActiveAdmin.register User do
   menu label: 'Пользователи'
 
+  actions :all, except: [:new]
+
   scope :all, default: true
   scope :with_subscription
 
