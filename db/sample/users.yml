@@ -12,6 +12,7 @@ user1:
   salt: 'G9Y3bPEzgLyJMpbRruKy'
   crypted_password: '$2a$10$zUA/Q8y8skaUZJy1zXmyu.V0PfUyTnOgytiOB8pYh3TknX0O3.x0e'
   activation_state: active
+  active_subscription: true
 
 user2:
   id: 2
