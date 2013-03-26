@@ -77,3 +77,9 @@ namespace :sphinx do
     end
   end
 end
+
+namespace :weather do
+  task :update, :roles => :app do
+    run "cd #{release_path}; RAILS_ENV=#{rails_env} #{rake} weather:update --trace"
+  end
+end

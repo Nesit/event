@@ -24,3 +24,4 @@ after 'db:seed', 'db:load_sample'
 
 before 'unicorn:restart', 'sphinx:rebuild'
 before 'unicorn:restart', 'deploy:symlink_robots'
+after 'unicorn:restart', 'weather:update'

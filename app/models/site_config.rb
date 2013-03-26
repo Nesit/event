@@ -23,7 +23,7 @@ class SiteConfig < ActiveRecord::Base
     content = open("http://export.yandex.ru/weather-ng/forecasts/#{moscow_id}.xml").read
     doc = Nokogiri::XML(content, nil, 'utf-8')
     items = []
-    (0..7).each do |n|
+    (0..8).each do |n|
       item = {}
       date = Date.today + n.days
       
@@ -37,8 +37,13 @@ class SiteConfig < ActiveRecord::Base
       item['icon_name'] = icon_name
 
       items.push item
+    rescue
+      # just skip element
     end
-    self.weather['items'] = items
+    # take only 7 elements, even if we take 8
+    # this ugly hack needed, because of timezone problem
+    # on production server
+    self.weather['items'] = items[0..7]
   end
 
   private
