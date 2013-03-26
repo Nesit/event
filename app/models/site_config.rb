@@ -27,18 +27,20 @@ class SiteConfig < ActiveRecord::Base
       item = {}
       date = Date.today + n.days
       
-      day_elt = doc.search("day[@date=\"#{date.to_s}\"]").first
-      tempr = day_elt.search("*[@type=day]").search('temperature-data/avg').first.text()
-      icon_name = day_elt.search("*[@type=day]").search('image-v3').first.text()
-      
-      item['weekday'] = Russian.strftime(date, "%a")
-      item['month_day'] = Russian.strftime(date, "%d/%m")
-      item['temperature'] = tempr
-      item['icon_name'] = icon_name
+      begin
+        day_elt = doc.search("day[@date=\"#{date.to_s}\"]").first
+        tempr = day_elt.search("*[@type=day]").search('temperature-data/avg').first.text()
+        icon_name = day_elt.search("*[@type=day]").search('image-v3').first.text()
+        
+        item['weekday'] = Russian.strftime(date, "%a")
+        item['month_day'] = Russian.strftime(date, "%d/%m")
+        item['temperature'] = tempr
+        item['icon_name'] = icon_name
 
-      items.push item
-    rescue
-      # just skip element
+        items.push item
+      rescue
+        # just skip element
+      end
     end
     # take only 7 elements, even if we take 8
     # this ugly hack needed, because of timezone problem
