@@ -9,6 +9,10 @@ class SubscriptionsController < ApplicationController
   end
 
   def new
+    url = request.referrer 
+    if URI.parse(url).path != '/subscriptions/new'
+      cookies[:subscription_back_url] = url
+    end
   end
 
   def pay

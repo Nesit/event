@@ -3,6 +3,11 @@
 		@include page-title;
 	}
 
+	h1.stupid-regush-specific-style {
+		width: 640px;
+		margin: 0 auto;
+	}
+
 	#subscription-content {
 		width: 590px;
 		margin: 0 auto;
