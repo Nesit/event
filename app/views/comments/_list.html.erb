@@ -1,6 +1,6 @@
 <div class="comments-list">
 	<h2>Комментарии</h2>
-	<%= form_for topic.comments.build, html: { id: 'top-comment-form' } do |f| %>
+	<%= form_for topic.comments.build, html: { id: 'top-comment-form' }, remote: true do |f| %>
 		<%= f.text_area :body, 'data-placeholder' => 'Ваш комментарий...', 
 		                readonly: !can_comment?, class: (current_user.nil? ? 'auth-required' : '') %>
 		<%= f.hidden_field :topic_id %>

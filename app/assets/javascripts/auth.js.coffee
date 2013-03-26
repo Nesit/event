@@ -202,6 +202,10 @@ $ ->
         window.update_csrf_token(value)
 
         # allow comment
+        $('#top-comment-form textarea').removeClass('auth-required')
+        $('#top-comment-form textarea').removeAttr('readonly')
+        $('#top-comment-form input[type=submit]').removeClass('hidden')
+
         $('.comments-list input[type=submit]').removeClass('hidden')
         $('.comments-list .notice').addClass('hidden')
         $('.comments-list .comment-reply-block').removeClass('hidden')

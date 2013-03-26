@@ -1,5 +1,5 @@
 $ ->
-    $('#top-comment-form textarea.auth-required').on 'click', ->
+    $(document).on 'click', '#top-comment-form textarea.auth-required', ->
         if $(this).attr('readonly')
             window.show_login_dialog()
             return false
@@ -85,6 +85,10 @@ $ ->
         $item.find('.comment-tree').prepend(data)
         $item.find('.comment-reply-link').parent().removeClass('hidden')
         $item.find('.comment-reply-block form').addClass('hidden')
+
+    $(document).on 'ajax:success', '#top-comment-form', (event, data) ->
+        $('.comments-list .comment-tree').first().prepend(data)
+        $(this).find('textarea').val('')
 
     $(document).on 'submit', '.comments-list form', (event) ->
         if $(this).find('textarea').val() == ""
