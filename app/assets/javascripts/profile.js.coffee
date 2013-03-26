@@ -118,10 +118,7 @@ $ ->
         minSize: [96, 96]
         aspectRatio: 1
 
-    #jcrop_api = null
     jcrop_api = $.Jcrop('#cropping-dialog .source-image', opts)
-    #$('#cropping-dialog .source-image').Jcrop opts, ->
-    #    jcrop_api = this
 
     window.show_cropping_dialog = (data) ->
         jcrop_api.setImage(data.url)
