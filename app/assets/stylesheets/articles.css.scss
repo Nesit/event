@@ -38,6 +38,8 @@
 	}
 
 	.article-head-image {
+		width: 474px;
+		height: 316px;
 		margin: 10px 0;
 	}
 
@@ -327,6 +329,11 @@
 			@include video-overlay-active;
 		}
 
+		img {
+			width: 270px;
+			height: 190px;
+		}
+
 		.article-item-description {
 			width: 355px;
 			height: 170px;
@@ -415,6 +422,11 @@
 
 		.carousel-item-description {
 			height: 400px;
+
+			img {
+				width: 300px;
+				height: 200px;
+			}
 		}
 
 		.article-carousel-item-info {
@@ -541,6 +553,8 @@
 			font-size: 16px;
 		}
 		img {
+			width: 157px;
+			height: 82px;
 			border: 1px solid $grey-border-color;
 		}
 	}
@@ -606,7 +620,7 @@
 
 #video-block {
 	width: 619px;
-	//height: 250px;
+	height: 222px;
 	background-color: $video-block-bg-color;
 	margin-bottom: 11px;
 	padding: 15px;

@@ -22,6 +22,10 @@
 }
 
 .frame {
+	&.adriver-frame {
+		height: 444px;
+	}
+
 	padding: 23px;
 	padding-top: 0;
 	border: 1px solid $grey-border-color;
