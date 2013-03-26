@@ -14,6 +14,16 @@ ActiveAdmin.register User do
   filter :state, as: :select, collection: %w[need_info complete banned].
     map {|s| [I18n.t(s), s]}, include_blank: true
 
+  member_action :activate, method: :put do
+    user = User.find(params[:id])
+    user.activate!
+    redirect_to action: :edit
+  end
+
+  action_item only: :edit do
+    link_to "активировать", activate_admin_user_path(user), method: :put if user.activation_state != 'active'
+  end
+
   controller do
     def update
       params[:user].delete_if {|k,v| k == 'password'} if (params[:user][:password] && params[:user][:password].empty?)
