@@ -14,6 +14,29 @@ ActiveAdmin.register User do
   filter :state, as: :select, collection: %w[need_info complete banned].
     map {|s| [I18n.t(s), s]}, include_blank: true
 
+
+  member_action :ban, method: :put do
+    user = User.find(params[:id])
+    user.ban!
+    redirect_to action: :edit
+  end
+
+  action_item only: :edit do
+    link_to "Забанить", ban_admin_user_path(user), method: :put unless user.banned?
+  end
+
+
+  member_action :unban, method: :put do
+    user = User.find(params[:id])
+    user.unban!
+    redirect_to action: :edit
+  end
+
+  action_item only: :edit do
+    link_to "Разбанить", unban_admin_user_path(user), method: :put if user.banned?
+  end
+
+
   member_action :activate, method: :put do
     user = User.find(params[:id])
     user.activate!
@@ -21,7 +44,7 @@ ActiveAdmin.register User do
   end
 
   action_item only: :edit do
-    link_to "активировать", activate_admin_user_path(user), method: :put if user.activation_state != 'active'
+    link_to "Активировать", activate_admin_user_path(user), method: :put if user.activation_state != 'active'
   end
 
   controller do

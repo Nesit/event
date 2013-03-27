@@ -64,8 +64,6 @@ class User < ActiveRecord::Base
   scope :comment_notifications, -> { where(active_subscription: true, comment_notification: true) }
 
   state_machine :state, initial: :need_info do
-    after_transition any => :banned, :do => :banned_user
-
     event :complete do
       transition all => :complete
     end
@@ -139,8 +137,21 @@ class User < ActiveRecord::Base
     _articles.uniq
   end
 
-  def banned_user
+  def ban!
+    self.state = 'banned'
+    self.save!
     UserMailer.user_banned(self).deliver
+  end
+
+  def unban!
+    self.state = 'need_info'
+    select_state
+    self.save!
+    UserMailer.user_unbanned(self).deliver
+  end
+
+  def banned?
+    state == 'banned'
   end
 
   def activate!
@@ -255,6 +266,8 @@ class User < ActiveRecord::Base
   end
 
   def select_state
+    return if state == 'banned'
+
     self.state = 'complete'
     complete = true
     FIELDS_FOR_COMPLETE.each do |sym|
