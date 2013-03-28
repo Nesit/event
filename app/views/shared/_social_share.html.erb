@@ -1,5 +1,30 @@
 <% url ||= full_url %>
 <div class="social-share-line" data-id="<%= subject.id %>" data-kind="<%= subject.class.name %>">
+
+  <div class="fb-like" data-send="false" data-layout="button_count" data-width="450" data-show-faces="false"></div>
+
+  <% @vk_id_num ||= 0; @vk_id_num += 1 %>
+  <div id="vk_like<%= @vk_id_num %>"></div>
+  <script type="text/javascript">
+  VK.Widgets.Like("vk_like<%= @vk_id_num %>", {type: "mini"});
+  </script>
+
+  <iframe allowtransparency="true" frameborder="0" scrolling="no"
+        src="https://platform.twitter.com/widgets/tweet_button.html"
+        style="width:90px; height:20px;"></iframe>
+
+  <div class="g-plus-one-wrapper">
+    <div class="g-plusone" data-size="small"></div>
+    <script type="text/javascript">
+      (function() {
+        var po = document.createElement('script'); po.type = 'text/javascript'; po.async = true;
+        po.src = 'https://apis.google.com/js/plusone.js';
+        var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(po, s);
+      })();
+    </script>
+  </div>
+
+<!--
   <a class="fb share" href="http://www.facebook.com/share.php?u=<%=u url %>" data-kind="fb" data-service="Facebook">
     <%= subject.fb_shares_count %>
   </a>
@@ -15,4 +40,5 @@
   <a class="mailru share" data-kind="mailru" href="http://connect.mail.ru/share?url=<%=u url %>&comment=<%=u subject.title %>" data-service="MailRu">
     <%= subject.mailru_shares_count %>
   </a>
+-->
 </div>

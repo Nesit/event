@@ -1,3 +1,15 @@
+#vk_like1, #vk_like2 {
+	display: inline-block;
+}
+
+.g-plus-one-wrapper {
+	display: inline-block;
+
+	> div {
+		width: 80px;
+	}
+}
+
 .social-share-line {
 	display: inline-block;
 	a {
@@ -41,7 +53,7 @@
 .bottom-social-share {
 	.social-share-line {
 		float: inherit;
-		width: 330px;
+		width: 390px;
 		margin-left: 155px;
 	}
 	border-top: 1px solid $grey2-border-color;
