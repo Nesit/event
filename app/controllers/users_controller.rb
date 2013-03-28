@@ -24,7 +24,7 @@ class UsersController < ApplicationController
     @user = current_user
     params[:user].delete(:city_id) if params[:user][:city_id] == '-1'
     @user.update_attributes!(params[:user])
-    redirect_to edit_user_path
+    head :ok
   end
 
   def ensure_name

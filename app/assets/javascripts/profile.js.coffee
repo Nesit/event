@@ -92,6 +92,9 @@ $ ->
 
     check_for_required_fields()
 
+    $('#user-profile-form').on 'ajax:success', ->
+        $('#user-data-saved-message').removeClass('hidden')
+
     # cropping
 
     show_preview = (coords) ->

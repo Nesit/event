@@ -7,7 +7,7 @@
 			<h1 class="left bottom-line">Привет друг!</h1>
 		</div>
 		<div class="right" id="profile-content">
-			<%= form_for @user, url: user_path, method: :put, html: { id: 'user-profile-form' } do |f| %>
+			<%= form_for @user, url: user_path, method: :put, remote: true, html: { id: 'user-profile-form' } do |f| %>
 				<div class="field-list">
 					<div class="field">
 						<%= f.label :name, class: 'left' do %>
@@ -124,7 +124,8 @@
 					вам нужно заполнить все обязательные поля.
 				</p>
 
-				<%= f.submit "Сохранить" %>
+				<%= f.submit "Сохранить", class: 'left' %>
+				<div class="left hidden" id="user-data-saved-message">Данные сохранены</div>
 			<% end %>
 		</div>
 		<div class="clear"></div>

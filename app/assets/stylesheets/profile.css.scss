@@ -53,6 +53,19 @@
 	margin-bottom: 10px;
 	margin-top: 70px;
 
+	#user-data-saved-message {
+		@include error-block;
+		@include sans-serif;
+		font-size: 13px;
+		font-style: oblique;
+		display: inline-block;
+		margin-left: 20px;
+	}
+
+	#user-data-saved-message.hidden {
+		display: none;
+	}
+
 	#profile-left-menu {
 		width: 140px;
 
