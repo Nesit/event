@@ -23,11 +23,5 @@
   <%= f.inputs 'Сменить пароль' do %>
     <%= f.input :password %>
   <% end %>
-  <%= f.inputs 'Действия' do %>
-    <li>
-      <label>&nbsp;</label>
-      <%= link_to('Забанить', banned_admin_user_path(resource), method: :put) unless resource.banned? %>
-    </li>
-  <% end %>
   <%= f.actions %>
 <% end %>
