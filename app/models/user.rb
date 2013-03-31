@@ -16,9 +16,11 @@ class User < ActiveRecord::Base
 
   validates :password, length: { minimum: 6 }, if: :password
   validates :password, confirmation: true
+  validates :last_email_comment, :last_email_article, presence: true
 
   before_validation :process_new_city
   before_validation :ensure_uniqueness_name
+  before_validation :ensure_last_email
 
   before_destroy :user_deleted
   after_save :check_complete
@@ -122,12 +124,6 @@ class User < ActiveRecord::Base
 
   def last_email_article!
     self.update_attribute(:last_email_article, Time.zone.now)
-  end
-
-  def new_comments_in_articles
-    return [] if self.last_email_article > (Time.zone.now - 3.hours)
-    Article.joins(:comments).where('comments.id IN (?)', self.comment_ids).
-      joins(:comments).where('comments.created_at >= ?', self.last_email_article)
   end
 
   def new_comments_in_comments
@@ -256,6 +252,11 @@ class User < ActiveRecord::Base
   end
 
   private
+
+  def ensure_last_email
+    self.last_email_article = self.created_at if self.last_email_article.blank?
+    self.last_email_comment = self.created_at if self.last_email_comment.blank?
+  end
 
   def delete_all_other_pending
     if new_record?

@@ -13,6 +13,8 @@ user1:
   crypted_password: '$2a$10$zUA/Q8y8skaUZJy1zXmyu.V0PfUyTnOgytiOB8pYh3TknX0O3.x0e'
   activation_state: active
   active_subscription: true
+  last_email_article: '<%= DateTime.now %>'
+  last_email_comment: '<%= DateTime.now %>'
 
 user2:
   id: 2
@@ -28,6 +30,8 @@ user2:
   salt: 'UzNpW4ggbDXrywH2zzny'
   crypted_password: '$2a$10$RYBQJTFBA3s2QpzXmaCskuVl2pTRxsvzjg6nYrTwQGeiY/ddf8GqC'
   activation_state: active
+  last_email_article: '<%= DateTime.now %>'
+  last_email_comment: '<%= DateTime.now %>'
 
 <% (3..6).each do |i| %>
 user<%= i %>:
@@ -44,4 +48,6 @@ user<%= i %>:
   salt: 'UzNpW4ggbDXrywH2zzny'
   crypted_password: '$2a$10$RYBQJTFBA3s2QpzXmaCskuVl2pTRxsvzjg6nYrTwQGeiY/ddf8GqC'
   activation_state: active
+  last_email_article: '<%= DateTime.now %>'
+  last_email_comment: '<%= DateTime.now %>'
 <% end %>

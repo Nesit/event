@@ -35,9 +35,7 @@ namespace :newsletter do
 
   task :comment_article => :environment do
     User.article_comments.each do |user|
-      articles = user.new_comments_in_articles
-      next if articles.empty?
-      UserNotifyMailer.comment_in_articles(user, articles).deliver
+      UserNotifyMailer.comment_in_articles(user).deliver
     end
   end
 

@@ -88,7 +88,7 @@ class Comment < ActiveRecord::Base
       true, true, self.author_id, Time.zone.now.to_s(:db)).map {|c| c.author_id}
 
     User.find(comments_user_ids).each do |user|
-      UserNotifyMailer.comment_in_articles(user, self.topic).deliver
+      UserNotifyMailer.comment_in_articles(user).deliver
       user.last_email_article!
     end
 

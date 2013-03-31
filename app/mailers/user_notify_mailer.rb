@@ -28,10 +28,12 @@ class UserNotifyMailer < ActionMailer::Base
     mail(to: user.email, :subject => "Event.ru рекомендует")
   end
 
-  def comment_in_articles(user, articles)
-    @user = user
-    @articles = articles.class.name == 'Array' ? articles : [articles]
-    mail(to: @user.email, :subject => "Уведомление о новом комментарии на сайте Event.ru")
+  def comment_in_articles(user)
+    @comments = user.comments.toplevel
+      .where('created_at > ?', user.last_email_article)
+      .group_by(&:article)
+    return if @comments.empty?
+    mail(to: user.email, :subject => "Уведомление о новом комментарии на сайте Event.ru")
   end
 
   def comment_comment(user, articles)
