@@ -126,13 +126,6 @@ class User < ActiveRecord::Base
     self.update_attribute(:last_email_article, Time.zone.now)
   end
 
-  def new_comments_in_comments
-    return [] if self.last_email_comment > (Time.zone.now - 3.hours)
-    _comments = comments.map {|c| c.children.where('created_at >= ?', self.last_email_comment)}.flatten
-    _articles = _comments.map {|c| c.topic}
-    _articles.uniq
-  end
-
   def ban!
     self.state = 'banned'
     self.save!

@@ -32,13 +32,26 @@ class UserNotifyMailer < ActionMailer::Base
     @comments = user.comments.toplevel
       .where('created_at > ?', user.last_email_article)
       .group_by(&:article)
+    
     return if @comments.empty?
+    
+    user.last_email_article!
     mail(to: user.email, :subject => "Уведомление о новом комментарии на сайте Event.ru")
   end
 
-  def comment_comment(user, articles)
-    @user = user
-    @articles = articles.class.name =~ /Relation|Array/ ? articles : [articles]
-    mail(to: @user.email, :subject => "Уведомление о новом комментарии на сайте Event.ru")
+  def comment_comment(user)
+    @comments = user.comments.map { |comment|
+      comment.children.where('created_at > ?', user.last_email_comment) }
+        .select { |children| not children.empty?  }
+
+    return if @comments.empty?
+
+    @comments = @comments.group_by { |children| children.first.topic  }
+
+    # got following:
+    # [[topic, [[child, ...], ...]], ...]
+
+    user.last_email_comment!
+    mail(to: user.email, :subject => "Уведомление о новом комментарии на сайте Event.ru")
   end
 end
