@@ -247,8 +247,8 @@ class User < ActiveRecord::Base
   private
 
   def ensure_last_email
-    self.last_email_article = self.created_at if self.last_email_article.blank?
-    self.last_email_comment = self.created_at if self.last_email_comment.blank?
+    self.last_email_article = DateTime.now if self.last_email_article.blank?
+    self.last_email_comment = DateTime.now if self.last_email_comment.blank?
   end
 
   def delete_all_other_pending
