@@ -1,9 +1,21 @@
-Вас непременно это заинтересует!<br />
-
+<h1>Здравствуйте,<br>Появились новые статьи на сайте:</h1>
 <% @news.each do |day, news| %>
-  <h2><%= I18n.t(day.strftime('%A')) %></h2><br />
-  <% news.each do |novelty| -%>
-    "<%= novelty.title %>"(<%= link_to news_article_url(novelty), news_article_url(novelty) %>)<br />
-  <% end %>
-  <br /><br />
-<% end -%>
+<div class="red-line"></div>
+<div class="red-line-title"><%= Russian.strftime(day, "%e %B %Y г.") %></div>
+	<% news.each do |article| %>
+		<div class="item">
+			<%= link_to image_tag("#{root_url}/#{article.head_image.list_thumb}", class: 'image_fix', width: 210, height: 140), polymorphic_url(article, only_path: false), style: "float:left" %>
+			<div class="description">
+				<h2><%= link_to article.title, polymorphic_url(article, only_path: false) %></h2>
+				<p><%= article.list_item_description %></p>
+				<p class="bot">
+					<%= link_to t("articles.category.#{article.class.name}"), "#{root_path}/#{send("#{article.class.name.underscore.pluralize}_path")}" %>
+					<span class="created-at">
+						<%= distance_of_time_in_words(Time.now, article.published_at) %> назад,
+						в <%= article.published_at.strftime("%H:%M") %>
+					</span>
+				</p>
+			</div>
+		</div>
+	<% end %>
+<% end %>

@@ -4,9 +4,12 @@ class UsersController < ApplicationController
   authorize_resource
 
   def edit
-    @user = current_user
-    @user.city ||= City.new
-    @user.new_country_cd = @user.city.country_cd if @user.city
+    if @user = current_user
+      @user.city ||= City.new
+      @user.new_country_cd = @user.city.country_cd if @user.city
+    else
+      redirect_to root_path
+    end
   end
 
   def create

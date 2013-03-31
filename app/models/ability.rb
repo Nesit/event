@@ -40,6 +40,8 @@ class Ability
     can [:new, :create, :pay], Subscription
     can [:success, :fail], :robokassa_payment
 
+    can [:edit], User
+
     return if user.blank?
 
     can [:update_email], User if user.email.blank?
@@ -54,7 +56,7 @@ class Ability
     can :read, City
     can :manage, Subscription
     can :read, :notification
-    can [:edit, :update, :ensure_name, :edit_password, :update_password], User
+    can [:update, :ensure_name, :edit_password, :update_password], User
     can [:edit_avatar, :update_avatar], User
     can :create, TemporaryAvatar
 

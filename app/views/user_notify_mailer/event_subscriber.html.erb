@@ -1,9 +1,20 @@
-Напоминаем вам о будущих событиях:<br />
-
-<% @events.each do |day, events| %>
-  <h2><%= I18n.t(day.strftime('%A')) %></h2><br />
-  <% events.each do |event| -%>
-    "<%= event.title %>"(<%= link_to event_article_url(event), event_article_url(event) %>)<br />
-  <% end %>
-  <br /><br />
-<% end -%>
+<h1>Предстоящие события:</h1>
+<div class="red-line"></div>
+<div class="red-line-title">Афиша</div>
+<% @events.each do |day, news| %>
+	<% news.each do |article| %>
+		<div class="item">
+			<%= link_to image_tag("#{root_url}/#{article.head_image.list_thumb}", class: 'image_fix', width: 210, height: 140), polymorphic_url(article, only_path: false), style: "float:left" %>
+			<div class="description">
+				<h2><%= link_to article.title, polymorphic_url(article, only_path: false) %></h2>
+				<p><%= article.list_item_description %></p>
+				<p class="bot">
+					<span class="created-at">
+						<%= distance_of_time_in_words(Time.now, article.published_at) %> назад,
+						в <%= article.published_at.strftime("%H:%M") %>
+					</span>
+				</p>
+			</div>
+		</div>
+	<% end %>
+<% end %>

@@ -2,20 +2,23 @@
 class UserNotifyMailer < ActionMailer::Base
   default :from => "robot@event.ru"
 
+  layout 'notification'
+
   def weekly_newsletter_monday(user)
-    @news = NewsArticle.published_to_monday.group_by(&:published_at)
+    @news = NewsArticle.published_to_monday.group_by { |a| a.published_at.to_date }
     return if @news.empty?
     mail(to: user.email, :subject => "Новые статьи на Event.ru")
   end
 
   def weekly_newsletter_thursday(user)
-    @news = NewsArticle.published_to_thursday.group_by(&:published_at)
+    @news = NewsArticle.published_to_thursday.group_by { |a| a.published_at.to_date }
     return if @news.empty?
-    mail(to: user.email, :subject => "Новые статьи на Event.ru")
+    mail(to: user.email, :subject => "Новые статьи на Event.ru",
+      :template_name => 'weekly_newsletter_monday')
   end
 
   def event_subscriber(user)
-    @events = NewsArticle.new_events_tuesday.group_by(&:target_at)
+    @events = EventArticle.new_events_tuesday.group_by { |a| a.target_at.to_date }
     return if @events.empty?
     mail(to: user.email, :subject => "Афиша Event.ru")
   end
