@@ -9,7 +9,7 @@
 <% if main_page? %>
 	<%= render 'articles/carousel' %>
 	<%= render 'articles/afisha' %>
-<% elsif params[:type] == 'EventArticle' %>
+<% elsif params[:type] == 'EventArticle' and (params[:page].to_i < 2) %>
 	<h2 class="afisha-today">
 		<span class="today">Сегодня</span>,
 		<%= Russian.strftime(Date.today, "%e %B, %A") %>
