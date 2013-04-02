@@ -1,0 +1,14 @@
+<%= semantic_form_for [:admin, resource] do |f| %>
+  <%= f.inputs do %>
+    <%= f.input :name %>
+    <%= f.input :number %>
+    <%= f.input :issued_at %>
+    <%= f.input :cover %>
+    <li>
+    	<label>&nbsp;</label>
+	    <%= image_tag(resource.cover.thumb_ext) if resource.cover? %>
+	</li>
+  <% end %>
+
+  <%= f.actions %>
+<% end %>

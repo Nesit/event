@@ -24,14 +24,5 @@ ActiveAdmin.register Issue do
     default_actions
   end
 
-  form do |f|
-    f.inputs do
-      f.input :name
-      f.input :number
-      f.input :issued_at
-      f.input :cover
-    end
-
-    f.actions
-  end
+  form partial: 'issues/admin_form'
 end
