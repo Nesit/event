@@ -38,9 +38,9 @@ $ ->
                 success: (data) ->
                     window.cities[country_cd] = data
                     setup_city_select(country_cd)
-    $('#user-profile-form select[name="user[new_country_cd]"]').trigger('change')
-
-    #$('#user-profile-form select[name="user[new_country_cd]"]').trigger('change')
+    if  $('#user-profile-form select[name="user[city_id]"]').val() == null
+        $('#user-profile-form select[name="user[new_country_cd]"]').trigger('change')
+    
     $('#user-profile-form select[name="user[city_id]"]').chosen
         no_results_text: "Этого города нет в базе, нажмите ввод, чтобы добавить"
 
