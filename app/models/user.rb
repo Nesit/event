@@ -149,9 +149,9 @@ class User < ActiveRecord::Base
   end
 
   def ensure_plain_password
-    if crypted_password.blank? and password.blank?
+    #if crypted_password.blank? or password.blank?
       self.password = SecureRandom.hex(4)
-    end
+    #end
   end
 
   # this method generates merge token and sends emails with link
