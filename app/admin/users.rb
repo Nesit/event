@@ -47,6 +47,20 @@ ActiveAdmin.register User do
     link_to "Активировать", activate_admin_user_path(user), method: :put if user.activation_state != 'active'
   end
 
+
+  member_action :pay, method: :post do
+    user = User.find(params[:id])
+    user.subscription.activate!
+    redirect_to action: :edit
+  end
+
+  action_item only: :edit do
+    if user.subscription.present? and not user.subscription.paid?
+      link_to "Подтвердить оплату", pay_admin_user_path(user), method: :post
+    end
+  end
+
+
   controller do
     def update
       params[:user].delete_if {|k,v| k == 'password'} if (params[:user][:password] && params[:user][:password].empty?)
