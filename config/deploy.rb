@@ -83,3 +83,9 @@ namespace :weather do
     run "cd #{release_path}; RAILS_ENV=#{rails_env} #{rake} weather:update --trace"
   end
 end
+
+namespace :whenever do
+  task :update, :role => :app do
+    run "cd #{release_path}; RAILS_ENV=#{rails_env} #{File.join(shared_path, 'scripts/rvm_wrapper.sh')} bundle exec whenever --write-crontab event"
+  end
+end
