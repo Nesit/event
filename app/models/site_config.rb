@@ -35,8 +35,13 @@ class SiteConfig < ActiveRecord::Base
       
       item['weekday'] = Russian.strftime(date, "%a")
       item['month_day'] = Russian.strftime(date, "%d/%m")
-      item['temperature'] = tempr
       item['icon_name'] = icon_name
+
+      if tempr.to_i > 0 
+        item['temperature'] = "+#{tempr}"
+      else
+        item['temperature'] = tempr
+      end
 
       items.push item
     end
