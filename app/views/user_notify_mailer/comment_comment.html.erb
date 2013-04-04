@@ -1,0 +1,47 @@
+<h1>
+	Здравствуйте,<br><br>
+	На ваш комментарий ответили:
+</h1>
+<div class="red-line"></div>
+
+<% @comments.each do |topic, children| -%>
+	<div class="item">
+	<h2><%= link_to topic.title, "#{root_url}/#{polymorphic_url(topic)}" %></h2>
+	<% children.each do |children| %>
+		<% comment = children.first.parent %>
+		<div>
+			<%= image_tag "#{root_url}/#{comment.author.avatar.thumb}", class: 'image_fix', width: 60, height: 60, style: 'float:left' %>
+			<div class="comment-content">
+				<p>
+					<% if comment.author.social_auth %>
+						<%= image_tag("#{root_url}/#{asset_path("#{comment.author.social_auth.provider}_icon.png")}", class: 'image_fix', style: 'float:left') %>
+						<%= link_to comment.author.name, comment.author.social_url, class: 'name' %>
+					<% else %>
+						<span class="name"><%= comment.author.name %></span>
+					<% end %>
+					<span class="date"><%= comment.created_at.strftime("%d.%m.%Y %H:%M") %></span>
+				</p>
+				<p><%= comment.body %></p>
+			</div>
+		</div>
+
+		<% children.each do |comment| %>
+		<div class="subitem">
+			<%= image_tag "#{root_url}/#{comment.author.avatar.thumb}", class: 'image_fix', width: 60, height: 60, style: 'float:left' %>
+			<div class="comment-content">
+				<p>
+					<% if comment.author.social_auth %>
+						<%= image_tag("#{root_url}/#{asset_path("#{comment.author.social_auth.provider}_icon.png")}", class: 'image_fix', style: 'float:left') %>
+						<%= link_to comment.author.name, comment.author.social_url, class: 'name' %>
+					<% else %>
+						<span class="name"><%= comment.author.name %></span>
+					<% end %>
+					<span class="date"><%= comment.created_at.strftime("%d.%m.%Y %H:%M") %></span>
+				</p>
+				<p><%= comment.body %></p>
+			</div>
+		</div>
+		<% end %>
+	<% end %>
+	</div>
+<% end %>

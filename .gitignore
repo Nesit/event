@@ -1,6 +1,8 @@
 /.bundle
 /db/*.sqlite3
+/db/sphinx
 /log/*.log
+/log/*.pid
 /tmp
 /public/system
 /public/uploads
@@ -8,3 +10,7 @@
 /.gems
 
 /config/database.yml
+/config/*.sphinx.conf
+/.rbenv-gemsets
+/config/sphinx.yml
+/config/thinking_sphinx.yml

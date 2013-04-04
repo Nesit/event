@@ -18,8 +18,17 @@ GIT
       rails (>= 3.0.0)
       rmagick
 
+GIT
+  remote: git://github.com/vladimir-vg/kaminari.git
+  revision: 855f85e56bced58c4088ed2a24c72e8276f9b107
+  branch: padding-pages-count-fix
+  specs:
+    kaminari (0.14.1)
+      actionpack (>= 3.0.0)
+      activesupport (>= 3.0.0)
+
 GEM
-  remote: http://rubygems.org/
+  remote: https://rubygems.org/
   specs:
     actionmailer (3.2.11)
       actionpack (= 3.2.11)
@@ -139,13 +148,18 @@ GEM
       nokogiri (>= 1.5.0)
     daemons (1.1.9)
     database_cleaner (0.9.1)
-    debugger (1.2.2)
+    debugger (1.3.1)
       columnize (>= 0.3.1)
       debugger-linecache (~> 1.1.1)
-      debugger-ruby_core_source (~> 1.1.5)
+      debugger-ruby_core_source (~> 1.1.8)
     debugger-linecache (1.1.2)
       debugger-ruby_core_source (>= 1.1.1)
-    debugger-ruby_core_source (1.1.5)
+    debugger-ruby_core_source (1.1.8)
+    delayed_job (3.0.5)
+      activesupport (~> 3.0)
+    delayed_job_active_record (0.4.1)
+      activerecord (>= 2.1.0, < 4)
+      delayed_job (~> 3.0)
     devise (2.1.2)
       bcrypt-ruby (~> 3.0)
       orm_adapter (~> 0.1)
@@ -159,6 +173,9 @@ GEM
       rspec-rails (>= 2.8.1)
       simplecov (>= 0.3.8)
       yard (>= 0.7.0)
+    email_spec (1.4.0)
+      launchy (~> 2.1)
+      mail (~> 2.2)
     erubis (2.7.0)
     eventmachine (1.0.0)
     exception_notification (3.0.0)
@@ -176,32 +193,48 @@ GEM
     faraday_middleware (0.9.0)
       faraday (>= 0.7.4, < 0.9)
     fastercsv (1.5.5)
+    ffaker (1.15.0)
     ffi (1.2.0)
     formtastic (2.2.1)
       actionpack (>= 3.0)
     friendly_id (4.0.9)
     gherkin (2.11.5)
       json (>= 1.4.6)
+    guard (1.5.4)
+      listen (>= 0.4.2)
+      lumberjack (>= 1.0.2)
+      pry (>= 0.9.10)
+      thor (>= 0.14.6)
+    guard-rspec (2.4.1)
+      guard (>= 1.1)
+      rspec (~> 2.11)
+    guard-spork (1.4.2)
+      childprocess (>= 0.2.3)
+      guard (>= 1.1)
+      spork (>= 0.8.4)
     has_scope (0.5.1)
     hashie (1.2.0)
     highline (1.6.15)
     hike (1.2.1)
     http_parser.rb (0.5.3)
+    httparty (0.9.0)
+      multi_json (~> 1.0)
+      multi_xml
     httpauth (0.2.0)
-    i18n (0.6.1)
+    i18n (0.6.4)
     inherited_resources (1.3.1)
       has_scope (~> 0.5.0)
       responders (~> 0.6)
+    innertube (1.0.2)
     journey (1.0.4)
     jquery-rails (2.1.4)
       railties (>= 3.0, < 5.0)
       thor (>= 0.14, < 2.0)
+    jquery-ui-themes (0.0.8)
+      httparty
     json (1.7.6)
     jwt (0.1.5)
       multi_json (>= 1.0)
-    kaminari (0.14.1)
-      actionpack (>= 3.0.0)
-      activesupport (>= 3.0.0)
     kgio (2.7.4)
     launchy (2.1.2)
       addressable (~> 2.3)
@@ -212,6 +245,7 @@ GEM
       addressable
       websocket
     listen (0.5.3)
+    lumberjack (1.0.2)
     mail (2.4.4)
       i18n (>= 0.4.0)
       mime-types (~> 1.16)
@@ -221,13 +255,17 @@ GEM
       activerecord (~> 3.1)
       activesupport (~> 3.1)
       polyamorous (~> 0.5.0)
+    method_source (0.8.1)
+    middleware (0.1.0)
     mime-types (1.19)
     mini_magick (3.4)
       subexec (~> 0.2.1)
     money (5.1.0)
       i18n (~> 0.6.0)
-    multi_json (1.5.0)
+    multi_json (1.6.1)
+    multi_xml (0.5.1)
     multipart-post (1.1.5)
+    mysql2 (0.3.12b4)
     net-scp (1.1.0)
       net-ssh (>= 2.6.5)
     net-sftp (2.1.1)
@@ -248,6 +286,10 @@ GEM
     polyamorous (0.5.0)
       activerecord (~> 3.0)
     polyglot (0.3.3)
+    pry (0.9.12)
+      coderay (~> 1.0.5)
+      method_source (~> 0.8)
+      slop (~> 3.4)
     quiet_assets (1.0.1)
       railties (~> 3.1)
     rack (1.4.3)
@@ -274,12 +316,20 @@ GEM
       thor (>= 0.14.6, < 2.0)
     raindrops (0.10.0)
     rake (10.0.3)
+    rb-inotify (0.8.8)
+      ffi (>= 0.5.0)
     rdoc (3.12)
       json (~> 1.4)
     ref (1.0.2)
+    remotipart (1.0.5)
     responders (0.9.3)
       railties (~> 3.1)
+    riddle (1.5.5)
     rmagick (2.13.1)
+    rspec (2.12.0)
+      rspec-core (~> 2.12.0)
+      rspec-expectations (~> 2.12.0)
+      rspec-mocks (~> 2.12.0)
     rspec-core (2.12.2)
     rspec-expectations (2.12.1)
       diff-lcs (~> 1.1.3)
@@ -316,10 +366,15 @@ GEM
       multi_json (~> 1.0)
       simplecov-html (~> 0.7.1)
     simplecov-html (0.7.1)
+    slop (3.4.3)
     sorcery (0.8.1)
       bcrypt-ruby (~> 3.0.0)
       oauth (~> 0.4.4)
       oauth2 (~> 0.8.0)
+    spork (1.0.0rc3)
+    spork-rails (3.2.1)
+      rails (>= 3.0.0, < 3.3.0)
+      spork (>= 1.0rc0)
     sprockets (2.2.2)
       hike (~> 1.2)
       multi_json (~> 1.0)
@@ -334,8 +389,15 @@ GEM
       daemons (>= 1.0.9)
       eventmachine (>= 0.12.6)
       rack (>= 1.0.0)
+    thinking-sphinx (3.0.1)
+      activerecord (>= 3.1.0)
+      builder (>= 2.1.2)
+      innertube (>= 1.0.2)
+      middleware (>= 0.1.0)
+      riddle (>= 1.5.4)
     thor (0.16.0)
     tilt (1.3.3)
+    timecop (0.5.9.2)
     tinder (1.9.2)
       eventmachine (~> 1.0)
       faraday (~> 0.8)
@@ -394,20 +456,30 @@ DEPENDENCIES
   cucumber-rails
   database_cleaner
   debugger
+  delayed_job_active_record
   easy_captcha
+  email_spec
   exception_notification
   factory_girl_rails
+  ffaker
   formtastic (~> 2.2.1)
   friendly_id (~> 4.0.9)
+  guard-rspec
+  guard-spork
   jquery-rails
-  kaminari (~> 0.14.1)
+  jquery-ui-themes
+  kaminari!
   letter_opener
   libv8 (~> 3.11.8)
   mini_magick
+  mysql2
   pg
   quiet_assets
   rails (= 3.2.11)
+  rb-inotify (~> 0.8.8)
+  remotipart (~> 1.0)
   rmagick
+  rspec-mocks
   rspec-rails
   russian
   rvm-capistrano
@@ -415,10 +487,13 @@ DEPENDENCIES
   sextant
   simple_enum
   sorcery (~> 0.8.1)
+  spork-rails
   sqlite3
   state_machine
   therubyracer
   thin
+  thinking-sphinx (~> 3.0.1)
+  timecop
   uglifier (>= 1.0.3)
   unicorn
   whenever

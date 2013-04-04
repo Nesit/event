@@ -24,8 +24,24 @@ class Article < ActiveRecord::Base
   scope :newer_published, order('articles.published_at DESC')
   scope :older_published, order('articles.published_at ASC')
   scope :popular, order('articles.pageviews_count DESC')
-  scope :without_tv, where('type <> ?', 'TvArticle')
+  scope :without_tv_and_events, where('type NOT IN (?)', ['TvArticle', 'EventArticle'])
   scope :published, where(published: true)
+
+  ThinkingSphinx::Index.define :article, :with => :active_record do
+    indexes title, body
+  end
+
+  scope :published_to_monday, -> { published.where('published_at BETWEEN ? AND ?',
+                                   (Time.zone.now.prev_week.monday + 3.days).beginning_of_day, Time.zone.now.monday.end_of_day)
+  }
+
+  scope :published_to_thursday, -> { published.where('published_at BETWEEN ? AND ?',
+                                   (Time.zone.now.prev_week.monday).beginning_of_day, (Time.zone.now.monday + 3.days).end_of_day)
+  }
+
+  scope :new_events_tuesday, -> { published.where('target_at BETWEEN ? AND ?',
+                                   (Time.zone.now.monday + 1.day).beginning_of_day, Time.zone.now.next_week.end_of_week)
+  }
 
   extend FriendlyId
   friendly_id :title, use: :slugged

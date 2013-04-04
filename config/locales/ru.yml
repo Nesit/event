@@ -1,9 +1,15 @@
 ru:
-  active_admin:
-    scopes:
-      all: Все
-      with_subscription: Подписанные
-
+  pending: В ожидании
+  in_progress: Выполняется
+  done: Уже выполнен 
+  reject: Отклонён
+  Monday: Понедельник
+  Tuesday: Вторник
+  Wednesday: Среда
+  Thursday: Четверг
+  Friday: Пятница
+  Saturday: Суббота
+  Sunday: Воскресенье
   need_email: Необходим e-mail
   need_info: Неоходима информация
   complete: Все есть
@@ -13,6 +19,8 @@ ru:
     pagination:
       previous: '●'
       next: '●'
+  
+  
 
   attributes:
     tag_list: "Список тегов через запятую"
@@ -28,6 +36,7 @@ ru:
     sign_in_count: "количество входов"
     password: "пароль"
     password_confirmation: "подтверждение пароля"
+    old_password: "старый пароль"
     body: "содержимое"
     closed: "закрыта!"
     published: "опубликована"
@@ -40,6 +49,11 @@ ru:
     short_description: "текст для отображение в заголовочном блоке"
     closed_body: "содержимое"
     target_at: "назначено на"
+    topic: "тема"
+    edit_count: "редактировалось раз"
+    price: сумма
+    ordered_at: дата заказа
+    paid: оплачено
 
   articles:
     category:
@@ -84,6 +98,17 @@ ru:
     TripArticle: "Опыт"
     TvArticle: "TV"
     DetailArticle: "Детали"
+    
+    scopes:
+      all: Все
+      active: Активные
+      removed_by_owner: Удалённые пользователем
+      removed_by_admin: Удалённые администрацией
+      with_subscription: Подписанные
+    
+    batch_actions:
+      labels:
+        remove_by_admin: "Удалить как администратор"
 
   activerecord:
     enums:
@@ -100,6 +125,9 @@ ru:
     attributes:
       user:
         state: Статус
+        created_at: "дата регистрации"
+        activation_state: "РП"
+        print_versions_by_courier: "ПВ"
       site_config:
         actual_article: "статья"
         actual_article_description: "описание"

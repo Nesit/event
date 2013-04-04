@@ -1,4 +1,4 @@
-source :rubygems
+source 'https://rubygems.org'
 
 gem 'rails', '3.2.11'
 
@@ -9,16 +9,19 @@ group :production, :staging do
 end
 
 gem 'jquery-rails'
+gem 'remotipart', '~> 1.0'
 gem 'chosen-rails'
 gem 'formtastic', '~> 2.2.1'
-gem 'kaminari', '~> 0.14.1'
+gem 'kaminari', github: 'vladimir-vg/kaminari', branch: 'padding-pages-count-fix'
 
 gem 'activeadmin', '~> 0.5.1'
 gem 'active_admin_editor', github: 'vladimir-vg/active_admin_editor', branch: 'custom-toolbar'
 
 gem 'russian'
 gem 'mini_magick'
+
 gem 'carrierwave'
+
 gem 'sorcery', '~> 0.8.1'
 gem 'cancan'
 gem 'state_machine'
@@ -27,12 +30,17 @@ gem 'simple_enum'
 gem 'rmagick'
 gem 'easy_captcha'
 gem 'unicorn'
-#gem 'thinking-sphinx', '~> 3.0.1'
+
+gem 'mysql2'
+gem 'thinking-sphinx', '~> 3.0.1'
 gem 'activemerchant', require: 'active_merchant'
 
 gem 'friendly_id', '~> 4.0.9'
 
 gem 'acts-as-taggable-on', '~> 2.3.1'
+
+gem 'jquery-ui-themes'
+gem 'delayed_job_active_record'
 
 group :assets do
   gem 'sass-rails',   '~> 3.2.3'
@@ -60,6 +68,9 @@ group :development do
   gem 'capistrano-ext'
   gem 'capistrano-unicorn'
   gem 'rvm-capistrano'
+  gem 'debugger'
+
+  gem 'rb-inotify', '~> 0.8.8'
 end
 
 group :test, :development do
@@ -68,5 +79,11 @@ group :test, :development do
   gem 'cucumber-rails', require: false
   gem 'database_cleaner'
   gem 'capybara'
-  gem 'debugger'
+  gem 'spork-rails'
+  gem 'guard-spork'
+  gem 'guard-rspec'
+  gem 'ffaker'
+  gem 'timecop'
+  gem 'email_spec'
+  gem 'rspec-mocks'
 end

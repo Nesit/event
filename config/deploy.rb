@@ -27,8 +27,17 @@ after 'db:migrate', 'db:seed'
 
 after 'deploy:restart', 'unicorn:restart'
 
-namespace :deploy do
+desc "tail production log files"
+task :tail_logs, :roles => :app do
+  log_file = "#{rails_env}.log"
+  run "tail -f #{File.join(shared_path, 'log', log_file)}" do |channel, stream, data|
+    puts  # for an extra line break before the host name
+    puts "#{channel[:host]}: #{data}"
+    break if stream == :err
+  end
+end
 
+namespace :deploy do
   desc "Symlink shared configs and folders on each release."
   task :symlink_shared, :roles => :app do
     run "ln -nfs #{shared_path}/config/database.yml #{release_path}/config/database.yml"
@@ -38,27 +47,16 @@ namespace :deploy do
     run "ln -nfs #{shared_path}/config/robots.txt #{release_path}/public/robots.txt"
   end
 
+  task :symlink_sphinx_config, :roles => :app do
+    run "ln -nfs #{shared_path}/config/sphinx.yml #{release_path}/config/thinking_sphinx.yml"
+  end
 end
 
 namespace :db do
-  task :drop, :roles => :db do
-    run "cd #{current_path} && RAILS_ENV=#{rails_env} #{rake} db:drop --trace"
-  end
-
-  task :create, :roles => :db do
-    run "cd #{current_path} && RAILS_ENV=#{rails_env} #{rake} db:create --trace"
-  end
-
-  task :migrate, :roles => :db do
-    run "cd #{current_path} && RAILS_ENV=#{rails_env} #{rake} db:migrate --trace"
-  end
-
-  task :seed, :roles => :db do
-    run "cd #{current_path} && RAILS_ENV=#{rails_env} #{rake} db:seed --trace"
-  end
-
-  task :load_sample, :roles => :app do
-    run "cd #{latest_release}; RAILS_ENV=#{rails_env} #{rake} db:load_sample --trace"
+  [:drop, :create, :migrate, :seed, :load_sample].each do |_task|
+    task _task, :roles => :db do
+      run "cd #{release_path}; RAILS_ENV=#{rails_env} #{rake} db:#{_task} --trace"
+    end
   end
 end
 
@@ -69,5 +67,25 @@ namespace :unicorn do
 
   task :restart, :roles => :app do
     run "/etc/init.d/#{application}_#{stage} restart"
+  end
+end
+
+namespace :sphinx do
+  [:configure, :index, :start, :stop, :rebuild].each do |_task|
+    task _task, :roles => :db do
+      run "cd #{release_path}; RAILS_ENV=#{rails_env} #{rake} ts:#{_task} --trace"
+    end
+  end
+end
+
+namespace :weather do
+  task :update, :roles => :app do
+    run "cd #{release_path}; RAILS_ENV=#{rails_env} #{rake} weather:update --trace"
+  end
+end
+
+namespace :whenever do
+  task :update, :role => :app do
+    run "cd #{release_path}; RAILS_ENV=#{rails_env} #{File.join(shared_path, 'scripts/rvm_wrapper.sh')} bundle exec whenever --write-crontab event"
   end
 end

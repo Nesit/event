@@ -7,10 +7,16 @@
 // For example, to change the sidebar width:
 // $sidebar-width: 242px;
 
+@import "jquery-ui/smoothness";
+
+@import "compass/css3/border-radius";
+
 // Active Admin's got SASS!
 @import "active_admin/mixins";
 @import "active_admin/base";
 @import "active_admin/editor";
+
+@improt "jquery.tagsinput";
 
 .gallery-select-item {
 	img {
@@ -19,9 +25,49 @@
 	}
 }
 
+
 .active_admin {
-	.edit-menu-block {
+	.red { color: red; }
+	.green { color: green; }
+
+	#bottom-menu-edit-block, #top-menu-edit-block {
 		margin-left: 20%;
+	}
+	.menu-item {
+		background-color: darken(#dddddd, 5);
+		margin-bottom: 5px;
+	}
+
+	.menu-item .out-link {
+		padding-left: 66px;
+		padding-right: 50px;
+	}
+
+	.children {
+		margin-left: 212px;
+		.menu-item {
+			background-color: darken(#dddddd, 15);
+		}
+	}
+
+	.comment-versions p {
+		margin: 10px 0;
+		padding: 15px;
+		background-color: darken(#dddddd, 3);
+	}
+
+	.tagsinput {
+		margin-left: 20%;
+		width: 76%;
+
+		.tag {
+			display: inline-block;
+			border: 1px solid darken(#ddd, 3);
+			padding: 5px;
+			margin-right: 5px;
+			margin-bottom: 5px;
+			@include border-radius(5px);
+		}
 	}
 }
 

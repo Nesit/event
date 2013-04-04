@@ -1,4 +1,6 @@
 .profile-top-avatar {
+	margin-left: 140px;
+
 	img {
 		border: 1px solid $profile-avatar-border-color;
 	}
@@ -8,6 +10,28 @@
 		@include sans-serif;
 		font-size: 24px;
 		font-weight: bold;
+	}
+
+	.profile-avatar-form {
+		margin-left: 26px + 96px;
+		margin-top: 20px;
+
+		input[type=file] {
+			display: none;
+		}
+
+		button {
+			@include button;
+			width: 200px;
+		}
+	}
+
+	p {
+		width: 96px;
+		@include sans-serif;
+		color: $light-grey-text-color;
+		font-size: 12px;
+		font-style: oblique;
 	}
 
 	h1.bottom-line {
@@ -28,6 +52,19 @@
 #profile {
 	margin-bottom: 10px;
 	margin-top: 70px;
+
+	#user-data-saved-message {
+		@include error-block;
+		@include sans-serif;
+		font-size: 13px;
+		font-style: oblique;
+		display: inline-block;
+		margin-left: 20px;
+	}
+
+	#user-data-saved-message.hidden {
+		display: none;
+	}
 
 	#profile-left-menu {
 		width: 140px;
@@ -80,6 +117,10 @@
 				display: inline-block;
 				width: 115px;
 				margin-left: 10px;
+
+				.star {
+					color: red;
+				}
 			}
 
 			label, .description {
@@ -112,7 +153,7 @@
 				width: 274px;
 			}
 
-			input[type=text] {
+			input[type=text], input[type=password] {
 				@include form-text-field;
 				width: 200px;
 			}
@@ -147,5 +188,35 @@
 				}
 			}
 		}
+	}
+
+	#profile-password-block {
+		h1 {
+			@include page-title;
+		}
+
+		.field {
+			position: relative;
+
+			input[type=text], input[type=password] {
+				width: 270px;
+			}
+
+			.errors {
+				position: absolute;
+				top: 0;
+				left: 290px;
+				li {
+					@include error-block;
+					padding: 5px;
+				}
+			}
+		}
+
+		input[type=submit] {
+			width: 280px;
+		}
+
+		padding-top: 10px;
 	}
 }

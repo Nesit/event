@@ -162,16 +162,17 @@
 }
 
 #poll-aside .poll-choices-select-list {
+	$left-margin: 0px;
 	h2 {
 		@include sans-serif;
 		color: $poll-aside-header-fg-color;
 		font-weight: bold;
 		font-size: 14px;
-		margin-left: 32px;
+		margin-left: $left-margin;
 	}
 
 	.wrapper {
-		margin-left: 32px;
+		margin-left: $left-margin;
 
 		.notice {
 			@include sans-serif;
@@ -197,7 +198,6 @@
 		@extend .point-checkbox.active;
 		p {
 			color: $purple-color;
-			text-decoration: underline;
 		}
 
 		.-icon {

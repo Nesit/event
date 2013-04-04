@@ -5,6 +5,11 @@ a {
 	text-decoration: none;
 }
 
+a:hover {
+	text-decoration: underline;
+	color: lighten($purple-color, 15);
+}
+
 @mixin content-block {
 	p {
 		margin: 1.5em 0;
@@ -38,6 +43,10 @@ a {
 
 	h3 {
 		font-size: 18px;
+	}
+
+	ul {
+		list-style-type: disc;
 	}
 }
 
@@ -74,17 +83,52 @@ a {
 			display: inline-block;
 			height: 48px;
 			line-height: 48px;
-			margin-right: 1.2em;
-			color: $menu-fg-color;
-			font-size: 13px;
-			@include menu-item-typography;
+			padding-right: 1.2em;
+
+			a {
+				color: $menu-fg-color;
+				font-size: 13px;
+				@include menu-item-typography;
+			}
+
+			position: relative;
+			.children {
+				display: inline-block;
+				position: absolute;
+				left: -0.6em;
+				top: 48px;
+
+				background-color: $menu-bg-color;
+				color: $menu-fg-color;
+				border: 1px solid $menu-outline-color;
+				border-top: 0;
+
+				.menu-nav-item {
+					margin: 0;
+					padding: 0 1.2em;
+				}
+
+				.menu-nav-item a {
+
+				}
+			}
+
+			.children {
+				display: none;
+			}
 		}
 
-		a.menu-nav-item:hover, .menu-nav-item.active {
+		.menu-nav-item:hover .children {
+			display: inline-block;
+		}
+
+		.menu-nav-item a:hover,
+		.menu-nav-item a.active,
+		.menu-nav-item .children .menu-nav-item:hover {
 			color: $purple-color;
 		}
 
-		.menu-right :last-child {
+		.menu-right > :last-child {
 			margin-right: 0;
 		}
 
@@ -141,7 +185,7 @@ a {
 	#logo {
 		display: block;
 		margin: 0 auto;
-		width: 300px;
+		width: 267px;
 
 		img {
 			margin-left: 10px;
@@ -152,6 +196,7 @@ a {
 			font-size: 10pt;
 			color: $header-grey-color2;
 			@include sans-serif;
+			text-align: center;
 		}
 	}
 
@@ -178,7 +223,7 @@ a {
 			margin-top: 8px;
 			@include border-radius(5px, 5px);
 
-			input[name=query] {
+			input[name=term] {
 				width: 130px;
 				height: 21px;
 				margin-top: 2px;
@@ -357,6 +402,8 @@ $fixed-top-margin: 112px;
 			margin-left: 28px;
 
 			img {
+				width: 218px;
+				height: 148px;
 				display: block;
 				border: 1px solid $wide-footer-fg-color;
 			}
@@ -488,5 +535,43 @@ $fixed-top-margin: 112px;
 
 	#bottom-banner {
 		height: 60px;
+	}
+}
+
+.weather-block {
+	padding: 10px 30px;
+	@include sans-serif2;
+	color: $grey-text-color;
+
+	.weather-item {
+		height: 30px;
+
+		.weekday {
+			width: 30px;
+			text-transform: uppercase;
+			font-weight: bold;
+		}
+
+		.month-day {
+			font-style: oblique;
+		}
+
+		.tempr {
+			width: 30px;
+			text-align: right;
+			text-transform: uppercase;
+			font-weight: bold;
+		}
+
+		img {
+			// ugly, but can't figure out why it doesn't center vertically
+			margin: -10px 10px;
+		}
+
+		span {
+			display: inline-block;
+			height: 30px;
+			line-height: 30px;
+		}
 	}
 }

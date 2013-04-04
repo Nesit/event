@@ -5,7 +5,21 @@ class CommentsController < ApplicationController
     @comment = Comment.new params[:comment]
     @comment.author_id = current_user.id
     @comment.save!
-    redirect_to @comment.topic
+    render partial: 'comments/item', locals: { comment: @comment, nested: false }
+  end
+
+  def update
+    @comment = current_user.comments.find(params[:id])
+    @comment.body = params[:comment][:body]
+    @comment.save!
+    head :ok
+  end
+
+  def destroy
+    @comment = current_user.comments.find(params[:id])
+    @comment.state = 'removed_by_owner'
+    @comment.save!
+    head :ok
   end
 
   def index

@@ -1,17 +1,25 @@
-<div class="article-gallery-control">
-	<% unless @gallery.title.blank? %>
-		<h2><%= @gallery.title %></h2>
-	<% end %>
-	<div class="article-gallery-pagination">
-		<%= link_to ''.html_safe, '#', class: 'page-left' %>
-		<span class="pages-text">X из X</span>
-		<%= link_to '', '#', class: 'page-right' %>
-	</div>
-</div>
-<div class="article-gallery-carousel">
-	<ul>
-		<% @gallery.images.each do |body_image| %>
-			<li><%= link_to image_tag(body_image.source), '#' %></li>
+<% if @gallery.images.any? %>
+	<div class="article-gallery-control <%= @gallery.images.count == 1 ? 'hidden' : '' %>">
+		<% unless @gallery.title.blank? %>
+			<h2><%= @gallery.title %></h2>
 		<% end %>
-	</ul>
-</div>
+		<div class="article-gallery-pagination">
+			<%= link_to ''.html_safe, '#', class: 'page-left' %>
+			<span class="pages-text">X из X</span>
+			<%= link_to '', '#', class: 'page-right' %>
+		</div>
+	</div>
+	<div class="article-gallery-carousel">
+		<ul>
+			<% @gallery.images.each do |body_image| %>
+				<li>
+          <% if @gallery.images.count > 1 %>
+          <%= link_to image_tag(body_image.source), '#' %>
+          <% else %>
+          <%= image_tag(body_image.source) %>
+          <% end %>
+        </li>
+			<% end %>
+		</ul>
+	</div>
+<% end %>

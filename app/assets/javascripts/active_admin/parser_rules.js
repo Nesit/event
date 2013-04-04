@@ -191,7 +191,7 @@ var wysihtml5ParserRules = {
         },
         "a": {
             "check_attributes": {
-                "href": "url" // if you compiled master manually then change this from 'url' to 'href'
+                "href": "allow" //"url" // if you compiled master manually then change this from 'url' to 'href'
             },
             "set_attributes": {
                 "rel": "nofollow",

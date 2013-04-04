@@ -7,7 +7,11 @@ class ArticlesController < ApplicationController
     @articles = 
       case params[:type]
       when 'EventArticle'
-        EventArticle.published.newer_targeted
+        if (params[:page].to_i < 2)
+          @afisha_articles = EventArticle.newer_targeted.first(6)
+          EventArticle.published.newer_targeted
+        end
+        
       when nil
         Article.published.newer_published
       else
@@ -20,6 +24,15 @@ class ArticlesController < ApplicationController
     end
 
     @articles = @articles.page(params[:page]).per(10)
+    @articles = @articles.padding(6) if params[:type] == 'EventArticle' and (params[:page].to_i < 2)
+  end
+
+  def search
+    @articles = Article.search params[:term],
+      field_weights: { title: 10, body: 3 },
+      page: params[:page],
+      per_page: 10
+    render 'index'
   end
 
   def show

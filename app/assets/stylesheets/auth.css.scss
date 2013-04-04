@@ -5,18 +5,12 @@
 
 	font-size: 12px;
 
-	color: $light-grey-text-color;
-
-	.reset-password-link {
-		color: $text-color;
-		font-weight: bold;
-		text-decoration: none;
-	}
+	color: $light-grey-text-color;	
 
 	.logout-link,
 	.login-link,
-	.register-link,
-	.profile-link {
+	.profile-link,
+	.register-link {
 		color: $text-color;
 		font-weight: normal;
 		@include sans-serif;
@@ -27,7 +21,18 @@
 	.logout-link:hover,
 	.login-link:hover,
 	.register-link:hover,
-	.profile-link:hover,
+	.profile-link:hover {
+		color: $purple-color;
+	}
+}
+
+#dialogs-block {
+	.reset-password-link {
+		color: $text-color;
+		font-weight: bold;
+		text-decoration: none;
+	}
+
 	.reset-password-link:hover {
 		color: $purple-color;
 	}

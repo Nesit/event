@@ -15,6 +15,6 @@ class UserMailer < ActionMailer::Base
   def user_deleted(user)
     @user = user
     mail(to: @user.email,
-         subject: "Вы разбанены")
+         subject: "Вы удалены")
   end
 end

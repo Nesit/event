@@ -22,6 +22,14 @@
 }
 
 .frame {
+	&.adriver-frame {
+		height: 444px;
+	}
+
+	&.facebook-frame {
+		height: 395px
+	}
+
 	padding: 23px;
 	padding-top: 0;
 	border: 1px solid $grey-border-color;

@@ -4,7 +4,7 @@
 		<%= render 'users/menu', current: :notifications %>
 
 		<div class="profile-top-avatar">
-			<%= image_tag(current_user.avatar.url, class: 'left') %>
+			<%= image_tag(current_user.avatar.profile.url, class: 'left') %>
 			<h1 class="left">Привет друг!</h1>
 		</div>
 		<div class="right" id="profile-content">
@@ -13,11 +13,11 @@
 			</p>
 			<%= form_for current_user, url: user_path, method: :put, html: { id: 'user-profile-form' } do |f| %>
 				<div class="notifications-list">
-					<%= point_checkbox_field(f, :article_comment_notification, "Кто-то добавил комментарий на статью, которую вы откомментировали") %>
-					<%= point_checkbox_field(f, :comment_notification, "Ваш комментарий был откомментирован") %>
-					<%= point_checkbox_field(f, :event_notification, "Уведомления о наступающих событиях") %>
-					<%= point_checkbox_field(f, :partner_notification, "Получать информацию от партнёров") %>
-					<%= point_checkbox_field(f, :weekly_notification, "Подписаться на еженедельную рассылку новостей Event") %>
+					<%= point_checkbox_field(f, :article_comment_notification, "Появился новый комментарий на статью, которую Вы комментировали") %>
+					<%= point_checkbox_field(f, :comment_notification, "Кто-то ответил на Ваш комментарий") %>
+					<%= point_checkbox_field(f, :event_notification, "О наступающих событиях") %>
+					<%= point_checkbox_field(f, :partner_notification, "Информацию от партнёров") %>
+					<%= point_checkbox_field(f, :weekly_notification, "Еженедельную рассылку новостей Event.ru") %>
 				</div>
 				<%= f.submit "Сохранить" %>
 			<% end %>

@@ -2,6 +2,12 @@ class Ability
   include CanCan::Ability
 
   def initialize(user, admin_user)
+    
+    if admin_user.present?
+      can :new, :menu_item
+      can :index, :tag
+    end
+
     # for guest
 
     can :show, :home
@@ -11,13 +17,16 @@ class Ability
     # to be able log in
     can :create, :user_session
 
+    # be able to reset password
+    can [:create, :edit, :update], :password_reset
+
     # to log in through OAuth, activate from email
     can [
       :create, :activate, :merge, :create_merge_request, :oauth,
       :oauth_callback, :ensure_email
       ], User
 
-    can :read, Article
+    can [:read, :search], Article
     can :preview, Article if admin_user
     can :read, ArticleGallery # for dynamic embedding images galleries
     can :read, Comment
@@ -30,6 +39,8 @@ class Ability
 
     can [:new, :create, :pay], Subscription
     can [:success, :fail], :robokassa_payment
+
+    can [:edit], User
 
     return if user.blank?
 
@@ -45,10 +56,12 @@ class Ability
     can :read, City
     can :manage, Subscription
     can :read, :notification
-    can [:edit, :update, :ensure_name], User
+    can [:update, :ensure_name, :edit_password, :update_password], User
+    can [:edit_avatar, :update_avatar], User
+    can :create, TemporaryAvatar
 
     if user.complete?
-      can :create, Comment
+      can [:create, :update, :destroy], Comment
     end
   end
 end

@@ -1,5 +1,8 @@
 #= require jquery
 #= require jquery_ujs
+#= require jquery.remotipart
+#= require jquery.Jcrop
+#= require jquery.color
 #= require jquery.jcarousel
 #= require jquery.placeholder
 #= require chosen-jquery

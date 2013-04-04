@@ -3,14 +3,16 @@
 	<div id="profile">
 		<%= render 'menu', current: :profile %>
 		<div class="profile-top-avatar">
-			<%= image_tag(current_user.avatar.url, class: 'left') %>
+			<%= image_tag(current_user.avatar.profile.url, class: 'left') %>
 			<h1 class="left bottom-line">Привет друг!</h1>
 		</div>
 		<div class="right" id="profile-content">
-			<%= form_for @user, url: user_path, method: :put, html: { id: 'user-profile-form' } do |f| %>
+			<%= form_for @user, url: user_path, method: :put, remote: true, html: { id: 'user-profile-form' } do |f| %>
 				<div class="field-list">
 					<div class="field">
-						<%= f.label :name, "Имя*", class: 'left' %>
+						<%= f.label :name, class: 'left' do %>
+							Имя<span class="star">*</span>
+						<% end %>
 						<div class="input-line left">
 							<%= f.text_field :name, 'data-placeholder' => "Введите ваше имя", class: 'required' %>
 							<div id="user-ensure-name-message" class="hidden"></div>
@@ -31,7 +33,9 @@
 					</div>
 
 					<div class="field">
-						<%= f.label :city, "Город*", class: 'left' %>
+						<%= f.label :city, class: 'left' do %>
+							Город<span class="star">*</span>
+						<% end %>
 						<div class="input-line left">
 							<%= f.select :city_id, options_from_collection_for_select(City.where(country_cd: @user.city.country_cd), :id, :name, @user.city_id) %>
 							<%= f.hidden_field :new_city %>
@@ -41,7 +45,9 @@
 					</div>
 
 					<div class="field">
-						<%= f.label :born_at, "Дата рождения*", class: 'left' %>
+						<%= f.label :born_at, class: 'left' do %>
+						Дата рождения<span class="star">*</span>
+						<% end %>
 						<div class="input-line left">
 							<%= f.date_select :born_at, { start_year: (Time.now.year-16), end_year: (Time.now.year-75), prompt: { year: "Год", month: "Месяц", day: "День" } }, { class: 'required' } %>
 						</div>
@@ -50,7 +56,9 @@
 					</div>
 
 					<div class="field">
-						<%= f.label :gender_cd, "Пол*", class: 'left' %>
+						<%= f.label :gender_cd, class: 'left' do %>
+							Пол<span class="star">*</span>
+						<% end %>
 						<div class="input-line left">
 							<div class="profile-gender-select">
 								<%= link_to "Мужской", '#', class: (@user.gender == :male ? 'active' : ''), 'data-value' => 1 %>
@@ -64,7 +72,9 @@
 					</div>
 
 					<div class="field">
-						<%= f.label :company, "Компания*", class: 'left' %>
+						<%= f.label :company, class: 'left' do %>
+							Компания<span class="star">*</span>
+						<% end %>
 						<div class="input-line left">
 							<%= f.text_field :company, 'data-placeholder' => "Введите название компании", class: 'required' %>
 							<div id="user-ensure-name-message" class="hidden"></div>
@@ -74,7 +84,9 @@
 					</div>
 
 					<div class="field">
-						<%= f.label :position, "Должность*", class: 'left' %>
+						<%= f.label :position, class: 'left' do %>
+							Должность<span class="star">*</span>
+						<% end %>
 						<div class="input-line left">
 							<%= f.text_field :position, 'data-placeholder' => "Введите вашу должность", class: 'required' %>
 							<div id="user-ensure-name-message" class="hidden"></div>
@@ -84,7 +96,9 @@
 					</div>
 
 					<div class="field">
-						<%= f.label :website, "Веб-сайт*", class: 'left' %>
+						<%= f.label :website, class: 'left' do %>
+							Веб-сайт<span class="star">*</span>
+						<% end %>
 						<div class="input-line left">
 							<%= f.text_field :website, 'data-placeholder' => "Введите адрес веб-сайта", class: 'required' %>
 							<div id="user-ensure-name-message" class="hidden"></div>
@@ -110,7 +124,8 @@
 					вам нужно заполнить все обязательные поля.
 				</p>
 
-				<%= f.submit "Сохранить" %>
+				<%= f.submit "Сохранить", class: 'left' %>
+				<div class="left hidden" id="user-data-saved-message">Данные сохранены</div>
 			<% end %>
 		</div>
 		<div class="clear"></div>

@@ -4,9 +4,12 @@ class UsersController < ApplicationController
   authorize_resource
 
   def edit
-    @user = current_user
-    @user.city ||= City.new
-    @user.new_country_cd = @user.city.country_cd if @user.city
+    if @user = current_user
+      @user.city ||= City.new
+      @user.new_country_cd = @user.city.country_cd if @user.city
+    else
+      redirect_to root_path
+    end
   end
 
   def create
@@ -24,7 +27,7 @@ class UsersController < ApplicationController
     @user = current_user
     params[:user].delete(:city_id) if params[:user][:city_id] == '-1'
     @user.update_attributes!(params[:user])
-    redirect_to edit_user_path
+    head :ok
   end
 
   def ensure_name
@@ -44,7 +47,6 @@ class UsersController < ApplicationController
   end
 
   def update_email
-    debugger
     @user = current_user
     if User.activated.where(email: params[:email]).any?
       render json: {used: true}, status: :error
@@ -53,6 +55,41 @@ class UsersController < ApplicationController
       @user.instance_exec { setup_activation }
       @user.save!
       head :ok
+    end
+  end
+
+  def edit_avatar
+    @user = current_user
+  end
+
+  def update_avatar
+    @user = current_user
+    @user.avatar = UserAvatarUploader.crop_thumbnail_from(
+      params[:x].to_i, params[:y].to_i,
+      params[:width].to_i, params[:height].to_i,
+      TemporaryAvatar.find(params[:temporary_avatar_id]).avatar.path)
+    @user.save!
+    redirect_to profile_avatar_path
+  end
+
+  def edit_password
+    @user = current_user
+  end
+
+  def update_password
+    @user = User.authenticate(current_user.email, params[:user][:old_password])
+    if @user.blank?
+      @user = current_user
+      @user.errors.add(:old_password, "введён неверно")
+      render 'edit_password'
+    else
+      @user.password = params[:user][:password]
+      @user.password_confirmation = params[:user][:password_confirmation]
+      if @user.save
+        redirect_to edit_user_path
+      else
+        render 'edit_password'
+      end
     end
   end
   
@@ -149,6 +186,7 @@ class UsersController < ApplicationController
         @user.activate!
       end
 
+      @user.set_facebook_external_avatar_url! if params[:provider] == 'facebook'
       @user.save!
 
       reset_session # protect from session fixation attack

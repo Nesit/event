@@ -95,6 +95,9 @@ Rails.application.config.sorcery.configure do |config|
     # attribute: user_hash.property
     email: "email",
     name: "name",
+
+    # couldn't find way to get facebook avatar by fields
+    # process it separately
   }
 
   
@@ -104,6 +107,7 @@ Rails.application.config.sorcery.configure do |config|
   config.vk.user_info_mapping = {
     # attribute: user_hash.property
     name: "full_name",
+    external_avatar_url: "photo_medium",
     # vkontakte doesn't provide emails =(
   }
 

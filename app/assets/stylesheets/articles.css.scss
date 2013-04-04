@@ -38,6 +38,8 @@
 	}
 
 	.article-head-image {
+		width: 474px;
+		height: 316px;
 		margin: 10px 0;
 	}
 
@@ -57,7 +59,7 @@
 
 	.social-share-line {
 		display: block;
-		width: 330px;
+		width: 390px;
 		margin: 0 auto;
 	}
 
@@ -133,6 +135,10 @@
 			@include sans-serif;
 			font-size: 16px;
 			margin: 5px;
+		}
+		
+		ul {
+			margin: 15px;
 		}
 	}
 
@@ -323,6 +329,11 @@
 			@include video-overlay-active;
 		}
 
+		img {
+			width: 270px;
+			height: 190px;
+		}
+
 		.article-item-description {
 			width: 355px;
 			height: 170px;
@@ -411,6 +422,11 @@
 
 		.carousel-item-description {
 			height: 400px;
+
+			img {
+				width: 300px;
+				height: 200px;
+			}
 		}
 
 		.article-carousel-item-info {
@@ -511,6 +527,17 @@
 	}
 }
 
+.afisha-today {
+	@include sans-serif;
+	text-align: right;
+	font-size: 24px;
+	font-weight: bold;
+
+	.today {
+		color: $purple-color;
+	}
+}
+
 .afisha {
 	border: 2px solid $light-grey-border-color;
 	padding: 10px;
@@ -526,6 +553,8 @@
 			font-size: 16px;
 		}
 		img {
+			width: 157px;
+			height: 82px;
 			border: 1px solid $grey-border-color;
 		}
 	}
@@ -591,7 +620,7 @@
 
 #video-block {
 	width: 619px;
-	//height: 250px;
+	height: 222px;
 	background-color: $video-block-bg-color;
 	margin-bottom: 11px;
 	padding: 15px;

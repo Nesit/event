@@ -14,13 +14,6 @@ describe User do
     user.should be_valid
   end
 
-  it "turns :state to :need_email if no email supplied" do
-    user = User.new
-    user.should be_valid
-
-    user.state.should == 'need_email'
-  end
-
   it "turns :state to :need_info if email is present and not enough info" do
     user = User.new
     user.email = "whatever@example.com"

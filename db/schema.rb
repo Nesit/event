@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20130212093510) do
+ActiveRecord::Schema.define(:version => 20130301133346) do
 
   create_table "active_admin_comments", :force => true do |t|
     t.string   "resource_id",   :null => false
@@ -139,12 +139,30 @@ ActiveRecord::Schema.define(:version => 20130212093510) do
     t.string   "topic_type"
     t.datetime "created_at", :null => false
     t.datetime "updated_at", :null => false
+    t.string   "state"
+    t.text     "versions"
   end
 
   add_index "comments", ["ancestry"], :name => "index_comments_on_ancestry"
   add_index "comments", ["author_id"], :name => "index_comments_on_author_id"
   add_index "comments", ["topic_id"], :name => "index_comments_on_topic_id"
   add_index "comments", ["topic_type"], :name => "index_comments_on_topic_type"
+
+  create_table "delayed_jobs", :force => true do |t|
+    t.integer  "priority",   :default => 0
+    t.integer  "attempts",   :default => 0
+    t.text     "handler"
+    t.text     "last_error"
+    t.datetime "run_at"
+    t.datetime "locked_at"
+    t.datetime "failed_at"
+    t.string   "locked_by"
+    t.string   "queue"
+    t.datetime "created_at",                :null => false
+    t.datetime "updated_at",                :null => false
+  end
+
+  add_index "delayed_jobs", ["priority", "run_at"], :name => "delayed_jobs_priority"
 
   create_table "issues", :force => true do |t|
     t.date     "issued_at"
@@ -164,6 +182,15 @@ ActiveRecord::Schema.define(:version => 20130212093510) do
   end
 
   add_index "pages", ["slug"], :name => "index_pages_on_slug", :unique => true
+
+  create_table "partner_newsletters", :force => true do |t|
+    t.string   "title",      :null => false
+    t.string   "state"
+    t.datetime "started_at"
+    t.text     "text"
+    t.datetime "created_at", :null => false
+    t.datetime "updated_at", :null => false
+  end
 
   create_table "poll_choices", :force => true do |t|
     t.integer  "poll_id"
@@ -215,6 +242,8 @@ ActiveRecord::Schema.define(:version => 20130212093510) do
     t.integer  "article_list_banner_after"
     t.text     "article_list_banner_body"
     t.text     "bottom_menu"
+    t.text     "top_menu"
+    t.text     "weather"
   end
 
   create_table "subscriptions", :force => true do |t|
@@ -245,6 +274,12 @@ ActiveRecord::Schema.define(:version => 20130212093510) do
 
   create_table "tags", :force => true do |t|
     t.string "name"
+  end
+
+  create_table "temporary_avatars", :force => true do |t|
+    t.string   "avatar"
+    t.datetime "created_at", :null => false
+    t.datetime "updated_at", :null => false
   end
 
   create_table "users", :force => true do |t|
@@ -280,6 +315,8 @@ ActiveRecord::Schema.define(:version => 20130212093510) do
     t.string   "merge_token"
     t.string   "merge_email"
     t.datetime "merge_token_expires_at"
+    t.datetime "last_email_comment"
+    t.datetime "last_email_article"
   end
 
   add_index "users", ["activation_token"], :name => "index_users_on_activation_token"

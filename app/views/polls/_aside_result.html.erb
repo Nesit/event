@@ -6,6 +6,7 @@
 			<div class="point-radio-static<%= choice.voted?(current_user) ? ' active' : '' %>" data-id="<%= choice.id %>" data-percent="<%= choice.votes_percent %>">
 				<p class="left">
 					<%= choice.title %>
+					<div class="clear"></div>
 					<div class="graph left"><%= choice.votes_percent %>%</div>
 					<div class="count right">
 						<%= choice.votes.count %>

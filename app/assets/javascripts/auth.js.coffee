@@ -6,6 +6,8 @@ window.show_register_dialog = ->
     $inputs.val('')
     $inputs.trigger('blur')
 
+    $('#register-dialog .dialog-title').html("Регистрация")
+
     $('#register-dialog-message').html(
         """Введите ваш email и код подтверждения,
            затем мы вам сгенерируем пароль и вышлем
@@ -14,11 +16,31 @@ window.show_register_dialog = ->
     $('#register-dialog').removeClass('hidden')
     $('#dialog-overlay').addClass('active')
 
-window.show_register_thanks_dialog = ->
+window.show_weird_register_dialog = ->
+    # need to enclose val('') with focus and blur events
+    # to do not break placeholder plugin
+    $inputs = $('#register-dialog').find('input[name="user[email]"], input[name=captcha]')
+    $inputs.trigger('focus')
+    $inputs.val('')
+    $inputs.trigger('blur')
+
+    $('#register-dialog .dialog-title').html("Введите почту, чтобы получать новости!")
+
+    $('#register-dialog-message').html(
+        """Введите ваш email и код подтверждения,
+           затем мы вам сгенерируем пароль и вышлем
+           на указанный адрес""")
     $('.dialog.closable').addClass('hidden')
-    $('#register-thanks-dialog').removeClass('hidden')
+    $('#register-dialog').removeClass('hidden')
     $('#dialog-overlay').addClass('active')
 
+window.show_message_dialog = (title, message1, message2) ->
+    $('.dialog.closable').addClass('hidden')
+    $('#message-dialog').removeClass('hidden')
+    $('#message-dialog .dialog-title').html(title)
+    $('#message-dialog h2').html(message1)
+    $('#message-dialog p').html(message2)
+    $('#dialog-overlay').addClass('active')
 
 window.show_login_dialog = ->
     $inputs = $('#login-dialog').find('input[name=email], input[name=password]')
@@ -45,6 +67,11 @@ window.show_email_dialog = ->
     $('#email-dialog').removeClass('hidden')
     $('#dialog-overlay').addClass('active')
 
+window.show_reset_password_dialog = ->
+    $('.dialog.closable').addClass('hidden')
+    $('#reset-password-dialog').removeClass('hidden')
+    $('#dialog-overlay').addClass('active')
+
 window.update_csrf_token = (value) ->
     $('meta[name=csrf-token]').attr('content', value)
     $('input[name=authenticity_token]').val(value)
@@ -61,6 +88,9 @@ $ ->
         window.show_login_dialog()
         event.preventDefault()
 
+    $('.weird-register-link').on 'click', (event) ->
+        window.show_weird_register_dialog()
+        event.preventDefault()
 
     $(document.body).on 'click', '.register-link', (event) ->
         window.show_register_dialog()
@@ -152,7 +182,8 @@ $ ->
             return false
 
     $('#register-dialog form').on 'ajax:success', (event, data) ->
-        window.show_register_thanks_dialog()
+        window.show_message_dialog("Регистрация", "Спасибо за регистрацию",
+            "Письмо с дальнейшими инструкциями отправлено на указанный адрес")
 
     $('#register-dialog form').on 'ajax:error', (event, data) ->
         $el = $(data.responseText)
@@ -171,6 +202,10 @@ $ ->
         window.update_csrf_token(value)
 
         # allow comment
+        $('#top-comment-form textarea').removeClass('auth-required')
+        $('#top-comment-form textarea').removeAttr('readonly')
+        $('#top-comment-form input[type=submit]').removeClass('hidden')
+
         $('.comments-list input[type=submit]').removeClass('hidden')
         $('.comments-list .notice').addClass('hidden')
         $('.comments-list .comment-reply-block').removeClass('hidden')
@@ -221,6 +256,14 @@ $ ->
         catch e
             # do nothing
         $('#email-dialog-message').html("Произошла ошибка, похоже email введён неверно")
+
+    $('.reset-password-link').on 'click', (event) ->
+        window.show_reset_password_dialog()
+        event.preventDefault()
+
+    $('#reset-password-dialog form').on 'ajax:success', (event) ->
+        window.show_message_dialog("Восстановление пароля", "",
+            "Письмо с дальнейшими инструкциями отправлено на указанный адрес")
 
     # captcha reload
     $('.reload-captcha-link').on 'click', (event) ->

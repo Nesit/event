@@ -14,7 +14,13 @@
 	}
 }
 
-#login-dialog, #register-dialog, #register-thanks-dialog, #subscribe-dialog, #email-dialog {
+#login-dialog,
+#register-dialog,
+#message-dialog,
+#subscribe-dialog,
+#email-dialog,
+#cropping-dialog,
+#reset-password-dialog {
 	@include sans-serif;
 
 	width: 500px;
@@ -69,7 +75,13 @@
 	}
 }
 
-#login-dialog, #register-dialog, #register-thanks-dialog, #subscribe-dialog, #email-dialog {
+#login-dialog,
+#register-dialog,
+#message-dialog,
+#subscribe-dialog,
+#email-dialog,
+#cropping-dialog,
+#reset-password-dialog {
 	position: fixed;
 	margin-left: -250px;
 	margin-top: -200px;
@@ -117,6 +129,7 @@
 	.reset-password-link {
 		font-weight: normal;
 		font-style: oblique;
+		font-size: 12px;
 	}
 
 	.register-notice {
@@ -138,7 +151,8 @@
 
 		label {
 			position: absolute;
-			top: 0;
+			top: 1px;
+			font-size: 12px;
 		}
 	}
 
@@ -163,7 +177,8 @@
 	}
 }
 
-#email-dialog {
+#email-dialog,
+#reset-password-dialog {
 	width: 360px;
 	margin-left: -180px;
 
@@ -177,7 +192,7 @@
 	}
 }
 
-#register-thanks-dialog {
+#message-dialog {
 	h2 {
 		color: $grey-text-color;
 		font-size: 16px;
@@ -186,5 +201,31 @@
 	h2, p {
 		width: 300px;
 		margin: 30px auto;
+	}
+}
+
+#cropping-dialog {
+	position: absolute;
+	width: 768px + 60px + 96px;
+	margin-left: -400px;
+	margin-top: -250px;
+
+	.jcrop-holder {
+		float: left;
+	}
+
+	$preview-margin: 20px;
+
+	input[type=submit] {
+		width: 155px;
+		margin-top: $preview-margin;
+		margin-left: $preview-margin;
+	}
+
+	#avatar-cropping-preview {
+		width: 96px;
+		height: 96px;
+		overflow: hidden;
+		margin-left: $preview-margin;
 	}
 }

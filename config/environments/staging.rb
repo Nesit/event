@@ -7,6 +7,7 @@ EventRu::Application.configure do
   config.serve_static_assets = false
   config.assets.compress = true
   config.assets.compile = false
+  config.assets.precompile += %w(application.css active_admin.css wysiwyg.css)
   config.assets.digest = true
   config.action_dispatch.x_sendfile_header = 'X-Accel-Redirect'
   config.i18n.fallbacks = false
@@ -19,4 +20,8 @@ EventRu::Application.configure do
   config.action_mailer.delivery_method = :sendmail
   config.action_mailer.perform_deliveries = true
   config.action_mailer.raise_delivery_errors = true
+  config.action_mailer.default_url_options = {
+    host: "stage.event.elzar.srv.balticit.ru",
+    port: 80,
+  }
 end

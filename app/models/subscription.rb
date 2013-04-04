@@ -20,6 +20,10 @@ class Subscription < ActiveRecord::Base
   scope :pending, where(state: 'pending')
   scope :active, where(state: 'active')
 
+  def paid?
+    state.to_s.in? ['active', 'expired']
+  end
+
   def amount
     normal_hash = {
       six_months: 600,

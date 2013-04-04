@@ -15,9 +15,12 @@ class User < ActiveRecord::Base
   validates :merge_email, format: /.+\@.+\..+/, if: proc { merge_email.present? }
 
   validates :password, length: { minimum: 6 }, if: :password
+  validates :password, confirmation: true
+  validates :last_email_comment, :last_email_article, presence: true
 
   before_validation :process_new_city
   before_validation :ensure_uniqueness_name
+  before_validation :ensure_last_email
 
   before_destroy :user_deleted
   after_save :check_complete
@@ -25,7 +28,12 @@ class User < ActiveRecord::Base
   before_validation :delete_all_other_pending, if: proc { activation_state == 'pending' }
   before_validation :select_state
 
+  before_save :process_external_avatar
+
   attr_accessor :new_city, :new_country_cd
+  attr_accessor :password_confirmation, :old_password
+
+  attr_accessor :external_avatar_url
 
   attr_accessible :born_at, :gender_cd, :city_id, :new_city,
                   :new_country_cd, :company, :position, :website,
@@ -33,7 +41,7 @@ class User < ActiveRecord::Base
                   :comment_notification, :event_notification,
                   :partner_notification, :weekly_notification, :state,
                   :active_subscription, :password, :password_confirmation,
-                  :article_comment_notification
+                  :article_comment_notification, :last_email_comment, :last_email_article
 
   attr_accessible :state
 
@@ -51,9 +59,13 @@ class User < ActiveRecord::Base
   scope :activated, where(activation_state: 'active')
   scope :with_subscription, where(active_subscription: true)
 
-  state_machine :state, initial: :need_info do
-    after_transition any => :banned, :do => :banned_user
+  scope :weekly_subscribers,    -> { where(active_subscription: true, weekly_notification: true) }
+  scope :event_subscribers,     -> { where(active_subscription: true, event_notification: true) }
+  scope :partner_notifications, -> { where(active_subscription: true, partner_notification: true) }
+  scope :article_comments,      -> { where(active_subscription: true, article_comment_notification: true) }
+  scope :comment_notifications, -> { where(active_subscription: true, comment_notification: true) }
 
+  state_machine :state, initial: :need_info do
     event :complete do
       transition all => :complete
     end
@@ -70,8 +82,65 @@ class User < ActiveRecord::Base
   scope :activated, where(activation_state: ['active', nil])
   scope :pending, where(activation_state: 'pending')
 
-  def banned_user
+  def subscription
+    subscriptions.active.first or subscriptions.pending.newer.first
+  end
+
+  def print_versions_by_courier
+    subscription.present? and subscription.print_versions_by_courier
+  end
+
+  def ordered_at
+    subscription.present? and subscription.created_at
+  end
+
+  def set_facebook_external_avatar_url!
+    if auth = authentications.where(provider: 'facebook').first
+      facebook_id = auth.uid
+      query_url = "https://graph.facebook.com/#{facebook_id}?fields=picture.type(normal)"
+      
+      require 'open-uri'
+      data = JSON.parse(open(query_url).read)
+      self.external_avatar_url = data["picture"]["data"]["url"]
+    end
+  end
+
+  def process_external_avatar
+    return if avatar?
+    return if external_avatar_url.blank?
+
+    require 'open-uri'
+
+    file = Tempfile.new ["external_avatar", File.extname(external_avatar_url)]
+    file.binmode
+    file.write(open(external_avatar_url).read)
+    file.close
+    self.avatar = file
+  end
+
+  def last_email_comment!
+    self.update_attribute(:last_email_comment, Time.zone.now)
+  end
+
+  def last_email_article!
+    self.update_attribute(:last_email_article, Time.zone.now)
+  end
+
+  def ban!
+    self.state = 'banned'
+    self.save!
     UserMailer.user_banned(self).deliver
+  end
+
+  def unban!
+    self.state = 'need_info'
+    select_state
+    self.save!
+    UserMailer.user_unbanned(self).deliver
+  end
+
+  def banned?
+    state == 'banned'
   end
 
   def activate!
@@ -80,9 +149,9 @@ class User < ActiveRecord::Base
   end
 
   def ensure_plain_password
-    if crypted_password.blank? and password.blank?
+    #if crypted_password.blank? or password.blank?
       self.password = SecureRandom.hex(4)
-    end
+    #end
   end
 
   # this method generates merge token and sends emails with link
@@ -115,7 +184,7 @@ class User < ActiveRecord::Base
         comment.save!
       end
       self.comments(true)
-      
+
       user.authentications.each do |auth|
         auth.user_id = self.id
         auth.save!
@@ -140,7 +209,7 @@ class User < ActiveRecord::Base
       self.active_subscription |= user.active_subscription
 
       # TODO load other user avatar if present
-      
+
       user.delete
     end
     self.save!
@@ -177,6 +246,11 @@ class User < ActiveRecord::Base
 
   private
 
+  def ensure_last_email
+    self.last_email_article = DateTime.now if self.last_email_article.blank?
+    self.last_email_comment = DateTime.now if self.last_email_comment.blank?
+  end
+
   def delete_all_other_pending
     if new_record?
       ::User.pending.where(email: email).delete_all
@@ -186,6 +260,8 @@ class User < ActiveRecord::Base
   end
 
   def select_state
+    return if state == 'banned'
+
     self.state = 'complete'
     complete = true
     FIELDS_FOR_COMPLETE.each do |sym|

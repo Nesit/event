@@ -1,39 +1,73 @@
-<div class="comment-tree">
-	<div class="comment">
-		<%= image_tag(comment.author.avatar.thumb, class: 'avatar left') %>
-		<div>
-			<div class="comment-author-name">
-				<% if comment.author.social_auth %>
-					<%= image_tag(asset_path("#{comment.author.social_auth.provider}_icon.png")) %>
-					<%= link_to comment.author.name, comment.author.social_url, class: 'name' %>
-				<% else %>
-					<span class="name"><%= comment.author.name %></span>
-				<% end %>
-				<span class="date"><%= comment.created_at.strftime("%d.%m.%Y %H:%M") %></span>
-			</div>
-			<p><%= comment.body %></p>
+<div class="comment">
+	<div class="avatar-block left">
+		<%= image_tag(comment.author.avatar.thumb, class: 'avatar') %>
+	</div>
+	<div>
+		<div class="comment-author-name">
+			<% if comment.author.social_auth %>
+				<%= image_tag(asset_path("#{comment.author.social_auth.provider}_icon.png")) %>
+				<%= link_to comment.author.name, comment.author.social_url, class: 'name' %>
+			<% else %>
+				<span class="name"><%= comment.author.name %></span>
+			<% end %>
+			<span class="date"><%= comment.created_at.strftime("%d.%m.%Y %H:%M") %></span>
 
-			<div class="comment-reply-block <%= can?(:create, Comment) || 'hidden' %>">
-				<p><%= link_to "ответить", '#', class: 'comment-reply-link blue-link' %></p>
-				<%= form_for comment.children.build(topic: comment.topic), html: { class: 'hidden' } do |f| %>
-					<%= f.text_area :body %>
-					<%= f.hidden_field :ancestry %>
-					<%= f.hidden_field :topic_id %>
-					<%= f.hidden_field :topic_type %>
-					<%= f.submit "откомментировать" %>
-				<% end %>
-			</div>
-			<% unless can?(:create, Comment) %>
-				<% if current_user and current_user.need_info? %>
-					<p class="notice"><%= link_to "Заполните информацию в личном кабинете", edit_user_path, class: 'blue-link' %></p>
-				<% else %>
-					<p class="notice"><%= link_to "Войти, чтобы ответить", '#', class: 'login-link blue-link' %></p>
-				<% end %>
+			<% if comment.owner?(current_user) and comment.active? %>
+				<%= link_to "", comment_path(comment), class: 'delete-comment-link right', method: :delete, remote: true %>
+				<%= link_to "", comment_path(comment), class: 'edit-comment-link right', method: :put, remote: true %>
 			<% end %>
 		</div>
-		<div class="clear"></div>
+
+		<div class="comment-show-state <%= (comment.active? ? '' : 'hidden') %>">
+			<p><%= comment.body %></p>
+
+			<div class="comment-reply-block <%= (can?(:create, Comment) ? '' : 'hidden') %>">
+				<% if current_user and not current_user.banned? %>
+					<p><%= link_to "ответить", '#', class: 'comment-reply-link blue-link' %></p>
+					<%= form_for comment.children.build(topic: comment.topic), remote: true, html: { class: 'hidden' } do |f| %>
+						<%= f.text_area :body %>
+						<%= f.submit "откомментировать" %>
+						<%= f.hidden_field :ancestry %>
+						<%= f.hidden_field :topic_id %>
+						<%= f.hidden_field :topic_type %>
+					<% end %>
+				<% end %>
+			</div>
+		</div>
+
+		<div class="comment-edit-state hidden">
+			<%= form_for comment, remote: true do |f| %>
+				<%= f.text_area :body %>
+				<%= f.submit "сохранить" %>
+			<% end %>
+		</div>
+
+		<div class="comment-removed-by-user-state <%= (comment.removed_by_owner? ? '' : 'hidden') %>">
+			<p>Комментарий был удалён автором</p>
+		</div>
+
+		<div class="comment-removed-by-admin-state <%= (comment.removed_by_admin? ? '' : 'hidden') %>">
+			<p>Комментарий был удалён администрацией</p>
+		</div>
+
+		<% unless can?(:create, Comment) %>
+			<% if current_user and current_user.need_info? %>
+				<p class="notice"><%= link_to "Заполните информацию в личном кабинете", edit_user_path, class: 'blue-link' %></p>
+			<% elsif current_user and current_user.banned? %>
+				<!-- user is banned -->
+			<% else %>
+				<p class="notice"><%= link_to "Войти, чтобы ответить", '#', class: 'login-link blue-link' %></p>
+			<% end %>
+		<% end %>
 	</div>
-	<% comment.children.each do |comment| %>
-		<%= render 'comments/item', comment: comment %>
+	<div class="clear"></div>
+
+	<div class="comment-tree">
+	<% if nested %>
+		<% comment.children.each do |comment| %>
+			<%= render 'comments/item', comment: comment, nested: nested %>
+		<% end %>
 	<% end %>
+	</div>
+
 </div>

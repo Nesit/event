@@ -1,5 +1,7 @@
 <div class="left" id="profile-left-menu">
 	<%= link_to "Личные данные", edit_user_path, class: (current == :profile and 'active') %>
+	<%= link_to "Фотография", profile_avatar_path, class: (current == :avatar and 'active') %>
 	<%= link_to "Уведомления", user_notifications_path, class: (current == :notifications and 'active') %>
+	<%= link_to "Изменить пароль", profile_password_path, class: (current == :password and 'active') %>
 	<%= link_to "Подписка", user_subscriptions_path, class: (current == :subscriptions and 'active') %>
 </div>

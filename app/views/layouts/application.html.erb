@@ -15,24 +15,34 @@
     <meta property="og:type" content="website"/>
     <!-- end social meta -->
 
+    <script type="text/javascript" src="//vk.com/js/api/openapi.js?86"></script>
+
+	<script type="text/javascript">
+	  VK.init({apiId: 3286894, onlyWidgets: true});
+	</script>
+
     <%= stylesheet_link_tag "application", media: "all" %>
     <%= javascript_include_tag "application" %>
     <%= csrf_meta_tags %>
   </head>
   <body>
-  	<div id="fb-root"></div>
+
+	<div id="fb-root"></div>
 	<script>(function(d, s, id) {
 	  var js, fjs = d.getElementsByTagName(s)[0];
 	  if (d.getElementById(id)) return;
 	  js = d.createElement(s); js.id = id;
-	  js.src = "//connect.facebook.net/ru_RU/all.js#xfbml=1";
+	  js.src = "//connect.facebook.net/ru_RU/all.js#xfbml=1&appId=392802290814243";
 	  fjs.parentNode.insertBefore(js, fjs);
 	}(document, 'script', 'facebook-jssdk'));</script>
 
     <%= render 'shared/top_menu' %>
 
     <div id="main-column">
-      
+    	<div id="dialogs-block">
+	    	<%= render 'shared/dialogs' %>
+      	</div>
+
       <% unless @hide_top %>
 	<div id="header">
 	  <div id="utmost-left-block" class="left">
@@ -49,19 +59,18 @@
 	  </div>
 
 	  <div id="left-block" class="left">
-
 	  </div>
 
 	  <div id="utmost-right-block" class="right">
 	    <div id="auth-block">
-	      <%= render 'shared/auth_block' %>
+	    	<%= render 'shared/auth_block' %>
 	    </div>
 
-	    <%= form_tag '#', id: 'search-form' do %>
-	    <%= text_field_tag :query, '', class: 'left', 'data-placeholder' => "Поиск по сайту" %>
-	    <%= submit_tag '', class: 'right' %>
-	    <div class="clear"></div>
-      <% end %>
+	    <%= form_tag articles_search_path, method: :get, id: 'search-form' do %>
+		    <%= text_field_tag :term, '', class: 'left', 'data-placeholder' => "Поиск по сайту" %>
+		    <%= submit_tag '', class: 'right' %>
+		    <div class="clear"></div>
+	      <% end %>
       </div>
 
       <div id="right-block" class="right">
@@ -69,7 +78,7 @@
       </div>
 
       <div id="logo">
-	      <%= link_to image_tag(asset_path('logo.png')), root_path %>
+	      <%= link_to image_tag(asset_path('logo_2.gif')), root_path %>
 	      <p>Информационный портал event-индустрии</p>
 	  </div>
       <div class="clear"></div>
@@ -96,7 +105,7 @@
 				<%= link_to "", EventRu::Links::Facebook, class: 'fb' %>
 				<%#= link_to "", EventRu::Links::Vkontakte, class: 'vk' %>
 				<%#= link_to "", EventRu::Links::Twitter, class: 'twitter' %>
-				<%= link_to "", EventRu::Links::MailRu, class: 'mailru register-link' %>
+				<%= link_to '', user_notifications_path, class: "mailru #{current_user ? '' : 'weird-register-link'}" %>
 				<%#= link_to "", EventRu::Links::GooglePlus, class: 'gplus' %>
 			</div>
 		</div>

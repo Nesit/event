@@ -5,6 +5,7 @@ expired_subscription1:
   kind_cd: 2
   activated_at: <%= 2.years.ago.to_date %>
   ended_at: <%= 1.year.ago.to_date %>
+  print_versions_by_courier: true
 
 active_subscription2:
   id: 2
@@ -13,6 +14,7 @@ active_subscription2:
   kind_cd: 1
   activated_at: <%= 3.months.ago.to_date %>
   ended_at: <%= Date.today + 3.months %>
+  print_versions_by_courier: true
 
 pending_subscription3:
   id: 3
