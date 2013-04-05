@@ -13,6 +13,7 @@ class Ability
     can :show, :home
     can :none, :home
     can :page404, :home
+    can :page500, :home
 
     # to be able log in
     can :create, :user_session
