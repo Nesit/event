@@ -80,7 +80,7 @@ EventRu::Application.routes.draw do
     end
   end
 
-  root to: 'home#page500' #to: 'home#show'
+  root to: 'home#show'
 
   # to make exception notifier silent for /none.png requests
   match 'none' => 'home#none'

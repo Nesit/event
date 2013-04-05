@@ -10,10 +10,15 @@ class ApplicationController < ActionController::Base
   # reset captcha code after each request for security
   after_filter :reset_last_captcha_code!, if: :need_to_reset_captcha?
 
+  before_filter :raise_temporary_error
   before_filter :assign_config
   before_filter :default_url_options
 
   after_filter :check_need_email
+
+  def raise_temporary_error
+    raise "We're working right now"
+  end
 
   unless Rails.env.development?
     rescue_from "Exception" do |exception|
