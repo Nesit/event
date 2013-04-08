@@ -96,7 +96,7 @@ $ ->
         items = JSON.parse(data)
         $top_area = $top_block.find('.menu-edit-area')
         for item in items
-            $area.append(item_template(item, true))
+            $top_area.append(item_template(item, true))
             $last = $top_area.find('.menu-item .children').last()
             $last.disableSelection()
             $last.sortable

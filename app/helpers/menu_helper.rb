@@ -70,17 +70,20 @@ module MenuHelper
   def url_from_menu_item(item)
     case item['kind']
     when 'Page'
-      page = Page.find(item['data'])
-      url_for(page)
+      if page = Page.where(id: item['data']).first
+        url_for(page)
+      end
     when 'Article'
-      article = Article.find(item['data'])
-      url_for(article)
+      if article = Article.where(id: item['data']).first
+        url_for(article)
+      end
     when 'ArticleCategory'
       sym = item['data'].underscore.pluralize
-      send("#{sym}_path")
+      send("#{sym}_path") rescue nil
     when 'Poll'
-      poll = Poll.find(item['data'])
-      url_for(poll)
+      if poll = Poll.where(id: item['data']).first
+        url_for(poll)
+      end
     when 'Polls'
       polls_path
     when 'Special'
