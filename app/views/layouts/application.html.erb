@@ -85,6 +85,7 @@
       <%= link_to image_tag(asset_path('subscribe_aside.png')), new_subscription_path, class: 'subscribe-aside-link' %>
       <div id="left-banner">
 	<!--  AdRiver code START. Type:100x100 Site: Event.ru PZ: 1 BN: 0 -->
+	<% unless display_banners? %>
 	<script language="javascript" type="text/javascript"><!--
 				var RndNum4NoCash = Math.round(Math.random() * 1000000000);
 				var ar_Tail='unknown'; if (document.referrer) ar_Tail = escape(document.referrer);
@@ -100,7 +101,8 @@
 				</noscript>
 
 				<!--  AdRiver code END  -->
-			</div>
+			<% end %>
+		</div>
 			<div id="left-social-line">
 				<%= link_to "", EventRu::Links::Facebook, class: 'fb' %>
 				<%#= link_to "", EventRu::Links::Vkontakte, class: 'vk' %>

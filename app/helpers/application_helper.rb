@@ -1,6 +1,10 @@
 module ApplicationHelper
   include MenuHelper # because stupid active admin see only this file
 
+  def display_banners?
+    controller_name == 'password_resets' and action_name == 'edit'
+  end
+
   # Just return host with protocol and port like
   # https://sr1.localhost:3000
   def host_path

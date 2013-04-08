@@ -1,4 +1,5 @@
 <div id="right-column" class="right">
+	<% unless display_banners? %>
 	<div class="frame adriver-frame">
 		<div class="frame-title">Реклама</div>
 		<!--  AdRiver code START. Type:240x400 Site: Event.ru PZ: 2 BN: 1 -->
@@ -17,6 +18,8 @@
 		</noscript>
 		<!--  AdRiver code END  -->
 	</div>
+	<% end %>
+
 	<div class="frame facebook-frame">
 	  <div class="frame-title">Быть в курсе</div>
 	  <div class="fb-like-box" data-href="http://www.facebook.com/WelcomeToEvent.ru" data-width="240" data-height="379" data-show-faces="true" data-stream="false" data-header="false"></div>
@@ -34,6 +37,7 @@
 
 	<%= render 'shared/weather' %>
 
+	<% unless display_banners? %>
 	<div class="frame adriver-frame">
 		<div class="frame-title">Реклама</div>
 		<!--  AdRiver code START. Type:240x400 Site: Event.ru PZ: 2 BN: 2 -->
@@ -73,5 +77,6 @@
 
 		<!--  AdRiver code END  -->
 	</div>
+	<% end %>
 
 </div>
