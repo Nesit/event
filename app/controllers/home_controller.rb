@@ -6,10 +6,10 @@ class HomeController < ApplicationController
   layout 'error_page', only: [:page404, :page403, :page500]
 
   def show
-    articles = Article.without_tv_and_events.newer_published
+    articles = Article.without_tv_and_events.newer_published.published
     @articles = articles.page(params[:page]).per(10).padding(5)
     @carousel_articles = articles.first(5)
-    @afisha_articles = EventArticle.newer_targeted.first(6)
+    @afisha_articles = EventArticle.newer_targeted.published.first(6)
 
     @seo_tags ||= {}
     @seo_tags[:title] = "Event.ru - информационный портал event-индустрии"

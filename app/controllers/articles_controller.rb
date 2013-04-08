@@ -8,7 +8,7 @@ class ArticlesController < ApplicationController
       case params[:type]
       when 'EventArticle'
         if (params[:page].to_i < 2)
-          @afisha_articles = EventArticle.newer_targeted.first(6)
+          @afisha_articles = EventArticle.published.newer_targeted.first(6)
           EventArticle.published.newer_targeted
         end
         
