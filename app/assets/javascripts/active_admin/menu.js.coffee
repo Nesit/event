@@ -69,9 +69,9 @@ $ ->
         
         data = $bottom_block.find('input[name="site_config[bottom_menu]"]').val()
         items = JSON.parse(data)
-        $area = $bottom_block.find('.menu-edit-area')
+        $bottom_area = $bottom_block.find('.menu-edit-area')
         for item in items
-            $area.append(item_template(item, false))
+            $bottom_area.append(item_template(item, false))
         
         save_bottom_menu()
 
@@ -82,7 +82,7 @@ $ ->
                 url: '/menu_items/new'
                 data: { url: url }
                 success: (data) ->
-                    $area.prepend(item_template(data, false))
+                    $bottom_area.prepend(item_template(data, false))
                     save_bottom_menu()
 
     $top_block = $('#top-menu-edit-block')
@@ -94,10 +94,10 @@ $ ->
         
         data = $top_block.find('input[name="site_config[top_menu]"]').val()
         items = JSON.parse(data)
-        $area = $top_block.find('.menu-edit-area')
+        $top_area = $top_block.find('.menu-edit-area')
         for item in items
             $area.append(item_template(item, true))
-            $last = $area.find('.menu-item .children').last()
+            $last = $top_area.find('.menu-item .children').last()
             $last.disableSelection()
             $last.sortable
                 stop: (event, ui) ->
@@ -112,8 +112,8 @@ $ ->
                 url: '/menu_items/new'
                 data: { url: url }
                 success: (data) ->
-                    $area.prepend(item_template(data, true))
-                    $first = $area.find('.menu-item .children').first()
+                    $top_area.prepend(item_template(data, true))
+                    $first = $top_area.find('.menu-item .children').first()
                     $first.disableSelection()
                     $first.sortable
                         stop: (event, ui) ->
