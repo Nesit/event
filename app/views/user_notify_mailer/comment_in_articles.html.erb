@@ -1,21 +1,24 @@
-<h1>
+<h1 style="font-weight: normal; font-size: 22px">
 	Здравствуйте,<br><br>
 	Появился новый комментарий на статью, которую Вы прокомментировали:
 </h1>
-<div class="red-line"></div>
+
+<div style="background-image: url(data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAAPCAIAAACqfTKuAAAACXBIWXMAAAsTAAALEwEAmpwYAAAAB3RJTUUH3QQJECogot8DiwAAABl0RVh0Q29tbWVudABDcmVhdGVkIHdpdGggR0lNUFeBDhcAAAAZSURBVAjXY/j//z8TAwMDNszw3iiKAY88ACseB47m9NOYAAAAAElFTkSuQmCC); background-position: center center; width: 100%; font-weight: bold; font-size: 14px; min-height: 14px">
+	<br>
+</div>
 
 <% @comments.each do |article, comments| -%>
-	<h2><%= link_to article.title, "#{root_url}/#{polymorphic_url(article)}" %></h2>
+	<h2><%= link_to article.title, "#{root_url}/#{polymorphic_url(article)}", style: "text-decoration: none; color: black; font-size: 20px;" %></h2>
 	<% comments.each do |comment| %>
-		<div class="item">
-			<%= image_tag "#{root_url}/#{comment.author.avatar.thumb}", class: 'image_fix', width: 60, height: 60, style: 'float:left' %>
-			<div class="comment-content">
+		<div style="clear: both; border-bottom: 1px solid #d3d3d3;">
+			<%= image_tag "#{root_url}/#{comment.author.avatar.thumb}", class: 'image_fix', width: 60, height: 60, style: "float:left; margin: 20px; margin-top: 0" %>
+			<div class="comment-content" style="margin-left: 80px; width: 540px; height: 80px; font-size: 12px">
 				<p>
 					<% if comment.author.social_auth %>
-						<%= image_tag("#{root_url}/#{asset_path("#{comment.author.social_auth.provider}_icon.png")}", class: 'image_fix', style: 'float:left') %>
-						<%= link_to comment.author.name, comment.author.social_url, class: 'name' %>
+						<%= image_tag("#{root_url}/#{asset_path("#{comment.author.social_auth.provider}_icon.png")}", class: 'image_fix', style: 'float:left: margin: 0') %>
+						<%= link_to comment.author.name, comment.author.social_url, class: 'name', style: "color: blue; text-decoration: underline;" %>
 					<% else %>
-						<span class="name"><%= comment.author.name %></span>
+						<span class="name" style="color: blue"><%= comment.author.name %></span>
 					<% end %>
 					<span class="date"><%= comment.created_at.strftime("%d.%m.%Y %H:%M") %></span>
 				</p>
@@ -24,3 +27,4 @@
 		</div>
 	<% end %>
 <% end %>
+<br>

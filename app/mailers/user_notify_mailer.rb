@@ -31,8 +31,8 @@ class UserNotifyMailer < ActionMailer::Base
   def comment_in_articles(user)
     @comments = user.comments.toplevel
       .where('created_at > ?', user.last_email_article)
-      .group_by(&:article)
-    
+      .group_by(&:topic)
+
     return if @comments.empty?
     
     user.last_email_article!

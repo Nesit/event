@@ -1,16 +1,18 @@
-<h1>Здравствуйте,<br>Появились новые статьи на сайте:</h1>
+<h1 style="font-weight: normal; font-size: 22px">Здравствуйте,<br>Появились новые статьи на сайте:</h1>
 <% @news.each do |day, news| %>
-<div class="red-line"></div>
-<div class="red-line-title"><%= Russian.strftime(day, "%e %B %Y г.") %></div>
+
+<div style="background-image: url(data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAAPCAIAAACqfTKuAAAACXBIWXMAAAsTAAALEwEAmpwYAAAAB3RJTUUH3QQJECogot8DiwAAABl0RVh0Q29tbWVudABDcmVhdGVkIHdpdGggR0lNUFeBDhcAAAAZSURBVAjXY/j//z8TAwMDNszw3iiKAY88ACseB47m9NOYAAAAAElFTkSuQmCC); background-position: center center; width: 100%; font-weight: bold; font-size: 14px; min-height: 14px">
+	<div style="background-color: #fefefe; padding: 5px; margin: 0 auto; width: 130px;"><%= Russian.strftime(day, "%e %B %Y г.") %></div>
+</div>
 	<% news.each do |article| %>
-		<div class="item">
-			<%= link_to image_tag("#{root_url}/#{article.head_image.list_thumb}", class: 'image_fix', width: 210, height: 140), polymorphic_url(article, only_path: false), style: "float:left" %>
-			<div class="description">
-				<h2><%= link_to article.title, polymorphic_url(article, only_path: false) %></h2>
-				<p><%= article.list_item_description %></p>
-				<p class="bot">
-					<%= link_to t("articles.category.#{article.class.name}"), "#{root_path}/#{send("#{article.class.name.underscore.pluralize}_path")}" %>
-					<span class="created-at">
+		<div style="clear: both; border-bottom: 1px solid #d3d3d3">
+			<%= link_to image_tag("#{root_url}/#{article.head_image.list_thumb}", width: 210, height: 140, style: "margin: 20px; margin-top: 0"), polymorphic_url(article, only_path: false), style: "float:left" %>
+			<div style="width: 382px; height: 160px; margin-left: 258px; position: relative">
+				<h2 style="line-height: 1em"><%= link_to article.title, polymorphic_url(article, only_path: false), style: "text-decoration: none; color: black; font-size: 20px;" %></h2>
+				<p style="font-family: serif; font-size: 14px"><%= article.list_item_description %></p>
+				<p style="font-family: serif; font-size: 14px; position: absolute; bottom: 0; height: 22px; font-size: 12px">
+					<%= link_to t("articles.category.#{article.class.name}"), "#{root_path}/#{send("#{article.class.name.underscore.pluralize}_path")}", style: "font-style: oblique; font-weight: bold; font-family: serif; text-decoration: none; color: black; margin-right: 30px" %>
+					<span style="font-style: oblique; color: #6f6f6f">
 						<%= distance_of_time_in_words(Time.now, article.published_at) %> назад,
 						в <%= article.published_at.strftime("%H:%M") %>
 					</span>
