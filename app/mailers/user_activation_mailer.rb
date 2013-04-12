@@ -1,6 +1,8 @@
 # encoding: utf-8
 
 class UserActivationMailer < ActionMailer::Base
+  default :from => "no-reply@event.ru"
+  
   def activation_needed_email(user)
     @user = user
     mail(to: user.email, subject: "Event.ru - Активация учётной записи") do |format|

@@ -1,5 +1,7 @@
 # -*- coding: utf-8 -*-
 class UserMailer < ActionMailer::Base
+  default :from => "no-reply@event.ru"
+
   def user_banned(user)
     @user = user
     mail(to: @user.email,
