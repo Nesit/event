@@ -1,11 +1,11 @@
 set :stage, 'production'
 
-role :web, 'event.ru'
-role :app, 'event.ru'
-role :db,  'event.ru', :primary => true
+role :web, 'event.balticit.ru'
+role :app, 'event.balticit.ru'
+role :db,  'event.balticit.ru', :primary => true
 
-set :user, 'event_production'
-set :deploy_to, '/var/www/event_production'
+set :user, 'rvm_user'
+set :deploy_to, '/var/www/apps/event_production'
 
 set :rails_env, 'production'
 set :branch, 'master'

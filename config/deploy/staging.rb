@@ -1,11 +1,11 @@
 set :stage, 'staging'
 
-role :web, 'stage.event.elzar.srv.balticit.ru'
-role :app, 'stage.event.elzar.srv.balticit.ru'
-role :db,  'stage.event.elzar.srv.balticit.ru', :primary => true
+role :web, 'stage.event.balticit.ru'
+role :app, 'stage.event.balticit.ru'
+role :db,  'stage.event.balticit.ru', :primary => true
 
-set :user, 'event'
-set :deploy_to, '/var/www/event_staging'
+set :user, 'rvm_user'
+set :deploy_to, '/var/www/apps/event_staging'
 
 set :rails_env, 'staging'
 set :branch, 'stage'

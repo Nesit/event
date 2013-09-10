@@ -5,7 +5,7 @@ require 'capistrano/ext/multistage'
 
 require 'bundler/capistrano'
 
-set :repository,  "git@github.com:balticit/event.git"
+set :repository,  "git@github.com:Nesit/event.git"
 set :scm, :git
 set :application, "event"
 ssh_options[:forward_agent] = true
@@ -89,3 +89,9 @@ namespace :whenever do
     run "cd #{release_path}; RAILS_ENV=#{rails_env} #{File.join(shared_path, 'scripts/rvm_wrapper.sh')} bundle exec whenever --write-crontab event"
   end
 end
+
+Dir.glob('config/deploy/shared/*.rb').each{ |file| load file }
+
+set :privates, %w{
+  config/database.yml
+}
