@@ -69,6 +69,7 @@ group :development do
   gem 'capistrano-unicorn'
   gem 'rvm-capistrano'
   gem 'debugger'
+  gem 'capistrano-helpers'
 
   gem 'rb-inotify', '~> 0.8.8'
 end

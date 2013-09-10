@@ -4,6 +4,7 @@ set :default_stage, "staging"
 require 'capistrano/ext/multistage'
 
 require 'bundler/capistrano'
+require 'capistrano-helpers/privates'
 
 set :repository,  "git@github.com:Nesit/event.git"
 set :scm, :git
@@ -17,6 +18,10 @@ set :keep_releases, 10
 set :asset_env, "RAILS_GROUPS=assets"
 set :rvm_type, :system
 require "rvm/capistrano"
+
+set :privates, %w{
+  config/database.yml
+}
 
 before 'deploy:assets:precompile', 'deploy:symlink_shared'
 after 'deploy:restart','deploy:cleanup'
@@ -84,14 +89,4 @@ namespace :weather do
   end
 end
 
-namespace :whenever do
-  task :update, :role => :app do
-    run "cd #{release_path}; RAILS_ENV=#{rails_env} #{File.join(shared_path, 'scripts/rvm_wrapper.sh')} bundle exec whenever --write-crontab event"
-  end
-end
-
 Dir.glob('config/deploy/shared/*.rb').each{ |file| load file }
-
-set :privates, %w{
-  config/database.yml
-}

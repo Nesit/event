@@ -13,8 +13,6 @@ set :unicorn_env, 'staging'
 set :keep_releases, 5
 set :app_env, 'staging'
 
-set :rake, "#{File.join shared_path, 'scripts/rvm_wrapper.sh'} #{rake}"
-
 after 'deploy:symlink_shared', 'deploy:symlink_sphinx_config'
 
 before 'sphinx:stop', 'sphinx:configure'
