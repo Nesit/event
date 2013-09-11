@@ -1,4 +1,4 @@
-app_dir = "/var/www/apps/eventru_staging"
+app_dir = "/var/www/apps/event_staging"
 
 # Set unicorn options
 worker_processes 4

@@ -13,6 +13,8 @@ set :unicorn_env, 'production'
 set :keep_releases, 10
 set :app_env, 'production'
 
+set :current_path, File.join(deploy_to, current_dir) #fix for capistrano-unicorn
+
 after 'deploy:update_code', 'deploy:migrate'
 
 #before 'sphinx:stop', 'sphinx:configure'
