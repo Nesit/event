@@ -13,12 +13,11 @@ set :unicorn_env, 'production'
 set :keep_releases, 10
 set :app_env, 'production'
 
-after 'deploy:symlink_shared', 'deploy:symlink_sphinx_config'
+after 'deploy:update_code', 'deploy:migrate'
 
 #before 'sphinx:stop', 'sphinx:configure'
 #before 'db:drop', 'unicorn:stop', 'sphinx:stop'
 
 #before 'unicorn:restart', 'sphinx:rebuild'
-before 'unicorn:restart', 'deploy:symlink_robots'
-after 'unicorn:restart', 'weather:update'
-after 'unicorn:restart', 'whenever:update'
+#before 'unicorn:restart', 'deploy:symlink_robots'
+#after 'unicorn:restart', 'weather:update'

@@ -17,20 +17,23 @@ set :use_sudo, false
 set :keep_releases, 10
 set :asset_env, "RAILS_GROUPS=assets"
 set :rvm_type, :system
+set :base_directory, '/var/www/apps'
 require "rvm/capistrano"
+require 'capistrano-unicorn'
 
 set :privates, %w{
   config/database.yml
 }
 
-before 'deploy:assets:precompile', 'deploy:symlink_shared'
-after 'deploy:restart','deploy:cleanup'
+before 'deploy:setup', 'rvm:install_rvm'
+before 'deploy:setup', 'rvm:install_ruby'
 
-after 'deploy:symlink_shared', 'db:create'
-after 'db:create', 'db:migrate'
-after 'db:migrate', 'db:seed'
+after 'deploy:restart', 'unicorn:restart'  # app preloaded
 
-after 'deploy:restart', 'unicorn:restart'
+after 'deploy:restart', 'nginx:update_site_config'
+after 'nginx:update_site_config', 'nginx:reload'
+
+after 'deploy:restart', 'deploy:cleanup' #remove old releases
 
 desc "tail production log files"
 task :tail_logs, :roles => :app do
@@ -42,36 +45,12 @@ task :tail_logs, :roles => :app do
   end
 end
 
-namespace :deploy do
-  desc "Symlink shared configs and folders on each release."
-  task :symlink_shared, :roles => :app do
-    run "ln -nfs #{shared_path}/config/database.yml #{release_path}/config/database.yml"
-  end
-
-  task :symlink_robots, :roles => :app do
-    run "ln -nfs #{shared_path}/config/robots.txt #{release_path}/public/robots.txt"
-  end
-
-  task :symlink_sphinx_config, :roles => :app do
-    run "ln -nfs #{shared_path}/config/sphinx.yml #{release_path}/config/thinking_sphinx.yml"
-  end
-end
 
 namespace :db do
   [:drop, :create, :migrate, :seed, :load_sample].each do |_task|
     task _task, :roles => :db do
       run "cd #{release_path}; RAILS_ENV=#{rails_env} #{rake} db:#{_task} --trace"
     end
-  end
-end
-
-namespace :unicorn do
-  task :stop, :roles => :app do
-    run "/etc/init.d/#{application}_#{stage} stop"
-  end
-
-  task :restart, :roles => :app do
-    run "/etc/init.d/#{application}_#{stage} restart"
   end
 end
 
