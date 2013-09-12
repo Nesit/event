@@ -1,4 +1,3 @@
-User-Agent: *
+Disallow: *
 Disallow: /admin
 Disallow: /admin/login
-Host: event.ru
