@@ -1,9 +1,8 @@
+require 'bundler/capistrano'
 set :stage_dir, "config/deploy"
 set :stages, Dir[ "#{ File.dirname(__FILE__) }/deploy/*.rb" ].collect { |fn| File.basename(fn, ".rb") }
 set :default_stage, "staging"
 require 'capistrano/ext/multistage'
-
-require 'bundler/capistrano'
 require 'capistrano-helpers/privates'
 
 set :repository,  "git@github.com:Nesit/event.git"
@@ -18,8 +17,6 @@ set :keep_releases, 10
 set :asset_env, "RAILS_GROUPS=assets"
 set :rvm_type, :system
 set :base_directory, '/var/www/apps'
-require "rvm/capistrano"
-require 'capistrano-unicorn'
 
 set :privates, %w{
   config/database.yml
@@ -34,6 +31,9 @@ after 'deploy:restart', 'nginx:update_site_config'
 after 'nginx:update_site_config', 'nginx:reload'
 
 after 'deploy:restart', 'deploy:cleanup' #remove old releases
+
+require "rvm/capistrano"
+require 'capistrano-unicorn'
 
 desc "tail production log files"
 task :tail_logs, :roles => :app do
